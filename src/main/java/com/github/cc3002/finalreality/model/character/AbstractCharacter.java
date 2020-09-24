@@ -23,11 +23,21 @@ public abstract class AbstractCharacter implements ICharacter {
   private Weapon equippedWeapon = null;
   private ScheduledExecutorService scheduledExecutor;
 
+  /**   Added
+            **/
+  private int maxHp;
+  private int hp;
+
+
   protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,
       @NotNull String name, CharacterClass characterClass) {
     this.turnsQueue = turnsQueue;
     this.name = name;
     this.characterClass = characterClass;
+
+    /*    Added     */
+    this.maxHp = 100;
+    this.hp = this.maxHp;
   }
 
   @Override
@@ -71,5 +81,35 @@ public abstract class AbstractCharacter implements ICharacter {
   @Override
   public CharacterClass getCharacterClass() {
     return characterClass;
+  }
+
+  /*added*/
+
+  public int getHp() {
+      return this.hp;
+  }
+
+  public void setHp(int number) {
+      this.hp = number;
+  }
+
+  public int getMaxHp() {
+      return this.maxHp;
+  }
+  public void receiveDamage(int damage) {
+      int actualHp = this.getHp();
+      if (actualHp - damage <= 0) {
+          this.setHp(0);
+      } else {
+          this.setHp(actualHp - damage);
+
+      }
+  }
+
+
+  public void commonAttack(AbstractCharacter target) {
+      Weapon weapon = this.getEquippedWeapon();
+      int damage = weapon.getDamage();
+      target.receiveDamage(damage);
   }
 }
