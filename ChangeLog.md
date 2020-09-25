@@ -3,7 +3,8 @@ ChangeLog
 
 Version 2.0
 -----------
-Write your changes in here
+- (B.2) Added magic to mages.
+- (B.1) Added mages and common characters.
 
 Version 1.0
 -----------
