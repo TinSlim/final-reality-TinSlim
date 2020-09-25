@@ -1,13 +1,15 @@
-package com.github.cc3002.finalreality.model.character.player;
+package com.github.cc3002.finalreality.model.character.player.commoncharacter;
 
 import com.github.cc3002.finalreality.model.character.ICharacter;
+import com.github.cc3002.finalreality.model.character.player.CharacterClass;
+import com.github.cc3002.finalreality.model.character.player.PlayerCharacter;
 import com.github.cc3002.finalreality.model.weapon.Weapon;
 import com.github.cc3002.finalreality.model.weapon.WeaponType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
 
-public class ThiefCharacter extends PlayerCharacter{
+public class ThiefCharacter extends PlayerCharacter {
 
     /**
      * Creates a new character.
@@ -20,6 +22,13 @@ public class ThiefCharacter extends PlayerCharacter{
         super(name, turnsQueue, characterClass);
     }
 
+    public void equip(Weapon weapon) {
+        if (weapon.getType() == WeaponType.SWORD  || weapon.getType() == WeaponType.BOW || weapon.getType() == WeaponType.STAFF) {
+            this.setEquippedWeapon(weapon);
+        }
+    }
+
+    /**
     public boolean equipWeapon(Weapon weapon) {
         if (weapon.getType() == WeaponType.SWORD  || weapon.getType() == WeaponType.BOW || weapon.getType() == WeaponType.STAFF) {
             this.equip(weapon);
@@ -27,6 +36,6 @@ public class ThiefCharacter extends PlayerCharacter{
         } else {
             return false;
         }
-    }
+    }**/
 }
 
