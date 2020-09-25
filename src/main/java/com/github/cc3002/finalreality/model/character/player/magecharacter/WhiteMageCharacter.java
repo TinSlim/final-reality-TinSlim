@@ -49,19 +49,22 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
             return false;
         }
     }**/
-
+    /* Todo DELET
     public void equip(Weapon weapon) {
         if (weapon.getType() == WeaponType.STAFF) {
             this.setEquippedWeapon(weapon);
         }
     }
+    */
 
-    boolean cast(int cost) {
-        Weapon weapon = getEquippedWeapon();
-        if (this.mana - cost < 0 || weapon.getType() != WeaponType.STAFF) {
-            return false;
-        } else {
-            return true;
+    public void equip(Weapon weapon) {
+        WeaponType typeEquippingWeapon = weapon.getType();
+        switch (typeEquippingWeapon) {
+            case STAFF:
+                this.setEquippedWeapon(weapon);
+            default:
+                break;
         }
     }
+
 }

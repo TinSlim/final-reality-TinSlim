@@ -23,10 +23,22 @@ public class EngineerCharacter extends AbstractCommonCharacter {
     }
 
     public void equip(Weapon weapon) {
-        if (weapon.getType() == WeaponType.AXE || weapon.getType() == WeaponType.BOW) {
-            this.setEquippedWeapon(weapon);
+        WeaponType typeEquippingWeapon = weapon.getType();
+        switch (typeEquippingWeapon) {
+            case AXE:
+                this.setEquippedWeapon(weapon);
+            case BOW:
+                this.setEquippedWeapon(weapon);
+            default:
+                break;
         }
     }
+
+        /* Todo delet this
+        if (weapon.getType() == WeaponType.AXE || weapon.getType() == WeaponType.BOW) {
+            this.setEquippedWeapon(weapon);
+        }*/
+
 
     /**Todo
     public boolean equipWeapon(Weapon weapon) {

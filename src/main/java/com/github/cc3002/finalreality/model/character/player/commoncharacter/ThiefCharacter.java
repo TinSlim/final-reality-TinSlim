@@ -22,9 +22,24 @@ public class ThiefCharacter extends PlayerCharacter {
         super(name, turnsQueue, characterClass);
     }
 
+    /* Todo delet this
     public void equip(Weapon weapon) {
         if (weapon.getType() == WeaponType.SWORD  || weapon.getType() == WeaponType.BOW || weapon.getType() == WeaponType.STAFF) {
             this.setEquippedWeapon(weapon);
+        }
+    }*/
+
+    public void equip(Weapon weapon) {
+        WeaponType typeEquippingWeapon = weapon.getType();
+        switch (typeEquippingWeapon) {
+            case SWORD:
+                this.setEquippedWeapon(weapon);
+            case BOW:
+                this.setEquippedWeapon(weapon);
+            case STAFF:
+                this.setEquippedWeapon(weapon);
+            default:
+                break;
         }
     }
 

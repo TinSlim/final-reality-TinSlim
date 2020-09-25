@@ -22,10 +22,23 @@ public class KnightCharacter extends AbstractCommonCharacter {
     }
 
     public void equip(Weapon weapon) {
-        if (weapon.getType() == WeaponType.SWORD  || weapon.getType() == WeaponType.AXE || weapon.getType() == WeaponType.KNIFE) {
-            this.setEquippedWeapon(weapon);
+        WeaponType typeEquippingWeapon = weapon.getType();
+        switch (typeEquippingWeapon) {
+            case SWORD:
+                this.setEquippedWeapon(weapon);
+            case AXE:
+                this.setEquippedWeapon(weapon);
+            case KNIFE:
+                this.setEquippedWeapon(weapon);
+            default:
+                break;
         }
     }
+        /*
+        if (weapon.getType() == WeaponType.SWORD  || weapon.getType() == WeaponType.AXE || weapon.getType() == WeaponType.KNIFE) {
+            this.setEquippedWeapon(weapon);
+        }*/
+
 
     /**Todo
     public boolean equipWeapon(Weapon weapon) {
