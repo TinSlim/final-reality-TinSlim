@@ -1,5 +1,6 @@
 package com.github.cc3002.finalreality.model.character.player.magecharacter;
 
+import java.util.Random;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.AbstractMageCharacter;
@@ -29,16 +30,39 @@ public class BlackMageCharacter extends AbstractMageCharacter {
         StaffWeapon weapon = (StaffWeapon) this.getEquippedWeapon();
         int damage = weapon.getMagicDamage();
         target.receiveDamage(damage);
+        Random rng = new Random();
+        int posibilityToParalize = rng.nextInt(9);
+        if (posibilityToParalize <= 3) {
+
+        }
         //Todo paralizar
     }
 
     public void fire(Enemy target) {
         StaffWeapon weapon = (StaffWeapon) this.getEquippedWeapon();
-        int damage = weapon.getMagicDamage();
-        target.receiveDamage(damage);
-        //Todo quemar
+        int magicDamage = weapon.getMagicDamage();
+        target.receiveDamage(magicDamage);
+
+        Random rng = new Random();
+        int burnRandom = rng.nextInt(9);
+        if (burnRandom <= 2) {
+            target.setBurnDamage(magicDamage/3);
+        }
     }
 
+    public void equip(Weapon weapon) {
+        WeaponType typeEquippingWeapon = weapon.getType();
+        switch (typeEquippingWeapon) {
+            case STAFF:
+                this.setEquippedWeapon(weapon);
+            case KNIFE:
+                this.setEquippedWeapon(weapon);
+            default:
+                break;
+        }
+    }
+
+    /* Todo delet this
     public boolean equipWeapon(Weapon weapon) {
         if (weapon.getType() == WeaponType.STAFF || weapon.getType() == WeaponType.KNIFE) {
             this.equip(weapon);
@@ -47,13 +71,6 @@ public class BlackMageCharacter extends AbstractMageCharacter {
             return false;
         }
     }
+    */
 
-    boolean cast(int cost) {
-        Weapon weapon = getEquippedWeapon();
-        if (this.mana - cost < 0 || weapon.getType() != WeaponType.STAFF) {
-            return false;
-        } else {
-            return true;
-        }
-    }
 }
