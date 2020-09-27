@@ -1,10 +1,6 @@
 package com.github.cc3002.finalreality.model.weapon;
 
-import com.github.cc3002.finalreality.model.character.player.commoncharacter.EngineerCharacter;
-import com.github.cc3002.finalreality.model.character.player.commoncharacter.KnightCharacter;
-import com.github.cc3002.finalreality.model.character.player.commoncharacter.ThiefCharacter;
-import com.github.cc3002.finalreality.model.character.player.magecharacter.BlackMageCharacter;
-import com.github.cc3002.finalreality.model.character.player.magecharacter.WhiteMageCharacter;
+import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 
 public class Knife extends AbstractWeapon {
   /**
@@ -20,23 +16,23 @@ public class Knife extends AbstractWeapon {
     super(name, damage, weight, type);
   }
 
-  public void equipToKnight(KnightCharacter character){
+  public void equipToKnight(IPlayerCharacter character){
     character.setEquippedWeapon(this);
   }
 
-  public void equipToThief(ThiefCharacter character){
+  public void equipToThief(IPlayerCharacter character){
     character.setEquippedWeapon(this);
   }
 
-  public void equipToEngineer(EngineerCharacter character){
+  public void equipToEngineer(IPlayerCharacter character){
     character.setEquippedWeapon(this);
   }
 
-  public void equipToBlackMage(BlackMageCharacter character){
+  public void equipToBlackMage(IPlayerCharacter character){
     character.setEquippedWeapon(this);
   }
 
-  public void equipToWhiteMage(WhiteMageCharacter character){
+  public void equipToWhiteMage(IPlayerCharacter character){
     character.setEquippedWeapon(this);
   }
 }

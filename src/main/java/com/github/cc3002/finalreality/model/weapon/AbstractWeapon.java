@@ -33,7 +33,6 @@ public abstract class AbstractWeapon implements IWeapon {
     return name;
   }
 
-  /**Todo pq getDamage es privado, lo cambio a public**/
   public int getDamage() {
     return damage;
   }
