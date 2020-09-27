@@ -5,9 +5,7 @@ import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.AbstractMageCharacter;
 import com.github.cc3002.finalreality.model.character.player.CharacterClass;
 import com.github.cc3002.finalreality.model.character.player.PlayerCharacter;
-import com.github.cc3002.finalreality.model.weapon.StaffWeapon;
-import com.github.cc3002.finalreality.model.weapon.Weapon;
-import com.github.cc3002.finalreality.model.weapon.WeaponType;
+import com.github.cc3002.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
@@ -32,7 +30,7 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
     }
 
     public void venom(Enemy target) {
-        StaffWeapon weapon = (StaffWeapon) this.getEquippedWeapon();
+        Staff weapon = (Staff) this.getEquippedWeapon();
         int damage = weapon.getMagicDamage() / 3;
         target.setPoisonDamage(damage);
     }
@@ -57,6 +55,13 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
     }
     */
 
+
+
+    public void equip(Staff weapon) {
+        this.setEquippedWeapon(weapon);
+    }
+
+    /**
     public void equip(Weapon weapon) {
         WeaponType typeEquippingWeapon = weapon.getType();
         switch (typeEquippingWeapon) {
@@ -65,6 +70,6 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
             default:
                 break;
         }
-    }
+    }**/
 
 }

@@ -4,8 +4,7 @@ import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.AbstractCommonCharacter;
 import com.github.cc3002.finalreality.model.character.player.AbstractMageCharacter;
 import com.github.cc3002.finalreality.model.character.player.CharacterClass;
-import com.github.cc3002.finalreality.model.weapon.Weapon;
-import com.github.cc3002.finalreality.model.weapon.WeaponType;
+import com.github.cc3002.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
@@ -22,32 +21,7 @@ public class EngineerCharacter extends AbstractCommonCharacter {
         super(name, turnsQueue, characterClass);
     }
 
-    public void equip(Weapon weapon) {
-        WeaponType typeEquippingWeapon = weapon.getType();
-        switch (typeEquippingWeapon) {
-            case AXE:
-                this.setEquippedWeapon(weapon);
-            case BOW:
-                this.setEquippedWeapon(weapon);
-            default:
-                break;
-        }
-    }
+    public void equip(Weapon weapon) { }
 
-        /* Todo delet this
-        if (weapon.getType() == WeaponType.AXE || weapon.getType() == WeaponType.BOW) {
-            this.setEquippedWeapon(weapon);
-        }*/
-
-
-    /**Todo
-    public boolean equipWeapon(Weapon weapon) {
-        if (weapon.getType() == WeaponType.AXE  || weapon.getType() == WeaponType.BOW) {
-            this.equip(weapon);
-            return true;
-        } else {
-            return false;
-        }
-    }**/
 }
 
