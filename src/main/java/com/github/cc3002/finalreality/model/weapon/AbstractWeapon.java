@@ -8,7 +8,7 @@ import java.util.Objects;
  * @author Ignacio Slater Muñoz.
  * @author <Your name>
  */
-public class Weapon {
+public abstract class AbstractWeapon implements IWeapon {
 
   private final String name;
   private final int damage;
@@ -20,19 +20,21 @@ public class Weapon {
    *
    * @see WeaponType
    */
-  public Weapon(final String name, final int damage, final int weight,
-      final WeaponType type) {
+  public AbstractWeapon(final String name, final int damage, final int weight,
+                        final WeaponType type) {
     this.name = name;
     this.damage = damage;
     this.weight = weight;
     this.type = type;
   }
 
-  private String getName() {
+
+  public String getName() {
     return name;
   }
 
-  private int getDamage() {
+  /**Todo pq getDamage es privado, lo cambio a public**/
+  public int getDamage() {
     return damage;
   }
 
@@ -40,7 +42,7 @@ public class Weapon {
     return weight;
   }
 
-  private WeaponType getType() {
+  public WeaponType getType() {
     return type;
   }
 
@@ -49,14 +51,14 @@ public class Weapon {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof Weapon)) {
+    if (!(o instanceof AbstractWeapon)) {
       return false;
     }
-    final Weapon weapon = (Weapon) o;
-    return getDamage() == weapon.getDamage() &&
-        getWeight() == weapon.getWeight() &&
-        getName().equals(weapon.getName()) &&
-        getType() == weapon.getType();
+    final AbstractWeapon abstractWeapon = (AbstractWeapon) o;
+    return getDamage() == abstractWeapon.getDamage() &&
+        getWeight() == abstractWeapon.getWeight() &&
+        getName().equals(abstractWeapon.getName()) &&
+        getType() == abstractWeapon.getType();
   }
 
   @Override
