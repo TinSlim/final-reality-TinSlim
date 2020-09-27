@@ -1,6 +1,12 @@
 package com.github.cc3002.finalreality.model.weapon;
 
-public class Staff extends Weapon implements IThiefWeapon, IBlackMageWeapon, IWhiteMageWeapon {
+import com.github.cc3002.finalreality.model.character.player.commoncharacter.EngineerCharacter;
+import com.github.cc3002.finalreality.model.character.player.commoncharacter.KnightCharacter;
+import com.github.cc3002.finalreality.model.character.player.commoncharacter.ThiefCharacter;
+import com.github.cc3002.finalreality.model.character.player.magecharacter.BlackMageCharacter;
+import com.github.cc3002.finalreality.model.character.player.magecharacter.WhiteMageCharacter;
+
+public class Staff extends AbstractWeapon {
 
   private int magicDamage = 0;
 
@@ -18,9 +24,27 @@ public class Staff extends Weapon implements IThiefWeapon, IBlackMageWeapon, IWh
     this.magicDamage = magicDamage;
   }
 
-
-
   public int getMagicDamage() {
     return this.magicDamage;
+  }
+
+  public void equipToKnight(KnightCharacter character){
+    character.setEquippedWeapon(this);
+  }
+
+  public void equipToThief(ThiefCharacter character){
+    character.setEquippedWeapon(this);
+  }
+
+  public void equipToEngineer(EngineerCharacter character){
+    character.setEquippedWeapon(this);
+  }
+
+  public void equipToBlackMage(BlackMageCharacter character){
+    character.setEquippedWeapon(this);
+  }
+
+  public void equipToWhiteMage(WhiteMageCharacter character){
+    character.setEquippedWeapon(this);
   }
 }
