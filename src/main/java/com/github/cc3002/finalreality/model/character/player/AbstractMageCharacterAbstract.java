@@ -22,19 +22,29 @@ public abstract class AbstractMageCharacterAbstract extends AbstractPlayerCharac
         super(name, turnsQueue, characterClass);
     }
 
+    /**
+     * Gets this MageCharacter's mana.
+     */
     public int getMana() {
         return this.mana;
     }
 
+    /**
+     * Sets this MageCharacter's mana.
+     */
     public void setMana(int mana) {
         this.mana = mana;
     }
 
+    /**
+     * Reduces and evaluate if this MageCharacter can cast a magic.
+     */
     boolean cast(int cost) {
         IWeapon weapon = this.getEquippedWeapon();
         if (this.getMana() - cost < 0 || weapon.getType() != WeaponType.STAFF) {
             return false;
         } else {
+            this.setMana(this.getMana() - cost);
             return true;
         }
     }

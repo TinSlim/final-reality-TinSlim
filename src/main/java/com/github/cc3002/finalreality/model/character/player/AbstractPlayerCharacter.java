@@ -63,9 +63,7 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
             && getName().equals(that.getName());
   }
 
-  /**
-   * Adds life to this Character without exceed the max Health Points.
-   */
+  @Override
   public void receiveLife(int life) {
     this.setHp(this.getHp() + life);
     if (this.getHp() > this.getMaxHp()) {

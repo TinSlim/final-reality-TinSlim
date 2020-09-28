@@ -79,15 +79,14 @@ public abstract class AbstractCharacter implements ICharacter {
     return this.maxHp;
   }
 
-
+  /**
+   * Sets this character's Hp (health points).
+   */
   public void setHp(int number) {
     this.hp = number;
   }
 
-  public void setMaxHp(int number) {
-    this.maxHp = number;
-  }
-
+  @Override
   public void receiveDamage(int damage) {
     int actualHp = this.getHp();
     if (actualHp - damage <= 0) {

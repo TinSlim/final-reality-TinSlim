@@ -71,18 +71,28 @@ public class Enemy extends AbstractCharacter {
     return Objects.hash(getWeight());
   }
 
+  /**
+   * Gets this enemy's damage.
+   */
   public int getDamage() {
     return this.damage;
   }
 
+  /**
+   * Sets this enemy's burn damage (acquired when a mage uses fire attack).
+   */
   public void setBurnDamage(int newDamage) {
     this.burnDamage = newDamage;
   }
 
+  @Override
   public void commonAttack(ICharacter target) {
     target.receiveDamage(this.damage);
   }
 
+  /**
+   * Sets this enemy's poison damage (acquired when a mage uses venom attack).
+   */
   public void setPoisonDamage(int damage) {
     this.poisonDamage = damage;
   }

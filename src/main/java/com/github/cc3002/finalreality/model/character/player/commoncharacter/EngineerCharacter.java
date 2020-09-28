@@ -21,6 +21,7 @@ public class EngineerCharacter extends AbstractCommonCharacterAbstract {
         super(name, turnsQueue, characterClass);
     }
 
+    @Override
     public void equip(IWeapon weapon) {
         weapon.equipToEngineer(this);
     }

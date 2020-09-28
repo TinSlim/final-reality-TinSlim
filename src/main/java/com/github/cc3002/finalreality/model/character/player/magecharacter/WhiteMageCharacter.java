@@ -5,6 +5,7 @@ import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.AbstractMageCharacterAbstract;
 import com.github.cc3002.finalreality.model.character.player.CharacterClass;
 import com.github.cc3002.finalreality.model.character.player.AbstractPlayerCharacter;
+import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,53 +25,31 @@ public class WhiteMageCharacter extends AbstractMageCharacterAbstract {
         super(name, turnsQueue, characterClass);
     }
 
-    public void cure(AbstractPlayerCharacter target) {
+    /**
+     * This WhiteMageCharacter cures a target (IPlayerCharacter).
+     */
+    public void cure(IPlayerCharacter target) {
         int life = target.getMaxHp();
         target.receiveLife((int) (life * 0.3));
     }
 
+    /**
+     * This WhiteMageCharacter venom a target (Enemy).
+     */
     public void venom(Enemy target) {
         Staff weapon = (Staff) this.getEquippedWeapon();
         int damage = weapon.getMagicDamage() / 3;
         target.setPoisonDamage(damage);
     }
 
+    /**
+     * This WhiteMageCharacter paralyzes a target (Enemy).
+     */
     public void paralyze(Enemy target) {
     }
 
-    /**
-    public boolean equipWeapon(Weapon weapon) {
-        if (weapon.getType() == WeaponType.STAFF) {
-            this.equip(weapon);
-            return true;
-        } else {
-            return false;
-        }
-    }
-     * @param weapon**/
-    /* Todo DELET
-    public void equip(Weapon weapon) {
-        if (weapon.getType() == WeaponType.STAFF) {
-            this.setEquippedWeapon(weapon);
-        }
-    }
-    */
-
-
-
+    @Override
     public void equip(IWeapon weapon) {
         weapon.equipToWhiteMage(this);
     }
-
-    /**
-    public void equip(Weapon weapon) {
-        WeaponType typeEquippingWeapon = weapon.getType();
-        switch (typeEquippingWeapon) {
-            case STAFF:
-                this.setEquippedWeapon(weapon);
-            default:
-                break;
-        }
-    }**/
-
 }

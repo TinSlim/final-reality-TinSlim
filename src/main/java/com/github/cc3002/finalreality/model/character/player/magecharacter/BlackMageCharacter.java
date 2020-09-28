@@ -24,6 +24,10 @@ public class BlackMageCharacter extends AbstractMageCharacterAbstract {
         super(name, turnsQueue, characterClass);
     }
 
+    /**
+     * This BlackMageCharacter attacks a target (Enemy) with thunder magic with a chance to paralize
+     * the target.
+     */
     public void thunder(Enemy target) {
         Staff weapon = (Staff) this.getEquippedWeapon();
         int damage = weapon.getMagicDamage();
@@ -36,6 +40,10 @@ public class BlackMageCharacter extends AbstractMageCharacterAbstract {
 
     }
 
+    /**
+     * This BlackMageCharacter attacks a target (Enemy) with fire magic with a chance to burn
+     * the target.
+     */
     public void fire(Enemy target) {
         Staff weapon = (Staff) this.getEquippedWeapon();
         int magicDamage = weapon.getMagicDamage();
@@ -48,43 +56,9 @@ public class BlackMageCharacter extends AbstractMageCharacterAbstract {
         }
     }
 
-
-    //public void equip(IBlackMageWeapon weapon) {
-    //    this.setEquippedWeapon((Weapon) weapon);
-    //}
-
-
-
+    @Override
     public void equip(IWeapon weapon) {
         weapon.equipToBlackMage(this);
     }
-
-
-
-
-
-    /**
-    public void equip(Weapon weapon) {
-        WeaponType typeEquippingWeapon = weapon.getType();
-        switch (typeEquippingWeapon) {
-            case STAFF:
-                this.setEquippedWeapon(weapon);
-            case KNIFE:
-                this.setEquippedWeapon(weapon);
-            default:
-                break;
-        }
-    }
-
-    /* Todo delet this
-    public boolean equipWeapon(Weapon weapon) {
-        if (weapon.getType() == WeaponType.STAFF || weapon.getType() == WeaponType.KNIFE) {
-            this.equip(weapon);
-            return true;
-        } else {
-            return false;
-        }
-    }
-    */
 
 }

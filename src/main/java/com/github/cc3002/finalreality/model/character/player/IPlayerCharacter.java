@@ -21,4 +21,14 @@ public interface IPlayerCharacter {
      * Sets weapon to this character's equipped weapon.
      */
     void setEquippedWeapon(AbstractWeapon abstractWeapon);
+
+    /**
+     * Returns this character's maxHp (max health points).
+     */
+    int getMaxHp();
+
+    /**
+     * Adds life to this Character without exceed the max Health Points.
+     */
+    void receiveLife(int i);
 }
