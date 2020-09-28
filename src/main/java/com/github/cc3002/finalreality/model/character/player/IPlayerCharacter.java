@@ -13,8 +13,9 @@ public interface IPlayerCharacter {
 
     /**
      * Returns this character's equipped weapon.
+     * @return
      */
-    AbstractWeapon getEquippedWeapon();
+    IWeapon getEquippedWeapon();
 
     /**
      * Sets weapon to this character's equipped weapon.

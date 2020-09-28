@@ -79,7 +79,7 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
   }
 
   @Override
-  public AbstractWeapon getEquippedWeapon() {
+  public IWeapon getEquippedWeapon() {
     return equippedAbstractWeapon;
   }
 
@@ -88,8 +88,8 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
 
   @Override
   public void commonAttack(ICharacter target) {
-    AbstractWeapon abstractWeapon = this.getEquippedWeapon();
-    int damage = abstractWeapon.getDamage();
+    IWeapon weapon = this.getEquippedWeapon();
+    int damage = weapon.getDamage();
     target.receiveDamage(damage);
   }
 }
