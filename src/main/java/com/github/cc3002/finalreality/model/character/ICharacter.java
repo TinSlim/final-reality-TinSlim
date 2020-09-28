@@ -1,7 +1,6 @@
 package com.github.cc3002.finalreality.model.character;
 
 import com.github.cc3002.finalreality.model.character.player.CharacterClass;
-import com.github.cc3002.finalreality.model.weapon.Weapon;
 
 /**
  * This represents a character from the game.
@@ -24,17 +23,28 @@ public interface ICharacter {
   String getName();
 
   /**
-   * Equips a weapon to the character.
-   */
-  void equip(Weapon weapon);
-
-  /**
-   * Return this character's equipped weapon.
-   */
-  Weapon getEquippedWeapon();
-
-  /**
    * Returns this character's class.
    */
   CharacterClass getCharacterClass();
+
+  /**
+   * This character makes an attack to a target, dealing damage.
+   * @param target
+   */
+  void commonAttack(ICharacter target);
+
+  /**
+   * This character receive damage reducing the hp b
+   */
+  void receiveDamage(int damage);
+
+  /**
+   * Returns this character's hp (health points).
+   */
+  int getHp();
+
+  /**
+   * Returns this character's maxHp (max health points).
+   */
+  int getMaxHp();
 }
