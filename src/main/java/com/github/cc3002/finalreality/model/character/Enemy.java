@@ -3,6 +3,9 @@ package com.github.cc3002.finalreality.model.character;
 import com.github.cc3002.finalreality.model.character.player.CharacterClass;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -14,6 +17,13 @@ import org.jetbrains.annotations.NotNull;
 public class Enemy extends AbstractCharacter {
 
   private final int weight;
+
+
+  private int burnDamage = 0;
+  private int poisonDamage = 0;
+  boolean paralyze = false;
+  private int damage = 0;
+
 
   /**
    * Creates a new enemy with a name, a weight and the queue with the characters ready to
@@ -33,6 +43,18 @@ public class Enemy extends AbstractCharacter {
   }
 
   @Override
+  public void waitTurn() {
+    //Todo borrar print
+    System.out.println(this.getName() + " esperando su turno \n");
+
+    scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
+    var enemy = (Enemy) this;
+    scheduledExecutor
+            .schedule(this::addToQueue, enemy.getWeight() / 10, TimeUnit.SECONDS);
+  }
+
+
+  @Override
   public boolean equals(final Object o) {
     if (this == o) {
       return true;
@@ -47,5 +69,31 @@ public class Enemy extends AbstractCharacter {
   @Override
   public int hashCode() {
     return Objects.hash(getWeight());
+  }
+
+  /**
+   * Gets this enemy's damage.
+   */
+  public int getDamage() {
+    return this.damage;
+  }
+
+  /**
+   * Sets this enemy's burn damage (acquired when a mage uses fire attack).
+   */
+  public void setBurnDamage(int newDamage) {
+    this.burnDamage = newDamage;
+  }
+
+  @Override
+  public void commonAttack(ICharacter target) {
+    target.receiveDamage(this.damage);
+  }
+
+  /**
+   * Sets this enemy's poison damage (acquired when a mage uses venom attack).
+   */
+  public void setPoisonDamage(int damage) {
+    this.poisonDamage = damage;
   }
 }
