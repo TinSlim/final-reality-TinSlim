@@ -1,7 +1,7 @@
 package com.github.cc3002.finalreality.model.character.player;
 
 import com.github.cc3002.finalreality.model.character.ICharacter;
-import com.github.cc3002.finalreality.model.weapon.AbstractWeapon;
+import com.github.cc3002.finalreality.model.weapon.IWeapon;
 import com.github.cc3002.finalreality.model.weapon.WeaponType;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,8 +31,8 @@ public abstract class AbstractMageCharacter extends PlayerCharacter {
     }
 
     boolean cast(int cost) {
-        AbstractWeapon abstractWeapon = getEquippedWeapon();
-        if (this.getMana() - cost < 0 || abstractWeapon.getType() != WeaponType.STAFF) {
+        IWeapon weapon = this.getEquippedWeapon();
+        if (this.getMana() - cost < 0 || weapon.getType() != WeaponType.STAFF) {
             return false;
         } else {
             return true;
