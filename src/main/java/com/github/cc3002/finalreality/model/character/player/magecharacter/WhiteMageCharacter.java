@@ -2,15 +2,15 @@ package com.github.cc3002.finalreality.model.character.player.magecharacter;
 
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
-import com.github.cc3002.finalreality.model.character.player.AbstractMageCharacter;
+import com.github.cc3002.finalreality.model.character.player.AbstractMageCharacterAbstract;
 import com.github.cc3002.finalreality.model.character.player.CharacterClass;
-import com.github.cc3002.finalreality.model.character.player.PlayerCharacter;
+import com.github.cc3002.finalreality.model.character.player.AbstractPlayerCharacter;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
 
-public class WhiteMageCharacter extends AbstractMageCharacter {
+public class WhiteMageCharacter extends AbstractMageCharacterAbstract {
 
     int mana = 0;
     /**
@@ -24,7 +24,7 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
         super(name, turnsQueue, characterClass);
     }
 
-    public void cure(PlayerCharacter target) {
+    public void cure(AbstractPlayerCharacter target) {
         int life = target.getMaxHp();
         target.receiveLife((int) (life * 0.3));
     }

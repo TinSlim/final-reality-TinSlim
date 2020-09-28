@@ -3,14 +3,14 @@ package com.github.cc3002.finalreality.model.character.player.magecharacter;
 import java.util.Random;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
-import com.github.cc3002.finalreality.model.character.player.AbstractMageCharacter;
+import com.github.cc3002.finalreality.model.character.player.AbstractMageCharacterAbstract;
 import com.github.cc3002.finalreality.model.character.player.CharacterClass;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
 
-public class BlackMageCharacter extends AbstractMageCharacter {
+public class BlackMageCharacter extends AbstractMageCharacterAbstract {
     int mana = 0;
 
     /**

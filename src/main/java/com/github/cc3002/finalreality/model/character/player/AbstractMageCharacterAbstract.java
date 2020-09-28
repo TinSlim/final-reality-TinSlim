@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
 
-public abstract class AbstractMageCharacter extends PlayerCharacter {
+public abstract class AbstractMageCharacterAbstract extends AbstractPlayerCharacter {
 
     private int mana = 50;
 
@@ -18,7 +18,7 @@ public abstract class AbstractMageCharacter extends PlayerCharacter {
      * @param turnsQueue     the queue with the characters waiting for their turn
      * @param characterClass
      */
-    public AbstractMageCharacter(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, CharacterClass characterClass) {
+    public AbstractMageCharacterAbstract(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, CharacterClass characterClass) {
         super(name, turnsQueue, characterClass);
     }
 

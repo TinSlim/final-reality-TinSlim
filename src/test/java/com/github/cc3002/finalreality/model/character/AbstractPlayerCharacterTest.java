@@ -75,8 +75,8 @@ class PlayerCharacterTest extends AbstractCharacterTest {
     for (var character :
         testCharacters) {
       assertNull(character.getEquippedWeapon());
-      character.equip(testWeapon);
-      assertEquals(testWeapon, character.getEquippedWeapon());
+      character.equip(testAbstractWeapon);
+      assertEquals(testAbstractWeapon, character.getEquippedWeapon());
     }
   }
 }

@@ -17,8 +17,8 @@ import org.jetbrains.annotations.NotNull;
  * @author Ignacio Slater Muñoz.
  * @author <Your name>
  */
-public abstract class PlayerCharacter extends AbstractCharacter implements IPlayerCharacter{
-  //Todo rename the class to Abstract....
+public abstract class AbstractPlayerCharacter extends AbstractCharacter implements IPlayerCharacter{
+  //Todo rename the class to Abstract.... and to IWeapon
   private AbstractWeapon equippedAbstractWeapon = null;
 
   /**
@@ -28,9 +28,9 @@ public abstract class PlayerCharacter extends AbstractCharacter implements IPlay
    * @param turnsQueue     the queue with the characters waiting for their turn
    * @param characterClass the class of this character
    */
-  public PlayerCharacter(@NotNull String name,
-                         @NotNull BlockingQueue<ICharacter> turnsQueue,
-                         final CharacterClass characterClass) {
+  public AbstractPlayerCharacter(@NotNull String name,
+                                 @NotNull BlockingQueue<ICharacter> turnsQueue,
+                                 final CharacterClass characterClass) {
     super(turnsQueue, name, characterClass);
   }
 
@@ -55,10 +55,10 @@ public abstract class PlayerCharacter extends AbstractCharacter implements IPlay
     if (this == o) {
       return true;
     }
-    if (!(o instanceof PlayerCharacter)) {
+    if (!(o instanceof AbstractPlayerCharacter)) {
       return false;
     }
-    final PlayerCharacter that = (PlayerCharacter) o;
+    final AbstractPlayerCharacter that = (AbstractPlayerCharacter) o;
     return getCharacterClass() == that.getCharacterClass()
             && getName().equals(that.getName());
   }
