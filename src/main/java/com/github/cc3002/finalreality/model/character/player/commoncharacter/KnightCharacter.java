@@ -21,7 +21,7 @@ public class KnightCharacter extends AbstractCommonCharacter {
     }
 
     @Override
-    public void equip(AbstractWeapon abstractWeapon) {
-        abstractWeapon.equipToKnight(this);
+    public void equip(IWeapon weapon) {
+        weapon.equipToKnight(this);
     }
 }

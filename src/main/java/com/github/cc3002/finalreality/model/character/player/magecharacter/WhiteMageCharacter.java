@@ -46,7 +46,8 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
         } else {
             return false;
         }
-    }**/
+    }
+     * @param weapon**/
     /* Todo DELET
     public void equip(Weapon weapon) {
         if (weapon.getType() == WeaponType.STAFF) {
@@ -57,8 +58,8 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
 
 
 
-    public void equip(Staff weapon) {
-        this.setEquippedWeapon(weapon);
+    public void equip(IWeapon weapon) {
+        weapon.equipToWhiteMage(this);
     }
 
     /**

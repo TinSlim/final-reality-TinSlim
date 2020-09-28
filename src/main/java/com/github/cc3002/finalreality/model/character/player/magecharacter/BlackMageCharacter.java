@@ -55,12 +55,8 @@ public class BlackMageCharacter extends AbstractMageCharacter {
 
 
 
-    public void equip(Staff weapon) {
-        this.setEquippedWeapon(weapon);
-    }
-
-    public void equip(Knife weapon) {
-        this.setEquippedWeapon(weapon);
+    public void equip(IWeapon weapon) {
+        weapon.equipToBlackMage(this);
     }
 
 

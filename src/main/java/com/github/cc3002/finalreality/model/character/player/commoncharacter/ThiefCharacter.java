@@ -22,8 +22,8 @@ public class ThiefCharacter extends PlayerCharacter {
     }
 
     @Override
-    public void equip(AbstractWeapon abstractWeapon) {
-        abstractWeapon.equipToThief(this);
+    public void equip(IWeapon weapon) {
+        weapon.equipToThief(this);
     }
 }
 
