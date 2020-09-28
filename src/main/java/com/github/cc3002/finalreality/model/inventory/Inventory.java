@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Inventory {
-    private List<AbstractWeapon> weaponsInventory = new ArrayList<AbstractWeapon>();
+    private List<IWeapon> weaponsInventory = new ArrayList<IWeapon>();
     int pointInventory = 0;
     int lenInventory = 0;
 
