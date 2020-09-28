@@ -17,5 +17,4 @@ public abstract class AbstractCommonCharacter extends PlayerCharacter{
         super(name, turnsQueue, characterClass);
     }
 
-
 }
