@@ -1,25 +1,45 @@
 package com.github.cc3002.finalreality.model.character;
 
-import com.github.cc3002.finalreality.model.character.player.CharacterClass;
-import com.github.cc3002.finalreality.model.character.player.PlayerCharacter;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class EnemyTest extends AbstractCharacterTest {
+import java.util.concurrent.BlockingQueue;
 
-  private static final String ENEMY_NAME = "Goblin";
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class EnemyTest extends AbstractCharacterTest {
+  int h;
+  BlockingQueue<ICharacter> turnsQueue;
+
+  /**
+   * Checks that the class' constructor and equals method works properly.
+   */
 
   @BeforeEach
-  void setUp() {
-    basicSetUp();
-    testCharacters.add(new Enemy(ENEMY_NAME, 10, turns));
+  public void setUp(){
+    testCharacterA = new Enemy("EnemyA",100,turnsQueue);
+    testCharacterB = new Enemy("EnemyB",50,turnsQueue);
+    testCharacterC = new Enemy("EnemyC",0,turnsQueue);
+    testCharacterD = new Enemy("EnemyD",-10,turnsQueue);
+  }
+  @Test
+  public void testReceiveDamage() {
+
   }
 
-  @Test
-  void constructorTest() {
-    checkConstruction(new Enemy(ENEMY_NAME, 10, turns),
-        testCharacters.get(0),
-        new Enemy(ENEMY_NAME, 11, turns),
-        new PlayerCharacter(ENEMY_NAME, turns, CharacterClass.THIEF));
+  @Override
+  public void setMaxHp(int i) {
+
+  }
+
+  @Override
+  public void receiveDamage(int i) {
+
+  }
+
+  @Override
+  public int getHp() {
+    return 0;
   }
 }
