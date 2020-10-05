@@ -21,20 +21,31 @@ public abstract class AbstractCharacterTest implements ICharacterTest{
   ICharacter testCharacterD;
   int h;
 
-  @BeforeEach
-  void setUp() {
-    testCharacterA.setMaxHp(100);
-    testCharacterB.setMaxHp(40);
-    testCharacterC.setMaxHp(0);
-    testCharacterD.setMaxHp(-10);
-  }
 
   /**
    * Checks that the class' constructor and equals method works properly.
    */
+  abstract void setTestCharacter();
+
+  @BeforeEach
+  public void setUp(){
+    setTestCharacter();
+  }
+
+
+
   @Test
   public void testReceiveDamage() {
     testCharacterA.receiveDamage(40);
-    assertEquals(testCharacterA.getHp(),60);
+    assertEquals(60,testCharacterA.getHp());
+
+    testCharacterB.receiveDamage(100);
+    assertEquals(0,testCharacterB.getHp());
+
+    testCharacterC.receiveDamage(50);
+    assertEquals(0,testCharacterC.getHp());
+
+    testCharacterD.receiveDamage(20);
+    assertEquals(0,testCharacterD.getHp());
   }
 }

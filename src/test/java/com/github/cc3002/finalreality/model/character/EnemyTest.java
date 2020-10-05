@@ -16,27 +16,19 @@ class EnemyTest extends AbstractCharacterTest {
    * Checks that the class' constructor and equals method works properly.
    */
 
-  @BeforeEach
-  public void setUp(){
-    testCharacterA = new Enemy("EnemyA",100,turnsQueue);
-    testCharacterB = new Enemy("EnemyB",50,turnsQueue);
-    testCharacterC = new Enemy("EnemyC",0,turnsQueue);
-    testCharacterD = new Enemy("EnemyD",-10,turnsQueue);
-  }
-  @Test
-  public void testReceiveDamage() {
 
-  }
 
+  public void setTestCharacter(){
+    testCharacterA = new Enemy(turnsQueue,"EnemyA",100,100,100);
+    testCharacterB = new Enemy(turnsQueue,"EnemyB",50,50,50);
+    testCharacterC = new Enemy(turnsQueue,"EnemyC",0,0,0);
+    testCharacterD = new Enemy(turnsQueue,"EnemyD",-10,-10,-10);
+  }
   @Override
   public void setMaxHp(int i) {
 
   }
 
-  @Override
-  public void receiveDamage(int i) {
-
-  }
 
   @Override
   public int getHp() {
