@@ -16,6 +16,9 @@ public class Bow extends AbstractWeapon {
     super(name, damage, weight, WeaponType.BOW);
   }
 
+  public boolean cast(){
+    return false;
+  }
 
   public void equipToKnight(IPlayerCharacter character){
 

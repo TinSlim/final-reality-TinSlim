@@ -20,6 +20,10 @@ public class Staff extends AbstractWeapon {
     this.magicDamage = magicDamage;
   }
 
+  public boolean cast(){
+    return true;
+  }
+
   public int getMagicDamage() {
     return this.magicDamage;
   }

@@ -2,16 +2,15 @@ package com.github.cc3002.finalreality.model.character.player.magecharacter;
 
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
-import com.github.cc3002.finalreality.model.character.player.AbstractMageCharacterAbstract;
+import com.github.cc3002.finalreality.model.character.player.AbstractMageCharacter;
 import com.github.cc3002.finalreality.model.character.player.CharacterClass;
-import com.github.cc3002.finalreality.model.character.player.AbstractPlayerCharacter;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
 
-public class WhiteMageCharacter extends AbstractMageCharacterAbstract {
+public class WhiteMageCharacterMageCharacter extends AbstractMageCharacter {
 
     int mana = 0;
     /**
@@ -21,13 +20,13 @@ public class WhiteMageCharacter extends AbstractMageCharacterAbstract {
      * @param turnsQueue     the queue with the characters waiting for their turn
      * @param characterClass
      */
-    public WhiteMageCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,@NotNull String name,
-                              final int maxHp,final int defense,final int maxMana) {
+    public WhiteMageCharacterMageCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
+                                           final int maxHp, final int defense, final int maxMana) {
         super(turnsQueue, name, CharacterClass.WHITE_MAGE, maxHp, defense,maxMana);
     }
 
     /**
-     * This WhiteMageCharacter cures a target (IPlayerCharacter).
+     * This WhiteMageCharacterMageCharacter cures a target (IPlayerCharacter).
      */
     public void cure(IPlayerCharacter target) {
         int life = target.getMaxHp();
@@ -35,7 +34,7 @@ public class WhiteMageCharacter extends AbstractMageCharacterAbstract {
     }
 
     /**
-     * This WhiteMageCharacter venom a target (Enemy).
+     * This WhiteMageCharacterMageCharacter venom a target (Enemy).
      */
     public void venom(Enemy target) {
         Staff weapon = (Staff) this.getEquippedWeapon();
@@ -44,7 +43,7 @@ public class WhiteMageCharacter extends AbstractMageCharacterAbstract {
     }
 
     /**
-     * This WhiteMageCharacter paralyzes a target (Enemy).
+     * This WhiteMageCharacterMageCharacter paralyzes a target (Enemy).
      */
     public void paralyze(Enemy target) {
     }

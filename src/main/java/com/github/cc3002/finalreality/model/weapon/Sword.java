@@ -16,6 +16,10 @@ public class Sword extends AbstractWeapon {
     super(name, damage, weight, WeaponType.SWORD);
   }
 
+  public boolean cast(){
+    return false;
+  }
+
   public void equipToKnight(IPlayerCharacter character){
     character.setEquippedWeapon(this);
   }
