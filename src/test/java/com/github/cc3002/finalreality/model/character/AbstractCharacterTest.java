@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.concurrent.BlockingQueue;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -15,17 +17,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @see ICharacter
  */
 public abstract class AbstractCharacterTest implements ICharacterTest{
-  ICharacter testCharacterA;
-  ICharacter testCharacterB;
-  ICharacter testCharacterC;
-  ICharacter testCharacterD;
-  int h;
+  protected BlockingQueue<ICharacter> turnsQueue;
+  protected ICharacter testCharacterA;
+  protected ICharacter testCharacterB;
+  protected ICharacter testCharacterC;
+  protected ICharacter testCharacterD;
 
 
   /**
    * Checks that the class' constructor and equals method works properly.
    */
-  abstract void setTestCharacter();
+
+  protected abstract void setTestCharacter();
 
   @BeforeEach
   public void setUp(){
@@ -48,4 +51,6 @@ public abstract class AbstractCharacterTest implements ICharacterTest{
     testCharacterD.receiveDamage(20);
     assertEquals(0,testCharacterD.getHp());
   }
+
+
 }
