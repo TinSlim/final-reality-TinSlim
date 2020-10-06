@@ -12,11 +12,10 @@ public class EngineerCharacterTest extends AbstractCommonCharacterTest {
     testCharacterB = new EngineerCharacter(turnsQueue,"EngineerB",50,50);
     testCharacterC = new EngineerCharacter(turnsQueue,"EngineerC",0,0);
     testCharacterD = new EngineerCharacter(turnsQueue,"EngineerD",-10,-10);
-  }
-
-  public void setTestPlayerCharacter(){
     testCharacterE = new EngineerCharacter(turnsQueue,"EngineerE",100,100);
   }
+
+
 
   public void testEquipWeapons() {
     testCharacterE.equip(testWeaponKnife);
@@ -33,7 +32,5 @@ public class EngineerCharacterTest extends AbstractCommonCharacterTest {
 
     testCharacterE.equip(testWeaponBow);
     assertEquals(testWeaponBow,testCharacterE.getEquippedWeapon());
-
-
   }
 }

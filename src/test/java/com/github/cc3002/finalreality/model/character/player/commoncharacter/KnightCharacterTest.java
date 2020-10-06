@@ -13,10 +13,9 @@ public class KnightCharacterTest extends AbstractCommonCharacterTest {
     testCharacterB = new KnightCharacter(turnsQueue,"KnightB",50,50);
     testCharacterC = new KnightCharacter(turnsQueue,"KnightC",0,0);
     testCharacterD = new KnightCharacter(turnsQueue,"KnightD",-10,-10);
-  }
-  public void setTestPlayerCharacter(){
     testCharacterE = new KnightCharacter(turnsQueue,"KnightE",100,100);
   }
+
 
   public void testEquipWeapons() {
     testCharacterE.equip(testWeaponBow);

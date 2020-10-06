@@ -16,11 +16,11 @@ public class ThiefCharacterTest extends AbstractPlayerCharacterTest {
     testCharacterB = new ThiefCharacter(turnsQueue,"ThiefB",50,50);
     testCharacterC = new ThiefCharacter(turnsQueue,"ThiefC",0,0);
     testCharacterD = new ThiefCharacter(turnsQueue,"ThiefD",-10,-10);
+
+    testCharacterE = new ThiefCharacter(turnsQueue,"ThiefE",100,100);
+
   }
 
-  public void setTestPlayerCharacter(){
-    testCharacterE = new ThiefCharacter(turnsQueue,"ThiefE",100,100);
-  }
 
   public void testEquipWeapons() {
     testCharacterE.equip(testWeaponKnife);

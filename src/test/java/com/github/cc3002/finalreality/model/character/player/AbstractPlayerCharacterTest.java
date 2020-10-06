@@ -22,11 +22,7 @@ public abstract class AbstractPlayerCharacterTest extends AbstractCharacterTest 
   @BeforeEach
   public void setUp(){
     setTestCharacter();
-    setTestPlayerCharacter();
   }
-
-  protected abstract void setTestPlayerCharacter();
-
 
   @Test
   public void testEquipWeaponsToPlayer(){
