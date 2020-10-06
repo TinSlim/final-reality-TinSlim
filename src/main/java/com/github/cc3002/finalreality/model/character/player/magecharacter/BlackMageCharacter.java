@@ -20,8 +20,9 @@ public class BlackMageCharacter extends AbstractMageCharacterAbstract {
      * @param turnsQueue     the queue with the characters waiting for their turn
      * @param characterClass
      */
-    public BlackMageCharacter(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, CharacterClass characterClass) {
-        super(name, turnsQueue, characterClass);
+    public BlackMageCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,@NotNull String name,
+                              final int maxHp,final int defense,final int maxMana) {
+        super(turnsQueue, name, CharacterClass.BLACK_MAGE, maxHp, defense,maxMana);
     }
 
     /**
@@ -32,7 +33,7 @@ public class BlackMageCharacter extends AbstractMageCharacterAbstract {
         Staff weapon = (Staff) this.getEquippedWeapon();
         int damage = weapon.getMagicDamage();
         target.receiveDamage(damage);
-        Random rng = new Random();
+        Random rng = this.getRandom();
         int posibilityToParalize = rng.nextInt(9);
         if (posibilityToParalize <= 3) {
             
@@ -49,7 +50,7 @@ public class BlackMageCharacter extends AbstractMageCharacterAbstract {
         int magicDamage = weapon.getMagicDamage();
         target.receiveDamage(magicDamage);
 
-        Random rng = new Random();
+        Random rng = this.getRandom();
         int burnRandom = rng.nextInt(9);
         if (burnRandom <= 2) {
             target.setBurnDamage(magicDamage/3);

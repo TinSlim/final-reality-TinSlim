@@ -12,8 +12,8 @@ public class Knife extends AbstractWeapon {
    * @param type
    * @see WeaponType
    */
-  public Knife(String name, int damage, int weight, WeaponType type) {
-    super(name, damage, weight, type);
+  public Knife(String name, int damage, int weight) {
+    super(name, damage, weight, WeaponType.KNIFE);
   }
 
   public void equipToKnight(IPlayerCharacter character){
@@ -21,11 +21,9 @@ public class Knife extends AbstractWeapon {
   }
 
   public void equipToThief(IPlayerCharacter character){
-    character.setEquippedWeapon(this);
   }
 
   public void equipToEngineer(IPlayerCharacter character){
-    character.setEquippedWeapon(this);
   }
 
   public void equipToBlackMage(IPlayerCharacter character){
@@ -33,6 +31,5 @@ public class Knife extends AbstractWeapon {
   }
 
   public void equipToWhiteMage(IPlayerCharacter character){
-    character.setEquippedWeapon(this);
   }
 }

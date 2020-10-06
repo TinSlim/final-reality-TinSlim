@@ -16,8 +16,9 @@ public class KnightCharacter extends AbstractCommonCharacterAbstract {
      * @param turnsQueue     the queue with the characters waiting for their turn
      * @param characterClass
      */
-    public KnightCharacter(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, CharacterClass characterClass) {
-        super(name, turnsQueue, characterClass);
+    public KnightCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,@NotNull String name,
+                           final int maxHp,final int defense) {
+        super(turnsQueue, name, CharacterClass.KNIGHT, maxHp, defense);
     }
 
     @Override

@@ -21,8 +21,9 @@ public class WhiteMageCharacter extends AbstractMageCharacterAbstract {
      * @param turnsQueue     the queue with the characters waiting for their turn
      * @param characterClass
      */
-    public WhiteMageCharacter(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, CharacterClass characterClass) {
-        super(name, turnsQueue, characterClass);
+    public WhiteMageCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,@NotNull String name,
+                              final int maxHp,final int defense,final int maxMana) {
+        super(turnsQueue, name, CharacterClass.WHITE_MAGE, maxHp, defense,maxMana);
     }
 
     /**

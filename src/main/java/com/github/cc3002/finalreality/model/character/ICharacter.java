@@ -47,4 +47,6 @@ public interface ICharacter {
    * Returns this character's maxHp (max health points).
    */
   int getMaxHp();
+
+  void setMaxHp(int i);
 }

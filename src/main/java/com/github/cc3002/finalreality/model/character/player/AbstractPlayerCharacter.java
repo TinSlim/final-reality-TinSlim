@@ -23,15 +23,13 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
 
   /**
    * Creates a new character.
-   *
+   *  @param turnsQueue     the queue with the characters waiting for their turn
    * @param name           the character's name
-   * @param turnsQueue     the queue with the characters waiting for their turn
    * @param characterClass the class of this character
    */
-  public AbstractPlayerCharacter(@NotNull String name,
-                                 @NotNull BlockingQueue<ICharacter> turnsQueue,
-                                 final CharacterClass characterClass) {
-    super(turnsQueue, name, characterClass);
+  public AbstractPlayerCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,@NotNull String name,
+  CharacterClass characterClass, final int maxHp,final int defense){
+    super(turnsQueue, name, characterClass,maxHp,defense);
   }
 
   @Override

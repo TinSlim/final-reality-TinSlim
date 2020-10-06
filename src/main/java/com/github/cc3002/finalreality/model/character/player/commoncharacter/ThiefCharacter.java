@@ -17,8 +17,9 @@ public class ThiefCharacter extends AbstractPlayerCharacter {
      * @param turnsQueue     the queue with the characters waiting for their turn
      * @param characterClass
      */
-    public ThiefCharacter(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, CharacterClass characterClass) {
-        super(name, turnsQueue, characterClass);
+    public ThiefCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,@NotNull String name,
+                          final int maxHp,final int defense) {
+        super(turnsQueue, name, CharacterClass.THIEF, maxHp, defense);
     }
 
     @Override

@@ -15,8 +15,8 @@ public class Staff extends AbstractWeapon {
    * @param type
    * @see WeaponType
    */
-  public Staff(String name, int damage, int magicDamage, int weight, WeaponType type) {
-    super(name, damage, weight, type);
+  public Staff(String name, int damage, int magicDamage, int weight) {
+    super(name, damage, weight, WeaponType.STAFF);
     this.magicDamage = magicDamage;
   }
 
@@ -25,7 +25,7 @@ public class Staff extends AbstractWeapon {
   }
 
   public void equipToKnight(IPlayerCharacter character){
-    character.setEquippedWeapon(this);
+
   }
 
   public void equipToThief(IPlayerCharacter character){
@@ -33,7 +33,7 @@ public class Staff extends AbstractWeapon {
   }
 
   public void equipToEngineer(IPlayerCharacter character){
-    character.setEquippedWeapon(this);
+
   }
 
   public void equipToBlackMage(IPlayerCharacter character){

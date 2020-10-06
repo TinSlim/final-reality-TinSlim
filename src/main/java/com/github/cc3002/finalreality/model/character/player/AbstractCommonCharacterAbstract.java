@@ -13,8 +13,8 @@ public abstract class AbstractCommonCharacterAbstract extends AbstractPlayerChar
      * @param turnsQueue     the queue with the characters waiting for their turn
      * @param characterClass
      */
-    public AbstractCommonCharacterAbstract(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, CharacterClass characterClass) {
-        super(name, turnsQueue, characterClass);
+    public AbstractCommonCharacterAbstract(@NotNull BlockingQueue<ICharacter> turnsQueue,@NotNull String name,
+                                           CharacterClass characterClass, final int maxHp,final int defense) {
+        super(turnsQueue, name, characterClass, maxHp, defense);
     }
-
 }

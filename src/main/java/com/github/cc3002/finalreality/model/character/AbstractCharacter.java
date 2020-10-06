@@ -25,27 +25,13 @@ public abstract class AbstractCharacter implements ICharacter {
 
 
   protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,
-      @NotNull String name, CharacterClass characterClass, int maxHp, int defense) {
+      @NotNull String name, CharacterClass characterClass, final int maxHp, final int defense) {
     this.turnsQueue = turnsQueue;
     this.name = name;
     this.characterClass = characterClass;
     this.maxHp = maxHp;
     this.hp = maxHp;
     this.defense = defense;
-
-  }
-
-  //Todo borrar despues
-  protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,
-                              @NotNull String name, CharacterClass characterClass) {
-    this.turnsQueue = turnsQueue;
-    this.name = name;
-    this.characterClass = characterClass;
-
-    this.maxHp = 100;
-    this.hp = maxHp;
-    this.defense = 5;
-
   }
 
 
@@ -58,7 +44,9 @@ public abstract class AbstractCharacter implements ICharacter {
     scheduledExecutor.shutdown();
   }
 
-
+  public void setMaxHp(int i){
+    this.maxHp = i;
+  }
   @Override
   public String getName() {
     return name;
@@ -88,11 +76,10 @@ public abstract class AbstractCharacter implements ICharacter {
 
   @Override
   public void receiveDamage(int damage) {
-    int actualHp = this.getHp();
-    if (actualHp - damage <= 0) {
+    if ((this.getHp() - damage) <= 0) {
       this.setHp(0);
     } else {
-      this.setHp(actualHp - damage);
+      this.setHp(this.getHp() - damage);
     }
   }
 }

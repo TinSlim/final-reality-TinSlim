@@ -12,13 +12,13 @@ public class Bow extends AbstractWeapon {
    * @param type
    * @see WeaponType
    */
-  public Bow(String name, int damage, int weight, WeaponType type) {
-    super(name, damage, weight, type);
+  public Bow(String name, int damage, int weight) {
+    super(name, damage, weight, WeaponType.BOW);
   }
 
 
   public void equipToKnight(IPlayerCharacter character){
-    character.setEquippedWeapon(this);
+
   }
 
   public void equipToThief(IPlayerCharacter character){
@@ -30,11 +30,9 @@ public class Bow extends AbstractWeapon {
   }
 
   public void equipToBlackMage(IPlayerCharacter character){
-    character.setEquippedWeapon(this);
   }
 
   public void equipToWhiteMage(IPlayerCharacter character){
-    character.setEquippedWeapon(this);
   }
 
 }

@@ -17,8 +17,9 @@ public class EngineerCharacter extends AbstractCommonCharacterAbstract {
      * @param turnsQueue     the queue with the characters waiting for their turn
      * @param characterClass
      */
-    public EngineerCharacter(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, CharacterClass characterClass) {
-        super(name, turnsQueue, characterClass);
+    public EngineerCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,@NotNull String name,
+                             final int maxHp,final int defense) {
+        super(turnsQueue, name, CharacterClass.ENGINEER, maxHp, defense);
     }
 
     @Override

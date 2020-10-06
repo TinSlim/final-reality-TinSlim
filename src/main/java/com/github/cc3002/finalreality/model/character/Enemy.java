@@ -29,9 +29,10 @@ public class Enemy extends AbstractCharacter {
    * Creates a new enemy with a name, a weight and the queue with the characters ready to
    * play.
    */
-  public Enemy(@NotNull final String name, final int weight,
-      @NotNull final BlockingQueue<ICharacter> turnsQueue) {
-    super(turnsQueue, name, CharacterClass.ENEMY);
+  public Enemy(@NotNull BlockingQueue<ICharacter> turnsQueue,
+               @NotNull String name, final int maxHp,
+               final int weight,final int defense){
+    super(turnsQueue,name,CharacterClass.ENEMY,maxHp,defense);
     this.weight = weight;
   }
 
@@ -85,10 +86,14 @@ public class Enemy extends AbstractCharacter {
     this.burnDamage = newDamage;
   }
 
+  public int getBurnDamage(){
+    return this.burnDamage;
+  }
   @Override
   public void commonAttack(ICharacter target) {
     target.receiveDamage(this.damage);
   }
+
 
   /**
    * Sets this enemy's poison damage (acquired when a mage uses venom attack).
