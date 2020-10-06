@@ -14,9 +14,6 @@ public abstract class AbstractPlayerCharacterTest extends AbstractCharacterTest 
   protected IWeapon testWeaponStaff = new Staff("TestStaff",10,100,90);
   protected IWeapon testWeaponBow = new Bow("TestBow",50,30);
   protected IWeapon testWeaponAxe = new Axe("TestAxe",100,50);
-  protected IWeapon testWeaponA;
-  protected IWeapon testWeaponB;
-  protected IWeapon testWeaponC;
 
 
   @BeforeEach
