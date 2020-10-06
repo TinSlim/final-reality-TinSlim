@@ -16,11 +16,6 @@ public abstract class AbstractPlayerCharacterTest extends AbstractCharacterTest 
   protected IWeapon testWeaponAxe = new Axe("TestAxe",100,50);
 
 
-  @BeforeEach
-  public void setUp(){
-    setTestCharacter();
-  }
-
   @Test
   public void testEquipWeaponsToPlayer(){
     testEquipWeapons();
