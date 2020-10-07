@@ -16,7 +16,7 @@ public class Axe extends AbstractWeapon {
     super(name, damage, weight, WeaponType.AXE);
   }
 
-  public boolean cast(){
+  public boolean castMagic(){
     return false;
   }
 

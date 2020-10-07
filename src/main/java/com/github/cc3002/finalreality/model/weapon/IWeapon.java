@@ -45,4 +45,6 @@ public interface IWeapon {
   String getName();
 
   WeaponType getType();
+
+  boolean castMagic();
 }
