@@ -1,7 +1,6 @@
 package com.github.cc3002.finalreality.model.character.player.commoncharacter;
 import com.github.cc3002.finalreality.model.character.player.AbstractCommonCharacterTest;
-import com.github.cc3002.finalreality.model.character.AbstractCharacterTest;
-import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -12,25 +11,25 @@ public class EngineerCharacterTest extends AbstractCommonCharacterTest {
     testCharacterB = new EngineerCharacter(turnsQueue,"EngineerB",50,50);
     testCharacterC = new EngineerCharacter(turnsQueue,"EngineerC",0,0);
     testCharacterD = new EngineerCharacter(turnsQueue,"EngineerD",-10,-10);
-    testCharacterE = new EngineerCharacter(turnsQueue,"EngineerE",100,100);
+    testPlayerCharacter = new EngineerCharacter(turnsQueue,"EngineerE",100,100);
   }
 
 
 
   public void testEquipWeapons() {
-    testCharacterE.equip(testWeaponKnife);
-    assertNull(testCharacterE.getEquippedWeapon());
+    testPlayerCharacter.equip(testWeaponKnife);
+    assertNull(testPlayerCharacter.getEquippedWeapon());
 
-    testCharacterE.equip(testWeaponStaff);
-    assertNull(testCharacterE.getEquippedWeapon());
+    testPlayerCharacter.equip(testWeaponStaff);
+    assertNull(testPlayerCharacter.getEquippedWeapon());
 
-    testCharacterE.equip(testWeaponSword);
-    assertNull(testCharacterE.getEquippedWeapon());
+    testPlayerCharacter.equip(testWeaponSword);
+    assertNull(testPlayerCharacter.getEquippedWeapon());
 
-    testCharacterE.equip(testWeaponAxe);
-    assertEquals(testWeaponAxe,testCharacterE.getEquippedWeapon());
+    testPlayerCharacter.equip(testWeaponAxe);
+    assertEquals(testWeaponAxe, testPlayerCharacter.getEquippedWeapon());
 
-    testCharacterE.equip(testWeaponBow);
-    assertEquals(testWeaponBow,testCharacterE.getEquippedWeapon());
+    testPlayerCharacter.equip(testWeaponBow);
+    assertEquals(testWeaponBow, testPlayerCharacter.getEquippedWeapon());
   }
 }

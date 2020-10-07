@@ -1,23 +1,6 @@
 package com.github.cc3002.finalreality.model.character;
 
-import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.util.concurrent.BlockingQueue;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 class EnemyTest extends AbstractCharacterTest {
-
-
-
-  /**
-   * Checks that the class' constructor and equals method works properly.
-   */
-
-
-
   public void setTestCharacter(){
     testCharacterA = new Enemy(turnsQueue,"EnemyA",100,100,100);
     testCharacterB = new Enemy(turnsQueue,"EnemyB",50,50,50);

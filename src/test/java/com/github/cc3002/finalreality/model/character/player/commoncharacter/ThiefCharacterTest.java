@@ -1,9 +1,5 @@
 package com.github.cc3002.finalreality.model.character.player.commoncharacter;
-import com.github.cc3002.finalreality.model.character.player.AbstractCommonCharacterTest;
-import com.github.cc3002.finalreality.model.character.AbstractCharacterTest;
 import com.github.cc3002.finalreality.model.character.player.AbstractPlayerCharacterTest;
-import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
-import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -17,25 +13,25 @@ public class ThiefCharacterTest extends AbstractPlayerCharacterTest {
     testCharacterC = new ThiefCharacter(turnsQueue,"ThiefC",0,0);
     testCharacterD = new ThiefCharacter(turnsQueue,"ThiefD",-10,-10);
 
-    testCharacterE = new ThiefCharacter(turnsQueue,"ThiefE",100,100);
+    testPlayerCharacter = new ThiefCharacter(turnsQueue,"ThiefE",100,100);
 
   }
 
 
   public void testEquipWeapons() {
-    testCharacterE.equip(testWeaponKnife);
-    assertNull(testCharacterE.getEquippedWeapon());
+    testPlayerCharacter.equip(testWeaponKnife);
+    assertNull(testPlayerCharacter.getEquippedWeapon());
 
-    testCharacterE.equip(testWeaponAxe);
-    assertNull(testCharacterE.getEquippedWeapon());
+    testPlayerCharacter.equip(testWeaponAxe);
+    assertNull(testPlayerCharacter.getEquippedWeapon());
 
-    testCharacterE.equip(testWeaponSword);
-    assertEquals(testWeaponSword,testCharacterE.getEquippedWeapon());
+    testPlayerCharacter.equip(testWeaponSword);
+    assertEquals(testWeaponSword, testPlayerCharacter.getEquippedWeapon());
 
-    testCharacterE.equip(testWeaponBow);
-    assertEquals(testWeaponBow,testCharacterE.getEquippedWeapon());
+    testPlayerCharacter.equip(testWeaponBow);
+    assertEquals(testWeaponBow, testPlayerCharacter.getEquippedWeapon());
 
-    testCharacterE.equip(testWeaponStaff);
-    assertEquals(testWeaponStaff,testCharacterE.getEquippedWeapon());
+    testPlayerCharacter.equip(testWeaponStaff);
+    assertEquals(testWeaponStaff, testPlayerCharacter.getEquippedWeapon());
   }
 }

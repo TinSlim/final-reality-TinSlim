@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public abstract class AbstractPlayerCharacterTest extends AbstractCharacterTest implements IPlayerCharacterTest {
-  protected IPlayerCharacter testCharacterE;
+  protected IPlayerCharacter testPlayerCharacter;
 
   protected IWeapon testWeaponSword = new Sword("TestSword",80,42);
   protected IWeapon testWeaponKnife = new Knife("TestKnife",20,5);
