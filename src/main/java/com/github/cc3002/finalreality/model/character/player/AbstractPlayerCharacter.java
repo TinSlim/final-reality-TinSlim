@@ -1,6 +1,7 @@
 package com.github.cc3002.finalreality.model.character.player;
 
 import com.github.cc3002.finalreality.model.character.AbstractCharacter;
+import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
@@ -82,8 +83,8 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
   @Override
   abstract public void equip(IWeapon weapon);
 
-  @Override
-  public void commonAttack(ICharacter target) {
+
+  public void commonAttack(Enemy target) {
     IWeapon weapon = this.getEquippedWeapon();
     int damage = weapon.getDamage();
     target.receiveDamage(damage);

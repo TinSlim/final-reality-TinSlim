@@ -49,6 +49,6 @@ public abstract class AbstractMageCharacter extends AbstractPlayerCharacter impl
 
 
     public void reduceMana(int mana){
-        this.mana = this.mana - mana;
+        this.setMana(this.mana - mana);
     }
 }

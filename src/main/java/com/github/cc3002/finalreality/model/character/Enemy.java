@@ -6,6 +6,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -98,8 +99,8 @@ public class Enemy extends AbstractCharacter {
     return this.paralyze;
   }
 
-  @Override
-  public void commonAttack(ICharacter target) {
+
+  public void commonAttack(IPlayerCharacter target) {
     target.receiveDamage(this.damage);
   }
 

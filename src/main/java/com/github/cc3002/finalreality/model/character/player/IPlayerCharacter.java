@@ -1,5 +1,6 @@
 package com.github.cc3002.finalreality.model.character.player;
 
+import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.weapon.AbstractWeapon;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
 
@@ -35,4 +36,8 @@ public interface IPlayerCharacter {
     void setHp(int i);
 
     int getHp();
+
+  void receiveDamage(int damage);
+
+  void commonAttack(Enemy testEnemyA);
 }

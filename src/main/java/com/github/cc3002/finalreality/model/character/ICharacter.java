@@ -27,11 +27,6 @@ public interface ICharacter {
    */
   CharacterClass getCharacterClass();
 
-  /**
-   * This character makes an attack to a target, dealing damage.
-   * @param target
-   */
-  void commonAttack(ICharacter target);
 
   /**
    * This character receive damage reducing the hp b
