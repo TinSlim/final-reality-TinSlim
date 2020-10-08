@@ -10,18 +10,20 @@ import com.github.cc3002.finalreality.model.character.player.commoncharacter.Thi
 import com.github.cc3002.finalreality.model.weapon.Staff;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
   protected IPlayerCharacter testComradeA;
   protected IPlayerCharacter testComradeB;
   protected IPlayerCharacter testComradeC;
+  protected IPlayerCharacter testComradeD;
 
   protected Enemy testEnemyA;
   protected Enemy testEnemyB;
+  protected Enemy testEnemyC;
 
-  protected WhiteMageCharacter testWhiteMage;
+  protected WhiteMageCharacter testWhiteMageA;
+  protected WhiteMageCharacter testWhiteMageB;
 
   public void setTestCharacter(){
     testCharacterA = new WhiteMageCharacter(turnsQueue,"WhiteMageA",100,100,100);
@@ -31,7 +33,8 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
 
     testPlayerCharacter = new WhiteMageCharacter(turnsQueue,"WhiteMageE",100,100,100);
 
-    testWhiteMage = new WhiteMageCharacter(turnsQueue,"WhiteMage",100,100,100);
+    testWhiteMageA = new WhiteMageCharacter(turnsQueue,"WhiteMage",100,100,100);
+    testWhiteMageB = new WhiteMageCharacter(turnsQueue,"WhiteMage",100,100,5);
 
     testMageA = new WhiteMageCharacter(turnsQueue,"WhiteMageA",100,100,100);
     testMageB = new WhiteMageCharacter(turnsQueue,"WhiteMageB",100,100,40);
@@ -40,6 +43,12 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
     testComradeA = new KnightCharacter(turnsQueue,"KnightComrade",99,100);
     testComradeB = new ThiefCharacter(turnsQueue,"ThiefComrade",99,50);
     testComradeC = new EngineerCharacter(turnsQueue,"EngineerComrade",99,50);
+    testComradeD = new BlackMageCharacter(turnsQueue,"BlackMageComrade",100,50,10);
+
+    testEnemyA = new Enemy(turnsQueue,"EnemyA",100,100,100);
+    testEnemyB = new Enemy(turnsQueue,"EnemyB",100,100,100);
+    testEnemyC = new Enemy(turnsQueue,"EnemyC",30,100,100);
+
   }
 
   @Test
@@ -61,37 +70,54 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
     assertEquals(testWeaponStaff, testPlayerCharacter.getEquippedWeapon());
   }
 
-  @Test
-  public void testCast(){
-    testMageA.equip(testWeaponStaffA);
-    testMageA.cast(90);
-    assertEquals(10,testMageA.getMana());
-
-    testMageB.equip(testWeaponStaffA);
-    testMageB.cast(40);
-    assertEquals(0,testMageB.getMana());
-
-    testMageC.equip(testWeaponStaffA);
-    testMageC.cast(38);
-    assertEquals(30,testMageC.getMana());
-  }
 
   @Test
   public void testCure(){
-    testWhiteMage.equip(testWeaponStaff);
+    testWhiteMageA.equip(testWeaponStaff);
     testComradeA.setHp(33);
-    testWhiteMage.cure(testComradeA);
+    testWhiteMageA.cure(testComradeA);
     assertEquals(66,testComradeA.getHp());
 
     testComradeB.setHp(66);
-    testWhiteMage.cure(testComradeB);
+    testWhiteMageA.cure(testComradeB);
     assertEquals(99,testComradeB.getHp());
 
     testComradeC.setHp(95);
-    testWhiteMage.cure(testComradeC);
+    testWhiteMageA.cure(testComradeC);
     assertEquals(99,testComradeC.getHp());
+
+    testComradeD.setHp(1);
+    testWhiteMageB.cure(testComradeD);
+    assertEquals(1,testComradeD.getHp());
   }
 
   @Test
-  public
+  public void testVenom(){
+    testWhiteMageA.equip(testWeaponStaffA);
+    testWhiteMageA.venom(testEnemyA);
+    assertEquals(26,testEnemyA.getPoisonDamage());
+
+    testWhiteMageA.equip(testWeaponStaffB);
+    testWhiteMageA.venom(testEnemyB);
+    assertEquals(3,testEnemyB.getPoisonDamage());
+
+    testWhiteMageB.equip(testWeaponStaffB);
+    testWhiteMageB.venom(testEnemyC);
+    assertEquals(0,testEnemyC.getPoisonDamage());
+  }
+
+  @Test
+  public void testParalyze(){
+    testWhiteMageA.equip(testWeaponStaffA);
+    testWhiteMageA.paralyze(testEnemyA);
+    assertTrue(testEnemyA.getParalyze());
+
+    testWhiteMageA.equip(testWeaponStaffB);
+    testWhiteMageA.paralyze(testEnemyB);
+    assertTrue(testEnemyB.getParalyze());
+
+    testWhiteMageB.equip(testWeaponStaffB);
+    testWhiteMageB.paralyze(testEnemyC);
+    assertFalse(testEnemyC.getParalyze());
+  }
 }

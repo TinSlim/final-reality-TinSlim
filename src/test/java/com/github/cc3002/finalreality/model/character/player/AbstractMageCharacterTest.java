@@ -20,7 +20,4 @@ public abstract class AbstractMageCharacterTest extends AbstractPlayerCharacterT
   protected IWeapon testWeaponStaffB = new Staff("TestStaffB",0,10,90);
   protected IWeapon testWeaponStaffC = new Staff("TestStaffC",0,0,90);
 
-  @Test
-  public abstract void testCast();
-
 }
