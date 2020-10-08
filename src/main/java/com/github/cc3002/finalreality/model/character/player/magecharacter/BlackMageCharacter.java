@@ -33,11 +33,11 @@ public class BlackMageCharacter extends AbstractMageCharacter {
         else {
             this.reduceMana(15);
             Staff weapon = (Staff) this.getEquippedWeapon();
-            int damage = weapon.getMagicDamage();
-            target.receiveDamage(damage);
+            int magicDamage = weapon.getMagicDamage();
+            target.receiveDamage(magicDamage);
             Random rng = this.getRandom();
             int posibilityToParalize = rng.nextInt(9);
-            if (posibilityToParalize <= 3) {
+            if (posibilityToParalize < 3) {
                 target.setParalyze(true);
             }
         }
@@ -58,7 +58,7 @@ public class BlackMageCharacter extends AbstractMageCharacter {
             target.receiveDamage(magicDamage);
             Random rng = this.getRandom();
             int burnRandom = rng.nextInt(9);
-            if (burnRandom <= 2) {
+            if (burnRandom < 2) {
                 target.setBurnDamage(magicDamage / 3);
             }
         }

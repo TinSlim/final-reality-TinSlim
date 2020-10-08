@@ -16,7 +16,6 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
      *
      * @param name           the character's name
      * @param turnsQueue     the queue with the characters waiting for their turn
-     * @param characterClass
      */
     public WhiteMageCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
                               final int maxHp, final int defense, final int maxMana) {
@@ -33,7 +32,7 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
         else {
             this.reduceMana(15);
             int life = target.getMaxHp();
-            target.receiveLife(life / 3);
+            target.receiveLife((life * 3) / 10 );
         }
     }
 

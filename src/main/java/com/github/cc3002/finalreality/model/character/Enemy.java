@@ -18,12 +18,11 @@ import org.jetbrains.annotations.NotNull;
 public class Enemy extends AbstractCharacter {
 
   private final int weight;
-
+  private final int damage;
 
   private int burnDamage = 0;
   private int poisonDamage = 0;
   boolean paralyze = false;
-  private int damage = 0;
 
 
   /**
@@ -32,9 +31,10 @@ public class Enemy extends AbstractCharacter {
    */
   public Enemy(@NotNull BlockingQueue<ICharacter> turnsQueue,
                @NotNull String name, final int maxHp,
-               final int weight,final int defense){
+               final int weight,final int defense, final int damage){
     super(turnsQueue,name,CharacterClass.ENEMY,maxHp,defense);
     this.weight = weight;
+    this.damage = damage;
   }
 
   /**
@@ -101,7 +101,7 @@ public class Enemy extends AbstractCharacter {
 
 
   public void commonAttack(IPlayerCharacter target) {
-    target.receiveDamage(this.damage);
+    target.receiveDamage(this.getDamage());
   }
 
 
