@@ -1,14 +1,14 @@
 package com.github.cc3002.finalreality.model.character.player.commoncharacter;
 
 import com.github.cc3002.finalreality.model.character.ICharacter;
-import com.github.cc3002.finalreality.model.character.player.AbstractCommonCharacter;
+import com.github.cc3002.finalreality.model.character.player.AbstractCommonCharacterAbstract;
 import com.github.cc3002.finalreality.model.character.player.CharacterClass;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
 
-public class EngineerCharacterCommonCharacter extends AbstractCommonCharacter {
+public class EngineerCharacter extends AbstractCommonCharacterAbstract {
 
     /**
      * Creates a new character.
@@ -17,8 +17,8 @@ public class EngineerCharacterCommonCharacter extends AbstractCommonCharacter {
      * @param turnsQueue     the queue with the characters waiting for their turn
      * @param characterClass
      */
-    public EngineerCharacterCommonCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
-                                            final int maxHp, final int defense) {
+    public EngineerCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,@NotNull String name,
+                             final int maxHp,final int defense) {
         super(turnsQueue, name, CharacterClass.ENGINEER, maxHp, defense);
     }
 

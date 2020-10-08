@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 
-public abstract class AbstractMageCharacterAbstract extends AbstractPlayerCharacter {
+public abstract class AbstractMageCharacter extends AbstractPlayerCharacter implements IMageCharacter{
     private int mana;
     Random adverseEffectProbability = new Random();
 
@@ -19,8 +19,8 @@ public abstract class AbstractMageCharacterAbstract extends AbstractPlayerCharac
      * @param turnsQueue     the queue with the characters waiting for their turn
      * @param characterClass
      */
-    public AbstractMageCharacterAbstract(@NotNull BlockingQueue<ICharacter> turnsQueue,@NotNull String name,
-    CharacterClass characterClass, final int maxHp,final int defense,final int maxMana){
+    public AbstractMageCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
+                                 CharacterClass characterClass, final int maxHp, final int defense, final int maxMana){
         super(turnsQueue, name, characterClass, maxHp, defense);
         this.mana = maxMana;
     }
@@ -47,17 +47,8 @@ public abstract class AbstractMageCharacterAbstract extends AbstractPlayerCharac
         this.mana = mana;
     }
 
-    /**
-     * Reduces and evaluate if this MageCharacter can cast a magic.
-     */
-    boolean cast(int cost) {
-        IWeapon weapon = this.getEquippedWeapon();
-        if (this.getMana() - cost < 0 || weapon.getType() != WeaponType.STAFF) {
-            return false;
-        } else {
-            this.setMana(this.getMana() - cost);
-            return true;
-        }
+
+    public void reduceMana(int mana){
+        this.mana = this.mana - mana;
     }
-    
 }

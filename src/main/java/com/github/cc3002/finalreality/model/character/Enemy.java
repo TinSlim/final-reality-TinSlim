@@ -89,6 +89,15 @@ public class Enemy extends AbstractCharacter {
   public int getBurnDamage(){
     return this.burnDamage;
   }
+
+  public void setParalyze(boolean value){
+    this.paralyze = value;
+  }
+
+  public boolean getParalyze(){
+    return this.paralyze;
+  }
+
   @Override
   public void commonAttack(ICharacter target) {
     target.receiveDamage(this.damage);
@@ -100,5 +109,9 @@ public class Enemy extends AbstractCharacter {
    */
   public void setPoisonDamage(int damage) {
     this.poisonDamage = damage;
+  }
+
+  public int getPoisonDamage() {
+    return this.poisonDamage;
   }
 }

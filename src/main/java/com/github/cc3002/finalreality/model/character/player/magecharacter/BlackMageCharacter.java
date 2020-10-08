@@ -10,49 +10,57 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
 
-public class BlackMageCharacterMageCharacter extends AbstractMageCharacter {
-    int mana = 0;
-
+public class BlackMageCharacter extends AbstractMageCharacter {
     /**
      * Creates a new character.
      *
      * @param name           the character's name
      * @param turnsQueue     the queue with the characters waiting for their turn
-     * @param characterClass
      */
-    public BlackMageCharacterMageCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
-                                           final int maxHp, final int defense, final int maxMana) {
+    public BlackMageCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
+                              final int maxHp, final int defense, final int maxMana) {
         super(turnsQueue, name, CharacterClass.BLACK_MAGE, maxHp, defense,maxMana);
     }
 
     /**
-     * This BlackMageCharacterMageCharacter attacks a target (Enemy) with thunder magic with a chance to paralize
+     * This BlackMageCharacter attacks a target (Enemy) with thunder magic with a chance to paralize
      * the target.
      */
     public void thunder(Enemy target) {
-        Staff weapon = (Staff) this.getEquippedWeapon();
-        int damage = weapon.getMagicDamage();
-        target.receiveDamage(damage);
-        Random rng = this.getRandom();
-        int posibilityToParalize = rng.nextInt(9);
-        if (posibilityToParalize <= 3) {
-            target.setParalyze(true);
+        if ((this.getMana() - 15) < 0 || !this.getEquippedWeapon().castMagic()) {
+            return;
+        }
+        else {
+            this.reduceMana(15);
+            Staff weapon = (Staff) this.getEquippedWeapon();
+            int damage = weapon.getMagicDamage();
+            target.receiveDamage(damage);
+            Random rng = this.getRandom();
+            int posibilityToParalize = rng.nextInt(9);
+            if (posibilityToParalize <= 3) {
+                target.setParalyze(true);
+            }
         }
     }
 
     /**
-     * This BlackMageCharacterMageCharacter attacks a target (Enemy) with fire magic with a chance to burn
+     * This BlackMageCharacter attacks a target (Enemy) with fire magic with a chance to burn
      * the target.
      */
     public void fire(Enemy target) {
-        Staff weapon = (Staff) this.getEquippedWeapon();
-        int magicDamage = weapon.getMagicDamage();
-        target.receiveDamage(magicDamage);
-
-        Random rng = this.getRandom();
-        int burnRandom = rng.nextInt(9);
-        if (burnRandom <= 2) {
-            target.setBurnDamage(magicDamage/3);
+        if ((this.getMana() - 15) < 0 || !this.getEquippedWeapon().castMagic()) {
+            return;
+        }
+        else{
+            this.reduceMana(15);
+            Staff weapon = (Staff) this.getEquippedWeapon();
+            int magicDamage = weapon.getMagicDamage();
+            target.receiveDamage(magicDamage);
+            Random rng = this.getRandom();
+            int burnRandom = rng.nextInt(9);
+            if (burnRandom <= 2) {
+                target.setBurnDamage(magicDamage / 3);
+            }
         }
     }
 

@@ -10,9 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
 
-public class WhiteMageCharacterMageCharacter extends AbstractMageCharacter {
-
-    int mana = 0;
+public class WhiteMageCharacter extends AbstractMageCharacter {
     /**
      * Creates a new character.
      *
@@ -20,32 +18,51 @@ public class WhiteMageCharacterMageCharacter extends AbstractMageCharacter {
      * @param turnsQueue     the queue with the characters waiting for their turn
      * @param characterClass
      */
-    public WhiteMageCharacterMageCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
-                                           final int maxHp, final int defense, final int maxMana) {
+    public WhiteMageCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
+                              final int maxHp, final int defense, final int maxMana) {
         super(turnsQueue, name, CharacterClass.WHITE_MAGE, maxHp, defense,maxMana);
     }
 
     /**
-     * This WhiteMageCharacterMageCharacter cures a target (IPlayerCharacter).
+     * This WhiteMageCharacter cures a target (IPlayerCharacter).
      */
     public void cure(IPlayerCharacter target) {
-        int life = target.getMaxHp();
-        target.receiveLife((int) (life * 0.3));
+        if ((this.getMana() - 15) < 0 || !this.getEquippedWeapon().castMagic()) {
+            return;
+        }
+        else {
+            this.reduceMana(15);
+            int life = target.getMaxHp();
+            target.receiveLife(life / 3);
+        }
     }
 
     /**
-     * This WhiteMageCharacterMageCharacter venom a target (Enemy).
+     * This WhiteMageCharacter venom a target (Enemy).
      */
     public void venom(Enemy target) {
-        Staff weapon = (Staff) this.getEquippedWeapon();
-        int damage = weapon.getMagicDamage() / 3;
-        target.setPoisonDamage(damage);
+        if ((this.getMana() - 40) < 0 || !this.getEquippedWeapon().castMagic()) {
+            return;
+        }
+        else {
+            this.reduceMana(40);
+            Staff weapon = (Staff) this.getEquippedWeapon();
+            int damage = weapon.getMagicDamage() / 3;
+            target.setPoisonDamage(damage);
+        }
     }
 
     /**
-     * This WhiteMageCharacterMageCharacter paralyzes a target (Enemy).
+     * This WhiteMageCharacter paralyzes a target (Enemy).
      */
     public void paralyze(Enemy target) {
+        if ((this.getMana() - 25) < 0 || !this.getEquippedWeapon().castMagic()) {
+            return;
+        }
+        else {
+            this.reduceMana(25);
+            target.setParalyze(true);
+        }
     }
 
     @Override
