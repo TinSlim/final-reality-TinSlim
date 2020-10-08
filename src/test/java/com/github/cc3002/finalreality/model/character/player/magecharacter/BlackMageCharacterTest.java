@@ -63,17 +63,17 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
 
   @Test
   public void testFire(){
-    testBlackMageA.setSeed(23);
+    testBlackMageA.setSeed(8);
     testBlackMageB.setSeed(22);
 
     testBlackMageA.equip(testWeaponStaffA);
     testBlackMageA.fire(testEnemyA);
-    assertEquals(0,testEnemyA.getBurnDamage());
+    assertEquals(26,testEnemyA.getBurnDamage());
     assertEquals(0,testEnemyA.getHp());
 
     testBlackMageA.equip(testWeaponStaffB);
     testBlackMageA.fire(testEnemyB);
-    assertEquals(3,testEnemyB.getBurnDamage());
+    assertEquals(0,testEnemyB.getBurnDamage());
     assertEquals(60,testEnemyB.getHp());
 
     testBlackMageA.equip(testWeaponStaffC);
@@ -94,22 +94,22 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
 
   @Test
   public void testThunder(){
-    testBlackMageA.setSeed(23);
+    testBlackMageA.setSeed(44213);
     testBlackMageB.setSeed(22);
 
     testBlackMageA.equip(testWeaponStaffA);
     testBlackMageA.thunder(testEnemyA);
-    assertEquals(false,testEnemyA.getParalyze());
+    assertEquals(true,testEnemyA.getParalyze());
     assertEquals(0,testEnemyA.getHp());
 
     testBlackMageA.equip(testWeaponStaffB);
     testBlackMageA.thunder(testEnemyB);
-    assertEquals(true,testEnemyB.getParalyze());
+    assertEquals(false,testEnemyB.getParalyze());
     assertEquals(60,testEnemyB.getHp());
 
     testBlackMageA.equip(testWeaponStaffC);
     testBlackMageA.thunder(testEnemyC);
-    assertEquals(true,testEnemyC.getParalyze());
+    assertEquals(false,testEnemyC.getParalyze());
     assertEquals(10,testEnemyC.getHp());
 
     testBlackMageB.equip(testWeaponStaffA);

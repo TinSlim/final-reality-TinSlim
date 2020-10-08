@@ -75,11 +75,11 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
     testWhiteMageA.equip(testWeaponStaff);
     testComradeA.setHp(33);
     testWhiteMageA.cure(testComradeA);
-    assertEquals(66,testComradeA.getHp());
+    assertEquals(62,testComradeA.getHp());
 
     testComradeB.setHp(66);
     testWhiteMageA.cure(testComradeB);
-    assertEquals(99,testComradeB.getHp());
+    assertEquals(95,testComradeB.getHp());
 
     testComradeC.setHp(95);
     testWhiteMageA.cure(testComradeC);
