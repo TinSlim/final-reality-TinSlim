@@ -35,7 +35,7 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
     testMageB = new BlackMageCharacter(turnsQueue,"BlackMageB",100,100,15);
     testMageC = new BlackMageCharacter(turnsQueue,"BlackMageC",100,100,5);
 
-    testEnemyD = new Enemy(turnsQueue,"testEnemyC",10,100,100);
+    testEnemyD = new Enemy(turnsQueue,"testEnemyC",10,100,100,40);
 
     testClassWeaponA = new Knife("TestKnifeAttack",100,42);
     testClassWeaponB = new Staff("TestStaffAttackA",50,42,42);

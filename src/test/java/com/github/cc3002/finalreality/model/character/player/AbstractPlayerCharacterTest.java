@@ -33,9 +33,9 @@ public abstract class AbstractPlayerCharacterTest extends AbstractCharacterTest 
   protected abstract void testEquipWeapons();
 
   public void setEnemies(){
-    testEnemyA = new Enemy(turnsQueue,"testEnemyA",80,100,100);
-    testEnemyB = new Enemy(turnsQueue,"testEnemyB",70,100,100);
-    testEnemyC = new Enemy(turnsQueue,"testEnemyC",10,100,100);
+    testEnemyA = new Enemy(turnsQueue,"testEnemyA",80,100,100,10);
+    testEnemyB = new Enemy(turnsQueue,"testEnemyB",70,100,100,20);
+    testEnemyC = new Enemy(turnsQueue,"testEnemyC",10,100,100,30);
   }
 
   @Test
