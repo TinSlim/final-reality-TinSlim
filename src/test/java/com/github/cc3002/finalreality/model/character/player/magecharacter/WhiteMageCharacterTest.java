@@ -7,6 +7,7 @@ import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import com.github.cc3002.finalreality.model.character.player.commoncharacter.EngineerCharacter;
 import com.github.cc3002.finalreality.model.character.player.commoncharacter.KnightCharacter;
 import com.github.cc3002.finalreality.model.character.player.commoncharacter.ThiefCharacter;
+import com.github.cc3002.finalreality.model.weapon.Knife;
 import com.github.cc3002.finalreality.model.weapon.Staff;
 import org.junit.jupiter.api.Test;
 
@@ -18,14 +19,12 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
   protected IPlayerCharacter testComradeC;
   protected IPlayerCharacter testComradeD;
 
-  protected Enemy testEnemyA;
-  protected Enemy testEnemyB;
-  protected Enemy testEnemyC;
-
   protected WhiteMageCharacter testWhiteMageA;
   protected WhiteMageCharacter testWhiteMageB;
 
   public void setTestCharacter(){
+    setEnemies();
+
     testCharacterA = new WhiteMageCharacter(turnsQueue,"WhiteMageA",100,100,100);
     testCharacterB = new WhiteMageCharacter(turnsQueue,"WhiteMageB",50,50,50);
     testCharacterC = new WhiteMageCharacter(turnsQueue,"WhiteMageC",0,0,0);
@@ -45,9 +44,9 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
     testComradeC = new EngineerCharacter(turnsQueue,"EngineerComrade",99,50);
     testComradeD = new BlackMageCharacter(turnsQueue,"BlackMageComrade",100,50,10);
 
-    testEnemyA = new Enemy(turnsQueue,"EnemyA",100,100,100);
-    testEnemyB = new Enemy(turnsQueue,"EnemyB",100,100,100);
-    testEnemyC = new Enemy(turnsQueue,"EnemyC",30,100,100);
+    testClassWeaponA = new Staff("TestStaffAttackA",100,42,42);
+    testClassWeaponB = new Staff("TestStaffAttackB",50,42,42);
+    testClassWeaponC = new Staff("TestStaffAttackC",0,42,42);
 
   }
 

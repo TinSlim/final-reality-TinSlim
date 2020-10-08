@@ -2,6 +2,10 @@ package com.github.cc3002.finalreality.model.character.player.magecharacter;
 
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.player.AbstractMageCharacterTest;
+import com.github.cc3002.finalreality.model.weapon.Axe;
+import com.github.cc3002.finalreality.model.weapon.Bow;
+import com.github.cc3002.finalreality.model.weapon.Knife;
+import com.github.cc3002.finalreality.model.weapon.Staff;
 import org.junit.jupiter.api.Test;
 
 
@@ -9,15 +13,15 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BlackMageCharacterTest extends AbstractMageCharacterTest {
-  protected Enemy testEnemyA;
-  protected Enemy testEnemyB;
-  protected Enemy testEnemyC;
+
   protected Enemy testEnemyD;
 
   protected BlackMageCharacter testBlackMageA;
   protected BlackMageCharacter testBlackMageB;
 
   public void setTestCharacter(){
+    setEnemies();
+
     testCharacterA = new BlackMageCharacter(turnsQueue,"BlackMageA",100,100,100);
     testCharacterB = new BlackMageCharacter(turnsQueue,"BlackMageB",50,50,50);
     testCharacterC = new BlackMageCharacter(turnsQueue,"BlackMageC",0,0,0);
@@ -31,10 +35,11 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
     testMageB = new BlackMageCharacter(turnsQueue,"BlackMageB",100,100,15);
     testMageC = new BlackMageCharacter(turnsQueue,"BlackMageC",100,100,5);
 
-    testEnemyA = new Enemy(turnsQueue,"testEnemyA",80,100,100);
-    testEnemyB = new Enemy(turnsQueue,"testEnemyB",70,100,100);
-    testEnemyC = new Enemy(turnsQueue,"testEnemyC",10,100,100);
     testEnemyD = new Enemy(turnsQueue,"testEnemyC",10,100,100);
+
+    testClassWeaponA = new Knife("TestKnifeAttack",100,42);
+    testClassWeaponB = new Staff("TestStaffAttackA",50,42,42);
+    testClassWeaponC = new Staff("TestStaffAttackB",0,42,42);
 
   }
 

@@ -1,5 +1,9 @@
 package com.github.cc3002.finalreality.model.character.player.commoncharacter;
 import com.github.cc3002.finalreality.model.character.player.AbstractCommonCharacterTest;
+import com.github.cc3002.finalreality.model.weapon.Axe;
+import com.github.cc3002.finalreality.model.weapon.Bow;
+import com.github.cc3002.finalreality.model.weapon.Knife;
+import com.github.cc3002.finalreality.model.weapon.Sword;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -7,11 +11,17 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 public class EngineerCharacterTest extends AbstractCommonCharacterTest {
 
   public void setTestCharacter(){
+    setEnemies();
+
     testCharacterA = new EngineerCharacter(turnsQueue,"EngineerA",100,100);
     testCharacterB = new EngineerCharacter(turnsQueue,"EngineerB",50,50);
     testCharacterC = new EngineerCharacter(turnsQueue,"EngineerC",0,0);
     testCharacterD = new EngineerCharacter(turnsQueue,"EngineerD",-10,-10);
     testPlayerCharacter = new EngineerCharacter(turnsQueue,"EngineerE",100,100);
+
+    testClassWeaponA = new Bow("TestBowAttack",100,42);
+    testClassWeaponB = new Axe("TestAxeAttackA",50,42);
+    testClassWeaponC = new Axe("TestAxeAttackB",0,42);
   }
 
 
