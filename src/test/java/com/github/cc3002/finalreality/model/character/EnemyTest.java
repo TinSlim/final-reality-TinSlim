@@ -30,7 +30,12 @@ class EnemyTest extends AbstractCharacterTest {
     testPlayerCharacterA = new KnightCharacter(turnsQueue, "testPCharacterB",80,80);
     testPlayerCharacterB = new ThiefCharacter(turnsQueue, "testPCharacterA",70,80);
     testPlayerCharacterC = new EngineerCharacter(turnsQueue, "testPCharacterC",10,80);
+
+    testTurnsCharacterA = new Enemy(turnsQueue,"EnemyA",100,100,100,100);
+    testTurnsCharacterB = new Enemy(turnsQueue,"EnemyB",50,20,50,50);
+
   }
+
 
   @Test
   public void testCommonAttack(){

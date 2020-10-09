@@ -44,9 +44,14 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
     testComradeC = new EngineerCharacter(turnsQueue,"EngineerComrade",99,50);
     testComradeD = new BlackMageCharacter(turnsQueue,"BlackMageComrade",100,50,10);
 
-    testClassWeaponA = new Staff("TestStaffAttackA",100,42,42);
-    testClassWeaponB = new Staff("TestStaffAttackB",50,42,42);
+    testClassWeaponA = new Staff("TestStaffAttackA",100,42,100);
+    testClassWeaponB = new Staff("TestStaffAttackB",50,42,20);
     testClassWeaponC = new Staff("TestStaffAttackC",0,42,42);
+
+    testTurnsCharacterA = new WhiteMageCharacter(turnsQueue,"TestTurnsMageA",100,100,5);
+    ((WhiteMageCharacter) testTurnsCharacterA).equip(testClassWeaponA);
+    testTurnsCharacterB = new WhiteMageCharacter(turnsQueue,"TestTurnsMageB",100,100,5);
+    ((WhiteMageCharacter) testTurnsCharacterB).equip(testClassWeaponB);
 
   }
 

@@ -1,5 +1,6 @@
 package com.github.cc3002.finalreality.model.character.player.commoncharacter;
 import com.github.cc3002.finalreality.model.character.player.AbstractPlayerCharacterTest;
+import com.github.cc3002.finalreality.model.character.player.magecharacter.WhiteMageCharacter;
 import com.github.cc3002.finalreality.model.weapon.Bow;
 import com.github.cc3002.finalreality.model.weapon.Sword;
 
@@ -19,9 +20,14 @@ public class ThiefCharacterTest extends AbstractPlayerCharacterTest {
 
     testPlayerCharacter = new ThiefCharacter(turnsQueue,"ThiefE",100,100);
 
-    testClassWeaponA = new Sword("TestSwordAttack",100,42);
-    testClassWeaponB = new Bow("TestBowAttack",50,42);
+    testClassWeaponA = new Sword("TestSwordAttack",100,100);
+    testClassWeaponB = new Bow("TestBowAttack",50,20);
     testClassWeaponC = new Bow("TestBowAttack",0,42);
+
+    testTurnsCharacterA = new ThiefCharacter(turnsQueue,"TestTurnsThiefA",100,100);
+    ((ThiefCharacter) testTurnsCharacterA).equip(testClassWeaponA);
+    testTurnsCharacterB = new ThiefCharacter(turnsQueue,"TestTurnsThiefB",100,100);
+    ((ThiefCharacter) testTurnsCharacterB).equip(testClassWeaponB);
   }
 
 

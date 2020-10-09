@@ -1,11 +1,16 @@
 package com.github.cc3002.finalreality.model.character;
 
 
+import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
+import com.github.cc3002.finalreality.model.character.player.commoncharacter.ThiefCharacter;
+import com.github.cc3002.finalreality.model.weapon.Knife;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Random;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -18,10 +23,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public abstract class AbstractCharacterTest implements ICharacterTest{
   protected BlockingQueue<ICharacter> turnsQueue;
+
   protected ICharacter testCharacterA;
   protected ICharacter testCharacterB;
   protected ICharacter testCharacterC;
   protected ICharacter testCharacterD;
+
+  protected ICharacter testTurnsCharacterA;
+  protected ICharacter testTurnsCharacterB;
 
 
   /**
@@ -32,8 +41,21 @@ public abstract class AbstractCharacterTest implements ICharacterTest{
 
   @BeforeEach
   public void setUp(){
+    turnsQueue = new LinkedBlockingQueue<>();
     setTestCharacter();
   }
+
+
+  @Test
+  public void testQueueTurns() throws InterruptedException {
+    testTurnsCharacterA.waitTurn();
+    testTurnsCharacterB.waitTurn();
+    Thread.sleep(10500);
+    //Thread.sleep(6000);
+    //Thread.sleep(3000);
+    assertEquals(testTurnsCharacterB,turnsQueue.poll());
+    assertEquals(testTurnsCharacterA,turnsQueue.poll());
+    }
 
 
 

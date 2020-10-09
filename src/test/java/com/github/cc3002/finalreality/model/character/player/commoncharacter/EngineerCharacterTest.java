@@ -19,9 +19,16 @@ public class EngineerCharacterTest extends AbstractCommonCharacterTest {
     testCharacterD = new EngineerCharacter(turnsQueue,"EngineerD",-10,-10);
     testPlayerCharacter = new EngineerCharacter(turnsQueue,"EngineerE",100,100);
 
-    testClassWeaponA = new Bow("TestBowAttack",100,42);
-    testClassWeaponB = new Axe("TestAxeAttackA",50,42);
+    testClassWeaponA = new Bow("TestBowAttack",100,100);
+    testClassWeaponB = new Axe("TestAxeAttackA",50,20);
     testClassWeaponC = new Axe("TestAxeAttackB",0,42);
+
+    testTurnsCharacterA = new EngineerCharacter(turnsQueue,"TestTurnsEngineerA",100,100);
+    ((EngineerCharacter) testTurnsCharacterA).equip(testClassWeaponA);
+    testTurnsCharacterB = new EngineerCharacter(turnsQueue,"TestTurnsEngineerB",100,100);
+    ((EngineerCharacter) testTurnsCharacterB).equip(testClassWeaponB);
+
+
   }
 
 

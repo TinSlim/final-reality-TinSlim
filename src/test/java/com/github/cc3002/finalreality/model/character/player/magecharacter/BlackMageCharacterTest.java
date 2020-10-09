@@ -1,7 +1,9 @@
 package com.github.cc3002.finalreality.model.character.player.magecharacter;
 
 import com.github.cc3002.finalreality.model.character.Enemy;
+import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.AbstractMageCharacterTest;
+import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import com.github.cc3002.finalreality.model.weapon.Axe;
 import com.github.cc3002.finalreality.model.weapon.Bow;
 import com.github.cc3002.finalreality.model.weapon.Knife;
@@ -35,12 +37,19 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
     testMageB = new BlackMageCharacter(turnsQueue,"BlackMageB",100,100,15);
     testMageC = new BlackMageCharacter(turnsQueue,"BlackMageC",100,100,5);
 
+    testTurnsCharacterA = new BlackMageCharacter(turnsQueue,"BlackMageC",100,100,5);
+    testTurnsCharacterB = new BlackMageCharacter(turnsQueue,"BlackMageC",100,100,5);
+
     testEnemyD = new Enemy(turnsQueue,"testEnemyC",10,100,100,40);
 
-    testClassWeaponA = new Knife("TestKnifeAttack",100,42);
-    testClassWeaponB = new Staff("TestStaffAttackA",50,42,42);
+    testClassWeaponA = new Knife("TestKnifeAttack",100,100);
+    testClassWeaponB = new Staff("TestStaffAttackA",50,42,20);
     testClassWeaponC = new Staff("TestStaffAttackB",0,42,42);
 
+    testTurnsCharacterA = new BlackMageCharacter(turnsQueue,"TestTurnsMageA",100,100,5);
+    ((BlackMageCharacter) testTurnsCharacterA).equip(testClassWeaponA);
+    testTurnsCharacterB = new BlackMageCharacter(turnsQueue,"TestTurnsMageB",100,100,5);
+    ((BlackMageCharacter) testTurnsCharacterB).equip(testClassWeaponB);
   }
 
   public void testEquipWeapons() {
@@ -68,7 +77,7 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
 
     testBlackMageA.equip(testWeaponStaffA);
     testBlackMageA.fire(testEnemyA);
-    assertEquals(26,testEnemyA.getBurnDamage());
+    assertEquals(40,testEnemyA.getBurnDamage());
     assertEquals(0,testEnemyA.getHp());
 
     testBlackMageA.equip(testWeaponStaffB);
