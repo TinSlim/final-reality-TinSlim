@@ -43,5 +43,4 @@ public interface ICharacter {
    */
   int getMaxHp();
 
-  void setMaxHp(int i);
 }

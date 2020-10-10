@@ -2,7 +2,7 @@ package com.github.cc3002.finalreality.model.weapon;
 
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 
-public class Staff extends AbstractWeapon {
+public class Staff extends AbstractWeapon implements IMageWeapons {
 
   private int magicDamage = 0;
 

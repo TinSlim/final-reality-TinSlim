@@ -3,6 +3,7 @@ package com.github.cc3002.finalreality.model.character.player;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 
 public abstract class AbstractCommonCharacterAbstract extends AbstractPlayerCharacter {
@@ -16,5 +17,9 @@ public abstract class AbstractCommonCharacterAbstract extends AbstractPlayerChar
     public AbstractCommonCharacterAbstract(@NotNull BlockingQueue<ICharacter> turnsQueue,@NotNull String name,
                                            CharacterClass characterClass, final int maxHp,final int defense) {
         super(turnsQueue, name, characterClass, maxHp, defense);
+    }
+
+    public int hashCode() {
+        return Objects.hash(getCharacterClass(),getName(),getMaxHp(),getDefense());
     }
 }

@@ -44,9 +44,7 @@ public abstract class AbstractCharacter implements ICharacter {
     scheduledExecutor.shutdown();
   }
 
-  public void setMaxHp(int i){
-    this.maxHp = i;
-  }
+
   @Override
   public String getName() {
     return name;
@@ -65,6 +63,10 @@ public abstract class AbstractCharacter implements ICharacter {
   @Override
   public int getMaxHp() {
     return this.maxHp;
+  }
+
+  public int getDefense(){
+    return this.defense;
   }
 
   /**

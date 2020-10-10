@@ -26,7 +26,8 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
      * This WhiteMageCharacter cures a target (IPlayerCharacter).
      */
     public void cure(IPlayerCharacter target) {
-        if ((this.getMana() - 15) < 0 || !this.getEquippedWeapon().castMagic()) {
+        IMageWeapons weapon = (IMageWeapons) this.getEquippedWeapon();
+        if ((this.getMana() - 15) < 0) {
             return;
         }
         else {
@@ -40,13 +41,14 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
      * This WhiteMageCharacter venom a target (Enemy).
      */
     public void venom(Enemy target) {
-        if ((this.getMana() - 40) < 0 || !this.getEquippedWeapon().castMagic()) {
+        IMageWeapons weapon = (IMageWeapons) this.getEquippedWeapon();
+        if ((this.getMana() - 40) < 0) {
             return;
         }
         else {
             this.reduceMana(40);
-            Staff weapon = (Staff) this.getEquippedWeapon();
-            int damage = weapon.getMagicDamage() / 3;
+            Staff weaponStaff = (Staff) this.getEquippedWeapon();
+            int damage = weaponStaff.getMagicDamage() / 3;
             target.setPoisonDamage(damage);
         }
     }
@@ -55,7 +57,8 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
      * This WhiteMageCharacter paralyzes a target (Enemy).
      */
     public void paralyze(Enemy target) {
-        if ((this.getMana() - 25) < 0 || !this.getEquippedWeapon().castMagic()) {
+        IMageWeapons weapon = (IMageWeapons) this.getEquippedWeapon();
+        if ((this.getMana() - 25) < 0) {
             return;
         }
         else {
@@ -67,5 +70,18 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
     @Override
     public void equip(IWeapon weapon) {
         weapon.equipToWhiteMage(this);
+    }
+
+
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof WhiteMageCharacter)) {
+            return false;
+        }
+        final WhiteMageCharacter character = (WhiteMageCharacter) o;
+        return this.getName() == character.getName() && this.getDefense() == character.getDefense() &&
+                this.getMaxHp() == character.getMaxHp() && this.getMaxMana() == character.getMaxMana();
     }
 }

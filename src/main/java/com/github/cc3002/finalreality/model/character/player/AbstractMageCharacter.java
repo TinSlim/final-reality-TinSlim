@@ -5,11 +5,14 @@ import com.github.cc3002.finalreality.model.weapon.IWeapon;
 import com.github.cc3002.finalreality.model.weapon.WeaponType;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 
 public abstract class AbstractMageCharacter extends AbstractPlayerCharacter implements IMageCharacter{
     private int mana;
+    private int maxMana;
+
     Random adverseEffectProbability = new Random();
 
     /**
@@ -23,6 +26,7 @@ public abstract class AbstractMageCharacter extends AbstractPlayerCharacter impl
                                  CharacterClass characterClass, final int maxHp, final int defense, final int maxMana){
         super(turnsQueue, name, characterClass, maxHp, defense);
         this.mana = maxMana;
+        this.maxMana = maxMana;
     }
 
     public void setSeed(long i){
@@ -40,6 +44,10 @@ public abstract class AbstractMageCharacter extends AbstractPlayerCharacter impl
         return this.mana;
     }
 
+    public int getMaxMana() {
+        return this.maxMana;
+    }
+
     /**
      * Sets this MageCharacter's mana.
      */
@@ -50,5 +58,9 @@ public abstract class AbstractMageCharacter extends AbstractPlayerCharacter impl
 
     public void reduceMana(int mana){
         this.setMana(this.mana - mana);
+    }
+
+    public int hashCode() {
+        return Objects.hash(getCharacterClass(),getName(),getMaxHp(),getDefense(),getMaxMana());
     }
 }

@@ -45,7 +45,6 @@ public abstract class AbstractWeapon implements IWeapon {
     return type;
   }
 
-  public abstract boolean castMagic();
 
   /** Todo This need to be deleted or something
    *       This was changed to receive an interface

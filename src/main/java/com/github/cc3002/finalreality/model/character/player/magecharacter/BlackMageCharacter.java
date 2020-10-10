@@ -5,6 +5,7 @@ import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.AbstractMageCharacter;
 import com.github.cc3002.finalreality.model.character.player.CharacterClass;
+import com.github.cc3002.finalreality.model.character.player.commoncharacter.ThiefCharacter;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,13 +28,14 @@ public class BlackMageCharacter extends AbstractMageCharacter {
      * the target.
      */
     public void thunder(Enemy target) {
-        if ((this.getMana() - 15) < 0 || !this.getEquippedWeapon().castMagic()) {
+        IMageWeapons weapon = (IMageWeapons) this.getEquippedWeapon();
+        if ((this.getMana() - 15) < 0 || !weapon.castMagic()) {
             return;
         }
         else {
             this.reduceMana(15);
-            Staff weapon = (Staff) this.getEquippedWeapon();
-            int magicDamage = weapon.getMagicDamage();
+            Staff weaponStaff = (Staff) this.getEquippedWeapon();
+            int magicDamage = weaponStaff.getMagicDamage();
             target.receiveDamage(magicDamage);
             Random rng = this.getRandom();
             int posibilityToParalize = rng.nextInt(9);
@@ -48,18 +50,19 @@ public class BlackMageCharacter extends AbstractMageCharacter {
      * the target.
      */
     public void fire(Enemy target) {
-        if ((this.getMana() - 15) < 0 || !this.getEquippedWeapon().castMagic()) {
+        IMageWeapons weapon = (IMageWeapons) this.getEquippedWeapon();
+        if ((this.getMana() - 15) < 0 || !weapon.castMagic()) {
             return;
         }
         else{
             this.reduceMana(15);
-            Staff weapon = (Staff) this.getEquippedWeapon();
-            int magicDamage = weapon.getMagicDamage();
+            Staff weaponStaff = (Staff) this.getEquippedWeapon();
+            int magicDamage = weaponStaff.getMagicDamage();
             target.receiveDamage(magicDamage);
             Random rng = this.getRandom();
             int burnRandom = rng.nextInt(9);
             if (burnRandom < 2) {
-                target.setBurnDamage(magicDamage / 3);
+                target.setBurnDamage(magicDamage / 2);
             }
         }
     }
@@ -69,4 +72,17 @@ public class BlackMageCharacter extends AbstractMageCharacter {
         weapon.equipToBlackMage(this);
     }
 
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof BlackMageCharacter)) {
+            return false;
+        }
+        final BlackMageCharacter character = (BlackMageCharacter) o;
+        return this.getName() == character.getName() && this.getDefense() == character.getDefense() &&
+                this.getMaxHp() == character.getMaxHp() && this.getMaxMana() == character.getMaxMana();
+    }
+
 }
+

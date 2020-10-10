@@ -26,5 +26,19 @@ public class EngineerCharacter extends AbstractCommonCharacterAbstract {
     public void equip(IWeapon weapon) {
         weapon.equipToEngineer(this);
     }
+
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof EngineerCharacter)) {
+            return false;
+        }
+        final EngineerCharacter character = (EngineerCharacter) o;
+        return this.getName() == character.getName() && this.getDefense() == character.getDefense() &&
+                this.getMaxHp() == character.getMaxHp();
+    }
+
+
 }
 

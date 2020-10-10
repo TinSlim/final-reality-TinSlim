@@ -16,9 +16,6 @@ public class Axe extends AbstractWeapon {
     super(name, damage, weight, WeaponType.AXE);
   }
 
-  public boolean castMagic(){
-    return false;
-  }
 
   public void equipToKnight(IPlayerCharacter character){
     character.setEquippedWeapon(this);

@@ -38,13 +38,10 @@ public interface IWeapon {
    * @param character
    */
   void equipToWhiteMage(IPlayerCharacter character);
-
   
   int getWeight();
 
   String getName();
 
   WeaponType getType();
-
-  boolean castMagic();
 }
