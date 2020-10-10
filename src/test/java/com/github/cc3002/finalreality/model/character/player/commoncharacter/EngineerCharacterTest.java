@@ -1,14 +1,20 @@
 package com.github.cc3002.finalreality.model.character.player.commoncharacter;
 import com.github.cc3002.finalreality.model.character.player.AbstractCommonCharacterTest;
+import com.github.cc3002.finalreality.model.character.player.magecharacter.BlackMageCharacter;
+import com.github.cc3002.finalreality.model.character.player.magecharacter.WhiteMageCharacter;
 import com.github.cc3002.finalreality.model.weapon.Axe;
 import com.github.cc3002.finalreality.model.weapon.Bow;
 import com.github.cc3002.finalreality.model.weapon.Knife;
 import com.github.cc3002.finalreality.model.weapon.Sword;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class EngineerCharacterTest extends AbstractCommonCharacterTest {
+
+  protected EngineerCharacter testEngineerA;
+  protected EngineerCharacter testEngineerB;
 
   public void setTestCharacter(){
     setEnemies();
@@ -22,6 +28,9 @@ public class EngineerCharacterTest extends AbstractCommonCharacterTest {
     testClassWeaponA = new Bow("TestBowAttack",100,100);
     testClassWeaponB = new Axe("TestAxeAttackA",50,20);
     testClassWeaponC = new Axe("TestAxeAttackB",0,42);
+
+    testEngineerA = new EngineerCharacter(turnsQueue,"testEngineerA",100,100);
+    testEngineerB = new EngineerCharacter(turnsQueue,"testEngineerB",100,1);
 
     testTurnsCharacterA = new EngineerCharacter(turnsQueue,"TestTurnsEngineerA",100,100);
     ((EngineerCharacter) testTurnsCharacterA).equip(testClassWeaponA);
@@ -48,5 +57,17 @@ public class EngineerCharacterTest extends AbstractCommonCharacterTest {
 
     testPlayerCharacter.equip(testWeaponBow);
     assertEquals(testWeaponBow, testPlayerCharacter.getEquippedWeapon());
+  }
+
+  @Test
+  public void testEquals() {
+    assertEquals(testEngineerA, testEngineerA);
+    assertNotEquals(testEngineerA, testEngineerB);
+    assertNotEquals(testEngineerA, new ThiefCharacter(turnsQueue, "BlackMageA", 100, 100));
+    assertEquals(testEngineerA, new EngineerCharacter(turnsQueue, "testEngineerA", 100, 100));
+
+    assertNotEquals(testEngineerA, new EngineerCharacter(turnsQueue, "DiffName", 100, 100));
+    assertNotEquals(testEngineerA, new EngineerCharacter(turnsQueue, "testEngineerA", 1, 100));
+    assertNotEquals(testEngineerA, new EngineerCharacter(turnsQueue, "testEngineerA", 100, 1));
   }
 }

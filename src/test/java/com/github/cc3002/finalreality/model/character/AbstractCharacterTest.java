@@ -45,8 +45,10 @@ public abstract class AbstractCharacterTest implements ICharacterTest{
     setTestCharacter();
   }
 
-
   @Test
+  public abstract void testEquals();
+
+  //@Test
   public void testQueueTurns() throws InterruptedException {
     testTurnsCharacterA.waitTurn();
     testTurnsCharacterB.waitTurn();
@@ -73,6 +75,5 @@ public abstract class AbstractCharacterTest implements ICharacterTest{
     testCharacterD.receiveDamage(20);
     assertEquals(0,testCharacterD.getHp());
   }
-
 
 }

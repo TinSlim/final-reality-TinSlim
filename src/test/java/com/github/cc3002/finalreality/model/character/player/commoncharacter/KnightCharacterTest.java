@@ -4,11 +4,15 @@ import com.github.cc3002.finalreality.model.weapon.Axe;
 import com.github.cc3002.finalreality.model.weapon.Bow;
 import com.github.cc3002.finalreality.model.weapon.Knife;
 import com.github.cc3002.finalreality.model.weapon.Sword;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class KnightCharacterTest extends AbstractCommonCharacterTest {
+
+  protected KnightCharacter testKnightA;
+  protected KnightCharacter testKnightB;
 
   public void setTestCharacter(){
     setEnemies();
@@ -22,6 +26,9 @@ public class KnightCharacterTest extends AbstractCommonCharacterTest {
     testClassWeaponA = new Sword("TestSwordAttack",100,100);
     testClassWeaponB = new Axe("TestAxeAttack",50,20);
     testClassWeaponC = new Knife("TestKnifeAttack",0,42);
+
+    testKnightA = new KnightCharacter(turnsQueue,"testKnightA",100,100);
+    testKnightB = new KnightCharacter(turnsQueue,"testKnightB",100,1);
 
     testTurnsCharacterA = new KnightCharacter(turnsQueue,"TestTurnsKnightA",100,100);
     ((KnightCharacter) testTurnsCharacterA).equip(testClassWeaponA);
@@ -45,5 +52,17 @@ public class KnightCharacterTest extends AbstractCommonCharacterTest {
 
     testPlayerCharacter.equip(testWeaponSword);
     assertEquals(testWeaponSword, testPlayerCharacter.getEquippedWeapon());
+  }
+
+  @Test
+  public void testEquals() {
+    assertEquals(testKnightA, testKnightA);
+    assertNotEquals(testKnightA, testKnightB);
+    assertNotEquals(testKnightA, new ThiefCharacter(turnsQueue, "testThiefA", 100, 100));
+    assertEquals(testKnightA, new KnightCharacter(turnsQueue, "testKnightA", 100, 100));
+
+    assertNotEquals(testKnightA, new KnightCharacter(turnsQueue, "DiffName", 100, 100));
+    assertNotEquals(testKnightA, new KnightCharacter(turnsQueue, "testKnightA", 1, 100));
+    assertNotEquals(testKnightA, new KnightCharacter(turnsQueue, "testKnightA", 100, 1));
   }
 }

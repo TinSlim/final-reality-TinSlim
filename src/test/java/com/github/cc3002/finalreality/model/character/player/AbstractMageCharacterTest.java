@@ -2,6 +2,7 @@ package com.github.cc3002.finalreality.model.character.player;
 
 import com.github.cc3002.finalreality.model.character.player.magecharacter.BlackMageCharacter;
 import com.github.cc3002.finalreality.model.character.player.magecharacter.WhiteMageCharacter;
+import com.github.cc3002.finalreality.model.weapon.IMageWeapons;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
 import com.github.cc3002.finalreality.model.weapon.Staff;
 import org.junit.jupiter.api.Test;
@@ -20,4 +21,14 @@ public abstract class AbstractMageCharacterTest extends AbstractPlayerCharacterT
   protected IWeapon testWeaponStaffB = new Staff("TestStaffB",0,10,90);
   protected IWeapon testWeaponStaffC = new Staff("TestStaffC",0,0,90);
 
+  protected IMageCharacter testMaxManaMageA;
+  protected IMageCharacter testMaxManaMageB;
+  protected IMageCharacter testMaxManaMageC;
+
+  @Test
+  public void testGetMaxMana(){
+    assertEquals(100,testMaxManaMageA.getMaxMana());
+    assertEquals(15,testMaxManaMageB.getMaxMana());
+    assertEquals(0,testMaxManaMageC.getMaxMana());
+  }
 }

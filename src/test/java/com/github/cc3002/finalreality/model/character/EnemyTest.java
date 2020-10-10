@@ -7,6 +7,7 @@ import com.github.cc3002.finalreality.model.character.player.commoncharacter.Thi
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class EnemyTest extends AbstractCharacterTest {
   protected IPlayerCharacter testPlayerCharacterA;
@@ -47,5 +48,19 @@ class EnemyTest extends AbstractCharacterTest {
 
     testEnemyC.commonAttack(testPlayerCharacterC);
     assertEquals(10,testPlayerCharacterC.getHp());
+  }
+
+  @Test
+  public void testEquals(){
+    assertEquals(testEnemyA,testEnemyA);
+    assertNotEquals(testEnemyA,testEnemyB);
+    assertNotEquals(testEnemyA,new ThiefCharacter(turnsQueue, "ThiefMageA", 100, 100));
+    assertEquals(testEnemyA,new Enemy(turnsQueue,"EnemyA",100,100,100,100));
+
+    assertNotEquals(testEnemyA,new Enemy(turnsQueue,"DiffName",100,100,100,100));
+    assertNotEquals(testEnemyA,new Enemy(turnsQueue,"EnemyA",1,100,100,100));
+    assertNotEquals(testEnemyA,new Enemy(turnsQueue,"EnemyA",100,1,100,100));
+    assertNotEquals(testEnemyA,new Enemy(turnsQueue,"EnemyA",100,100,1,100));
+    assertNotEquals(testEnemyA,new Enemy(turnsQueue,"EnemyA",100,100,100,1));
   }
 }

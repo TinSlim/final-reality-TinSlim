@@ -32,8 +32,8 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
 
     testPlayerCharacter = new WhiteMageCharacter(turnsQueue,"WhiteMageE",100,100,100);
 
-    testWhiteMageA = new WhiteMageCharacter(turnsQueue,"WhiteMage",100,100,100);
-    testWhiteMageB = new WhiteMageCharacter(turnsQueue,"WhiteMage",100,100,5);
+    testWhiteMageA = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,100);
+    testWhiteMageB = new WhiteMageCharacter(turnsQueue,"testWhiteMageB",100,100,5);
 
     testMageA = new WhiteMageCharacter(turnsQueue,"WhiteMageA",100,100,100);
     testMageB = new WhiteMageCharacter(turnsQueue,"WhiteMageB",100,100,40);
@@ -52,6 +52,10 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
     ((WhiteMageCharacter) testTurnsCharacterA).equip(testClassWeaponA);
     testTurnsCharacterB = new WhiteMageCharacter(turnsQueue,"TestTurnsMageB",100,100,5);
     ((WhiteMageCharacter) testTurnsCharacterB).equip(testClassWeaponB);
+
+    testMaxManaMageA = new WhiteMageCharacter(turnsQueue,"MaxManaA",100,100,100);
+    testMaxManaMageB = new WhiteMageCharacter(turnsQueue,"MaxManaB",100,100,15);
+    testMaxManaMageC = new WhiteMageCharacter(turnsQueue,"MaxManaC",100,100,0);
 
   }
 
@@ -123,5 +127,18 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
     testWhiteMageB.equip(testWeaponStaffB);
     testWhiteMageB.paralyze(testEnemyC);
     assertFalse(testEnemyC.getParalyze());
+  }
+
+  @Test
+  public void testEquals(){
+    assertEquals(testWhiteMageA,testWhiteMageA);
+    assertNotEquals(testWhiteMageA,testWhiteMageB);
+    assertNotEquals(testWhiteMageA,new ThiefCharacter(turnsQueue,"BlackMageA",100,100));
+    assertEquals(testWhiteMageA,new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,100));
+
+    assertNotEquals(testWhiteMageA,new WhiteMageCharacter(turnsQueue,"DiffName",100,100,100));
+    assertNotEquals(testWhiteMageA,new WhiteMageCharacter(turnsQueue,"testWhiteMageA",1,100,100));
+    assertNotEquals(testWhiteMageA,new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,1,100));
+    assertNotEquals(testWhiteMageA,new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,1));
   }
 }
