@@ -1,13 +1,10 @@
 package com.github.cc3002.finalreality.model.character.player.magecharacter;
 
-import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.player.AbstractMageCharacterTest;
-import com.github.cc3002.finalreality.model.character.player.AbstractPlayerCharacter;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import com.github.cc3002.finalreality.model.character.player.commoncharacter.EngineerCharacter;
 import com.github.cc3002.finalreality.model.character.player.commoncharacter.KnightCharacter;
 import com.github.cc3002.finalreality.model.character.player.commoncharacter.ThiefCharacter;
-import com.github.cc3002.finalreality.model.weapon.Knife;
 import com.github.cc3002.finalreality.model.weapon.Staff;
 import org.junit.jupiter.api.Test;
 
@@ -140,5 +137,11 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
     assertNotEquals(testWhiteMageA,new WhiteMageCharacter(turnsQueue,"testWhiteMageA",1,100,100));
     assertNotEquals(testWhiteMageA,new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,1,100));
     assertNotEquals(testWhiteMageA,new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,1));
+  }
+
+  public void hashSetUp(){
+    testHashA = testWhiteMageA;
+    testHashB = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,100);
+    testHashC = new ThiefCharacter(turnsQueue,"testWhiteMageA",100,100);
   }
 }

@@ -152,6 +152,11 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
     assertNotEquals(testBlackMageA,new BlackMageCharacter(turnsQueue,"testBlackMageA",1,100,60));
     assertNotEquals(testBlackMageA,new BlackMageCharacter(turnsQueue,"testBlackMageA",100,1,60));
     assertNotEquals(testBlackMageA,new BlackMageCharacter(turnsQueue,"testBlackMageA",100,100,1));
+  }
 
+  public void hashSetUp(){
+    testHashA = testBlackMageA;
+    testHashB = new BlackMageCharacter(turnsQueue,"testBlackMageA",100,100,60);
+    testHashC = new ThiefCharacter(turnsQueue,"testBlackMageA",100,100);
   }
 }

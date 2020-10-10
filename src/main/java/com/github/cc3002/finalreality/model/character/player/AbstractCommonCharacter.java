@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 
-public abstract class AbstractCommonCharacterAbstract extends AbstractPlayerCharacter {
+public abstract class AbstractCommonCharacter extends AbstractPlayerCharacter {
     /**
      * Creates a new character.
      *
@@ -14,8 +14,8 @@ public abstract class AbstractCommonCharacterAbstract extends AbstractPlayerChar
      * @param turnsQueue     the queue with the characters waiting for their turn
      * @param characterClass
      */
-    public AbstractCommonCharacterAbstract(@NotNull BlockingQueue<ICharacter> turnsQueue,@NotNull String name,
-                                           CharacterClass characterClass, final int maxHp,final int defense) {
+    public AbstractCommonCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
+                                   CharacterClass characterClass, final int maxHp, final int defense) {
         super(turnsQueue, name, characterClass, maxHp, defense);
     }
 

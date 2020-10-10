@@ -1,11 +1,7 @@
 package com.github.cc3002.finalreality.model.character.player.commoncharacter;
 import com.github.cc3002.finalreality.model.character.player.AbstractCommonCharacterTest;
-import com.github.cc3002.finalreality.model.character.player.magecharacter.BlackMageCharacter;
-import com.github.cc3002.finalreality.model.character.player.magecharacter.WhiteMageCharacter;
 import com.github.cc3002.finalreality.model.weapon.Axe;
 import com.github.cc3002.finalreality.model.weapon.Bow;
-import com.github.cc3002.finalreality.model.weapon.Knife;
-import com.github.cc3002.finalreality.model.weapon.Sword;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -69,5 +65,11 @@ public class EngineerCharacterTest extends AbstractCommonCharacterTest {
     assertNotEquals(testEngineerA, new EngineerCharacter(turnsQueue, "DiffName", 100, 100));
     assertNotEquals(testEngineerA, new EngineerCharacter(turnsQueue, "testEngineerA", 1, 100));
     assertNotEquals(testEngineerA, new EngineerCharacter(turnsQueue, "testEngineerA", 100, 1));
+  }
+
+  public void hashSetUp(){
+    testHashA = testEngineerA;
+    testHashB = new EngineerCharacter(turnsQueue,"testEngineerA",100,100);
+    testHashC = new ThiefCharacter(turnsQueue,"testEngineerA",100,100);
   }
 }

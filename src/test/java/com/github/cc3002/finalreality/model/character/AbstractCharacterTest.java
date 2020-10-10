@@ -13,6 +13,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 /**
  * Abstract class containing the common tests for all the types of characters.
@@ -32,6 +33,9 @@ public abstract class AbstractCharacterTest implements ICharacterTest{
   protected ICharacter testTurnsCharacterA;
   protected ICharacter testTurnsCharacterB;
 
+  protected ICharacter testHashA;
+  protected ICharacter testHashB;
+  protected ICharacter testHashC;
 
   /**
    * Checks that the class' constructor and equals method works properly.
@@ -76,4 +80,12 @@ public abstract class AbstractCharacterTest implements ICharacterTest{
     assertEquals(0,testCharacterD.getHp());
   }
 
+  @Test
+  public void testHash(){
+    this.hashSetUp();
+    assertEquals(testHashA.hashCode(),testHashB.hashCode());
+    assertNotEquals(testHashA.hashCode(),testHashC.hashCode());
+  }
+
+  protected abstract void hashSetUp();
 }

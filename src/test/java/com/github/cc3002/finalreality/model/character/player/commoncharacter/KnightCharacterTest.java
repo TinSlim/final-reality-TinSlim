@@ -1,7 +1,6 @@
 package com.github.cc3002.finalreality.model.character.player.commoncharacter;
 import com.github.cc3002.finalreality.model.character.player.AbstractCommonCharacterTest;
 import com.github.cc3002.finalreality.model.weapon.Axe;
-import com.github.cc3002.finalreality.model.weapon.Bow;
 import com.github.cc3002.finalreality.model.weapon.Knife;
 import com.github.cc3002.finalreality.model.weapon.Sword;
 import org.junit.jupiter.api.Test;
@@ -64,5 +63,11 @@ public class KnightCharacterTest extends AbstractCommonCharacterTest {
     assertNotEquals(testKnightA, new KnightCharacter(turnsQueue, "DiffName", 100, 100));
     assertNotEquals(testKnightA, new KnightCharacter(turnsQueue, "testKnightA", 1, 100));
     assertNotEquals(testKnightA, new KnightCharacter(turnsQueue, "testKnightA", 100, 1));
+  }
+
+  public void hashSetUp(){
+    testHashA = testKnightA;
+    testHashB = new KnightCharacter(turnsQueue,"testKnightA",100,100);
+    testHashC = new EngineerCharacter(turnsQueue,"testKnightA",100,100);
   }
 }

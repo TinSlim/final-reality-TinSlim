@@ -63,4 +63,10 @@ class EnemyTest extends AbstractCharacterTest {
     assertNotEquals(testEnemyA,new Enemy(turnsQueue,"EnemyA",100,100,1,100));
     assertNotEquals(testEnemyA,new Enemy(turnsQueue,"EnemyA",100,100,100,1));
   }
+
+  public void hashSetUp(){
+    testHashA = testEnemyA;
+    testHashB = new Enemy(turnsQueue,"EnemyA",100,100,100,100);
+    testHashC = new KnightCharacter(turnsQueue,"testKnightA",100,100);
+  }
 }
