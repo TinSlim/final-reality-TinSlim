@@ -1,6 +1,21 @@
 ChangeLog
 =========
 
+Version 3.0
+-----------
+- (B.12) Added inventory tests.
+- (B.11) Added Hash and Equals methods and their tests.
+- (B.10) Improved inheritance in all tests.
+- (B.9) Added tests to mage character classes.
+- (B.8) Added tests to common character classes.
+- (B.7) Minor fixes to magic attacks (damage and probability). 
+- (B.6) Improved inheritance between test classes. 
+- (B.5) Added tests to Enemy class. 
+- (B.4) Fixed magic attacks, now cast comes with magic attack.
+- (B.3) Added inheritance between PlayerCharacter classes.
+- (B.2) Added tests to all PlayerCharacter classes.
+- (B.1) Fixed wait turn method.
+
 Version 2.0
 -----------
 - (RC.1) Finished the order of classes, improved a lot o methods and added description to the methods. 
