@@ -7,7 +7,6 @@ import com.github.cc3002.finalreality.model.character.player.commoncharacter.Thi
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class EnemyTest extends AbstractCharacterTest {
   protected IPlayerCharacter testPlayerCharacterA;
@@ -62,11 +61,5 @@ class EnemyTest extends AbstractCharacterTest {
     testEqCharacterF3 = new Enemy(turnsQueue,"EnemyA",100,2,100,100);
     testEqCharacterF4 = new Enemy(turnsQueue,"EnemyA",100,100,2,100);
     testEqCharacterF5 = new Enemy(turnsQueue,"EnemyA",100,100,100,2);
-  }
-
-  public void hashSetUp(){
-    testHashA = testEnemyA;
-    testHashB = new Enemy(turnsQueue,"EnemyA",100,100,100,100);
-    testHashC = new KnightCharacter(turnsQueue,"testKnightA",100,100);
   }
 }

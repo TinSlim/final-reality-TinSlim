@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  * @author <Your name>
  * @see ICharacter
  */
-public abstract class AbstractCharacterTest implements ICharacterTest{
+public abstract class AbstractCharacterTest {
   protected BlockingQueue<ICharacter> turnsQueue;
 
   protected ICharacter testCharacterA;
@@ -27,10 +27,6 @@ public abstract class AbstractCharacterTest implements ICharacterTest{
 
   protected ICharacter testTurnsCharacterA;
   protected ICharacter testTurnsCharacterB;
-
-  protected ICharacter testHashA;
-  protected ICharacter testHashB;
-  protected ICharacter testHashC;
 
   protected ICharacter testEqCharacterA;
   protected ICharacter testEqCharacterB;
@@ -100,7 +96,7 @@ public abstract class AbstractCharacterTest implements ICharacterTest{
     assertNotEquals(testEqCharacterA.hashCode(), testEqCharacterF5.hashCode());
   }
 
-  protected abstract void hashSetUp();
+
 
   @Test
   public void testEquals() {
