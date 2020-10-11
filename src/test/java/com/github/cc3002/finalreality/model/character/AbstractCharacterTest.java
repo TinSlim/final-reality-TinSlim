@@ -1,14 +1,9 @@
 package com.github.cc3002.finalreality.model.character;
 
 
-import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
-import com.github.cc3002.finalreality.model.character.player.commoncharacter.ThiefCharacter;
-import com.github.cc3002.finalreality.model.weapon.Knife;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -37,6 +32,17 @@ public abstract class AbstractCharacterTest implements ICharacterTest{
   protected ICharacter testHashB;
   protected ICharacter testHashC;
 
+  protected ICharacter testEqCharacterA;
+  protected ICharacter testEqCharacterB;
+  protected ICharacter testEqCharacterC;
+  protected ICharacter testEqCharacterD;
+
+  protected ICharacter testEqCharacterF1;
+  protected ICharacter testEqCharacterF2;
+  protected ICharacter testEqCharacterF3;
+  protected ICharacter testEqCharacterF4;
+  protected ICharacter testEqCharacterF5;
+
   /**
    * Checks that the class' constructor and equals method works properly.
    */
@@ -49,10 +55,9 @@ public abstract class AbstractCharacterTest implements ICharacterTest{
     setTestCharacter();
   }
 
-  @Test
-  public abstract void testEquals();
 
-  //@Test
+
+  @Test
   public void testQueueTurns() throws InterruptedException {
     testTurnsCharacterA.waitTurn();
     testTurnsCharacterB.waitTurn();
@@ -82,10 +87,35 @@ public abstract class AbstractCharacterTest implements ICharacterTest{
 
   @Test
   public void testHash(){
-    this.hashSetUp();
-    assertEquals(testHashA.hashCode(),testHashB.hashCode());
-    assertNotEquals(testHashA.hashCode(),testHashC.hashCode());
+    setEqCharacter();
+    assertEquals(testEqCharacterA.hashCode(), testEqCharacterA.hashCode());
+    assertNotEquals(testEqCharacterA.hashCode(), testEqCharacterB.hashCode());
+    assertNotEquals(testEqCharacterA.hashCode(), testEqCharacterC.hashCode());
+    assertEquals(testEqCharacterA.hashCode(), testEqCharacterD.hashCode());
+
+    assertNotEquals(testEqCharacterA.hashCode(), testEqCharacterF1.hashCode());
+    assertNotEquals(testEqCharacterA.hashCode(), testEqCharacterF2.hashCode());
+    assertNotEquals(testEqCharacterA.hashCode(), testEqCharacterF3.hashCode());
+    assertNotEquals(testEqCharacterA.hashCode(), testEqCharacterF4.hashCode());
+    assertNotEquals(testEqCharacterA.hashCode(), testEqCharacterF5.hashCode());
   }
 
   protected abstract void hashSetUp();
+
+  @Test
+  public void testEquals() {
+    this.setEqCharacter();
+    assertEquals(testEqCharacterA, testEqCharacterA);
+    assertNotEquals(testEqCharacterA, testEqCharacterB);
+    assertNotEquals(testEqCharacterA, testEqCharacterC);
+    assertEquals(testEqCharacterA, testEqCharacterD);
+
+    assertNotEquals(testEqCharacterA, testEqCharacterF1);
+    assertNotEquals(testEqCharacterA, testEqCharacterF2);
+    assertNotEquals(testEqCharacterA, testEqCharacterF3);
+    assertNotEquals(testEqCharacterA, testEqCharacterF4);
+    assertNotEquals(testEqCharacterA, testEqCharacterF5);
+  }
+
+  protected abstract void setEqCharacter();
 }

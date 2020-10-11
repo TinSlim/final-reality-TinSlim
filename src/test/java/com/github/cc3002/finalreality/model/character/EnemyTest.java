@@ -50,18 +50,18 @@ class EnemyTest extends AbstractCharacterTest {
     assertEquals(10,testPlayerCharacterC.getHp());
   }
 
-  @Test
-  public void testEquals(){
-    assertEquals(testEnemyA,testEnemyA);
-    assertNotEquals(testEnemyA,testEnemyB);
-    assertNotEquals(testEnemyA,new ThiefCharacter(turnsQueue, "ThiefMageA", 100, 100));
-    assertEquals(testEnemyA,new Enemy(turnsQueue,"EnemyA",100,100,100,100));
 
-    assertNotEquals(testEnemyA,new Enemy(turnsQueue,"DiffName",100,100,100,100));
-    assertNotEquals(testEnemyA,new Enemy(turnsQueue,"EnemyA",1,100,100,100));
-    assertNotEquals(testEnemyA,new Enemy(turnsQueue,"EnemyA",100,1,100,100));
-    assertNotEquals(testEnemyA,new Enemy(turnsQueue,"EnemyA",100,100,1,100));
-    assertNotEquals(testEnemyA,new Enemy(turnsQueue,"EnemyA",100,100,100,1));
+  public void setEqCharacter() {
+    testEqCharacterA = new Enemy(turnsQueue,"EnemyA",100,100,100,100);
+    testEqCharacterB = new Enemy(turnsQueue,"EnemyB",50,50,50,50);
+    testEqCharacterC = new ThiefCharacter(turnsQueue, "ThiefMageA", 100, 100);
+    testEqCharacterD = new Enemy(turnsQueue,"EnemyA",100,100,100,100);
+
+    testEqCharacterF1 = new Enemy(turnsQueue,"DiffName",100,100,100,100);
+    testEqCharacterF2 = new Enemy(turnsQueue,"EnemyA",2,100,100,100);
+    testEqCharacterF3 = new Enemy(turnsQueue,"EnemyA",100,2,100,100);
+    testEqCharacterF4 = new Enemy(turnsQueue,"EnemyA",100,100,2,100);
+    testEqCharacterF5 = new Enemy(turnsQueue,"EnemyA",100,100,100,2);
   }
 
   public void hashSetUp(){

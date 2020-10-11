@@ -126,17 +126,17 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
     assertFalse(testEnemyC.getParalyze());
   }
 
-  @Test
-  public void testEquals(){
-    assertEquals(testWhiteMageA,testWhiteMageA);
-    assertNotEquals(testWhiteMageA,testWhiteMageB);
-    assertNotEquals(testWhiteMageA,new ThiefCharacter(turnsQueue,"BlackMageA",100,100));
-    assertEquals(testWhiteMageA,new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,100));
+  public void setEqCharacter() {
+    testEqCharacterA = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,100);
+    testEqCharacterB = new WhiteMageCharacter(turnsQueue,"testWhiteMageB",100,100,5);
+    testEqCharacterC = new ThiefCharacter(turnsQueue,"BlackMageA",100,100);
+    testEqCharacterD = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,100);
 
-    assertNotEquals(testWhiteMageA,new WhiteMageCharacter(turnsQueue,"DiffName",100,100,100));
-    assertNotEquals(testWhiteMageA,new WhiteMageCharacter(turnsQueue,"testWhiteMageA",1,100,100));
-    assertNotEquals(testWhiteMageA,new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,1,100));
-    assertNotEquals(testWhiteMageA,new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,1));
+    testEqCharacterF1 = new WhiteMageCharacter(turnsQueue,"DiffName",100,100,100);
+    testEqCharacterF2 = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",1,100,100);
+    testEqCharacterF3 = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,1,100);
+    testEqCharacterF4 = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,1);
+    testEqCharacterF5 = new WhiteMageCharacter(turnsQueue,"test",1,1,1);
   }
 
   public void hashSetUp(){

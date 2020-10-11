@@ -1,7 +1,5 @@
 package com.github.cc3002.finalreality.model.weapon;
 
-import com.github.cc3002.finalreality.model.character.Enemy;
-import com.github.cc3002.finalreality.model.character.player.commoncharacter.ThiefCharacter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,15 +12,14 @@ public abstract class AbstractWeaponTest {
   IWeapon testWeaponC;
   IWeapon testWeaponD;
 
-  IWeapon testWeaponFName;
-  IWeapon testWeaponFDamageA;
-  IWeapon testWeaponFDamageB;
-  IWeapon testWeaponFWeight;
+  IWeapon testWeaponF1;
+  IWeapon testWeaponF2;
+  IWeapon testWeaponF3;
+  IWeapon testWeaponF4;
 
   @BeforeEach
   public void setUp(){
     this.setWeapons();
-
   }
 
   @Test
@@ -32,10 +29,10 @@ public abstract class AbstractWeaponTest {
     assertNotEquals(testWeaponA,testWeaponC);
     assertEquals(testWeaponA,testWeaponD);
 
-    assertNotEquals(testWeaponA,testWeaponFName);
-    assertNotEquals(testWeaponA,testWeaponFDamageA);
-    assertNotEquals(testWeaponA,testWeaponFDamageB);
-    assertNotEquals(testWeaponA,testWeaponFWeight);
+    assertNotEquals(testWeaponA,testWeaponF1);
+    assertNotEquals(testWeaponA,testWeaponF2);
+    assertNotEquals(testWeaponA,testWeaponF3);
+    assertNotEquals(testWeaponA,testWeaponF4);
   }
 
   @Test
@@ -45,10 +42,10 @@ public abstract class AbstractWeaponTest {
     assertNotEquals(testWeaponA.hashCode(),testWeaponC.hashCode());
     assertEquals(testWeaponA.hashCode(),testWeaponD.hashCode());
 
-    assertNotEquals(testWeaponA.hashCode(),testWeaponFName.hashCode());
-    assertNotEquals(testWeaponA.hashCode(),testWeaponFDamageA.hashCode());
-    assertNotEquals(testWeaponA.hashCode(),testWeaponFDamageB.hashCode());
-    assertNotEquals(testWeaponA.hashCode(),testWeaponFWeight.hashCode());
+    assertNotEquals(testWeaponA.hashCode(),testWeaponF1.hashCode());
+    assertNotEquals(testWeaponA.hashCode(),testWeaponF2.hashCode());
+    assertNotEquals(testWeaponA.hashCode(),testWeaponF3.hashCode());
+    assertNotEquals(testWeaponA.hashCode(),testWeaponF4.hashCode());
   }
 
   protected abstract void setWeapons();

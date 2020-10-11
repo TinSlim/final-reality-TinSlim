@@ -8,9 +8,9 @@ public class StaffTest extends AbstractWeaponTest{
     testWeaponC = new Sword("TestStaffA",50,42);
     testWeaponD = new Staff("TestStaffA",50,42,20);
 
-    testWeaponFName = new Staff("TestStaffName",50,42,20);
-    testWeaponFDamageA = new Staff("TestStaffA",1,42,20);
-    testWeaponFDamageB = new Staff("TestStaffA",50,1,20);
-    testWeaponFWeight = new Staff("TestStaffA",50,42,1);
+    testWeaponF1 = new Staff("TestStaffName",50,42,20);
+    testWeaponF2 = new Staff("TestStaffA",1,42,20);
+    testWeaponF3 = new Staff("TestStaffA",50,1,20);
+    testWeaponF4 = new Staff("TestStaffA",50,42,1);
   }
 }

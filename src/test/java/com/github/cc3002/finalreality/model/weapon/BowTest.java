@@ -8,9 +8,9 @@ public class BowTest extends AbstractWeaponTest{
     testWeaponC = new Sword("TestBowA",50,42);
     testWeaponD = new Bow("TestBowA",50,42);
 
-    testWeaponFName = new Bow("TestBowName",50,42);
-    testWeaponFDamageA = new Bow("TestBowA",1,42);
-    testWeaponFDamageB = new Bow("TestBowA",200,42);
-    testWeaponFWeight = new Bow("TestBowA",50,1);
+    testWeaponF1 = new Bow("TestBowName",50,42);
+    testWeaponF2 = new Bow("TestBowA",1,42);
+    testWeaponF3 = new Bow("TestBowA",200,42);
+    testWeaponF4 = new Bow("TestBowA",50,1);
   }
 }

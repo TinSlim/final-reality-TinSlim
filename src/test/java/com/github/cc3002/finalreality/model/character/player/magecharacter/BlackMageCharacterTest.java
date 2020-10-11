@@ -1,12 +1,8 @@
 package com.github.cc3002.finalreality.model.character.player.magecharacter;
 
 import com.github.cc3002.finalreality.model.character.Enemy;
-import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.AbstractMageCharacterTest;
-import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import com.github.cc3002.finalreality.model.character.player.commoncharacter.ThiefCharacter;
-import com.github.cc3002.finalreality.model.weapon.Axe;
-import com.github.cc3002.finalreality.model.weapon.Bow;
 import com.github.cc3002.finalreality.model.weapon.Knife;
 import com.github.cc3002.finalreality.model.weapon.Staff;
 import org.junit.jupiter.api.Test;
@@ -141,17 +137,17 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
     assertEquals(10,testEnemyD.getHp());
   }
 
-  @Test
-  public void testEquals(){
-    assertEquals(testBlackMageA,testBlackMageA);
-    assertNotEquals(testBlackMageA,testBlackMageB);
-    assertNotEquals(testBlackMageA,new ThiefCharacter(turnsQueue,"BlackMageA",100,100));
-    assertEquals(testBlackMageA,new BlackMageCharacter(turnsQueue,"testBlackMageA",100,100,60));
+  public void setEqCharacter() {
+    testEqCharacterA = new BlackMageCharacter(turnsQueue,"testBlackMageA",100,100,60);
+    testEqCharacterB = new BlackMageCharacter(turnsQueue,"testBlackMageB",100,100,14);
+    testEqCharacterC = new ThiefCharacter(turnsQueue,"BlackMageA",100,100);
+    testEqCharacterD = new BlackMageCharacter(turnsQueue,"testBlackMageA",100,100,60);
 
-    assertNotEquals(testBlackMageA,new BlackMageCharacter(turnsQueue,"DiffName",100,100,60));
-    assertNotEquals(testBlackMageA,new BlackMageCharacter(turnsQueue,"testBlackMageA",1,100,60));
-    assertNotEquals(testBlackMageA,new BlackMageCharacter(turnsQueue,"testBlackMageA",100,1,60));
-    assertNotEquals(testBlackMageA,new BlackMageCharacter(turnsQueue,"testBlackMageA",100,100,1));
+    testEqCharacterF1 = new BlackMageCharacter(turnsQueue,"DiffName",100,100,60);
+    testEqCharacterF2 = new BlackMageCharacter(turnsQueue,"testBlackMageA",1,100,60);
+    testEqCharacterF3 = new BlackMageCharacter(turnsQueue,"testBlackMageA",100,1,60);
+    testEqCharacterF4 = new BlackMageCharacter(turnsQueue,"testBlackMageA",100,100,1);
+    testEqCharacterF5 = new BlackMageCharacter(turnsQueue,"test",1,1,1);
   }
 
   public void hashSetUp(){

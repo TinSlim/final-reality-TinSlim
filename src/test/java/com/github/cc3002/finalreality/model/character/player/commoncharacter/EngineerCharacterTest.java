@@ -2,7 +2,6 @@ package com.github.cc3002.finalreality.model.character.player.commoncharacter;
 import com.github.cc3002.finalreality.model.character.player.AbstractCommonCharacterTest;
 import com.github.cc3002.finalreality.model.weapon.Axe;
 import com.github.cc3002.finalreality.model.weapon.Bow;
-import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -55,16 +54,17 @@ public class EngineerCharacterTest extends AbstractCommonCharacterTest {
     assertEquals(testWeaponBow, testPlayerCharacter.getEquippedWeapon());
   }
 
-  @Test
-  public void testEquals() {
-    assertEquals(testEngineerA, testEngineerA);
-    assertNotEquals(testEngineerA, testEngineerB);
-    assertNotEquals(testEngineerA, new ThiefCharacter(turnsQueue, "BlackMageA", 100, 100));
-    assertEquals(testEngineerA, new EngineerCharacter(turnsQueue, "testEngineerA", 100, 100));
+  public void setEqCharacter() {
+    testEqCharacterA = new EngineerCharacter(turnsQueue,"testEngineerA",100,100);
+    testEqCharacterB = new EngineerCharacter(turnsQueue,"testEngineerB",100,1);
+    testEqCharacterC = new ThiefCharacter(turnsQueue, "BlackMageA", 100, 100);
+    testEqCharacterD = new EngineerCharacter(turnsQueue, "testEngineerA", 100, 100);
 
-    assertNotEquals(testEngineerA, new EngineerCharacter(turnsQueue, "DiffName", 100, 100));
-    assertNotEquals(testEngineerA, new EngineerCharacter(turnsQueue, "testEngineerA", 1, 100));
-    assertNotEquals(testEngineerA, new EngineerCharacter(turnsQueue, "testEngineerA", 100, 1));
+    testEqCharacterF1 = new EngineerCharacter(turnsQueue, "DiffName", 100, 100);
+    testEqCharacterF2 = new EngineerCharacter(turnsQueue, "testEngineerA", 1, 100);
+    testEqCharacterF3 = new EngineerCharacter(turnsQueue, "testEngineerA", 100, 1);
+    testEqCharacterF4 = new EngineerCharacter(turnsQueue, "test", 5, 1);
+    testEqCharacterF5 = new EngineerCharacter(turnsQueue, "test", 5, 1);
   }
 
   public void hashSetUp(){

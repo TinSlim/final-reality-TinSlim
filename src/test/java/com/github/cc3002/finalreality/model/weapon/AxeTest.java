@@ -8,9 +8,9 @@ public class AxeTest extends AbstractWeaponTest{
     testWeaponC = new Staff("TestAxeA",50,42,42);
     testWeaponD = new Axe("TestAxeA",50,42);
 
-    testWeaponFName = new Axe("TestAxeName",50,42);
-    testWeaponFDamageA = new Axe("TestAxeA",1,42);
-    testWeaponFDamageB = new Axe("TestAxeA",200,1);
-    testWeaponFWeight = new Axe("TestAxeA",50,1);
+    testWeaponF1 = new Axe("TestAxeName",50,42);
+    testWeaponF2 = new Axe("TestAxeA",1,42);
+    testWeaponF3 = new Axe("TestAxeA",200,1);
+    testWeaponF4 = new Axe("TestAxeA",50,1);
   }
 }

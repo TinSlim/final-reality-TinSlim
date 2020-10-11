@@ -54,16 +54,17 @@ public class ThiefCharacterTest extends AbstractPlayerCharacterTest {
     assertEquals(testWeaponStaff, testPlayerCharacter.getEquippedWeapon());
   }
 
-  @Test
-  public void testEquals() {
-    assertEquals(testThiefA, testThiefA);
-    assertNotEquals(testThiefA, testThiefB);
-    assertNotEquals(testThiefA, new EngineerCharacter(turnsQueue, "EngineerA", 100, 100));
-    assertEquals(testThiefA, new ThiefCharacter(turnsQueue,"testThiefA",100,100));
+  public void setEqCharacter() {
+    testEqCharacterA = new ThiefCharacter(turnsQueue,"testThiefA",100,100);
+    testEqCharacterB = new ThiefCharacter(turnsQueue,"testThiefB",1,1);
+    testEqCharacterC = new EngineerCharacter(turnsQueue, "EngineerA", 100, 100);
+    testEqCharacterD = new ThiefCharacter(turnsQueue,"testThiefA",100,100);
 
-    assertNotEquals(testThiefA, new ThiefCharacter(turnsQueue, "DiffName", 100, 100));
-    assertNotEquals(testThiefA, new ThiefCharacter(turnsQueue, "testThiefA", 1, 100));
-    assertNotEquals(testThiefA, new ThiefCharacter(turnsQueue, "testThiefA", 100, 1));
+    testEqCharacterF1 = new ThiefCharacter(turnsQueue, "DiffName", 100, 100);
+    testEqCharacterF2 = new ThiefCharacter(turnsQueue, "testThiefA", 1, 100);
+    testEqCharacterF3 = new ThiefCharacter(turnsQueue, "testThiefA", 100, 1);
+    testEqCharacterF4 = new ThiefCharacter(turnsQueue, "testThiefA", 5000, 100);
+    testEqCharacterF5 = new ThiefCharacter(turnsQueue, "testThiefA", 5000, 100);
   }
 
   public void hashSetUp(){
