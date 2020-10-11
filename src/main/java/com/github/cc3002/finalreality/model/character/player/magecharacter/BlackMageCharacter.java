@@ -3,9 +3,7 @@ package com.github.cc3002.finalreality.model.character.player.magecharacter;
 import java.util.Random;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
-import com.github.cc3002.finalreality.model.character.player.AbstractMageCharacter;
 import com.github.cc3002.finalreality.model.character.player.CharacterClass;
-import com.github.cc3002.finalreality.model.character.player.commoncharacter.ThiefCharacter;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 

@@ -1,8 +1,6 @@
 package com.github.cc3002.finalreality.model.character.player;
 
-import com.github.cc3002.finalreality.model.character.player.magecharacter.BlackMageCharacter;
-import com.github.cc3002.finalreality.model.character.player.magecharacter.WhiteMageCharacter;
-import com.github.cc3002.finalreality.model.weapon.IMageWeapons;
+import com.github.cc3002.finalreality.model.character.player.magecharacter.IMageCharacter;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
 import com.github.cc3002.finalreality.model.weapon.Staff;
 import org.junit.jupiter.api.Test;

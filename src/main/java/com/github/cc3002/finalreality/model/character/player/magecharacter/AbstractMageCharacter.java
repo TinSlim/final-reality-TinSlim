@@ -1,15 +1,15 @@
-package com.github.cc3002.finalreality.model.character.player;
+package com.github.cc3002.finalreality.model.character.player.magecharacter;
 
 import com.github.cc3002.finalreality.model.character.ICharacter;
-import com.github.cc3002.finalreality.model.weapon.IWeapon;
-import com.github.cc3002.finalreality.model.weapon.WeaponType;
+import com.github.cc3002.finalreality.model.character.player.AbstractPlayerCharacter;
+import com.github.cc3002.finalreality.model.character.player.CharacterClass;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 
-public abstract class AbstractMageCharacter extends AbstractPlayerCharacter implements IMageCharacter{
+public abstract class AbstractMageCharacter extends AbstractPlayerCharacter implements IMageCharacter {
     private int mana;
     private int maxMana;
 
