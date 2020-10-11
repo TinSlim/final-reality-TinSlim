@@ -18,13 +18,20 @@ public class InventoryTest {
   protected BlockingQueue<ICharacter> turnsQueue = new LinkedBlockingQueue<>();
   IPlayerCharacter testPlayerCharacter = new BlackMageCharacter(turnsQueue,"TestPlayer",12,31,12);
 
+  public void addWeaponsToBag(int quantity) {
+    for (int j = 1; j < quantity; j ++){
+      String name = "TestSword" + j;
+      testBag.addToInventory(new Sword(name,j+10,j+12));
+    }
+  }
+
   @BeforeEach
-  public void setUp(){
+  public void setUp() {
     testBag = new Inventory();
   }
 
   @Test
-  public void testAddTo(){
+  public void testAddTo() {
     assertEquals(testBag.getWeaponsInventory().size(), testBag.getLen());
 
     testBag.addToInventory(new Knife("TestKnifeA",16,12));
@@ -36,7 +43,7 @@ public class InventoryTest {
   }
 
   @Test
-  public void testPointer(){
+  public void testPointer() {
     addWeaponsToBag(20);
     assertEquals(0,testBag.getPointer());
 
@@ -51,8 +58,7 @@ public class InventoryTest {
   }
 
   @Test
-  public void testEquipToPlayerCharacter(){
-
+  public void testEquipToPlayerCharacter() {
     Knife testKnifeA = new Knife("TestKnifeA",22,21);
     Knife testKnifeB = new Knife("TestKnifeB",11,5);
     Sword testSword = new Sword("TestSword",32,22);
@@ -75,12 +81,5 @@ public class InventoryTest {
     testBag.movePoint(1);
     testBag.equipWeaponToCharacter(testPlayerCharacter);
     assertEquals(testKnifeB,testPlayerCharacter.getEquippedWeapon());
-  }
-
-  public void addWeaponsToBag(int i){
-    for (int j = 1; j<i; j++){
-      String name = "TestSword" + j;
-      testBag.addToInventory(new Sword(name,j+10,j+12));
-    }
   }
 }

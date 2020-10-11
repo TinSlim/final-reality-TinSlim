@@ -1,6 +1,6 @@
 package com.github.cc3002.finalreality.model.weapon;
 
-public class StaffTest extends AbstractWeaponTest{
+public class StaffTest extends AbstractWeaponTest {
 
   public void setWeapons() {
     testWeaponA = new Staff("TestStaffA",50,42,20);

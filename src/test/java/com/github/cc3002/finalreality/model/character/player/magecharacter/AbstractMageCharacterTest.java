@@ -1,7 +1,6 @@
 package com.github.cc3002.finalreality.model.character.player.magecharacter;
 
 import com.github.cc3002.finalreality.model.character.player.AbstractPlayerCharacterTest;
-import com.github.cc3002.finalreality.model.character.player.magecharacter.IMageCharacter;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
 import com.github.cc3002.finalreality.model.weapon.Staff;
 import org.junit.jupiter.api.Test;

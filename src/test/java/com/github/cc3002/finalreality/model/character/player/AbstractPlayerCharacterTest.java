@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public abstract class AbstractPlayerCharacterTest extends AbstractCharacterTest {
+
   protected IPlayerCharacter testPlayerCharacter;
 
   protected IWeapon testWeaponSword = new Sword("TestSword",80,42);
@@ -24,21 +25,21 @@ public abstract class AbstractPlayerCharacterTest extends AbstractCharacterTest 
   protected Enemy testEnemyB;
   protected Enemy testEnemyC;
 
-  @Test
-  public void testEquipWeaponsToPlayer(){
-    testEquipWeapons();
-  }
-
   protected abstract void testEquipWeapons();
 
-  public void setEnemies(){
+  public void setEnemies() {
     testEnemyA = new Enemy(turnsQueue,"testEnemyA",80,100,100,10);
     testEnemyB = new Enemy(turnsQueue,"testEnemyB",70,100,100,20);
     testEnemyC = new Enemy(turnsQueue,"testEnemyC",10,100,100,30);
   }
 
   @Test
-  public void testCommonAttack(){
+  public void testEquipWeaponsToPlayer() {
+    testEquipWeapons();
+  }
+
+  @Test
+  public void testCommonAttack() {
     testPlayerCharacter.equip(testClassWeaponA);
     testPlayerCharacter.commonAttack(testEnemyA);
     assertEquals(0,testEnemyA.getHp());

@@ -5,12 +5,8 @@ import com.github.cc3002.finalreality.model.weapon.Knife;
 import com.github.cc3002.finalreality.model.weapon.Sword;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class KnightCharacterTest extends AbstractPlayerCharacterTest {
-
-  protected KnightCharacter testKnightA;
-  protected KnightCharacter testKnightB;
 
   public void setTestCharacter(){
     setEnemies();
@@ -25,15 +21,11 @@ public class KnightCharacterTest extends AbstractPlayerCharacterTest {
     testClassWeaponB = new Axe("TestAxeAttack",50,20);
     testClassWeaponC = new Knife("TestKnifeAttack",0,42);
 
-    testKnightA = new KnightCharacter(turnsQueue,"testKnightA",100,100);
-    testKnightB = new KnightCharacter(turnsQueue,"testKnightB",100,1);
-
     testTurnsCharacterA = new KnightCharacter(turnsQueue,"TestTurnsKnightA",100,100);
     ((KnightCharacter) testTurnsCharacterA).equip(testClassWeaponA);
     testTurnsCharacterB = new KnightCharacter(turnsQueue,"TestTurnsKnightB",100,100);
     ((KnightCharacter) testTurnsCharacterB).equip(testClassWeaponB);
   }
-
 
   public void testEquipWeapons() {
     testPlayerCharacter.equip(testWeaponBow);

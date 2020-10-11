@@ -1,6 +1,6 @@
 package com.github.cc3002.finalreality.model.weapon;
 
-public class KnifeTest extends AbstractWeaponTest{
+public class KnifeTest extends AbstractWeaponTest {
 
   public void setWeapons() {
     testWeaponA = new Knife("TestKnifeA",50,42);

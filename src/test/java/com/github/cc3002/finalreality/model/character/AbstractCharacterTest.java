@@ -14,10 +14,11 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  * Abstract class containing the common tests for all the types of characters.
  *
  * @author Ignacio Slater Muñoz.
- * @author <Your name>
+ * @author Cristóbal Torres Gutiérrez.
  * @see ICharacter
  */
 public abstract class AbstractCharacterTest {
+
   protected BlockingQueue<ICharacter> turnsQueue;
 
   protected ICharacter testCharacterA;
@@ -39,32 +40,24 @@ public abstract class AbstractCharacterTest {
   protected ICharacter testEqCharacterF4;
   protected ICharacter testEqCharacterF5;
 
-  /**
-   * Checks that the class' constructor and equals method works properly.
-   */
-
   protected abstract void setTestCharacter();
 
+  protected abstract void setEqCharacter();
+
   @BeforeEach
-  public void setUp(){
+  public void setUp() {
     turnsQueue = new LinkedBlockingQueue<>();
     setTestCharacter();
   }
-
-
 
   @Test
   public void testQueueTurns() throws InterruptedException {
     testTurnsCharacterA.waitTurn();
     testTurnsCharacterB.waitTurn();
     Thread.sleep(10500);
-    //Thread.sleep(6000);
-    //Thread.sleep(3000);
     assertEquals(testTurnsCharacterB,turnsQueue.poll());
     assertEquals(testTurnsCharacterA,turnsQueue.poll());
     }
-
-
 
   @Test
   public void testReceiveDamage() {
@@ -82,7 +75,7 @@ public abstract class AbstractCharacterTest {
   }
 
   @Test
-  public void testHash(){
+  public void testHash() {
     setEqCharacter();
     assertEquals(testEqCharacterA.hashCode(), testEqCharacterA.hashCode());
     assertNotEquals(testEqCharacterA.hashCode(), testEqCharacterB.hashCode());
@@ -95,8 +88,6 @@ public abstract class AbstractCharacterTest {
     assertNotEquals(testEqCharacterA.hashCode(), testEqCharacterF4.hashCode());
     assertNotEquals(testEqCharacterA.hashCode(), testEqCharacterF5.hashCode());
   }
-
-
 
   @Test
   public void testEquals() {
@@ -112,6 +103,4 @@ public abstract class AbstractCharacterTest {
     assertNotEquals(testEqCharacterA, testEqCharacterF4);
     assertNotEquals(testEqCharacterA, testEqCharacterF5);
   }
-
-  protected abstract void setEqCharacter();
 }

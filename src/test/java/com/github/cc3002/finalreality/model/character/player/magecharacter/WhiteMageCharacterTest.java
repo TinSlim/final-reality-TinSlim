@@ -18,7 +18,7 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
   protected WhiteMageCharacter testWhiteMageA;
   protected WhiteMageCharacter testWhiteMageB;
 
-  public void setTestCharacter(){
+  public void setTestCharacter() {
     setEnemies();
 
     testCharacterA = new WhiteMageCharacter(turnsQueue,"WhiteMageA",100,100,100);
@@ -55,6 +55,19 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
 
   }
 
+  public void setEqCharacter() {
+    testEqCharacterA = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,100);
+    testEqCharacterB = new WhiteMageCharacter(turnsQueue,"testWhiteMageB",100,100,5);
+    testEqCharacterC = new ThiefCharacter(turnsQueue,"BlackMageA",100,100);
+    testEqCharacterD = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,100);
+
+    testEqCharacterF1 = new WhiteMageCharacter(turnsQueue,"DiffName",100,100,100);
+    testEqCharacterF2 = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",1,100,100);
+    testEqCharacterF3 = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,1,100);
+    testEqCharacterF4 = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,1);
+    testEqCharacterF5 = new WhiteMageCharacter(turnsQueue,"test",1,1,1);
+  }
+
   @Test
   public void testEquipWeapons() {
     testPlayerCharacter.equip(testWeaponSword);
@@ -74,9 +87,8 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
     assertEquals(testWeaponStaff, testPlayerCharacter.getEquippedWeapon());
   }
 
-
   @Test
-  public void testCure(){
+  public void testCure() {
     testWhiteMageA.equip(testWeaponStaff);
     testComradeA.setHp(33);
     testWhiteMageA.cure(testComradeA);
@@ -96,7 +108,7 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
   }
 
   @Test
-  public void testVenom(){
+  public void testVenom() {
     testWhiteMageA.equip(testWeaponStaffA);
     testWhiteMageA.venom(testEnemyA);
     assertEquals(26,testEnemyA.getPoisonDamage());
@@ -111,7 +123,7 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
   }
 
   @Test
-  public void testParalyze(){
+  public void testParalyze() {
     testWhiteMageA.equip(testWeaponStaffA);
     testWhiteMageA.paralyze(testEnemyA);
     assertTrue(testEnemyA.getParalyze());
@@ -123,18 +135,5 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
     testWhiteMageB.equip(testWeaponStaffB);
     testWhiteMageB.paralyze(testEnemyC);
     assertFalse(testEnemyC.getParalyze());
-  }
-
-  public void setEqCharacter() {
-    testEqCharacterA = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,100);
-    testEqCharacterB = new WhiteMageCharacter(turnsQueue,"testWhiteMageB",100,100,5);
-    testEqCharacterC = new ThiefCharacter(turnsQueue,"BlackMageA",100,100);
-    testEqCharacterD = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,100);
-
-    testEqCharacterF1 = new WhiteMageCharacter(turnsQueue,"DiffName",100,100,100);
-    testEqCharacterF2 = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",1,100,100);
-    testEqCharacterF3 = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,1,100);
-    testEqCharacterF4 = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,1);
-    testEqCharacterF5 = new WhiteMageCharacter(turnsQueue,"test",1,1,1);
   }
 }

@@ -15,10 +15,7 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
   protected BlackMageCharacter testBlackMageA;
   protected BlackMageCharacter testBlackMageB;
 
-  protected BlackMageCharacter testEqualsA;
-  protected ThiefCharacter testDifferentA;
-
-  public void setTestCharacter(){
+  public void setTestCharacter() {
     setEnemies();
 
     testCharacterA = new BlackMageCharacter(turnsQueue,"BlackMageA",100,100,100);
@@ -51,9 +48,6 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
     testMaxManaMageA = new BlackMageCharacter(turnsQueue,"MaxManaA",100,100,100);
     testMaxManaMageB = new BlackMageCharacter(turnsQueue,"MaxManaB",100,100,15);
     testMaxManaMageC = new BlackMageCharacter(turnsQueue,"MaxManaC",100,100,0);
-
-    testEqualsA = new BlackMageCharacter(turnsQueue,"BlackMageA",100,100,100);
-    testDifferentA = new ThiefCharacter(turnsQueue,"BlackMageA",100,100);
   }
 
   public void testEquipWeapons() {
@@ -75,7 +69,7 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
   }
 
   @Test
-  public void testFire(){
+  public void testFire() {
     testBlackMageA.setSeed(8);
     testBlackMageB.setSeed(22);
 
@@ -106,7 +100,7 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
   }
 
   @Test
-  public void testThunder(){
+  public void testThunder() {
     testBlackMageA.setSeed(44213);
     testBlackMageB.setSeed(22);
 

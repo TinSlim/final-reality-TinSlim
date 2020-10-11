@@ -7,7 +7,7 @@ import com.github.cc3002.finalreality.model.character.player.CharacterClass;
  * A character can be controlled by the player or by the CPU (an enemy).
  *
  * @author Ignacio Slater Muñoz.
- * @author <Your name>
+ * @author Cristóbal Torres Gutiérrez.
  */
 public interface ICharacter {
 

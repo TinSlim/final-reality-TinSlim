@@ -9,10 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class ThiefCharacterTest extends AbstractPlayerCharacterTest {
 
-  protected ThiefCharacter testThiefA;
-  protected ThiefCharacter testThiefB;
-
-
   public void setTestCharacter(){
     setEnemies();
 
@@ -27,15 +23,11 @@ public class ThiefCharacterTest extends AbstractPlayerCharacterTest {
     testClassWeaponB = new Bow("TestBowAttack",50,20);
     testClassWeaponC = new Bow("TestBowAttack",0,42);
 
-    testThiefA = new ThiefCharacter(turnsQueue,"testThiefA",100,100);
-    testThiefB = new ThiefCharacter(turnsQueue,"testThiefB",1,1);
-
     testTurnsCharacterA = new ThiefCharacter(turnsQueue,"TestTurnsThiefA",100,100);
     ((ThiefCharacter) testTurnsCharacterA).equip(testClassWeaponA);
     testTurnsCharacterB = new ThiefCharacter(turnsQueue,"TestTurnsThiefB",100,100);
     ((ThiefCharacter) testTurnsCharacterB).equip(testClassWeaponB);
   }
-
 
   public void testEquipWeapons() {
     testPlayerCharacter.equip(testWeaponKnife);

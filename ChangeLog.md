@@ -3,6 +3,8 @@ ChangeLog
 
 Version 3.0
 -----------
+- (RC.1) Finished test classes. 
+- (B.13) Code clean.
 - (B.12) Added inventory tests.
 - (B.11) Added Hash and Equals methods and their tests.
 - (B.10) Improved inheritance in all tests.

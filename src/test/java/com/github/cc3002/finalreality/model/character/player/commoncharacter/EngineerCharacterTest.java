@@ -4,12 +4,8 @@ import com.github.cc3002.finalreality.model.weapon.Axe;
 import com.github.cc3002.finalreality.model.weapon.Bow;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class EngineerCharacterTest extends AbstractPlayerCharacterTest {
-
-  protected EngineerCharacter testEngineerA;
-  protected EngineerCharacter testEngineerB;
 
   public void setTestCharacter(){
     setEnemies();
@@ -24,16 +20,11 @@ public class EngineerCharacterTest extends AbstractPlayerCharacterTest {
     testClassWeaponB = new Axe("TestAxeAttackA",50,20);
     testClassWeaponC = new Axe("TestAxeAttackB",0,42);
 
-    testEngineerA = new EngineerCharacter(turnsQueue,"testEngineerA",100,100);
-    testEngineerB = new EngineerCharacter(turnsQueue,"testEngineerB",100,1);
-
     testTurnsCharacterA = new EngineerCharacter(turnsQueue,"TestTurnsEngineerA",100,100);
     ((EngineerCharacter) testTurnsCharacterA).equip(testClassWeaponA);
     testTurnsCharacterB = new EngineerCharacter(turnsQueue,"TestTurnsEngineerB",100,100);
     ((EngineerCharacter) testTurnsCharacterB).equip(testClassWeaponB);
   }
-
-
 
   public void testEquipWeapons() {
     testPlayerCharacter.equip(testWeaponKnife);

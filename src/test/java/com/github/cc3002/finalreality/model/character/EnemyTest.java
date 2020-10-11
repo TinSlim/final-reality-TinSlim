@@ -17,7 +17,7 @@ class EnemyTest extends AbstractCharacterTest {
   protected Enemy testEnemyB;
   protected Enemy testEnemyC;
 
-  public void setTestCharacter(){
+  public void setTestCharacter() {
     testCharacterA = new Enemy(turnsQueue,"EnemyA",100,100,100,100);
     testCharacterB = new Enemy(turnsQueue,"EnemyB",50,50,50,50);
     testCharacterC = new Enemy(turnsQueue,"EnemyC",0,0,0,0);
@@ -33,22 +33,7 @@ class EnemyTest extends AbstractCharacterTest {
 
     testTurnsCharacterA = new Enemy(turnsQueue,"EnemyA",100,100,100,100);
     testTurnsCharacterB = new Enemy(turnsQueue,"EnemyB",50,20,50,50);
-
   }
-
-
-  @Test
-  public void testCommonAttack(){
-    testEnemyA.commonAttack(testPlayerCharacterA);
-    assertEquals(0,testPlayerCharacterA.getHp());
-
-    testEnemyB.commonAttack(testPlayerCharacterB);
-    assertEquals(20,testPlayerCharacterB.getHp());
-
-    testEnemyC.commonAttack(testPlayerCharacterC);
-    assertEquals(10,testPlayerCharacterC.getHp());
-  }
-
 
   public void setEqCharacter() {
     testEqCharacterA = new Enemy(turnsQueue,"EnemyA",100,100,100,100);
@@ -61,5 +46,17 @@ class EnemyTest extends AbstractCharacterTest {
     testEqCharacterF3 = new Enemy(turnsQueue,"EnemyA",100,2,100,100);
     testEqCharacterF4 = new Enemy(turnsQueue,"EnemyA",100,100,2,100);
     testEqCharacterF5 = new Enemy(turnsQueue,"EnemyA",100,100,100,2);
+  }
+
+  @Test
+  public void testCommonAttack() {
+    testEnemyA.commonAttack(testPlayerCharacterA);
+    assertEquals(0,testPlayerCharacterA.getHp());
+
+    testEnemyB.commonAttack(testPlayerCharacterB);
+    assertEquals(20,testPlayerCharacterB.getHp());
+
+    testEnemyC.commonAttack(testPlayerCharacterC);
+    assertEquals(10,testPlayerCharacterC.getHp());
   }
 }
