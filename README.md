@@ -79,4 +79,31 @@ The last package is the **inventory**, the only class here is **Inventory** clas
 of **IWeapons**, a pointer to an index of the list and the len of the list. With a object of this class you can
 storage weapons and access to equip the weapon indexed by the *pointer* to a character.
 
-## UML
+## Classes diagram
+- **model** 
+
+![model](images/PackageModel.png)
+
+- **character**
+
+![alt text](images/PackageCharacter.png)
+
+- **player**
+
+![alt text](images/PackagePlayer.png)
+
+- **commoncharacter**
+
+![alt text](images/PackageCommonCharacter.png)
+
+- **magecharacter**
+
+![alt text](images/PackageMageCharacter.png)
+
+- **inventory**
+
+![alt text](images/PackageInventory.png)
+
+- **weapon**
+
+![alt text](images/PackageWeapon.png)
