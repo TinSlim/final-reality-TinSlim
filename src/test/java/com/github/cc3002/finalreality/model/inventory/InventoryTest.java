@@ -75,7 +75,6 @@ public class InventoryTest {
     testBag.movePoint(1);
     testBag.equipWeaponToCharacter(testPlayerCharacter);
     assertEquals(testKnifeB,testPlayerCharacter.getEquippedWeapon());
-
   }
 
   public void addWeaponsToBag(int i){

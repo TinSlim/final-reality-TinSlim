@@ -1,12 +1,12 @@
 package com.github.cc3002.finalreality.model.character.player.commoncharacter;
-import com.github.cc3002.finalreality.model.character.player.AbstractCommonCharacterTest;
+import com.github.cc3002.finalreality.model.character.player.AbstractPlayerCharacterTest;
 import com.github.cc3002.finalreality.model.weapon.Axe;
 import com.github.cc3002.finalreality.model.weapon.Bow;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-public class EngineerCharacterTest extends AbstractCommonCharacterTest {
+public class EngineerCharacterTest extends AbstractPlayerCharacterTest {
 
   protected EngineerCharacter testEngineerA;
   protected EngineerCharacter testEngineerB;
@@ -31,8 +31,6 @@ public class EngineerCharacterTest extends AbstractCommonCharacterTest {
     ((EngineerCharacter) testTurnsCharacterA).equip(testClassWeaponA);
     testTurnsCharacterB = new EngineerCharacter(turnsQueue,"TestTurnsEngineerB",100,100);
     ((EngineerCharacter) testTurnsCharacterB).equip(testClassWeaponB);
-
-
   }
 
 
@@ -65,11 +63,5 @@ public class EngineerCharacterTest extends AbstractCommonCharacterTest {
     testEqCharacterF3 = new EngineerCharacter(turnsQueue, "testEngineerA", 100, 1);
     testEqCharacterF4 = new EngineerCharacter(turnsQueue, "test", 5, 1);
     testEqCharacterF5 = new EngineerCharacter(turnsQueue, "test", 5, 1);
-  }
-
-  public void hashSetUp(){
-    testHashA = testEngineerA;
-    testHashB = new EngineerCharacter(turnsQueue,"testEngineerA",100,100);
-    testHashC = new ThiefCharacter(turnsQueue,"testEngineerA",100,100);
   }
 }

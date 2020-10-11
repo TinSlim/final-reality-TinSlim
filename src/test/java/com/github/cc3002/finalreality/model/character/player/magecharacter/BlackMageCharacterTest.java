@@ -1,7 +1,6 @@
 package com.github.cc3002.finalreality.model.character.player.magecharacter;
 
 import com.github.cc3002.finalreality.model.character.Enemy;
-import com.github.cc3002.finalreality.model.character.player.AbstractMageCharacterTest;
 import com.github.cc3002.finalreality.model.character.player.commoncharacter.ThiefCharacter;
 import com.github.cc3002.finalreality.model.weapon.Knife;
 import com.github.cc3002.finalreality.model.weapon.Staff;
@@ -148,11 +147,5 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
     testEqCharacterF3 = new BlackMageCharacter(turnsQueue,"testBlackMageA",100,1,60);
     testEqCharacterF4 = new BlackMageCharacter(turnsQueue,"testBlackMageA",100,100,1);
     testEqCharacterF5 = new BlackMageCharacter(turnsQueue,"test",1,1,1);
-  }
-
-  public void hashSetUp(){
-    testHashA = testBlackMageA;
-    testHashB = new BlackMageCharacter(turnsQueue,"testBlackMageA",100,100,60);
-    testHashC = new ThiefCharacter(turnsQueue,"testBlackMageA",100,100);
   }
 }

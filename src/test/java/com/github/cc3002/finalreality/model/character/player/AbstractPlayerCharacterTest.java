@@ -2,13 +2,12 @@ package com.github.cc3002.finalreality.model.character.player;
 
 import com.github.cc3002.finalreality.model.character.AbstractCharacterTest;
 import com.github.cc3002.finalreality.model.character.Enemy;
-import com.github.cc3002.finalreality.model.character.IPlayerCharacterTest;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public abstract class AbstractPlayerCharacterTest extends AbstractCharacterTest implements IPlayerCharacterTest {
+public abstract class AbstractPlayerCharacterTest extends AbstractCharacterTest {
   protected IPlayerCharacter testPlayerCharacter;
 
   protected IWeapon testWeaponSword = new Sword("TestSword",80,42);

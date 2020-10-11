@@ -44,24 +44,7 @@ public abstract class AbstractWeapon implements IWeapon {
   public WeaponType getType() {
     return type;
   }
-
-
-  /** Todo This need to be deleted or something
-   *       This was changed to receive an interface
-  public boolean equals(final Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof AbstractWeapon)) {
-      return false;
-    }
-    final AbstractWeapon abstractWeapon = (AbstractWeapon) o;
-    return getDamage() == abstractWeapon.getDamage() &&
-        getWeight() == abstractWeapon.getWeight() &&
-        getName().equals(abstractWeapon.getName()) &&
-        getType() == abstractWeapon.getType();
-  }**/
-
+  
   @Override
   public int hashCode() {
     return Objects.hash(getName(), getDamage(), getWeight(), getType());

@@ -66,10 +66,4 @@ public class ThiefCharacterTest extends AbstractPlayerCharacterTest {
     testEqCharacterF4 = new ThiefCharacter(turnsQueue, "testThiefA", 5000, 100);
     testEqCharacterF5 = new ThiefCharacter(turnsQueue, "testThiefA", 5000, 100);
   }
-
-  public void hashSetUp(){
-    testHashA = new ThiefCharacter(turnsQueue,"testThiefA",100,100);
-    testHashB = new ThiefCharacter(turnsQueue,"testThiefA",100,100);
-    testHashC = new KnightCharacter(turnsQueue,"testThiefA",100,100);
-  }
 }

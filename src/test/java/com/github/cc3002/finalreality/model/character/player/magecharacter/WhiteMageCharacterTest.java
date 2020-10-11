@@ -1,6 +1,5 @@
 package com.github.cc3002.finalreality.model.character.player.magecharacter;
 
-import com.github.cc3002.finalreality.model.character.player.AbstractMageCharacterTest;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import com.github.cc3002.finalreality.model.character.player.commoncharacter.EngineerCharacter;
 import com.github.cc3002.finalreality.model.character.player.commoncharacter.KnightCharacter;
@@ -137,11 +136,5 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
     testEqCharacterF3 = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,1,100);
     testEqCharacterF4 = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,1);
     testEqCharacterF5 = new WhiteMageCharacter(turnsQueue,"test",1,1,1);
-  }
-
-  public void hashSetUp(){
-    testHashA = testWhiteMageA;
-    testHashB = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,100);
-    testHashC = new ThiefCharacter(turnsQueue,"testWhiteMageA",100,100);
   }
 }
