@@ -12,9 +12,10 @@ public class Sword extends AbstractWeapon {
    * @param type
    * @see WeaponType
    */
-  public Sword(String name, int damage, int weight, WeaponType type) {
-    super(name, damage, weight, type);
+  public Sword(String name, int damage, int weight) {
+    super(name, damage, weight, WeaponType.SWORD);
   }
+
 
   public void equipToKnight(IPlayerCharacter character){
     character.setEquippedWeapon(this);
@@ -25,14 +26,25 @@ public class Sword extends AbstractWeapon {
   }
 
   public void equipToEngineer(IPlayerCharacter character){
-    character.setEquippedWeapon(this);
   }
 
   public void equipToBlackMage(IPlayerCharacter character){
-    character.setEquippedWeapon(this);
+
   }
 
   public void equipToWhiteMage(IPlayerCharacter character){
-    character.setEquippedWeapon(this);
+  }
+
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof Sword)) {
+      return false;
+    }
+    final Sword weapon = (Sword) o;
+    return getDamage() == weapon.getDamage() &&
+            getWeight() == weapon.getWeight() &&
+            getName() == weapon.getName();
   }
 }

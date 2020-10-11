@@ -7,7 +7,7 @@ import com.github.cc3002.finalreality.model.character.player.CharacterClass;
  * A character can be controlled by the player or by the CPU (an enemy).
  *
  * @author Ignacio Slater Muñoz.
- * @author <Your name>
+ * @author Cristóbal Torres Gutiérrez.
  */
 public interface ICharacter {
 
@@ -27,11 +27,6 @@ public interface ICharacter {
    */
   CharacterClass getCharacterClass();
 
-  /**
-   * This character makes an attack to a target, dealing damage.
-   * @param target
-   */
-  void commonAttack(ICharacter target);
 
   /**
    * This character receive damage reducing the hp b
@@ -47,4 +42,7 @@ public interface ICharacter {
    * Returns this character's maxHp (max health points).
    */
   int getMaxHp();
+
+
+
 }

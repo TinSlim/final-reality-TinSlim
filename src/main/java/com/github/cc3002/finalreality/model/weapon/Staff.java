@@ -2,7 +2,9 @@ package com.github.cc3002.finalreality.model.weapon;
 
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 
-public class Staff extends AbstractWeapon {
+import java.util.Objects;
+
+public class Staff extends AbstractWeapon implements IMageWeapons {
 
   private int magicDamage = 0;
 
@@ -12,12 +14,15 @@ public class Staff extends AbstractWeapon {
    * @param name
    * @param damage
    * @param weight
-   * @param type
    * @see WeaponType
    */
-  public Staff(String name, int damage, int magicDamage, int weight, WeaponType type) {
-    super(name, damage, weight, type);
+  public Staff(String name, int damage, int magicDamage, int weight) {
+    super(name, damage, weight, WeaponType.STAFF);
     this.magicDamage = magicDamage;
+  }
+
+  public boolean castMagic(){
+    return true;
   }
 
   public int getMagicDamage() {
@@ -25,7 +30,7 @@ public class Staff extends AbstractWeapon {
   }
 
   public void equipToKnight(IPlayerCharacter character){
-    character.setEquippedWeapon(this);
+
   }
 
   public void equipToThief(IPlayerCharacter character){
@@ -33,7 +38,7 @@ public class Staff extends AbstractWeapon {
   }
 
   public void equipToEngineer(IPlayerCharacter character){
-    character.setEquippedWeapon(this);
+
   }
 
   public void equipToBlackMage(IPlayerCharacter character){
@@ -43,4 +48,23 @@ public class Staff extends AbstractWeapon {
   public void equipToWhiteMage(IPlayerCharacter character){
     character.setEquippedWeapon(this);
   }
+
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof Staff)) {
+      return false;
+    }
+    final Staff weapon = (Staff) o;
+    return getDamage() == weapon.getDamage() &&
+            getWeight() == weapon.getWeight() &&
+            getName() == weapon.getName() &&
+            getMagicDamage() == weapon.getMagicDamage();
+  }
+
+  public int hashCode() {
+    return Objects.hash(getName(), getDamage(), getWeight(), getType(),getMagicDamage());
+  }
+
 }

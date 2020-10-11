@@ -3,25 +3,22 @@ package com.github.cc3002.finalreality.model.character.player.magecharacter;
 import java.util.Random;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
-import com.github.cc3002.finalreality.model.character.player.AbstractMageCharacterAbstract;
 import com.github.cc3002.finalreality.model.character.player.CharacterClass;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
 
-public class BlackMageCharacter extends AbstractMageCharacterAbstract {
-    int mana = 0;
-
+public class BlackMageCharacter extends AbstractMageCharacter {
     /**
      * Creates a new character.
      *
      * @param name           the character's name
      * @param turnsQueue     the queue with the characters waiting for their turn
-     * @param characterClass
      */
-    public BlackMageCharacter(@NotNull String name, @NotNull BlockingQueue<ICharacter> turnsQueue, CharacterClass characterClass) {
-        super(name, turnsQueue, characterClass);
+    public BlackMageCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
+                              final int maxHp, final int defense, final int maxMana) {
+        super(turnsQueue, name, CharacterClass.BLACK_MAGE, maxHp, defense,maxMana);
     }
 
     /**
@@ -29,15 +26,21 @@ public class BlackMageCharacter extends AbstractMageCharacterAbstract {
      * the target.
      */
     public void thunder(Enemy target) {
-        Staff weapon = (Staff) this.getEquippedWeapon();
-        int damage = weapon.getMagicDamage();
-        target.receiveDamage(damage);
-        Random rng = new Random();
-        int posibilityToParalize = rng.nextInt(9);
-        if (posibilityToParalize <= 3) {
-            
+        IMageWeapons weapon = (IMageWeapons) this.getEquippedWeapon();
+        if ((this.getMana() - 15) < 0 || !weapon.castMagic()) {
+            return;
         }
-
+        else {
+            this.reduceMana(15);
+            Staff weaponStaff = (Staff) this.getEquippedWeapon();
+            int magicDamage = weaponStaff.getMagicDamage();
+            target.receiveDamage(magicDamage);
+            Random rng = this.getRandom();
+            int posibilityToParalize = rng.nextInt(9);
+            if (posibilityToParalize < 3) {
+                target.setParalyze(true);
+            }
+        }
     }
 
     /**
@@ -45,14 +48,20 @@ public class BlackMageCharacter extends AbstractMageCharacterAbstract {
      * the target.
      */
     public void fire(Enemy target) {
-        Staff weapon = (Staff) this.getEquippedWeapon();
-        int magicDamage = weapon.getMagicDamage();
-        target.receiveDamage(magicDamage);
-
-        Random rng = new Random();
-        int burnRandom = rng.nextInt(9);
-        if (burnRandom <= 2) {
-            target.setBurnDamage(magicDamage/3);
+        IMageWeapons weapon = (IMageWeapons) this.getEquippedWeapon();
+        if ((this.getMana() - 15) < 0 || !weapon.castMagic()) {
+            return;
+        }
+        else{
+            this.reduceMana(15);
+            Staff weaponStaff = (Staff) this.getEquippedWeapon();
+            int magicDamage = weaponStaff.getMagicDamage();
+            target.receiveDamage(magicDamage);
+            Random rng = this.getRandom();
+            int burnRandom = rng.nextInt(9);
+            if (burnRandom < 2) {
+                target.setBurnDamage(magicDamage / 2);
+            }
         }
     }
 
@@ -61,4 +70,17 @@ public class BlackMageCharacter extends AbstractMageCharacterAbstract {
         weapon.equipToBlackMage(this);
     }
 
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof BlackMageCharacter)) {
+            return false;
+        }
+        final BlackMageCharacter character = (BlackMageCharacter) o;
+        return this.getName() == character.getName() && this.getDefense() == character.getDefense() &&
+                this.getMaxHp() == character.getMaxHp() && this.getMaxMana() == character.getMaxMana();
+    }
+
 }
+

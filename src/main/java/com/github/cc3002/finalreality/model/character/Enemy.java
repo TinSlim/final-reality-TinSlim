@@ -6,6 +6,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -17,22 +18,23 @@ import org.jetbrains.annotations.NotNull;
 public class Enemy extends AbstractCharacter {
 
   private final int weight;
-
+  private final int damage;
 
   private int burnDamage = 0;
   private int poisonDamage = 0;
   boolean paralyze = false;
-  private int damage = 0;
 
 
   /**
    * Creates a new enemy with a name, a weight and the queue with the characters ready to
    * play.
    */
-  public Enemy(@NotNull final String name, final int weight,
-      @NotNull final BlockingQueue<ICharacter> turnsQueue) {
-    super(turnsQueue, name, CharacterClass.ENEMY);
+  public Enemy(@NotNull BlockingQueue<ICharacter> turnsQueue,
+               @NotNull String name, final int maxHp,
+               final int weight,final int defense, final int damage){
+    super(turnsQueue,name,CharacterClass.ENEMY,maxHp,defense);
     this.weight = weight;
+    this.damage = damage;
   }
 
   /**
@@ -44,9 +46,6 @@ public class Enemy extends AbstractCharacter {
 
   @Override
   public void waitTurn() {
-    //Todo borrar print
-    System.out.println(this.getName() + " esperando su turno \n");
-
     scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
     var enemy = (Enemy) this;
     scheduledExecutor
@@ -63,12 +62,13 @@ public class Enemy extends AbstractCharacter {
       return false;
     }
     final Enemy enemy = (Enemy) o;
-    return getWeight() == enemy.getWeight();
+    return getName() == enemy.getName() && getWeight() == enemy.getWeight() &&
+            getMaxHp() == enemy.getMaxHp() && getDamage() == enemy.getDamage() &&
+            getDefense() == enemy.getDefense();
   }
 
-  @Override
   public int hashCode() {
-    return Objects.hash(getWeight());
+    return Objects.hash(getCharacterClass(),getName(),getMaxHp(),getDefense(),getWeight(),getDamage());
   }
 
   /**
@@ -85,15 +85,32 @@ public class Enemy extends AbstractCharacter {
     this.burnDamage = newDamage;
   }
 
-  @Override
-  public void commonAttack(ICharacter target) {
-    target.receiveDamage(this.damage);
+  public int getBurnDamage(){
+    return this.burnDamage;
   }
+
+  public void setParalyze(boolean value){
+    this.paralyze = value;
+  }
+
+  public boolean getParalyze(){
+    return this.paralyze;
+  }
+
+
+  public void commonAttack(IPlayerCharacter target) {
+    target.receiveDamage(this.getDamage());
+  }
+
 
   /**
    * Sets this enemy's poison damage (acquired when a mage uses venom attack).
    */
   public void setPoisonDamage(int damage) {
     this.poisonDamage = damage;
+  }
+
+  public int getPoisonDamage() {
+    return this.poisonDamage;
   }
 }

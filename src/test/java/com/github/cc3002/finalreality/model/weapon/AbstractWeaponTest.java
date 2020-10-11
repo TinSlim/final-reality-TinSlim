@@ -1,52 +1,53 @@
 package com.github.cc3002.finalreality.model.weapon;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class WeaponTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-  private static final String AXE_NAME = "Test Axe";
-  private static final String STAFF_NAME = "Test Staff";
-  private static final String SWORD_NAME = "Test Sword";
-  private static final String BOW_NAME = "Test Bow";
-  private static final String KNIFE_NAME = "Test Knife";
-  private static final int DAMAGE = 15;
-  private static final int SPEED = 10;
+public abstract class AbstractWeaponTest {
 
-  private Weapon testAxe;
-  private Weapon testStaff;
-  private Weapon testSword;
-  private Weapon testBow;
-  private Weapon testKnife;
+  IWeapon testWeaponA;
+  IWeapon testWeaponB;
+  IWeapon testWeaponC;
+  IWeapon testWeaponD;
+
+  IWeapon testWeaponF1;
+  IWeapon testWeaponF2;
+  IWeapon testWeaponF3;
+  IWeapon testWeaponF4;
+
+  protected abstract void setWeapons();
 
   @BeforeEach
-  void setUp() {
-    testAxe = new Weapon(AXE_NAME, DAMAGE, SPEED, WeaponType.AXE);
-    testStaff = new Weapon(STAFF_NAME, DAMAGE, SPEED, WeaponType.STAFF);
-    testSword = new Weapon(SWORD_NAME, DAMAGE, SPEED, WeaponType.SWORD);
-    testBow = new Weapon(BOW_NAME, DAMAGE, SPEED, WeaponType.BOW);
-    testKnife = new Weapon(KNIFE_NAME, DAMAGE, SPEED, WeaponType.KNIFE);
+  public void setUp() {
+    this.setWeapons();
   }
 
   @Test
-  void constructorTest() {
-    var expectedAxe = new Weapon(AXE_NAME, DAMAGE, SPEED, WeaponType.AXE);
-    var expectedStaff = new Weapon(STAFF_NAME, DAMAGE, SPEED, WeaponType.STAFF);
-    var expectedSword = new Weapon(SWORD_NAME, DAMAGE, SPEED, WeaponType.SWORD);
-    var expectedBow = new Weapon(BOW_NAME, DAMAGE, SPEED, WeaponType.BOW);
-    var expectedKnife = new Weapon(KNIFE_NAME, DAMAGE, SPEED, WeaponType.KNIFE);
+  public void testEquals() {
+    assertEquals(testWeaponA,testWeaponA);
+    assertNotEquals(testWeaponA,testWeaponB);
+    assertNotEquals(testWeaponA,testWeaponC);
+    assertEquals(testWeaponA,testWeaponD);
 
-    assertEquals(expectedAxe, testAxe);
-    assertEquals(expectedAxe.hashCode(), testAxe.hashCode());
-    assertEquals(expectedStaff, testStaff);
-    assertEquals(expectedStaff.hashCode(), testStaff.hashCode());
-    assertEquals(expectedSword, testSword);
-    assertEquals(expectedSword.hashCode(), testSword.hashCode());
-    assertEquals(expectedBow, testBow);
-    assertEquals(expectedBow.hashCode(), testBow.hashCode());
-    assertEquals(expectedKnife, testKnife);
-    assertEquals(expectedKnife.hashCode(), testKnife.hashCode());
+    assertNotEquals(testWeaponA,testWeaponF1);
+    assertNotEquals(testWeaponA,testWeaponF2);
+    assertNotEquals(testWeaponA,testWeaponF3);
+    assertNotEquals(testWeaponA,testWeaponF4);
+  }
+
+  @Test
+  public void testHash() {
+    assertEquals(testWeaponA.hashCode(),testWeaponA.hashCode());
+    assertNotEquals(testWeaponA.hashCode(),testWeaponB.hashCode());
+    assertNotEquals(testWeaponA.hashCode(),testWeaponC.hashCode());
+    assertEquals(testWeaponA.hashCode(),testWeaponD.hashCode());
+
+    assertNotEquals(testWeaponA.hashCode(),testWeaponF1.hashCode());
+    assertNotEquals(testWeaponA.hashCode(),testWeaponF2.hashCode());
+    assertNotEquals(testWeaponA.hashCode(),testWeaponF3.hashCode());
+    assertNotEquals(testWeaponA.hashCode(),testWeaponF4.hashCode());
   }
 }
