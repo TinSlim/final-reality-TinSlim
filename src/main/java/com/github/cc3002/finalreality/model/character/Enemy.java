@@ -46,9 +46,6 @@ public class Enemy extends AbstractCharacter {
 
   @Override
   public void waitTurn() {
-    //Todo borrar print
-    System.out.println(this.getName() + " esperando su turno \n");
-
     scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
     var enemy = (Enemy) this;
     scheduledExecutor
