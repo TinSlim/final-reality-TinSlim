@@ -9,7 +9,6 @@ public class Knife extends AbstractWeapon implements IMageWeapons {
    * @param name
    * @param damage
    * @param weight
-   * @param type
    * @see WeaponType
    */
   public Knife(String name, int damage, int weight) {
@@ -35,5 +34,18 @@ public class Knife extends AbstractWeapon implements IMageWeapons {
   }
 
   public void equipToWhiteMage(IPlayerCharacter character){
+  }
+
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof Knife)) {
+      return false;
+    }
+    final Knife weapon = (Knife) o;
+    return getDamage() == weapon.getDamage() &&
+            getWeight() == weapon.getWeight() &&
+            getName() == weapon.getName();
   }
 }

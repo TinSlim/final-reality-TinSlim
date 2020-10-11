@@ -35,4 +35,16 @@ public class Bow extends AbstractWeapon {
   public void equipToWhiteMage(IPlayerCharacter character){
   }
 
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof Bow)) {
+      return false;
+    }
+    final Bow weapon = (Bow) o;
+    return getDamage() == weapon.getDamage() &&
+            getWeight() == weapon.getWeight() &&
+            getName() == weapon.getName();
+  }
 }

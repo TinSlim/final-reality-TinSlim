@@ -71,7 +71,7 @@ public class Enemy extends AbstractCharacter {
   }
 
   public int hashCode() {
-    return Objects.hash(getCharacterClass(),getName(),getMaxHp(),getDefense(),getWeight());
+    return Objects.hash(getCharacterClass(),getName(),getMaxHp(),getDefense(),getWeight(),getDamage());
   }
 
   /**

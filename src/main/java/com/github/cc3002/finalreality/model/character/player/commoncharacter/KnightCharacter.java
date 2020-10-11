@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
 
-public class KnightCharacterCommonCharacter extends AbstractCommonCharacter {
+public class KnightCharacter extends AbstractCommonCharacter {
 
     /**
      * Creates a new character.
@@ -16,8 +16,8 @@ public class KnightCharacterCommonCharacter extends AbstractCommonCharacter {
      * @param name           the character's name
      * @param turnsQueue     the queue with the characters waiting for their turn
      */
-    public KnightCharacterCommonCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
-                                          final int maxHp, final int defense) {
+    public KnightCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
+                           final int maxHp, final int defense) {
         super(turnsQueue, name, CharacterClass.KNIGHT, maxHp, defense);
     }
 
@@ -30,10 +30,10 @@ public class KnightCharacterCommonCharacter extends AbstractCommonCharacter {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof KnightCharacterCommonCharacter)) {
+        if (!(o instanceof KnightCharacter)) {
             return false;
         }
-        final KnightCharacterCommonCharacter character = (KnightCharacterCommonCharacter) o;
+        final KnightCharacter character = (KnightCharacter) o;
         return this.getName() == character.getName() && this.getDefense() == character.getDefense() &&
                 this.getMaxHp() == character.getMaxHp();
     }

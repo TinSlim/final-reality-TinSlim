@@ -9,7 +9,6 @@ public class Axe extends AbstractWeapon {
    * @param name
    * @param damage
    * @param weight
-   * @param type
    * @see WeaponType
    */
   public Axe(String name, int damage, int weight) {
@@ -34,5 +33,16 @@ public class Axe extends AbstractWeapon {
   public void equipToWhiteMage(IPlayerCharacter character){
   }
 
-
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof Axe)) {
+      return false;
+    }
+    final Axe weapon = (Axe) o;
+    return getDamage() == weapon.getDamage() &&
+            getWeight() == weapon.getWeight() &&
+            getName() == weapon.getName();
+  }
 }

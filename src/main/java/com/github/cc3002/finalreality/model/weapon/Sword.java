@@ -34,4 +34,17 @@ public class Sword extends AbstractWeapon {
 
   public void equipToWhiteMage(IPlayerCharacter character){
   }
+
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof Sword)) {
+      return false;
+    }
+    final Sword weapon = (Sword) o;
+    return getDamage() == weapon.getDamage() &&
+            getWeight() == weapon.getWeight() &&
+            getName() == weapon.getName();
+  }
 }
