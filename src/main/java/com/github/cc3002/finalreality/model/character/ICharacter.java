@@ -19,30 +19,38 @@ public interface ICharacter {
 
   /**
    * Returns this character's name.
+   * @return this character's name.
    */
   String getName();
 
   /**
    * Returns this character's class.
+   * @return this character's class.
    */
   CharacterClass getCharacterClass();
 
 
   /**
-   * This character receive damage reducing the hp b
+   * This character receives damage reducing the hp by damage.
+   * @param damage damage received.
    */
   void receiveDamage(int damage);
 
   /**
    * Returns this character's hp (health points).
+   * @return this character's hp (health points).
    */
   int getHp();
 
   /**
    * Returns this character's maxHp (max health points).
+   * @return this character's maxHp (max health points).
    */
   int getMaxHp();
 
-
-
+  /**
+   * Returns this character's defense.
+   * @return this character's defense.
+   */
+  int getDefense();
 }

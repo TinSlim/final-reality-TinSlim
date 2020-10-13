@@ -3,38 +3,43 @@ package com.github.cc3002.finalreality.model.weapon;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 
 public class Bow extends AbstractWeapon {
+
   /**
-   * Creates a weapon with a name, a base damage, speed and it's type.
+   * Creates a bow with a name, a base damage and weight.
    *
    * @param name
    * @param damage
    * @param weight
-   * @param type
    * @see WeaponType
    */
   public Bow(String name, int damage, int weight) {
     super(name, damage, weight, WeaponType.BOW);
   }
 
-
+  @Override
   public void equipToKnight(IPlayerCharacter character){
 
   }
 
+  @Override
   public void equipToThief(IPlayerCharacter character){
     character.setEquippedWeapon(this);
   }
 
+  @Override
   public void equipToEngineer(IPlayerCharacter character){
     character.setEquippedWeapon(this);
   }
 
+  @Override
   public void equipToBlackMage(IPlayerCharacter character){
   }
 
+  @Override
   public void equipToWhiteMage(IPlayerCharacter character){
   }
 
+  @Override
   public boolean equals(final Object o) {
     if (this == o) {
       return true;

@@ -39,7 +39,7 @@ public abstract class AbstractCharacterTest {
   protected ICharacter testEqCharacterF3;
   protected ICharacter testEqCharacterF4;
   protected ICharacter testEqCharacterF5;
-
+  
   protected abstract void setTestCharacter();
 
   protected abstract void setEqCharacter();

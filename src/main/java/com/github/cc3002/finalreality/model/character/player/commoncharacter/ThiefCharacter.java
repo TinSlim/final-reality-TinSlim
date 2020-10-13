@@ -9,7 +9,6 @@ import java.util.concurrent.BlockingQueue;
 
 public class ThiefCharacter extends AbstractCommonCharacter {
 
-
     /**
      * Creates a new character.
      *

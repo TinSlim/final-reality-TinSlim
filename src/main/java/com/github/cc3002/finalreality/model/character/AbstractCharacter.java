@@ -23,7 +23,14 @@ public abstract class AbstractCharacter implements ICharacter {
   private int hp;
   private int defense;
 
-
+  /**
+   * Creates a new Character
+   * @param turnsQueue      the queue with the characters waiting for their turn
+   * @param name            the character's name
+   * @param characterClass  the character's class
+   * @param maxHp           the character's max health points value
+   * @param defense         the character's defense
+   */
   protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,
       @NotNull String name, CharacterClass characterClass, final int maxHp, final int defense) {
     this.turnsQueue = turnsQueue;
@@ -33,7 +40,6 @@ public abstract class AbstractCharacter implements ICharacter {
     this.hp = maxHp;
     this.defense = defense;
   }
-
 
 
   /**
@@ -65,15 +71,17 @@ public abstract class AbstractCharacter implements ICharacter {
     return this.maxHp;
   }
 
+  @Override
   public int getDefense(){
     return this.defense;
   }
 
   /**
    * Sets this character's Hp (health points).
+   * @param newHp health points added to this character's hp.
    */
-  public void setHp(int number) {
-    this.hp = number;
+  public void setHp(int newHp) {
+    this.hp = newHp;
   }
 
   @Override

@@ -24,6 +24,7 @@ public class BlackMageCharacter extends AbstractMageCharacter {
     /**
      * This BlackMageCharacter attacks a target (Enemy) with thunder magic with a chance to paralize
      * the target.
+     * @param target Enemy that will receive thunder attack.
      */
     public void thunder(Enemy target) {
         IMageWeapons weapon = (IMageWeapons) this.getEquippedWeapon();
@@ -46,6 +47,7 @@ public class BlackMageCharacter extends AbstractMageCharacter {
     /**
      * This BlackMageCharacter attacks a target (Enemy) with fire magic with a chance to burn
      * the target.
+     * @param target Enemy that will receive fire attack.
      */
     public void fire(Enemy target) {
         IMageWeapons weapon = (IMageWeapons) this.getEquippedWeapon();
@@ -70,6 +72,7 @@ public class BlackMageCharacter extends AbstractMageCharacter {
         weapon.equipToBlackMage(this);
     }
 
+    @Override
     public boolean equals(final Object o) {
         if (this == o) {
             return true;

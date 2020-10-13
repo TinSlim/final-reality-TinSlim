@@ -79,7 +79,7 @@ The last package is the **inventory**, the only class here is **Inventory** clas
 of **IWeapons**, a pointer to an index of the list and the len of the list. With a object of this class you can
 storage weapons and access to equip the weapon indexed by the *pointer* to a character.
 
-## Classes diagram
+## Class Diagrams
 - **model** 
 
 ![model](images/PackageModel.png)
@@ -107,3 +107,9 @@ storage weapons and access to equip the weapon indexed by the *pointer* to a cha
 - **weapon**
 
 ![alt text](images/PackageWeapon.png)
+
+
+## Assumptions
+
+- Inventory will be used like a list of weapons.
+- Adverse effects will

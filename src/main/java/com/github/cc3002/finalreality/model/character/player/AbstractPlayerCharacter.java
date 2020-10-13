@@ -42,8 +42,8 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
 
 
   @Override
-  public void receiveLife(int life) {
-    this.setHp(this.getHp() + life);
+  public void receiveLife(int addedHp) {
+    this.setHp(this.getHp() + addedHp);
     if (this.getHp() > this.getMaxHp()) {
       this.setHp(this.getMaxHp());
     }

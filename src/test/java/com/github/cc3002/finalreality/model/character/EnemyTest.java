@@ -8,6 +8,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Class with set ups for Enemy class tests and the test method for common
+ * attack.
+ */
 class EnemyTest extends AbstractCharacterTest {
   protected IPlayerCharacter testPlayerCharacterA;
   protected IPlayerCharacter testPlayerCharacterB;

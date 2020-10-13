@@ -9,7 +9,7 @@ public class Staff extends AbstractWeapon implements IMageWeapons {
   private int magicDamage = 0;
 
   /**
-   * Creates a weapon with a name, a base damage, speed and it's type.
+   * Creates a staff with a name, a base damage, magic damage and weight.
    *
    * @param name
    * @param damage
@@ -21,34 +21,45 @@ public class Staff extends AbstractWeapon implements IMageWeapons {
     this.magicDamage = magicDamage;
   }
 
+  @Override
   public boolean castMagic(){
     return true;
   }
 
+  /**
+   * Returns magic damage
+   * @return magicDamage
+   */
   public int getMagicDamage() {
     return this.magicDamage;
   }
 
+  @Override
   public void equipToKnight(IPlayerCharacter character){
 
   }
 
+  @Override
   public void equipToThief(IPlayerCharacter character){
     character.setEquippedWeapon(this);
   }
 
+  @Override
   public void equipToEngineer(IPlayerCharacter character){
 
   }
 
+  @Override
   public void equipToBlackMage(IPlayerCharacter character){
     character.setEquippedWeapon(this);
   }
 
+  @Override
   public void equipToWhiteMage(IPlayerCharacter character){
     character.setEquippedWeapon(this);
   }
 
+  @Override
   public boolean equals(final Object o) {
     if (this == o) {
       return true;
@@ -63,6 +74,7 @@ public class Staff extends AbstractWeapon implements IMageWeapons {
             getMagicDamage() == weapon.getMagicDamage();
   }
 
+  @Override
   public int hashCode() {
     return Objects.hash(getName(), getDamage(), getWeight(), getType(),getMagicDamage());
   }

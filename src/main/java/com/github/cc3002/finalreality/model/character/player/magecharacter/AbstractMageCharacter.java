@@ -16,11 +16,13 @@ public abstract class AbstractMageCharacter extends AbstractPlayerCharacter impl
     Random adverseEffectProbability = new Random();
 
     /**
-     * Creates a new character.
-     *
-     * @param name           the character's name
-     * @param turnsQueue     the queue with the characters waiting for their turn
-     * @param characterClass
+     * Creates a new MageCharacter.
+     * @param turnsQueue       the queue with the characters waiting for their turn
+     * @param name             the character's name
+     * @param characterClass   the character's class
+     * @param maxHp            the character's max health points value
+     * @param defense          the character's defense
+     * @param maxMana          the character's max mana value
      */
     public AbstractMageCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
                                  CharacterClass characterClass, final int maxHp, final int defense, final int maxMana){
@@ -29,37 +31,49 @@ public abstract class AbstractMageCharacter extends AbstractPlayerCharacter impl
         this.maxMana = maxMana;
     }
 
-    public void setSeed(long i){
-        this.adverseEffectProbability = new Random(i);
+    /**
+     * Sets the seed for attacks with random factor.
+     * @param seed value to repeat random numbers.
+     */
+    public void setSeed(long seed){
+        this.adverseEffectProbability = new Random(seed);
     }
 
+    /**
+     * Gets Random parameter for for adverse effects.
+     * @return Random parameter for adverse effects.
+     */
     public Random getRandom(){
         return this.adverseEffectProbability;
     }
 
-    /**
-     * Gets this MageCharacter's mana.
-     */
+    @Override
     public int getMana() {
         return this.mana;
     }
 
+    @Override
     public int getMaxMana() {
         return this.maxMana;
     }
 
     /**
      * Sets this MageCharacter's mana.
+     * @param mana new mana.
      */
     public void setMana(int mana) {
         this.mana = mana;
     }
 
-
+    /**
+     * Reduces actual mana.
+     * @param mana quantity to reduce.
+     */
     public void reduceMana(int mana){
         this.setMana(this.mana - mana);
     }
 
+    @Override
     public int hashCode() {
         return Objects.hash(getCharacterClass(),getName(),getMaxHp(),getDefense(),getMaxMana());
     }

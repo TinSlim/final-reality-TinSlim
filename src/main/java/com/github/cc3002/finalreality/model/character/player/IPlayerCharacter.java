@@ -8,7 +8,7 @@ public interface IPlayerCharacter {
 
   /**
    * Sets weapon to this character's equipped weapon, only if the character's class can use it.
-   * @param weapon
+   * @param weapon weapon to equip.
    */
   void equip(IWeapon weapon);
 
@@ -30,10 +30,10 @@ public interface IPlayerCharacter {
   int getMaxHp();
 
   /**
-   * This character receives i Hp without without exceeding the maxHp
-   * @param i
+   * This character receives addedHp Hp without without exceeding the maxHp
+   * @param addedHp health points to receive.
    */
-  void receiveLife(int i);
+  void receiveLife(int addedHp);
 
   /**
    * Returns this PlayerCharacters's hp
@@ -43,19 +43,19 @@ public interface IPlayerCharacter {
 
   /**
    * Sets this PlayerCharacter's hp.
-   * @param number
+   * @param newHp new hp value to his character's hp.
    */
-  void setHp(int number);
+  void setHp(int newHp);
 
   /**
    * This PlayerCharacter receive damage, reducing their Hp, without passing the zero.
-   * @param damage
+   * @param damage damage that this character receives.
    */
   void receiveDamage(int damage);
 
   /**
    * This PlayerCharacter deals damage to the testEnemyA using damage from the EquippedWeapon
-   * @param testEnemyA
+   * @param testEnemyA target enemy that receives damage from this PlayerCharacter.
    */
   void commonAttack(Enemy testEnemyA);
 }

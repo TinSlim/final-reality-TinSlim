@@ -9,6 +9,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Class with WhiteCharacterTest, contains set ups for weapons and characters
+ * and tests for magic attacks methods (paralyze, venom and cure)
+ */
 public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
   protected IPlayerCharacter testComradeA;
   protected IPlayerCharacter testComradeB;

@@ -7,6 +7,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Abstract class containing the PlayerCharacter tests for all the types of playable
+ * characters.
+ */
 public abstract class AbstractPlayerCharacterTest extends AbstractCharacterTest {
 
   protected IPlayerCharacter testPlayerCharacter;
@@ -27,6 +31,9 @@ public abstract class AbstractPlayerCharacterTest extends AbstractCharacterTest 
 
   protected abstract void testEquipWeapons();
 
+  /**
+   * Set up for testEnemyA, testEnemyB and testEnemyC.
+   */
   public void setEnemies() {
     testEnemyA = new Enemy(turnsQueue,"testEnemyA",80,100,100,10);
     testEnemyB = new Enemy(turnsQueue,"testEnemyB",70,100,100,20);
