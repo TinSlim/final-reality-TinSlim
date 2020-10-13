@@ -7,8 +7,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+/**
+ * Class with set ups to test thief class and method to test equipWeapons
+ */
 public class ThiefCharacterTest extends AbstractPlayerCharacterTest {
 
+  @Override
   public void setTestCharacter(){
     setEnemies();
 
@@ -29,6 +33,7 @@ public class ThiefCharacterTest extends AbstractPlayerCharacterTest {
     ((ThiefCharacter) testTurnsCharacterB).equip(testClassWeaponB);
   }
 
+  @Override
   public void testEquipWeapons() {
     testPlayerCharacter.equip(testWeaponKnife);
     assertNull(testPlayerCharacter.getEquippedWeapon());
@@ -46,6 +51,7 @@ public class ThiefCharacterTest extends AbstractPlayerCharacterTest {
     assertEquals(testWeaponStaff, testPlayerCharacter.getEquippedWeapon());
   }
 
+  @Override
   public void setEqCharacter() {
     testEqCharacterA = new ThiefCharacter(turnsQueue,"testThiefA",100,100);
     testEqCharacterB = new ThiefCharacter(turnsQueue,"testThiefB",1,1);

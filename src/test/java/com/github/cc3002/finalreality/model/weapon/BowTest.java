@@ -1,7 +1,11 @@
 package com.github.cc3002.finalreality.model.weapon;
 
+/**
+ * Contains set up to test methods with Bow.
+ */
 public class BowTest extends AbstractWeaponTest {
 
+  @Override
   public void setWeapons() {
     testWeaponA = new Bow("TestBowA",50,42);
     testWeaponB = new Bow("TestBowB",50,42);

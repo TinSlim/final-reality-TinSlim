@@ -11,37 +11,49 @@ public interface IWeapon {
 
   /**
    * Equips or not this weapon to a Knight Character.
-   * @param character
+   * @param character who is trying to equip this weapon.
    */
   void equipToKnight(IPlayerCharacter character);
 
   /**
    * Equips or not this weapon to a Thief Character.
-   * @param character
+   * @param character who is trying to equip this weapon.
    */
   void equipToThief(IPlayerCharacter character);
 
   /**
    * Equips or not this weapon to a Engineer Character.
-   * @param character
+   * @param character who is trying to equip this weapon.
    */
   void equipToEngineer(IPlayerCharacter character);
 
   /**
    * Equips or not this weapon to a Knight Character .
-   * @param character
+   * @param character who is trying to equip this weapon.
    */
   void equipToBlackMage(IPlayerCharacter character);
 
   /**
    * Equips or not this weapon to a White Mage Character.
-   * @param character
+   * @param character who is trying to equip this weapon.
    */
   void equipToWhiteMage(IPlayerCharacter character);
-  
+
+  /**
+   * Returns the weight of this weapon.
+   * @return weight of this weapon.
+   */
   int getWeight();
 
+  /**
+   * Returns name of this weapon.
+   * @return name of this weapon.
+   */
   String getName();
 
+  /**
+   * Returns type of this weapon.
+   * @return type of this weapon.
+   */
   WeaponType getType();
 }

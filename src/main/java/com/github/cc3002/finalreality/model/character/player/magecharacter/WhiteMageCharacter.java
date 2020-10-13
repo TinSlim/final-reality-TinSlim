@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.BlockingQueue;
 
 public class WhiteMageCharacter extends AbstractMageCharacter {
+
     /**
      * Creates a new character.
      *
@@ -23,6 +24,7 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
 
     /**
      * This WhiteMageCharacter cures a target (IPlayerCharacter).
+     * @param target PlayerCharacter that will receive health points.
      */
     public void cure(IPlayerCharacter target) {
         IMageWeapons weapon = (IMageWeapons) this.getEquippedWeapon();
@@ -38,6 +40,7 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
 
     /**
      * This WhiteMageCharacter venom a target (Enemy).
+     * @param target Enemy that will receive venom attack.
      */
     public void venom(Enemy target) {
         IMageWeapons weapon = (IMageWeapons) this.getEquippedWeapon();
@@ -54,6 +57,7 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
 
     /**
      * This WhiteMageCharacter paralyzes a target (Enemy).
+     * @param target Enemy that will receive paralysis.
      */
     public void paralyze(Enemy target) {
         IMageWeapons weapon = (IMageWeapons) this.getEquippedWeapon();
@@ -71,7 +75,7 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
         weapon.equipToWhiteMage(this);
     }
 
-
+    @Override
     public boolean equals(final Object o) {
         if (this == o) {
             return true;

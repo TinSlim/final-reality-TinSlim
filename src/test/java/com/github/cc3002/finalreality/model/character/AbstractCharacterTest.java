@@ -42,23 +42,38 @@ public abstract class AbstractCharacterTest {
 
   protected abstract void setTestCharacter();
 
+  /**
+   * Set up for construction and hash test.
+   */
   protected abstract void setEqCharacter();
 
+  /**
+   * Set ups characters for tests.
+   */
   @BeforeEach
   public void setUp() {
     turnsQueue = new LinkedBlockingQueue<>();
     setTestCharacter();
   }
 
+  /**
+   * Tests turns and queue for characters.
+   * @throws InterruptedException to use Thread
+   */
   @Test
   public void testQueueTurns() throws InterruptedException {
     testTurnsCharacterA.waitTurn();
     testTurnsCharacterB.waitTurn();
+    assertEquals(0, turnsQueue.size());
     Thread.sleep(10500);
-    assertEquals(testTurnsCharacterB,turnsQueue.poll());
-    assertEquals(testTurnsCharacterA,turnsQueue.poll());
-    }
+    assertEquals(2, turnsQueue.size());
+    assertEquals(testTurnsCharacterB, turnsQueue.poll());
+    assertEquals(testTurnsCharacterA, turnsQueue.poll());
+  }
 
+  /**
+   * Tests reciveDamage method for characters.
+   */
   @Test
   public void testReceiveDamage() {
     testCharacterA.receiveDamage(40);
@@ -74,6 +89,9 @@ public abstract class AbstractCharacterTest {
     assertEquals(0,testCharacterD.getHp());
   }
 
+  /**
+   * Tests hash method for characters.
+   */
   @Test
   public void testHash() {
     setEqCharacter();
@@ -89,8 +107,11 @@ public abstract class AbstractCharacterTest {
     assertNotEquals(testEqCharacterA.hashCode(), testEqCharacterF5.hashCode());
   }
 
+  /**
+   * Tests construction for characters.
+   */
   @Test
-  public void testEquals() {
+  public void testConstruction() {
     this.setEqCharacter();
     assertEquals(testEqCharacterA, testEqCharacterA);
     assertNotEquals(testEqCharacterA, testEqCharacterB);

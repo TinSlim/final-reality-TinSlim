@@ -12,12 +12,20 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
+/**
+ * Contains tests for inventory class.
+ */
 public class InventoryTest {
   protected Inventory testBag;
   protected BlockingQueue<ICharacter> turnsQueue = new LinkedBlockingQueue<>();
   IPlayerCharacter testPlayerCharacter = new BlackMageCharacter(turnsQueue,"TestPlayer",12,31,12);
 
+  /**
+   * Adds "quantity" weapons to testBag
+   * @param quantity
+   */
   public void addWeaponsToBag(int quantity) {
     for (int j = 1; j < quantity; j ++){
       String name = "TestSword" + j;
@@ -68,7 +76,7 @@ public class InventoryTest {
     testBag.addToInventory(testSword);
 
     testBag.equipWeaponToCharacter(testPlayerCharacter);
-    assertEquals(null,testPlayerCharacter.getEquippedWeapon());
+    assertNull(testPlayerCharacter.getEquippedWeapon());
 
     testBag.movePoint(1);
     testBag.equipWeaponToCharacter(testPlayerCharacter);

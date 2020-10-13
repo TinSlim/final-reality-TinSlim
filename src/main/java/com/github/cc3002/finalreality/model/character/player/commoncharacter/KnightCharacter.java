@@ -10,7 +10,7 @@ import java.util.concurrent.BlockingQueue;
 public class KnightCharacter extends AbstractCommonCharacter {
 
     /**
-     * Creates a new character.
+     * Creates a new KnightCharacter.
      *
      * @param name           the character's name
      * @param turnsQueue     the queue with the characters waiting for their turn
@@ -25,6 +25,7 @@ public class KnightCharacter extends AbstractCommonCharacter {
         weapon.equipToKnight(this);
     }
 
+    @Override
     public boolean equals(final Object o) {
         if (this == o) {
             return true;

@@ -1,7 +1,11 @@
 package com.github.cc3002.finalreality.model.weapon;
 
+/**
+ * Contains set up to test methods with Axe.
+ */
 public class AxeTest extends AbstractWeaponTest {
 
+  @Override
   public void setWeapons() {
     testWeaponA = new Axe("TestAxeA",50,42);
     testWeaponB = new Axe("TestAxeB",50,42);

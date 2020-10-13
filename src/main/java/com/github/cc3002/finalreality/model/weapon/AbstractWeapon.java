@@ -28,19 +28,22 @@ public abstract class AbstractWeapon implements IWeapon {
     this.type = type;
   }
 
-
+  @Override
   public String getName() {
     return name;
   }
 
+  @Override
   public int getDamage() {
     return damage;
   }
 
+  @Override
   public int getWeight() {
     return weight;
   }
 
+  @Override
   public WeaponType getType() {
     return type;
   }

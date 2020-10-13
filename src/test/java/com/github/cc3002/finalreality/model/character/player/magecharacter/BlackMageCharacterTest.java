@@ -8,12 +8,17 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Class with BlackMageCharacterTest, contains set ups for weapons and characters
+ * and tests for magic attacks methods (fire and thunder)
+ */
 public class BlackMageCharacterTest extends AbstractMageCharacterTest {
 
   protected Enemy testEnemyD;
 
   protected BlackMageCharacter testBlackMageA;
   protected BlackMageCharacter testBlackMageB;
+
 
   public void setTestCharacter() {
     setEnemies();
@@ -100,6 +105,9 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
   }
 
   @Test
+  /*
+  Set ups enemies to test common attacks.
+   */
   public void testThunder() {
     testBlackMageA.setSeed(44213);
     testBlackMageB.setSeed(22);

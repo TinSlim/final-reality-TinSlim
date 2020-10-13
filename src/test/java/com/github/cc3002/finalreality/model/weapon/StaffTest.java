@@ -1,7 +1,11 @@
 package com.github.cc3002.finalreality.model.weapon;
 
+/**
+ * Contains set up to test methods with Staff.
+ */
 public class StaffTest extends AbstractWeaponTest {
 
+  @Override
   public void setWeapons() {
     testWeaponA = new Staff("TestStaffA",50,42,20);
     testWeaponB = new Staff("TestStaffB",50,42,20);

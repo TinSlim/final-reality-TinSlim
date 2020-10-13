@@ -4,10 +4,17 @@ import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import com.github.cc3002.finalreality.model.character.player.commoncharacter.EngineerCharacter;
 import com.github.cc3002.finalreality.model.character.player.commoncharacter.KnightCharacter;
 import com.github.cc3002.finalreality.model.character.player.commoncharacter.ThiefCharacter;
+import com.github.cc3002.finalreality.model.character.player.magecharacter.BlackMageCharacter;
+import com.github.cc3002.finalreality.model.character.player.magecharacter.WhiteMageCharacter;
+import com.github.cc3002.finalreality.model.weapon.Staff;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Class with set ups for Enemy class tests and the test method for common
+ * attack and adverse effects.
+ */
 class EnemyTest extends AbstractCharacterTest {
   protected IPlayerCharacter testPlayerCharacterA;
   protected IPlayerCharacter testPlayerCharacterB;
@@ -17,6 +24,9 @@ class EnemyTest extends AbstractCharacterTest {
   protected Enemy testEnemyB;
   protected Enemy testEnemyC;
 
+  /**
+   * Sets testsCharacters.
+   */
   public void setTestCharacter() {
     testCharacterA = new Enemy(turnsQueue,"EnemyA",100,100,100,100);
     testCharacterB = new Enemy(turnsQueue,"EnemyB",50,50,50,50);
@@ -35,6 +45,9 @@ class EnemyTest extends AbstractCharacterTest {
     testTurnsCharacterB = new Enemy(turnsQueue,"EnemyB",50,20,50,50);
   }
 
+  /**
+   * Sets EqCharacters for construction test.
+   */
   public void setEqCharacter() {
     testEqCharacterA = new Enemy(turnsQueue,"EnemyA",100,100,100,100);
     testEqCharacterB = new Enemy(turnsQueue,"EnemyB",50,50,50,50);
@@ -48,6 +61,9 @@ class EnemyTest extends AbstractCharacterTest {
     testEqCharacterF5 = new Enemy(turnsQueue,"EnemyA",100,100,100,2);
   }
 
+  /**
+   * Tests attack to PlayerCharacters.
+   */
   @Test
   public void testCommonAttack() {
     testEnemyA.commonAttack(testPlayerCharacterA);
@@ -58,5 +74,59 @@ class EnemyTest extends AbstractCharacterTest {
 
     testEnemyC.commonAttack(testPlayerCharacterC);
     assertEquals(10,testPlayerCharacterC.getHp());
+  }
+
+  /**
+   * Tests applying adverseEffects damage to enemy.
+   */
+  @Test
+  public void testApplyAdverseEffect() {
+    testPlayerCharacterA = new BlackMageCharacter(turnsQueue,"BlackMageA",100,100,500);
+    ((BlackMageCharacter) testPlayerCharacterA).setSeed(8);
+    testPlayerCharacterA.equip(new Staff("TestStaffAttackA",50,42,20));
+
+    testPlayerCharacterB = new WhiteMageCharacter(turnsQueue,"WhiteMageA",100,100,500);
+    ((BlackMageCharacter) testPlayerCharacterA).setSeed(8);
+    testPlayerCharacterB.equip(new Staff("TestStaffAttackA",50,42,20));
+
+    ((BlackMageCharacter) testPlayerCharacterA).fire(testEnemyA);
+    assertEquals(21,testEnemyA.getBurnDamage());
+    assertEquals(58,testEnemyA.getHp());
+    testEnemyA.applyEffect();
+    assertEquals(37,testEnemyA.getHp());
+
+    ((WhiteMageCharacter) testPlayerCharacterB).venom(testEnemyB);
+    assertEquals(14,testEnemyB.getPoisonDamage());
+    assertEquals(50,testEnemyB.getHp());
+    testEnemyB.applyEffect();
+    assertEquals(36,testEnemyB.getHp());
+  }
+
+  /**
+   * Tests applying paralyze to enemy.
+   */
+  @Test
+  public void TestApplyParalyze() {
+    testPlayerCharacterA = new BlackMageCharacter(turnsQueue,"BlackMageA",100,100,500);
+    ((BlackMageCharacter) testPlayerCharacterA).setSeed(8);
+    testPlayerCharacterA.equip(new Staff("TestStaffAttackA",50,42,20));
+
+    testPlayerCharacterB = new WhiteMageCharacter(turnsQueue,"WhiteMageA",100,100,500);
+    ((BlackMageCharacter) testPlayerCharacterA).setSeed(8);
+    testPlayerCharacterB.equip(new Staff("TestStaffAttackA",50,42,20));
+
+    ((BlackMageCharacter) testPlayerCharacterA).thunder(testEnemyA);
+    assertTrue(testEnemyA.getParalyze());
+    assertEquals(58,testEnemyA.getHp());
+    testEnemyA.applyParalyze();
+    assertFalse(testEnemyA.getParalyze());
+
+    ((WhiteMageCharacter) testPlayerCharacterB).paralyze(testEnemyB);
+    assertTrue(testEnemyB.getParalyze());
+    testEnemyB.applyParalyze();
+    assertFalse(testEnemyB.getParalyze());;
+
+    testEnemyB.applyParalyze();
+    assertFalse(testEnemyB.getParalyze());
   }
 }
