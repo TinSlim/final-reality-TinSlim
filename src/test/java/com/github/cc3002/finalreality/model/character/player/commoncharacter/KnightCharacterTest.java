@@ -6,8 +6,12 @@ import com.github.cc3002.finalreality.model.weapon.Sword;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Class with set ups to test knight class and method to test equipWeapons
+ */
 public class KnightCharacterTest extends AbstractPlayerCharacterTest {
 
+  @Override
   public void setTestCharacter(){
     setEnemies();
 
@@ -27,6 +31,7 @@ public class KnightCharacterTest extends AbstractPlayerCharacterTest {
     ((KnightCharacter) testTurnsCharacterB).equip(testClassWeaponB);
   }
 
+  @Override
   public void testEquipWeapons() {
     testPlayerCharacter.equip(testWeaponBow);
     assertNull(testPlayerCharacter.getEquippedWeapon());
@@ -44,6 +49,7 @@ public class KnightCharacterTest extends AbstractPlayerCharacterTest {
     assertEquals(testWeaponSword, testPlayerCharacter.getEquippedWeapon());
   }
 
+  @Override
   public void setEqCharacter() {
     testEqCharacterA = new KnightCharacter(turnsQueue,"testKnightA",100,100);
     testEqCharacterB = new KnightCharacter(turnsQueue,"testKnightB",100,1);

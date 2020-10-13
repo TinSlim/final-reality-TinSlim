@@ -21,15 +21,24 @@ public abstract class AbstractWeaponTest {
   IWeapon testWeaponF3;
   IWeapon testWeaponF4;
 
+  /**
+   * Sets weapons depending on the class, to test.
+   */
   protected abstract void setWeapons();
 
+  /**
+   * SetUp, called before each test.
+   */
   @BeforeEach
   public void setUp() {
     this.setWeapons();
   }
 
+  /**
+   * Test Construction for weapons classes.
+   */
   @Test
-  public void testEquals() {
+  public void testConstruction() {
     assertEquals(testWeaponA,testWeaponA);
     assertNotEquals(testWeaponA,testWeaponB);
     assertNotEquals(testWeaponA,testWeaponC);
@@ -41,6 +50,9 @@ public abstract class AbstractWeaponTest {
     assertNotEquals(testWeaponA,testWeaponF4);
   }
 
+  /**
+   * Tests hash for weapons classes.
+   */
   @Test
   public void testHash() {
     assertEquals(testWeaponA.hashCode(),testWeaponA.hashCode());

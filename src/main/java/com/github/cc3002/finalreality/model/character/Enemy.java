@@ -142,4 +142,25 @@ public class Enemy extends AbstractCharacter {
   public int getPoisonDamage() {
     return this.poisonDamage;
   }
+
+  /**
+   * Applies venom and burn damage effect.
+   */
+  public void applyEffect() {
+    this.receiveDamage(burnDamage);
+    this.receiveDamage(poisonDamage);
+  }
+
+  /**
+   * Applies paralyze state to this Enemy, making it not paralyzed for the next turn.
+   * @return is or not paralyzed this turn.
+   */
+  public boolean applyParalyze() {
+    if (getParalyze()) {
+      setParalyze(false);
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

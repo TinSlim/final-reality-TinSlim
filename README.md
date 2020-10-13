@@ -109,7 +109,9 @@ storage weapons and access to equip the weapon indexed by the *pointer* to a cha
 ![alt text](images/PackageWeapon.png)
 
 
+**All changes on classes were to keep SOLID principles.**
+
 ## Assumptions
 
 - Inventory will be used like a list of weapons.
-- Adverse effects will
+- Adververse effects will do damage ca

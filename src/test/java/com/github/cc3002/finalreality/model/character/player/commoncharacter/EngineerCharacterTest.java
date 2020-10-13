@@ -5,8 +5,12 @@ import com.github.cc3002.finalreality.model.weapon.Bow;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Class with set ups to test engineer class and method to test equipWeapons
+ */
 public class EngineerCharacterTest extends AbstractPlayerCharacterTest {
 
+  @Override
   public void setTestCharacter(){
     setEnemies();
 
@@ -26,6 +30,7 @@ public class EngineerCharacterTest extends AbstractPlayerCharacterTest {
     ((EngineerCharacter) testTurnsCharacterB).equip(testClassWeaponB);
   }
 
+  @Override
   public void testEquipWeapons() {
     testPlayerCharacter.equip(testWeaponKnife);
     assertNull(testPlayerCharacter.getEquippedWeapon());
@@ -43,6 +48,7 @@ public class EngineerCharacterTest extends AbstractPlayerCharacterTest {
     assertEquals(testWeaponBow, testPlayerCharacter.getEquippedWeapon());
   }
 
+  @Override
   public void setEqCharacter() {
     testEqCharacterA = new EngineerCharacter(turnsQueue,"testEngineerA",100,100);
     testEqCharacterB = new EngineerCharacter(turnsQueue,"testEngineerB",100,1);

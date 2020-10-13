@@ -5,6 +5,7 @@ package com.github.cc3002.finalreality.model.weapon;
  */
 public class AxeTest extends AbstractWeaponTest {
 
+  @Override
   public void setWeapons() {
     testWeaponA = new Axe("TestAxeA",50,42);
     testWeaponB = new Axe("TestAxeB",50,42);
