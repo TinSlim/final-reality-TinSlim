@@ -120,4 +120,3 @@ storage weapons and access to equip the weapon indexed by the *pointer* to a cha
 ## Assumptions
 
 - Inventory will be used like a list of weapons.
-- Adververse effects will do damage ca
