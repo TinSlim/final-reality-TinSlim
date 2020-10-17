@@ -25,7 +25,7 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
   public void setTestCharacter() {
     setEnemies();
 
-    testCharacterA = new WhiteMageCharacter(turnsQueue,"WhiteMageA",100,100,100);
+    testCharacterA = new WhiteMageCharacter(turnsQueue,"WhiteMageA",100,0,100);
     testCharacterB = new WhiteMageCharacter(turnsQueue,"WhiteMageB",50,50,50);
     testCharacterC = new WhiteMageCharacter(turnsQueue,"WhiteMageC",0,0,0);
     testCharacterD = new WhiteMageCharacter(turnsQueue,"WhiteMageD",-10,-10,-10);
@@ -115,7 +115,7 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
   public void testVenom() {
     testWhiteMageA.equip(testWeaponStaffA);
     testWhiteMageA.venom(testEnemyA);
-    assertEquals(26,testEnemyA.getPoisonDamage());
+    assertEquals(10,testEnemyA.getPoisonDamage());
 
     testWhiteMageA.equip(testWeaponStaffB);
     testWhiteMageA.venom(testEnemyB);

@@ -23,7 +23,7 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
   public void setTestCharacter() {
     setEnemies();
 
-    testCharacterA = new BlackMageCharacter(turnsQueue,"BlackMageA",100,100,100);
+    testCharacterA = new BlackMageCharacter(turnsQueue,"BlackMageA",100,0,100);
     testCharacterB = new BlackMageCharacter(turnsQueue,"BlackMageB",50,50,50);
     testCharacterC = new BlackMageCharacter(turnsQueue,"BlackMageC",0,0,0);
     testCharacterD = new BlackMageCharacter(turnsQueue,"BlackMageD",-10,-10,-10);
@@ -80,13 +80,13 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
 
     testBlackMageA.equip(testWeaponStaffA);
     testBlackMageA.fire(testEnemyA);
-    assertEquals(40,testEnemyA.getBurnDamage());
-    assertEquals(0,testEnemyA.getHp());
+    assertEquals(15,testEnemyA.getBurnDamage());
+    assertEquals(50,testEnemyA.getHp());
 
     testBlackMageA.equip(testWeaponStaffB);
     testBlackMageA.fire(testEnemyB);
     assertEquals(0,testEnemyB.getBurnDamage());
-    assertEquals(60,testEnemyB.getHp());
+    assertEquals(70,testEnemyB.getHp());
 
     testBlackMageA.equip(testWeaponStaffC);
     testBlackMageA.fire(testEnemyC);
@@ -115,12 +115,12 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
     testBlackMageA.equip(testWeaponStaffA);
     testBlackMageA.thunder(testEnemyA);
     assertEquals(true,testEnemyA.getParalyze());
-    assertEquals(0,testEnemyA.getHp());
+    assertEquals(50,testEnemyA.getHp());
 
     testBlackMageA.equip(testWeaponStaffB);
     testBlackMageA.thunder(testEnemyB);
     assertEquals(false,testEnemyB.getParalyze());
-    assertEquals(60,testEnemyB.getHp());
+    assertEquals(70,testEnemyB.getHp());
 
     testBlackMageA.equip(testWeaponStaffC);
     testBlackMageA.thunder(testEnemyC);

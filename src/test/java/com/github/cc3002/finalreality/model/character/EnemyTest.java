@@ -28,12 +28,12 @@ class EnemyTest extends AbstractCharacterTest {
    * Sets testsCharacters.
    */
   public void setTestCharacter() {
-    testCharacterA = new Enemy(turnsQueue,"EnemyA",100,100,100,100);
+    testCharacterA = new Enemy(turnsQueue,"EnemyA",100,100,0,100);
     testCharacterB = new Enemy(turnsQueue,"EnemyB",50,50,50,50);
     testCharacterC = new Enemy(turnsQueue,"EnemyC",0,0,0,0);
     testCharacterD = new Enemy(turnsQueue,"EnemyD",-10,-10,-10,0);
 
-    testEnemyA = new Enemy(turnsQueue,"EnemyA",100,100,100,100);
+    testEnemyA = new Enemy(turnsQueue,"EnemyA",100,100,10,100);
     testEnemyB = new Enemy(turnsQueue,"EnemyB",50,50,50,50);
     testEnemyC = new Enemy(turnsQueue,"EnemyC",10,1,1,0);
 
@@ -67,13 +67,16 @@ class EnemyTest extends AbstractCharacterTest {
   @Test
   public void testCommonAttack() {
     testEnemyA.commonAttack(testPlayerCharacterA);
-    assertEquals(0,testPlayerCharacterA.getHp());
+    assertEquals(60,testPlayerCharacterA.getHp());
+    assertTrue(testPlayerCharacterA.isAlive());
 
     testEnemyB.commonAttack(testPlayerCharacterB);
-    assertEquals(20,testPlayerCharacterB.getHp());
+    assertEquals(70,testPlayerCharacterB.getHp());
+    assertTrue(testPlayerCharacterB.isAlive());
 
     testEnemyC.commonAttack(testPlayerCharacterC);
     assertEquals(10,testPlayerCharacterC.getHp());
+    assertTrue(testPlayerCharacterC.isAlive());
   }
 
   /**
@@ -91,15 +94,15 @@ class EnemyTest extends AbstractCharacterTest {
 
     ((BlackMageCharacter) testPlayerCharacterA).fire(testEnemyA);
     assertEquals(21,testEnemyA.getBurnDamage());
-    assertEquals(58,testEnemyA.getHp());
+    assertEquals(68,testEnemyA.getHp());
     testEnemyA.applyEffect();
-    assertEquals(37,testEnemyA.getHp());
+    assertEquals(57,testEnemyA.getHp());
 
     ((WhiteMageCharacter) testPlayerCharacterB).venom(testEnemyB);
     assertEquals(14,testEnemyB.getPoisonDamage());
     assertEquals(50,testEnemyB.getHp());
     testEnemyB.applyEffect();
-    assertEquals(36,testEnemyB.getHp());
+    assertEquals(50,testEnemyB.getHp());
   }
 
   /**
@@ -117,7 +120,7 @@ class EnemyTest extends AbstractCharacterTest {
 
     ((BlackMageCharacter) testPlayerCharacterA).thunder(testEnemyA);
     assertTrue(testEnemyA.getParalyze());
-    assertEquals(58,testEnemyA.getHp());
+    assertEquals(68,testEnemyA.getHp());
     testEnemyA.applyParalyze();
     assertFalse(testEnemyA.getParalyze());
 

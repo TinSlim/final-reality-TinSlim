@@ -14,7 +14,7 @@ public class EngineerCharacterTest extends AbstractPlayerCharacterTest {
   public void setTestCharacter(){
     setEnemies();
 
-    testCharacterA = new EngineerCharacter(turnsQueue,"EngineerA",100,100);
+    testCharacterA = new EngineerCharacter(turnsQueue,"EngineerA",100,0);
     testCharacterB = new EngineerCharacter(turnsQueue,"EngineerB",50,50);
     testCharacterC = new EngineerCharacter(turnsQueue,"EngineerC",0,0);
     testCharacterD = new EngineerCharacter(turnsQueue,"EngineerD",-10,-10);

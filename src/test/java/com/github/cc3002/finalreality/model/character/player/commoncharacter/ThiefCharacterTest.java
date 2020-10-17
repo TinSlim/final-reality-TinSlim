@@ -16,7 +16,7 @@ public class ThiefCharacterTest extends AbstractPlayerCharacterTest {
   public void setTestCharacter(){
     setEnemies();
 
-    testCharacterA = new ThiefCharacter(turnsQueue,"ThiefA",100,100);
+    testCharacterA = new ThiefCharacter(turnsQueue,"ThiefA",100,0);
     testCharacterB = new ThiefCharacter(turnsQueue,"ThiefB",50,50);
     testCharacterC = new ThiefCharacter(turnsQueue,"ThiefC",0,0);
     testCharacterD = new ThiefCharacter(turnsQueue,"ThiefD",-10,-10);

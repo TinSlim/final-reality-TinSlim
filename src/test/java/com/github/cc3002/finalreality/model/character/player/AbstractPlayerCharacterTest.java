@@ -5,7 +5,7 @@ import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Abstract class containing the PlayerCharacter tests for all the types of playable
@@ -35,8 +35,8 @@ public abstract class AbstractPlayerCharacterTest extends AbstractCharacterTest 
    * Set up for testEnemyA, testEnemyB and testEnemyC.
    */
   public void setEnemies() {
-    testEnemyA = new Enemy(turnsQueue,"testEnemyA",80,100,100,10);
-    testEnemyB = new Enemy(turnsQueue,"testEnemyB",70,100,100,20);
+    testEnemyA = new Enemy(turnsQueue,"testEnemyA",80,100,0,10);
+    testEnemyB = new Enemy(turnsQueue,"testEnemyB",70,100,20,20);
     testEnemyC = new Enemy(turnsQueue,"testEnemyC",10,100,100,30);
   }
 
@@ -50,13 +50,20 @@ public abstract class AbstractPlayerCharacterTest extends AbstractCharacterTest 
     testPlayerCharacter.equip(testClassWeaponA);
     testPlayerCharacter.commonAttack(testEnemyA);
     assertEquals(0,testEnemyA.getHp());
+    assertFalse(testEnemyA.isAlive());
 
     testPlayerCharacter.equip(testClassWeaponB);
     testPlayerCharacter.commonAttack(testEnemyB);
-    assertEquals(20,testEnemyB.getHp());
+    assertEquals(40,testEnemyB.getHp());
+    assertTrue(testEnemyB.isAlive());
 
     testPlayerCharacter.equip(testClassWeaponC);
     testPlayerCharacter.commonAttack(testEnemyC);
     assertEquals(10,testEnemyC.getHp());
+    assertTrue(testEnemyC.isAlive());
+
+    testPlayerCharacter.commonAttack(testEnemyA);
+    assertEquals(0,testEnemyA.getHp());
+    assertFalse(testEnemyA.isAlive());
   }
 }

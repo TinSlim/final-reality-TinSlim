@@ -15,7 +15,7 @@ public abstract class AbstractMageCharacterTest extends AbstractPlayerCharacterT
   public IMageCharacter testMageC;
 
 
-  protected IWeapon testWeaponStaffA = new Staff("TestStaffA",0,80,90);
+  protected IWeapon testWeaponStaffA = new Staff("TestStaffA",0,30,90);
   protected IWeapon testWeaponStaffB = new Staff("TestStaffB",0,10,90);
   protected IWeapon testWeaponStaffC = new Staff("TestStaffC",0,0,90);
 

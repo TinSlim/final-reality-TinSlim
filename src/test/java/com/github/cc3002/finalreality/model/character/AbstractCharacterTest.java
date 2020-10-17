@@ -26,8 +26,10 @@ public abstract class AbstractCharacterTest {
   protected ICharacter testCharacterC;
   protected ICharacter testCharacterD;
 
+
   protected ICharacter testTurnsCharacterA;
   protected ICharacter testTurnsCharacterB;
+
 
   protected ICharacter testEqCharacterA;
   protected ICharacter testEqCharacterB;
@@ -60,7 +62,7 @@ public abstract class AbstractCharacterTest {
    * Tests turns and queue for characters.
    * @throws InterruptedException to use Thread
    */
-  @Test
+  //Todo @Test
   public void testQueueTurns() throws InterruptedException {
     testTurnsCharacterA.waitTurn();
     testTurnsCharacterB.waitTurn();

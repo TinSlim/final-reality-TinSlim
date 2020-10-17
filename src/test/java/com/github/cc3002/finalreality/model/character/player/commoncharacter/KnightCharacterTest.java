@@ -15,7 +15,7 @@ public class KnightCharacterTest extends AbstractPlayerCharacterTest {
   public void setTestCharacter(){
     setEnemies();
 
-    testCharacterA = new KnightCharacter(turnsQueue,"KnightA",100,100);
+    testCharacterA = new KnightCharacter(turnsQueue,"KnightA",100,0);
     testCharacterB = new KnightCharacter(turnsQueue,"KnightB",50,50);
     testCharacterC = new KnightCharacter(turnsQueue,"KnightC",0,0);
     testCharacterD = new KnightCharacter(turnsQueue,"KnightD",-10,-10);
