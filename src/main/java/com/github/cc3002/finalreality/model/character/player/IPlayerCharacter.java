@@ -58,4 +58,6 @@ public interface IPlayerCharacter {
    * @param testEnemyA target enemy that receives damage from this PlayerCharacter.
    */
   void commonAttack(Enemy testEnemyA);
+
+  boolean isAlive();
 }

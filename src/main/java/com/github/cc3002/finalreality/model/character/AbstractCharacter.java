@@ -23,6 +23,8 @@ public abstract class AbstractCharacter implements ICharacter {
   private int hp;
   private int defense;
 
+  private boolean outOfCombat;
+
   /**
    * Creates a new Character
    * @param turnsQueue      the queue with the characters waiting for their turn
@@ -39,6 +41,7 @@ public abstract class AbstractCharacter implements ICharacter {
     this.maxHp = maxHp;
     this.hp = maxHp;
     this.defense = defense;
+    this.outOfCombat = false;
   }
 
 
@@ -86,10 +89,23 @@ public abstract class AbstractCharacter implements ICharacter {
 
   @Override
   public void receiveDamage(int damage) {
-    if ((this.getHp() - damage) <= 0) {
-      this.setHp(0);
-    } else {
-      this.setHp(this.getHp() - damage);
+    int realDamage = damage - this.getDefense();
+    if (realDamage < 0) {
+      realDamage = 0;
     }
+    if ((this.getHp() - (realDamage)) <= 0) {
+      this.setHp(0);
+      this.faint();
+    } else {
+      this.setHp(this.getHp() - realDamage);
+    }
+  }
+
+  public boolean isAlive() {
+    return !outOfCombat;
+  }
+
+  public void faint() {
+    this.outOfCombat = true;
   }
 }

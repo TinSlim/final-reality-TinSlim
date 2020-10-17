@@ -20,8 +20,7 @@ public class ThiefCharacter extends AbstractCommonCharacter {
         super(turnsQueue, name, CharacterClass.THIEF, maxHp, defense);
     }
 
-    @Override
-    public void equip(IWeapon weapon) {
+    public void equipWeapon(IWeapon weapon) {
         weapon.equipToThief(this);
     }
 

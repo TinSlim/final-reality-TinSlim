@@ -20,8 +20,7 @@ public class KnightCharacter extends AbstractCommonCharacter {
         super(turnsQueue, name, CharacterClass.KNIGHT, maxHp, defense);
     }
 
-    @Override
-    public void equip(IWeapon weapon) {
+    public void equipWeapon(IWeapon weapon) {
         weapon.equipToKnight(this);
     }
 

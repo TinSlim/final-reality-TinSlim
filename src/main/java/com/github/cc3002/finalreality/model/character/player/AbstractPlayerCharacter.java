@@ -60,12 +60,20 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
   }
 
   @Override
-  abstract public void equip(IWeapon weapon);
+  public void equip(IWeapon weapon) {
+    if (this.isAlive()) {
+      this.equipWeapon(weapon);
+    }
+  }
+
+  protected abstract void equipWeapon(IWeapon weapon);
 
 
   public void commonAttack(Enemy target) {
-    IWeapon weapon = this.getEquippedWeapon();
-    int damage = weapon.getDamage();
-    target.receiveDamage(damage);
+    if (target.isAlive()) {
+      IWeapon weapon = this.getEquippedWeapon();
+      int damage = weapon.getDamage();
+      target.receiveDamage(damage);
+    }
   }
 }
