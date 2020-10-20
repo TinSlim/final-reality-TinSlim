@@ -16,8 +16,6 @@ enemies controlled by the computer.
 
 ---
 
-**The rest of the documentation is left for the users of this template to complete**
-
 # Fixing the order and inherit
 
 The first we have is the **AbstractCharacter** abstract class, here you will find common attributes and
