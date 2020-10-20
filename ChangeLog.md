@@ -1,6 +1,12 @@
 ChangeLog
 =========
 
+Version 4.0
+-----------
+- (B.3) Code clean on tests.
+- (B.2) A character who died can't receive damage or equip weapons.
+- (B.1) Now defense attribute is used when a character receives damage.
+
 Version 3.0
 -----------
 - (RC.1) Finished test classes. 
