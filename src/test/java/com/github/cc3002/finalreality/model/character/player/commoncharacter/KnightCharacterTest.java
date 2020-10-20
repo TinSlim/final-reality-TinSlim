@@ -4,8 +4,6 @@ import com.github.cc3002.finalreality.model.weapon.Axe;
 import com.github.cc3002.finalreality.model.weapon.Knife;
 import com.github.cc3002.finalreality.model.weapon.Sword;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * Class with set ups to test knight class and method to test equipWeapons
  */
@@ -43,15 +41,15 @@ public class KnightCharacterTest extends AbstractPlayerCharacterTest {
 
   @Override
   public void setEqCharacter() {
-    testEqCharacterA = new KnightCharacter(turnsQueue,"testKnightA",100,100);
-    testEqCharacterB = new KnightCharacter(turnsQueue,"testKnightB",100,1);
-    testEqCharacterC = new ThiefCharacter(turnsQueue, "testThiefA", 100, 100);
-    testEqCharacterD = new KnightCharacter(turnsQueue, "testKnightA", 100, 100);
+    testConstructionCharacter = new KnightCharacter(turnsQueue,"testKnightA",100,100);
+    testDiffCharacterSameClass = new KnightCharacter(turnsQueue,"testKnightB",100,1);
+    testDiffCharacterDiffClass = new ThiefCharacter(turnsQueue, "testThiefA", 100, 100);
+    testSameCharacterSameClass = new KnightCharacter(turnsQueue, "testKnightA", 100, 100);
 
-    testEqCharacterF1 = new KnightCharacter(turnsQueue, "DiffName", 100, 100);
-    testEqCharacterF2 = new KnightCharacter(turnsQueue, "testKnightA", 1, 100);
-    testEqCharacterF3 = new KnightCharacter(turnsQueue, "testKnightA", 100, 1);
-    testEqCharacterF4 = new KnightCharacter(turnsQueue, "test", 5, 1);
-    testEqCharacterF5 = new KnightCharacter(turnsQueue, "test", 5, 1);
+    testOnlyDiffName = new KnightCharacter(turnsQueue, "DiffName", 100, 100);
+    testOnlyDiffMaxHp = new KnightCharacter(turnsQueue, "testKnightA", 1, 100);
+    testOnlyDiffDefense = new KnightCharacter(turnsQueue, "testKnightA", 100, 1);
+    testOnlyDiffManaOrWeightOrOther = new KnightCharacter(turnsQueue, "test", 5, 1);
+    testOnlyDiffDamageOrOther = new KnightCharacter(turnsQueue, "test", 5, 1);
   }
 }

@@ -69,16 +69,16 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
   }
 
   public void setEqCharacter() {
-    testEqCharacterA = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,100);
-    testEqCharacterB = new WhiteMageCharacter(turnsQueue,"testWhiteMageB",100,100,5);
-    testEqCharacterC = new ThiefCharacter(turnsQueue,"BlackMageA",100,100);
-    testEqCharacterD = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,100);
+    testConstructionCharacter = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,100);
+    testDiffCharacterSameClass = new WhiteMageCharacter(turnsQueue,"testWhiteMageB",100,100,5);
+    testDiffCharacterDiffClass = new ThiefCharacter(turnsQueue,"BlackMageA",100,100);
+    testSameCharacterSameClass = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,100);
 
-    testEqCharacterF1 = new WhiteMageCharacter(turnsQueue,"DiffName",100,100,100);
-    testEqCharacterF2 = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",1,100,100);
-    testEqCharacterF3 = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,1,100);
-    testEqCharacterF4 = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,1);
-    testEqCharacterF5 = new WhiteMageCharacter(turnsQueue,"test",1,1,1);
+    testOnlyDiffName = new WhiteMageCharacter(turnsQueue,"DiffName",100,100,100);
+    testOnlyDiffMaxHp = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",1,100,100);
+    testOnlyDiffDefense = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,1,100);
+    testOnlyDiffManaOrWeightOrOther = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,1);
+    testOnlyDiffDamageOrOther = new WhiteMageCharacter(turnsQueue,"test",1,1,1);
   }
 
 

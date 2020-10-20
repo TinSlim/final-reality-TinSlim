@@ -39,7 +39,7 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
     testTurnsCharacterA = new BlackMageCharacter(turnsQueue,"BlackMageC",100,100,5);
     testTurnsCharacterB = new BlackMageCharacter(turnsQueue,"BlackMageC",100,100,5);
 
-    testEnemyD = new Enemy(turnsQueue,"testEnemyC",10,100,100,40);
+    testEnemyD = new Enemy(turnsQueue,"testEffectsC",10,100,100,40);
 
     testAttackWeaponA = new Knife("TestKnifeAttack",100,100);
     testAttackWeaponB = new Staff("TestStaffAttackA",50,42,20);
@@ -130,15 +130,15 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
   }
 
   public void setEqCharacter() {
-    testEqCharacterA = new BlackMageCharacter(turnsQueue,"testBlackMageA",100,100,60);
-    testEqCharacterB = new BlackMageCharacter(turnsQueue,"testBlackMageB",100,100,14);
-    testEqCharacterC = new ThiefCharacter(turnsQueue,"BlackMageA",100,100);
-    testEqCharacterD = new BlackMageCharacter(turnsQueue,"testBlackMageA",100,100,60);
+    testConstructionCharacter = new BlackMageCharacter(turnsQueue,"testBlackMageA",100,100,60);
+    testDiffCharacterSameClass = new BlackMageCharacter(turnsQueue,"testBlackMageB",100,100,14);
+    testDiffCharacterDiffClass = new ThiefCharacter(turnsQueue,"BlackMageA",100,100);
+    testSameCharacterSameClass = new BlackMageCharacter(turnsQueue,"testBlackMageA",100,100,60);
 
-    testEqCharacterF1 = new BlackMageCharacter(turnsQueue,"DiffName",100,100,60);
-    testEqCharacterF2 = new BlackMageCharacter(turnsQueue,"testBlackMageA",1,100,60);
-    testEqCharacterF3 = new BlackMageCharacter(turnsQueue,"testBlackMageA",100,1,60);
-    testEqCharacterF4 = new BlackMageCharacter(turnsQueue,"testBlackMageA",100,100,1);
-    testEqCharacterF5 = new BlackMageCharacter(turnsQueue,"test",1,1,1);
+    testOnlyDiffName = new BlackMageCharacter(turnsQueue,"DiffName",100,100,60);
+    testOnlyDiffMaxHp = new BlackMageCharacter(turnsQueue,"testBlackMageA",1,100,60);
+    testOnlyDiffDefense = new BlackMageCharacter(turnsQueue,"testBlackMageA",100,1,60);
+    testOnlyDiffManaOrWeightOrOther = new BlackMageCharacter(turnsQueue,"testBlackMageA",100,100,1);
+    testOnlyDiffDamageOrOther = new BlackMageCharacter(turnsQueue,"test",1,1,1);
   }
 }

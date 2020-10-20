@@ -21,9 +21,9 @@ public abstract class AbstractPlayerCharacterTest extends AbstractCharacterTest 
   protected IWeapon testWeaponBow = new Bow("TestBow",50,30);
   protected IWeapon testWeaponAxe = new Axe("TestAxe",100,50);
 
-  protected IWeapon testAttackWeaponA;//100
-  protected IWeapon testAttackWeaponB;//50
-  protected IWeapon testAttackWeaponC;//0
+  protected IWeapon testAttackWeaponA;
+  protected IWeapon testAttackWeaponB;
+  protected IWeapon testAttackWeaponC;
 
   protected IWeapon testEquipableWeaponA;
   protected IWeapon testEquipableWeaponB;
@@ -40,12 +40,12 @@ public abstract class AbstractPlayerCharacterTest extends AbstractCharacterTest 
 
 
   /**
-   * Set up for testEnemyA, testEnemyB and testEnemyC.
+   * Set up for testEffectsA, testEffectsB and testEffectsC.
    */
   public void setEnemies() {
-    testEnemyA = new Enemy(turnsQueue,"testEnemyA",80,100,0,10);
-    testEnemyB = new Enemy(turnsQueue,"testEnemyB",70,100,20,20);
-    testEnemyC = new Enemy(turnsQueue,"testEnemyC",10,100,100,30);
+    testEnemyA = new Enemy(turnsQueue,"testEffectsA",80,100,0,10);
+    testEnemyB = new Enemy(turnsQueue,"testEffectsB",70,100,20,20);
+    testEnemyC = new Enemy(turnsQueue,"testEffectsC",10,100,100,30);
   }
 
   @Test

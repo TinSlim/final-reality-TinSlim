@@ -3,8 +3,6 @@ import com.github.cc3002.finalreality.model.character.player.AbstractPlayerChara
 import com.github.cc3002.finalreality.model.weapon.Axe;
 import com.github.cc3002.finalreality.model.weapon.Bow;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * Class with set ups to test engineer class and method to test equipWeapons
  */
@@ -41,15 +39,15 @@ public class EngineerCharacterTest extends AbstractPlayerCharacterTest {
 
   @Override
   public void setEqCharacter() {
-    testEqCharacterA = new EngineerCharacter(turnsQueue,"testEngineerA",100,100);
-    testEqCharacterB = new EngineerCharacter(turnsQueue,"testEngineerB",100,1);
-    testEqCharacterC = new ThiefCharacter(turnsQueue, "BlackMageA", 100, 100);
-    testEqCharacterD = new EngineerCharacter(turnsQueue, "testEngineerA", 100, 100);
+    testConstructionCharacter = new EngineerCharacter(turnsQueue,"testEngineerA",100,100);
+    testDiffCharacterSameClass = new EngineerCharacter(turnsQueue,"testEngineerB",100,1);
+    testDiffCharacterDiffClass = new ThiefCharacter(turnsQueue, "BlackMageA", 100, 100);
+    testSameCharacterSameClass = new EngineerCharacter(turnsQueue, "testEngineerA", 100, 100);
 
-    testEqCharacterF1 = new EngineerCharacter(turnsQueue, "DiffName", 100, 100);
-    testEqCharacterF2 = new EngineerCharacter(turnsQueue, "testEngineerA", 1, 100);
-    testEqCharacterF3 = new EngineerCharacter(turnsQueue, "testEngineerA", 100, 1);
-    testEqCharacterF4 = new EngineerCharacter(turnsQueue, "test", 5, 1);
-    testEqCharacterF5 = new EngineerCharacter(turnsQueue, "test", 5, 1);
+    testOnlyDiffName = new EngineerCharacter(turnsQueue, "DiffName", 100, 100);
+    testOnlyDiffMaxHp = new EngineerCharacter(turnsQueue, "testEngineerA", 1, 100);
+    testOnlyDiffDefense = new EngineerCharacter(turnsQueue, "testEngineerA", 100, 1);
+    testOnlyDiffManaOrWeightOrOther = new EngineerCharacter(turnsQueue, "test", 5, 1);
+    testOnlyDiffDamageOrOther = new EngineerCharacter(turnsQueue, "test", 5, 1);
   }
 }
