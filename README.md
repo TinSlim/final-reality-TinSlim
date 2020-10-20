@@ -120,3 +120,4 @@ storage weapons and access to equip the weapon indexed by the *pointer* to a cha
 ## Assumptions
 
 - Inventory will be used like a list of weapons.
+- If the victim's defense is more than the damage that it receives, the victim will only not receive damage.
