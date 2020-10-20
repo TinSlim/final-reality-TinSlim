@@ -19,6 +19,7 @@ class EnemyTest extends AbstractCharacterTest {
   protected IPlayerCharacter testPlayerCharacterA;
   protected IPlayerCharacter testPlayerCharacterB;
   protected IPlayerCharacter testPlayerCharacterC;
+  protected IPlayerCharacter testPlayerCharacterD;
 
   protected Enemy testEnemyA;
   protected Enemy testEnemyB;
@@ -35,11 +36,12 @@ class EnemyTest extends AbstractCharacterTest {
 
     testEnemyA = new Enemy(turnsQueue,"EnemyA",100,100,10,100);
     testEnemyB = new Enemy(turnsQueue,"EnemyB",50,50,50,50);
-    testEnemyC = new Enemy(turnsQueue,"EnemyC",10,1,1,0);
+    testEnemyC = new Enemy(turnsQueue,"EnemyC",10,1,1,20);
 
     testPlayerCharacterA = new KnightCharacter(turnsQueue, "testPCharacterB",80,80);
     testPlayerCharacterB = new ThiefCharacter(turnsQueue, "testPCharacterA",70,80);
     testPlayerCharacterC = new EngineerCharacter(turnsQueue, "testPCharacterC",10,80);
+    testPlayerCharacterD = new EngineerCharacter(turnsQueue, "testPCharacterD",10,0);
 
     testTurnsCharacterA = new Enemy(turnsQueue,"EnemyA",100,100,100,100);
     testTurnsCharacterB = new Enemy(turnsQueue,"EnemyB",50,20,50,50);
@@ -77,6 +79,13 @@ class EnemyTest extends AbstractCharacterTest {
     testEnemyC.commonAttack(testPlayerCharacterC);
     assertEquals(10,testPlayerCharacterC.getHp());
     assertTrue(testPlayerCharacterC.isAlive());
+
+    testEnemyC.commonAttack(testPlayerCharacterD);
+    assertEquals(0,testPlayerCharacterD.getHp());
+    assertFalse(testPlayerCharacterD.isAlive());
+
+    testEnemyC.commonAttack(testPlayerCharacterD);
+    assertFalse(testPlayerCharacterD.isAlive());
   }
 
   /**

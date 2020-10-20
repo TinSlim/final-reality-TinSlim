@@ -20,32 +20,23 @@ public class EngineerCharacterTest extends AbstractPlayerCharacterTest {
     testCharacterD = new EngineerCharacter(turnsQueue,"EngineerD",-10,-10);
     testPlayerCharacter = new EngineerCharacter(turnsQueue,"EngineerE",100,100);
 
-    testClassWeaponA = new Bow("TestBowAttack",100,100);
-    testClassWeaponB = new Axe("TestAxeAttackA",50,20);
-    testClassWeaponC = new Axe("TestAxeAttackB",0,42);
+    testAttackWeaponA = new Bow("TestBowAttack",100,100);
+    testAttackWeaponB = new Axe("TestAxeAttackA",50,20);
+    testAttackWeaponC = new Axe("TestAxeAttackB",0,42);
+
+    testEquipableWeaponA = testWeaponAxe;
+    testEquipableWeaponB = testWeaponBow;
+    testEquipableWeaponC = testWeaponBow;
+
+    testNoEquipableWeaponA = testWeaponStaff;
+    testNoEquipableWeaponB = testWeaponKnife;
+    testNoEquipableWeaponC = testWeaponSword;
+    testNoEquipableWeaponD = testWeaponStaff;
 
     testTurnsCharacterA = new EngineerCharacter(turnsQueue,"TestTurnsEngineerA",100,100);
-    ((EngineerCharacter) testTurnsCharacterA).equip(testClassWeaponA);
+    ((EngineerCharacter) testTurnsCharacterA).equip(testAttackWeaponA);
     testTurnsCharacterB = new EngineerCharacter(turnsQueue,"TestTurnsEngineerB",100,100);
-    ((EngineerCharacter) testTurnsCharacterB).equip(testClassWeaponB);
-  }
-
-  @Override
-  public void testEquipWeapons() {
-    testPlayerCharacter.equip(testWeaponKnife);
-    assertNull(testPlayerCharacter.getEquippedWeapon());
-
-    testPlayerCharacter.equip(testWeaponStaff);
-    assertNull(testPlayerCharacter.getEquippedWeapon());
-
-    testPlayerCharacter.equip(testWeaponSword);
-    assertNull(testPlayerCharacter.getEquippedWeapon());
-
-    testPlayerCharacter.equip(testWeaponAxe);
-    assertEquals(testWeaponAxe, testPlayerCharacter.getEquippedWeapon());
-
-    testPlayerCharacter.equip(testWeaponBow);
-    assertEquals(testWeaponBow, testPlayerCharacter.getEquippedWeapon());
+    ((EngineerCharacter) testTurnsCharacterB).equip(testAttackWeaponB);
   }
 
   @Override

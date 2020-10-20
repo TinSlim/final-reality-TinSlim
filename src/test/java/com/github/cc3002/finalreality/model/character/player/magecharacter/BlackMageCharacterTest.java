@@ -41,36 +41,27 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
 
     testEnemyD = new Enemy(turnsQueue,"testEnemyC",10,100,100,40);
 
-    testClassWeaponA = new Knife("TestKnifeAttack",100,100);
-    testClassWeaponB = new Staff("TestStaffAttackA",50,42,20);
-    testClassWeaponC = new Staff("TestStaffAttackB",0,42,42);
+    testAttackWeaponA = new Knife("TestKnifeAttack",100,100);
+    testAttackWeaponB = new Staff("TestStaffAttackA",50,42,20);
+    testAttackWeaponC = new Staff("TestStaffAttackB",0,42,42);
+
+    testEquipableWeaponA = testWeaponStaff;
+    testEquipableWeaponB = testWeaponStaff;
+    testEquipableWeaponC = testWeaponKnife;
+
+    testNoEquipableWeaponA = testWeaponSword;
+    testNoEquipableWeaponB = testWeaponAxe;
+    testNoEquipableWeaponC = testWeaponBow;
+    testNoEquipableWeaponD = testWeaponBow;
 
     testTurnsCharacterA = new BlackMageCharacter(turnsQueue,"TestTurnsMageA",100,100,5);
-    ((BlackMageCharacter) testTurnsCharacterA).equip(testClassWeaponA);
+    ((BlackMageCharacter) testTurnsCharacterA).equip(testAttackWeaponA);
     testTurnsCharacterB = new BlackMageCharacter(turnsQueue,"TestTurnsMageB",100,100,5);
-    ((BlackMageCharacter) testTurnsCharacterB).equip(testClassWeaponB);
+    ((BlackMageCharacter) testTurnsCharacterB).equip(testAttackWeaponB);
 
     testMaxManaMageA = new BlackMageCharacter(turnsQueue,"MaxManaA",100,100,100);
     testMaxManaMageB = new BlackMageCharacter(turnsQueue,"MaxManaB",100,100,15);
     testMaxManaMageC = new BlackMageCharacter(turnsQueue,"MaxManaC",100,100,0);
-  }
-
-  public void testEquipWeapons() {
-    testPlayerCharacter.equip(testWeaponSword);
-    assertNull(testPlayerCharacter.getEquippedWeapon());
-
-    testPlayerCharacter.equip(testWeaponAxe);
-    assertNull(testPlayerCharacter.getEquippedWeapon());
-
-    testPlayerCharacter.equip(testWeaponBow);
-    assertNull(testPlayerCharacter.getEquippedWeapon());
-
-
-    testPlayerCharacter.equip(testWeaponKnife);
-    assertEquals(testWeaponKnife, testPlayerCharacter.getEquippedWeapon());
-
-    testPlayerCharacter.equip(testWeaponStaff);
-    assertEquals(testWeaponStaff, testPlayerCharacter.getEquippedWeapon());
   }
 
   @Test

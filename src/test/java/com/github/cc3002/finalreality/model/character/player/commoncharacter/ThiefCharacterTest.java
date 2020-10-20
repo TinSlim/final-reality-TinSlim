@@ -2,7 +2,6 @@ package com.github.cc3002.finalreality.model.character.player.commoncharacter;
 import com.github.cc3002.finalreality.model.character.player.AbstractPlayerCharacterTest;
 import com.github.cc3002.finalreality.model.weapon.Bow;
 import com.github.cc3002.finalreality.model.weapon.Sword;
-import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -23,32 +22,23 @@ public class ThiefCharacterTest extends AbstractPlayerCharacterTest {
 
     testPlayerCharacter = new ThiefCharacter(turnsQueue,"ThiefE",100,100);
 
-    testClassWeaponA = new Sword("TestSwordAttack",100,100);
-    testClassWeaponB = new Bow("TestBowAttack",50,20);
-    testClassWeaponC = new Bow("TestBowAttack",0,42);
+    testAttackWeaponA = new Sword("TestSwordAttack",100,100);
+    testAttackWeaponB = new Bow("TestBowAttack",50,20);
+    testAttackWeaponC = new Bow("TestBowAttack",0,42);
+
+    testEquipableWeaponA = testWeaponSword;
+    testEquipableWeaponB = testWeaponBow;
+    testEquipableWeaponC = testWeaponStaff;
+
+    testNoEquipableWeaponA = testWeaponKnife;
+    testNoEquipableWeaponB = testWeaponKnife;
+    testNoEquipableWeaponC = testWeaponKnife;
+    testNoEquipableWeaponD = testWeaponAxe;
 
     testTurnsCharacterA = new ThiefCharacter(turnsQueue,"TestTurnsThiefA",100,100);
-    ((ThiefCharacter) testTurnsCharacterA).equip(testClassWeaponA);
+    ((ThiefCharacter) testTurnsCharacterA).equip(testAttackWeaponA);
     testTurnsCharacterB = new ThiefCharacter(turnsQueue,"TestTurnsThiefB",100,100);
-    ((ThiefCharacter) testTurnsCharacterB).equip(testClassWeaponB);
-  }
-
-  @Override
-  public void testEquipWeapons() {
-    testPlayerCharacter.equip(testWeaponKnife);
-    assertNull(testPlayerCharacter.getEquippedWeapon());
-
-    testPlayerCharacter.equip(testWeaponAxe);
-    assertNull(testPlayerCharacter.getEquippedWeapon());
-
-    testPlayerCharacter.equip(testWeaponSword);
-    assertEquals(testWeaponSword, testPlayerCharacter.getEquippedWeapon());
-
-    testPlayerCharacter.equip(testWeaponBow);
-    assertEquals(testWeaponBow, testPlayerCharacter.getEquippedWeapon());
-
-    testPlayerCharacter.equip(testWeaponStaff);
-    assertEquals(testWeaponStaff, testPlayerCharacter.getEquippedWeapon());
+    ((ThiefCharacter) testTurnsCharacterB).equip(testAttackWeaponB);
   }
 
   @Override

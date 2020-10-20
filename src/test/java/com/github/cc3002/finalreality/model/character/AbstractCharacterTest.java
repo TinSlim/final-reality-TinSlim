@@ -62,7 +62,7 @@ public abstract class AbstractCharacterTest {
    * Tests turns and queue for characters.
    * @throws InterruptedException to use Thread
    */
-  //Todo @Test
+  @Test
   public void testQueueTurns() throws InterruptedException {
     testTurnsCharacterA.waitTurn();
     testTurnsCharacterB.waitTurn();
