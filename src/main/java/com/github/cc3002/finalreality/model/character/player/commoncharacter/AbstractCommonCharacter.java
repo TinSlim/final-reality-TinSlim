@@ -26,6 +26,6 @@ public abstract class AbstractCommonCharacter extends AbstractPlayerCharacter {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCharacterClass(),getName(),getMaxHp(),getDefense());
+        return Objects.hash(getClass(),getName(),getMaxHp(),getDefense());
     }
 }

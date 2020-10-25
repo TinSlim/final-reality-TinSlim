@@ -33,7 +33,7 @@ public class EngineerCharacter extends AbstractCommonCharacter {
             return false;
         }
         final EngineerCharacter character = (EngineerCharacter) o;
-        return this.getName() == character.getName() && this.getDefense() == character.getDefense() &&
+        return this.getName().equals(character.getName()) && this.getDefense() == character.getDefense() &&
                 this.getMaxHp() == character.getMaxHp();
     }
 }

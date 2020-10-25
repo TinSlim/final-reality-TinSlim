@@ -32,7 +32,7 @@ public class ThiefCharacter extends AbstractCommonCharacter {
             return false;
         }
         final ThiefCharacter character = (ThiefCharacter) o;
-        return this.getName() == character.getName() && this.getDefense() == character.getDefense() &&
+        return this.getName().equals(character.getName()) && this.getDefense() == character.getDefense() &&
                 this.getMaxHp() == character.getMaxHp();
     }
 }
