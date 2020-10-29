@@ -84,6 +84,7 @@ public abstract class AbstractCharacter implements ICharacter {
     int realDamage = damage - this.getDefense();
     if (realDamage < 0) {
       realDamage = 0;
+      return;
     }
     if ((this.getHp() - (realDamage)) <= 0) {
       this.setHp(0);
