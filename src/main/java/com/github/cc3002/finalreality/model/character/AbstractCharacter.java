@@ -82,11 +82,10 @@ public abstract class AbstractCharacter implements ICharacter {
   @Override
   public void receiveDamage(int damage) {
     int realDamage = damage - this.getDefense();
-    if (realDamage < 0) {
-      realDamage = 0;
+    if (realDamage <= 0) {
       return;
     }
-    if ((this.getHp() - (realDamage)) <= 0) {
+    if ((this.getHp() - realDamage) <= 0) {
       this.setHp(0);
       this.faint();
     } else {

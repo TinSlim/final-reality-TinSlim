@@ -122,7 +122,7 @@ public class Enemy extends AbstractCharacter {
    * @param target PlayerCharacter that will receive damage.
    */
   public void commonAttack(IPlayerCharacter target) {
-    if (target.isAlive()){
+    if (target.isAlive()) {
       target.receiveDamage(this.getDamage());
     }
   }
