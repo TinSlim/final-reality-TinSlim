@@ -1,6 +1,5 @@
 package com.github.cc3002.finalreality.model.character;
 
-import com.github.cc3002.finalreality.model.character.player.CharacterClass;
 
 /**
  * This represents a character from the game.
@@ -22,13 +21,6 @@ public interface ICharacter {
    * @return this character's name.
    */
   String getName();
-
-  /**
-   * Returns this character's class.
-   * @return this character's class.
-   */
-  CharacterClass getCharacterClass();
-
 
   /**
    * This character receives damage reducing the hp by damage.

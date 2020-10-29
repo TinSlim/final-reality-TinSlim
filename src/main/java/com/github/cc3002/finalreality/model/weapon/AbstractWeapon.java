@@ -13,19 +13,14 @@ public abstract class AbstractWeapon implements IWeapon {
   private final String name;
   private final int damage;
   private final int weight;
-  private final WeaponType type;
 
   /**
    * Creates a weapon with a name, a base damage, speed and it's type.
-   *
-   * @see WeaponType
    */
-  public AbstractWeapon(final String name, final int damage, final int weight,
-                        final WeaponType type) {
+  public AbstractWeapon(final String name, final int damage, final int weight) {
     this.name = name;
     this.damage = damage;
     this.weight = weight;
-    this.type = type;
   }
 
   @Override
@@ -42,14 +37,9 @@ public abstract class AbstractWeapon implements IWeapon {
   public int getWeight() {
     return weight;
   }
-
-  @Override
-  public WeaponType getType() {
-    return type;
-  }
   
   @Override
   public int hashCode() {
-    return Objects.hash(getName(), getDamage(), getWeight(), getType());
+    return Objects.hash(getName(), getDamage(), getWeight(),getClass());
   }
 }

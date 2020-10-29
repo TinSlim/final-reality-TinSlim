@@ -1,7 +1,6 @@
 package com.github.cc3002.finalreality.model.character.player.commoncharacter;
 
 import com.github.cc3002.finalreality.model.character.ICharacter;
-import com.github.cc3002.finalreality.model.character.player.CharacterClass;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,7 +16,7 @@ public class EngineerCharacter extends AbstractCommonCharacter {
      */
     public EngineerCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
                              final int maxHp, final int defense) {
-        super(turnsQueue, name, CharacterClass.ENGINEER, maxHp, defense);
+        super(turnsQueue, name, maxHp, defense);
     }
 
     public void equipWeapon(IWeapon weapon) {

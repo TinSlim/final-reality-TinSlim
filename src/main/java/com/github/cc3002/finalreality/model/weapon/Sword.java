@@ -7,13 +7,12 @@ public class Sword extends AbstractWeapon {
   /**
    * Creates a sword with a name, a base damage and weight.
    *
-   * @param name
-   * @param damage
-   * @param weight
-   * @see WeaponType
+   * @param name    the sword's name
+   * @param damage  the sword's damage
+   * @param weight  the sword's weight
    */
   public Sword(String name, int damage, int weight) {
-    super(name, damage, weight, WeaponType.SWORD);
+    super(name, damage, weight);
   }
 
   @Override
@@ -49,6 +48,6 @@ public class Sword extends AbstractWeapon {
     final Sword weapon = (Sword) o;
     return getDamage() == weapon.getDamage() &&
             getWeight() == weapon.getWeight() &&
-            getName() == weapon.getName();
+            getName().equals(weapon.getName());
   }
 }

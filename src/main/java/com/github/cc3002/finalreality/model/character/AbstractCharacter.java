@@ -1,7 +1,5 @@
 package com.github.cc3002.finalreality.model.character;
 
-import com.github.cc3002.finalreality.model.character.player.CharacterClass;
-
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -17,11 +15,11 @@ public abstract class AbstractCharacter implements ICharacter {
 
   protected final BlockingQueue<ICharacter> turnsQueue;
   protected final String name;
-  private final CharacterClass characterClass;
+
   protected ScheduledExecutorService scheduledExecutor;
-  private int maxHp;
+  private final int maxHp;
   private int hp;
-  private int defense;
+  private final int defense;
 
   private boolean outOfCombat;
 
@@ -29,15 +27,13 @@ public abstract class AbstractCharacter implements ICharacter {
    * Creates a new Character
    * @param turnsQueue      the queue with the characters waiting for their turn
    * @param name            the character's name
-   * @param characterClass  the character's class
    * @param maxHp           the character's max health points value
    * @param defense         the character's defense
    */
   protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,
-      @NotNull String name, CharacterClass characterClass, final int maxHp, final int defense) {
+      @NotNull String name, final int maxHp, final int defense) {
     this.turnsQueue = turnsQueue;
     this.name = name;
-    this.characterClass = characterClass;
     this.maxHp = maxHp;
     this.hp = maxHp;
     this.defense = defense;
@@ -59,10 +55,6 @@ public abstract class AbstractCharacter implements ICharacter {
     return name;
   }
 
-  @Override
-  public CharacterClass getCharacterClass() {
-    return characterClass;
-  }
 
   @Override
   public int getHp() {

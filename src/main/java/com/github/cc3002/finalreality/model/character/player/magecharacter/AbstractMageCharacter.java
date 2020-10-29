@@ -2,7 +2,6 @@ package com.github.cc3002.finalreality.model.character.player.magecharacter;
 
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.AbstractPlayerCharacter;
-import com.github.cc3002.finalreality.model.character.player.CharacterClass;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -11,7 +10,7 @@ import java.util.concurrent.BlockingQueue;
 
 public abstract class AbstractMageCharacter extends AbstractPlayerCharacter implements IMageCharacter {
     private int mana;
-    private int maxMana;
+    private final int maxMana;
 
     Random adverseEffectProbability = new Random();
 
@@ -19,14 +18,13 @@ public abstract class AbstractMageCharacter extends AbstractPlayerCharacter impl
      * Creates a new MageCharacter.
      * @param turnsQueue       the queue with the characters waiting for their turn
      * @param name             the character's name
-     * @param characterClass   the character's class
      * @param maxHp            the character's max health points value
      * @param defense          the character's defense
      * @param maxMana          the character's max mana value
      */
     public AbstractMageCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
-                                 CharacterClass characterClass, final int maxHp, final int defense, final int maxMana){
-        super(turnsQueue, name, characterClass, maxHp, defense);
+                                  final int maxHp, final int defense, final int maxMana){
+        super(turnsQueue, name, maxHp, defense);
         this.mana = maxMana;
         this.maxMana = maxMana;
     }
@@ -75,6 +73,6 @@ public abstract class AbstractMageCharacter extends AbstractPlayerCharacter impl
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCharacterClass(),getName(),getMaxHp(),getDefense(),getMaxMana());
+        return Objects.hash(getClass(),getName(),getMaxHp(),getDefense(),getMaxMana());
     }
 }

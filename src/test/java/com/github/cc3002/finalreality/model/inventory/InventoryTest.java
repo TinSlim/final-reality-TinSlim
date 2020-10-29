@@ -24,7 +24,7 @@ public class InventoryTest {
 
   /**
    * Adds "quantity" weapons to testBag
-   * @param quantity
+   * @param quantity how many weapons will be added
    */
   public void addWeaponsToBag(int quantity) {
     for (int j = 1; j < quantity; j ++){

@@ -3,7 +3,6 @@ import com.github.cc3002.finalreality.model.character.player.AbstractPlayerChara
 import com.github.cc3002.finalreality.model.weapon.Bow;
 import com.github.cc3002.finalreality.model.weapon.Sword;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 /**
  * Class with set ups to test thief class and method to test equipWeapons

@@ -6,18 +6,17 @@ import java.util.Objects;
 
 public class Staff extends AbstractWeapon implements IMageWeapons {
 
-  private int magicDamage = 0;
+  private final int magicDamage;
 
   /**
    * Creates a staff with a name, a base damage, magic damage and weight.
    *
-   * @param name
-   * @param damage
-   * @param weight
-   * @see WeaponType
+   * @param name    the staff's name
+   * @param damage  the staff's damage
+   * @param weight  the staff's weight
    */
   public Staff(String name, int damage, int magicDamage, int weight) {
-    super(name, damage, weight, WeaponType.STAFF);
+    super(name, damage, weight);
     this.magicDamage = magicDamage;
   }
 
@@ -70,13 +69,13 @@ public class Staff extends AbstractWeapon implements IMageWeapons {
     final Staff weapon = (Staff) o;
     return getDamage() == weapon.getDamage() &&
             getWeight() == weapon.getWeight() &&
-            getName() == weapon.getName() &&
+            getName().equals(weapon.getName()) &&
             getMagicDamage() == weapon.getMagicDamage();
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getName(), getDamage(), getWeight(), getType(),getMagicDamage());
+    return Objects.hash(getName(), getDamage(), getWeight(),getMagicDamage(),getClass());
   }
 
 }

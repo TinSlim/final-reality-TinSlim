@@ -7,13 +7,12 @@ public class Axe extends AbstractWeapon {
   /**
    * Creates an axe with a name, a base damage and weight.
    *
-   * @param name
-   * @param damage
-   * @param weight
-   * @see WeaponType
+   * @param name    the axe's name
+   * @param damage  the axe's damage
+   * @param weight  the axe's weight
    */
   public Axe(String name, int damage, int weight) {
-    super(name, damage, weight, WeaponType.AXE);
+    super(name, damage, weight);
   }
 
   @Override
@@ -49,6 +48,6 @@ public class Axe extends AbstractWeapon {
     final Axe weapon = (Axe) o;
     return getDamage() == weapon.getDamage() &&
             getWeight() == weapon.getWeight() &&
-            getName() == weapon.getName();
+            getName().equals(weapon.getName());
   }
 }

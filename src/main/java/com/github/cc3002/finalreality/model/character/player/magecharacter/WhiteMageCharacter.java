@@ -2,7 +2,6 @@ package com.github.cc3002.finalreality.model.character.player.magecharacter;
 
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
-import com.github.cc3002.finalreality.model.character.player.CharacterClass;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
@@ -19,7 +18,7 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
      */
     public WhiteMageCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
                               final int maxHp, final int defense, final int maxMana) {
-        super(turnsQueue, name, CharacterClass.WHITE_MAGE, maxHp, defense,maxMana);
+        super(turnsQueue, name, maxHp, defense,maxMana);
     }
 
     /**
@@ -27,11 +26,7 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
      * @param target PlayerCharacter that will receive health points.
      */
     public void cure(IPlayerCharacter target) {
-        IMageWeapons weapon = (IMageWeapons) this.getEquippedWeapon();
-        if ((this.getMana() - 15) < 0) {
-            return;
-        }
-        else {
+        if ((this.getMana() - 15) >= 0) {
             this.reduceMana(15);
             int life = target.getMaxHp();
             target.receiveLife((life * 3) / 10 );
@@ -43,11 +38,7 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
      * @param target Enemy that will receive venom attack.
      */
     public void venom(Enemy target) {
-        IMageWeapons weapon = (IMageWeapons) this.getEquippedWeapon();
-        if ((this.getMana() - 40) < 0) {
-            return;
-        }
-        else {
+        if ((this.getMana() - 40) >= 0) {
             this.reduceMana(40);
             Staff weaponStaff = (Staff) this.getEquippedWeapon();
             int damage = weaponStaff.getMagicDamage() / 3;
@@ -60,11 +51,7 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
      * @param target Enemy that will receive paralysis.
      */
     public void paralyze(Enemy target) {
-        IMageWeapons weapon = (IMageWeapons) this.getEquippedWeapon();
-        if ((this.getMana() - 25) < 0) {
-            return;
-        }
-        else {
+        if ((this.getMana() - 25) >= 0) {
             this.reduceMana(25);
             target.setParalyze(true);
         }
@@ -84,7 +71,7 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
             return false;
         }
         final WhiteMageCharacter character = (WhiteMageCharacter) o;
-        return this.getName() == character.getName() && this.getDefense() == character.getDefense() &&
+        return this.getName().equals(character.getName()) && this.getDefense() == character.getDefense() &&
                 this.getMaxHp() == character.getMaxHp() && this.getMaxMana() == character.getMaxMana();
     }
 }

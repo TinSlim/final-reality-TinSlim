@@ -105,27 +105,27 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
 
     testBlackMageA.equip(testWeaponStaffA);
     testBlackMageA.thunder(testEnemyA);
-    assertEquals(true,testEnemyA.getParalyze());
+    assertTrue(testEnemyA.getParalyze());
     assertEquals(50,testEnemyA.getHp());
 
     testBlackMageA.equip(testWeaponStaffB);
     testBlackMageA.thunder(testEnemyB);
-    assertEquals(false,testEnemyB.getParalyze());
+    assertFalse(testEnemyB.getParalyze());
     assertEquals(70,testEnemyB.getHp());
 
     testBlackMageA.equip(testWeaponStaffC);
     testBlackMageA.thunder(testEnemyC);
-    assertEquals(false,testEnemyC.getParalyze());
+    assertFalse(testEnemyC.getParalyze());
     assertEquals(10,testEnemyC.getHp());
 
     testBlackMageA.equip(testWeaponKnife);
     testBlackMageA.thunder(testEnemyC);
-    assertEquals(false,testEnemyC.getParalyze());
+    assertFalse(testEnemyC.getParalyze());
     assertEquals(10,testEnemyC.getHp());
 
     testBlackMageB.equip(testWeaponStaffA);
     testBlackMageB.thunder(testEnemyD);
-    assertEquals(false,testEnemyD.getParalyze());
+    assertFalse(testEnemyD.getParalyze());
     assertEquals(10,testEnemyD.getHp());
   }
 

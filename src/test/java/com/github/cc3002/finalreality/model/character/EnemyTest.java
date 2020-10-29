@@ -38,8 +38,8 @@ class EnemyTest extends AbstractCharacterTest {
     testEffectsB = new Enemy(turnsQueue,"EnemyB",50,50,50,50);
     testEffectsC = new Enemy(turnsQueue,"EnemyC",10,1,1,20);
 
-    testPlayerCharacterA = new KnightCharacter(turnsQueue, "testPCharacterB",80,80);
-    testPlayerCharacterB = new ThiefCharacter(turnsQueue, "testPCharacterA",70,80);
+    testPlayerCharacterA = new KnightCharacter(turnsQueue, "testPCharacterA",80,80);
+    testPlayerCharacterB = new ThiefCharacter(turnsQueue, "testPCharacterB",70,80);
     testPlayerCharacterC = new EngineerCharacter(turnsQueue, "testPCharacterC",10,80);
     testPlayerCharacterD = new EngineerCharacter(turnsQueue, "testPCharacterD",10,0);
 
@@ -136,7 +136,7 @@ class EnemyTest extends AbstractCharacterTest {
     ((WhiteMageCharacter) testPlayerCharacterB).paralyze(testEffectsB);
     assertTrue(testEffectsB.getParalyze());
     testEffectsB.applyParalyze();
-    assertFalse(testEffectsB.getParalyze());;
+    assertFalse(testEffectsB.getParalyze());
 
     testEffectsB.applyParalyze();
     assertFalse(testEffectsB.getParalyze());
