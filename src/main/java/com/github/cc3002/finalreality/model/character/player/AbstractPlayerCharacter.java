@@ -25,12 +25,11 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
   /**
    * Creates a new character.
    *  @param turnsQueue     the queue with the characters waiting for their turn
-   * @param name           the character's name
-   * @param characterClass the class of this character
+   *  @param name           the character's name
    */
   public AbstractPlayerCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,@NotNull String name,
-  CharacterClass characterClass, final int maxHp,final int defense){
-    super(turnsQueue, name, characterClass,maxHp,defense);
+                                 final int maxHp,final int defense){
+    super(turnsQueue, name, maxHp,defense);
   }
 
   @Override
@@ -60,12 +59,20 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
   }
 
   @Override
-  abstract public void equip(IWeapon weapon);
+  public void equip(IWeapon weapon) {
+    if (this.isAlive()) {
+      this.equipWeapon(weapon);
+    }
+  }
+
+  protected abstract void equipWeapon(IWeapon weapon);
 
 
   public void commonAttack(Enemy target) {
-    IWeapon weapon = this.getEquippedWeapon();
-    int damage = weapon.getDamage();
-    target.receiveDamage(damage);
+    if (target.isAlive()) {
+      IWeapon weapon = this.getEquippedWeapon();
+      int damage = weapon.getDamage();
+      target.receiveDamage(damage);
+    }
   }
 }

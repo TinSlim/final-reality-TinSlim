@@ -1,8 +1,6 @@
 package com.github.cc3002.finalreality.model.inventory;
 
-import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
-import com.github.cc3002.finalreality.model.weapon.AbstractWeapon;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
 
 import java.util.ArrayList;

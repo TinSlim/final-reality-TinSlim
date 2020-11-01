@@ -19,27 +19,29 @@ class EnemyTest extends AbstractCharacterTest {
   protected IPlayerCharacter testPlayerCharacterA;
   protected IPlayerCharacter testPlayerCharacterB;
   protected IPlayerCharacter testPlayerCharacterC;
+  protected IPlayerCharacter testPlayerCharacterD;
 
-  protected Enemy testEnemyA;
-  protected Enemy testEnemyB;
-  protected Enemy testEnemyC;
+  protected Enemy testEffectsA;
+  protected Enemy testEffectsB;
+  protected Enemy testEffectsC;
 
   /**
    * Sets testsCharacters.
    */
   public void setTestCharacter() {
-    testCharacterA = new Enemy(turnsQueue,"EnemyA",100,100,100,100);
+    testCharacterA = new Enemy(turnsQueue,"EnemyA",100,100,0,100);
     testCharacterB = new Enemy(turnsQueue,"EnemyB",50,50,50,50);
     testCharacterC = new Enemy(turnsQueue,"EnemyC",0,0,0,0);
     testCharacterD = new Enemy(turnsQueue,"EnemyD",-10,-10,-10,0);
 
-    testEnemyA = new Enemy(turnsQueue,"EnemyA",100,100,100,100);
-    testEnemyB = new Enemy(turnsQueue,"EnemyB",50,50,50,50);
-    testEnemyC = new Enemy(turnsQueue,"EnemyC",10,1,1,0);
+    testEffectsA = new Enemy(turnsQueue,"EnemyA",100,100,10,100);
+    testEffectsB = new Enemy(turnsQueue,"EnemyB",50,50,50,50);
+    testEffectsC = new Enemy(turnsQueue,"EnemyC",10,1,1,20);
 
-    testPlayerCharacterA = new KnightCharacter(turnsQueue, "testPCharacterB",80,80);
-    testPlayerCharacterB = new ThiefCharacter(turnsQueue, "testPCharacterA",70,80);
+    testPlayerCharacterA = new KnightCharacter(turnsQueue, "testPCharacterA",80,80);
+    testPlayerCharacterB = new ThiefCharacter(turnsQueue, "testPCharacterB",70,80);
     testPlayerCharacterC = new EngineerCharacter(turnsQueue, "testPCharacterC",10,80);
+    testPlayerCharacterD = new EngineerCharacter(turnsQueue, "testPCharacterD",10,0);
 
     testTurnsCharacterA = new Enemy(turnsQueue,"EnemyA",100,100,100,100);
     testTurnsCharacterB = new Enemy(turnsQueue,"EnemyB",50,20,50,50);
@@ -49,16 +51,16 @@ class EnemyTest extends AbstractCharacterTest {
    * Sets EqCharacters for construction test.
    */
   public void setEqCharacter() {
-    testEqCharacterA = new Enemy(turnsQueue,"EnemyA",100,100,100,100);
-    testEqCharacterB = new Enemy(turnsQueue,"EnemyB",50,50,50,50);
-    testEqCharacterC = new ThiefCharacter(turnsQueue, "ThiefMageA", 100, 100);
-    testEqCharacterD = new Enemy(turnsQueue,"EnemyA",100,100,100,100);
+    testConstructionCharacter = new Enemy(turnsQueue,"EnemyA",100,100,100,100);
+    testDiffCharacterSameClass = new Enemy(turnsQueue,"EnemyB",50,50,50,50);
+    testDiffCharacterDiffClass = new ThiefCharacter(turnsQueue, "ThiefMageA", 100, 100);
+    testSameCharacterSameClass = new Enemy(turnsQueue,"EnemyA",100,100,100,100);
 
-    testEqCharacterF1 = new Enemy(turnsQueue,"DiffName",100,100,100,100);
-    testEqCharacterF2 = new Enemy(turnsQueue,"EnemyA",2,100,100,100);
-    testEqCharacterF3 = new Enemy(turnsQueue,"EnemyA",100,2,100,100);
-    testEqCharacterF4 = new Enemy(turnsQueue,"EnemyA",100,100,2,100);
-    testEqCharacterF5 = new Enemy(turnsQueue,"EnemyA",100,100,100,2);
+    testOnlyDiffName = new Enemy(turnsQueue,"DiffName",100,100,100,100);
+    testOnlyDiffMaxHp = new Enemy(turnsQueue,"EnemyA",2,100,100,100);
+    testOnlyDiffDefense = new Enemy(turnsQueue,"EnemyA",100,100,2,100);
+    testOnlyDiffManaOrWeightOrOther = new Enemy(turnsQueue,"EnemyA",100,2,100,100);
+    testOnlyDiffDamageOrOther = new Enemy(turnsQueue,"EnemyA",100,100,100,2);
   }
 
   /**
@@ -66,14 +68,24 @@ class EnemyTest extends AbstractCharacterTest {
    */
   @Test
   public void testCommonAttack() {
-    testEnemyA.commonAttack(testPlayerCharacterA);
-    assertEquals(0,testPlayerCharacterA.getHp());
+    testEffectsA.commonAttack(testPlayerCharacterA);
+    assertEquals(60,testPlayerCharacterA.getHp());
+    assertTrue(testPlayerCharacterA.isAlive());
 
-    testEnemyB.commonAttack(testPlayerCharacterB);
-    assertEquals(20,testPlayerCharacterB.getHp());
+    testEffectsB.commonAttack(testPlayerCharacterB);
+    assertEquals(70,testPlayerCharacterB.getHp());
+    assertTrue(testPlayerCharacterB.isAlive());
 
-    testEnemyC.commonAttack(testPlayerCharacterC);
+    testEffectsC.commonAttack(testPlayerCharacterC);
     assertEquals(10,testPlayerCharacterC.getHp());
+    assertTrue(testPlayerCharacterC.isAlive());
+
+    testEffectsC.commonAttack(testPlayerCharacterD);
+    assertEquals(0,testPlayerCharacterD.getHp());
+    assertFalse(testPlayerCharacterD.isAlive());
+
+    testEffectsC.commonAttack(testPlayerCharacterD);
+    assertFalse(testPlayerCharacterD.isAlive());
   }
 
   /**
@@ -89,17 +101,17 @@ class EnemyTest extends AbstractCharacterTest {
     ((BlackMageCharacter) testPlayerCharacterA).setSeed(8);
     testPlayerCharacterB.equip(new Staff("TestStaffAttackA",50,42,20));
 
-    ((BlackMageCharacter) testPlayerCharacterA).fire(testEnemyA);
-    assertEquals(21,testEnemyA.getBurnDamage());
-    assertEquals(58,testEnemyA.getHp());
-    testEnemyA.applyEffect();
-    assertEquals(37,testEnemyA.getHp());
+    ((BlackMageCharacter) testPlayerCharacterA).fire(testEffectsA);
+    assertEquals(21, testEffectsA.getBurnDamage());
+    assertEquals(68, testEffectsA.getHp());
+    testEffectsA.applyEffect();
+    assertEquals(57, testEffectsA.getHp());
 
-    ((WhiteMageCharacter) testPlayerCharacterB).venom(testEnemyB);
-    assertEquals(14,testEnemyB.getPoisonDamage());
-    assertEquals(50,testEnemyB.getHp());
-    testEnemyB.applyEffect();
-    assertEquals(36,testEnemyB.getHp());
+    ((WhiteMageCharacter) testPlayerCharacterB).venom(testEffectsB);
+    assertEquals(14, testEffectsB.getPoisonDamage());
+    assertEquals(50, testEffectsB.getHp());
+    testEffectsB.applyEffect();
+    assertEquals(50, testEffectsB.getHp());
   }
 
   /**
@@ -115,18 +127,18 @@ class EnemyTest extends AbstractCharacterTest {
     ((BlackMageCharacter) testPlayerCharacterA).setSeed(8);
     testPlayerCharacterB.equip(new Staff("TestStaffAttackA",50,42,20));
 
-    ((BlackMageCharacter) testPlayerCharacterA).thunder(testEnemyA);
-    assertTrue(testEnemyA.getParalyze());
-    assertEquals(58,testEnemyA.getHp());
-    testEnemyA.applyParalyze();
-    assertFalse(testEnemyA.getParalyze());
+    ((BlackMageCharacter) testPlayerCharacterA).thunder(testEffectsA);
+    assertTrue(testEffectsA.getParalyze());
+    assertEquals(68, testEffectsA.getHp());
+    testEffectsA.applyParalyze();
+    assertFalse(testEffectsA.getParalyze());
 
-    ((WhiteMageCharacter) testPlayerCharacterB).paralyze(testEnemyB);
-    assertTrue(testEnemyB.getParalyze());
-    testEnemyB.applyParalyze();
-    assertFalse(testEnemyB.getParalyze());;
+    ((WhiteMageCharacter) testPlayerCharacterB).paralyze(testEffectsB);
+    assertTrue(testEffectsB.getParalyze());
+    testEffectsB.applyParalyze();
+    assertFalse(testEffectsB.getParalyze());
 
-    testEnemyB.applyParalyze();
-    assertFalse(testEnemyB.getParalyze());
+    testEffectsB.applyParalyze();
+    assertFalse(testEffectsB.getParalyze());
   }
 }

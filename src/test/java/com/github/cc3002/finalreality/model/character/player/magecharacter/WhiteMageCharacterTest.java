@@ -25,7 +25,7 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
   public void setTestCharacter() {
     setEnemies();
 
-    testCharacterA = new WhiteMageCharacter(turnsQueue,"WhiteMageA",100,100,100);
+    testCharacterA = new WhiteMageCharacter(turnsQueue,"WhiteMageA",100,0,100);
     testCharacterB = new WhiteMageCharacter(turnsQueue,"WhiteMageB",50,50,50);
     testCharacterC = new WhiteMageCharacter(turnsQueue,"WhiteMageC",0,0,0);
     testCharacterD = new WhiteMageCharacter(turnsQueue,"WhiteMageD",-10,-10,-10);
@@ -44,14 +44,23 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
     testComradeC = new EngineerCharacter(turnsQueue,"EngineerComrade",99,50);
     testComradeD = new BlackMageCharacter(turnsQueue,"BlackMageComrade",100,50,10);
 
-    testClassWeaponA = new Staff("TestStaffAttackA",100,42,100);
-    testClassWeaponB = new Staff("TestStaffAttackB",50,42,20);
-    testClassWeaponC = new Staff("TestStaffAttackC",0,42,42);
+    testAttackWeaponA = new Staff("TestStaffAttackA",100,42,100);
+    testAttackWeaponB = new Staff("TestStaffAttackB",50,42,20);
+    testAttackWeaponC = new Staff("TestStaffAttackC",0,42,42);
+
+    testEquipableWeaponA = testWeaponStaff;
+    testEquipableWeaponB = testWeaponStaff;
+    testEquipableWeaponC = testWeaponStaff;
+
+    testNoEquipableWeaponA = testWeaponSword;
+    testNoEquipableWeaponB = testWeaponAxe;
+    testNoEquipableWeaponC = testWeaponBow;
+    testNoEquipableWeaponD = testWeaponKnife;
 
     testTurnsCharacterA = new WhiteMageCharacter(turnsQueue,"TestTurnsMageA",100,100,5);
-    ((WhiteMageCharacter) testTurnsCharacterA).equip(testClassWeaponA);
+    ((WhiteMageCharacter) testTurnsCharacterA).equip(testAttackWeaponA);
     testTurnsCharacterB = new WhiteMageCharacter(turnsQueue,"TestTurnsMageB",100,100,5);
-    ((WhiteMageCharacter) testTurnsCharacterB).equip(testClassWeaponB);
+    ((WhiteMageCharacter) testTurnsCharacterB).equip(testAttackWeaponB);
 
     testMaxManaMageA = new WhiteMageCharacter(turnsQueue,"MaxManaA",100,100,100);
     testMaxManaMageB = new WhiteMageCharacter(turnsQueue,"MaxManaB",100,100,15);
@@ -60,36 +69,18 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
   }
 
   public void setEqCharacter() {
-    testEqCharacterA = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,100);
-    testEqCharacterB = new WhiteMageCharacter(turnsQueue,"testWhiteMageB",100,100,5);
-    testEqCharacterC = new ThiefCharacter(turnsQueue,"BlackMageA",100,100);
-    testEqCharacterD = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,100);
+    testConstructionCharacter = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,100);
+    testDiffCharacterSameClass = new WhiteMageCharacter(turnsQueue,"testWhiteMageB",100,100,5);
+    testDiffCharacterDiffClass = new ThiefCharacter(turnsQueue,"BlackMageA",100,100);
+    testSameCharacterSameClass = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,100);
 
-    testEqCharacterF1 = new WhiteMageCharacter(turnsQueue,"DiffName",100,100,100);
-    testEqCharacterF2 = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",1,100,100);
-    testEqCharacterF3 = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,1,100);
-    testEqCharacterF4 = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,1);
-    testEqCharacterF5 = new WhiteMageCharacter(turnsQueue,"test",1,1,1);
+    testOnlyDiffName = new WhiteMageCharacter(turnsQueue,"DiffName",100,100,100);
+    testOnlyDiffMaxHp = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",1,100,100);
+    testOnlyDiffDefense = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,1,100);
+    testOnlyDiffManaOrWeightOrOther = new WhiteMageCharacter(turnsQueue,"testWhiteMageA",100,100,1);
+    testOnlyDiffDamageOrOther = new WhiteMageCharacter(turnsQueue,"test",1,1,1);
   }
 
-  @Test
-  public void testEquipWeapons() {
-    testPlayerCharacter.equip(testWeaponSword);
-    assertNull(testPlayerCharacter.getEquippedWeapon());
-
-    testPlayerCharacter.equip(testWeaponAxe);
-    assertNull(testPlayerCharacter.getEquippedWeapon());
-
-    testPlayerCharacter.equip(testWeaponBow);
-    assertNull(testPlayerCharacter.getEquippedWeapon());
-
-
-    testPlayerCharacter.equip(testWeaponKnife);
-    assertNull(testPlayerCharacter.getEquippedWeapon());
-
-    testPlayerCharacter.equip(testWeaponStaff);
-    assertEquals(testWeaponStaff, testPlayerCharacter.getEquippedWeapon());
-  }
 
   @Test
   public void testCure() {
@@ -115,7 +106,7 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
   public void testVenom() {
     testWhiteMageA.equip(testWeaponStaffA);
     testWhiteMageA.venom(testEnemyA);
-    assertEquals(26,testEnemyA.getPoisonDamage());
+    assertEquals(10,testEnemyA.getPoisonDamage());
 
     testWhiteMageA.equip(testWeaponStaffB);
     testWhiteMageA.venom(testEnemyB);

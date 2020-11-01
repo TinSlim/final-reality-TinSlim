@@ -1,7 +1,6 @@
 package com.github.cc3002.finalreality.model.character.player.commoncharacter;
 
 import com.github.cc3002.finalreality.model.character.ICharacter;
-import com.github.cc3002.finalreality.model.character.player.CharacterClass;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,11 +16,10 @@ public class KnightCharacter extends AbstractCommonCharacter {
      */
     public KnightCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
                            final int maxHp, final int defense) {
-        super(turnsQueue, name, CharacterClass.KNIGHT, maxHp, defense);
+        super(turnsQueue, name, maxHp, defense);
     }
 
-    @Override
-    public void equip(IWeapon weapon) {
+    public void equipWeapon(IWeapon weapon) {
         weapon.equipToKnight(this);
     }
 
@@ -34,7 +32,7 @@ public class KnightCharacter extends AbstractCommonCharacter {
             return false;
         }
         final KnightCharacter character = (KnightCharacter) o;
-        return this.getName() == character.getName() && this.getDefense() == character.getDefense() &&
+        return this.getName().equals(character.getName()) && this.getDefense() == character.getDefense() &&
                 this.getMaxHp() == character.getMaxHp();
     }
 }

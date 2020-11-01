@@ -16,8 +16,6 @@ enemies controlled by the computer.
 
 ---
 
-**The rest of the documentation is left for the users of this template to complete**
-
 # Fixing the order and inherit
 
 The first we have is the **AbstractCharacter** abstract class, here you will find common attributes and
@@ -120,3 +118,4 @@ storage weapons and access to equip the weapon indexed by the *pointer* to a cha
 ## Assumptions
 
 - Inventory will be used like a list of weapons.
+- If the victim's defense is more than the damage that it receives, the victim will only not receive damage.

@@ -26,19 +26,21 @@ public abstract class AbstractCharacterTest {
   protected ICharacter testCharacterC;
   protected ICharacter testCharacterD;
 
+
   protected ICharacter testTurnsCharacterA;
   protected ICharacter testTurnsCharacterB;
 
-  protected ICharacter testEqCharacterA;
-  protected ICharacter testEqCharacterB;
-  protected ICharacter testEqCharacterC;
-  protected ICharacter testEqCharacterD;
 
-  protected ICharacter testEqCharacterF1;
-  protected ICharacter testEqCharacterF2;
-  protected ICharacter testEqCharacterF3;
-  protected ICharacter testEqCharacterF4;
-  protected ICharacter testEqCharacterF5;
+  protected ICharacter testConstructionCharacter;
+  protected ICharacter testDiffCharacterSameClass;
+  protected ICharacter testDiffCharacterDiffClass;
+  protected ICharacter testSameCharacterSameClass;
+
+  protected ICharacter testOnlyDiffName;
+  protected ICharacter testOnlyDiffMaxHp;
+  protected ICharacter testOnlyDiffDefense;
+  protected ICharacter testOnlyDiffManaOrWeightOrOther;
+  protected ICharacter testOnlyDiffDamageOrOther;
 
   protected abstract void setTestCharacter();
 
@@ -95,16 +97,16 @@ public abstract class AbstractCharacterTest {
   @Test
   public void testHash() {
     setEqCharacter();
-    assertEquals(testEqCharacterA.hashCode(), testEqCharacterA.hashCode());
-    assertNotEquals(testEqCharacterA.hashCode(), testEqCharacterB.hashCode());
-    assertNotEquals(testEqCharacterA.hashCode(), testEqCharacterC.hashCode());
-    assertEquals(testEqCharacterA.hashCode(), testEqCharacterD.hashCode());
+    assertEquals(testConstructionCharacter.hashCode(), testConstructionCharacter.hashCode());
+    assertNotEquals(testConstructionCharacter.hashCode(), testDiffCharacterSameClass.hashCode());
+    assertNotEquals(testConstructionCharacter.hashCode(), testDiffCharacterDiffClass.hashCode());
+    assertEquals(testConstructionCharacter.hashCode(), testSameCharacterSameClass.hashCode());
 
-    assertNotEquals(testEqCharacterA.hashCode(), testEqCharacterF1.hashCode());
-    assertNotEquals(testEqCharacterA.hashCode(), testEqCharacterF2.hashCode());
-    assertNotEquals(testEqCharacterA.hashCode(), testEqCharacterF3.hashCode());
-    assertNotEquals(testEqCharacterA.hashCode(), testEqCharacterF4.hashCode());
-    assertNotEquals(testEqCharacterA.hashCode(), testEqCharacterF5.hashCode());
+    assertNotEquals(testConstructionCharacter.hashCode(), testOnlyDiffName.hashCode());
+    assertNotEquals(testConstructionCharacter.hashCode(), testOnlyDiffMaxHp.hashCode());
+    assertNotEquals(testConstructionCharacter.hashCode(), testOnlyDiffDefense.hashCode());
+    assertNotEquals(testConstructionCharacter.hashCode(), testOnlyDiffManaOrWeightOrOther.hashCode());
+    assertNotEquals(testConstructionCharacter.hashCode(), testOnlyDiffDamageOrOther.hashCode());
   }
 
   /**
@@ -113,15 +115,15 @@ public abstract class AbstractCharacterTest {
   @Test
   public void testConstruction() {
     this.setEqCharacter();
-    assertEquals(testEqCharacterA, testEqCharacterA);
-    assertNotEquals(testEqCharacterA, testEqCharacterB);
-    assertNotEquals(testEqCharacterA, testEqCharacterC);
-    assertEquals(testEqCharacterA, testEqCharacterD);
+    assertEquals(testConstructionCharacter, testConstructionCharacter);
+    assertNotEquals(testConstructionCharacter, testDiffCharacterSameClass);
+    assertNotEquals(testConstructionCharacter, testDiffCharacterDiffClass);
+    assertEquals(testConstructionCharacter, testSameCharacterSameClass);
 
-    assertNotEquals(testEqCharacterA, testEqCharacterF1);
-    assertNotEquals(testEqCharacterA, testEqCharacterF2);
-    assertNotEquals(testEqCharacterA, testEqCharacterF3);
-    assertNotEquals(testEqCharacterA, testEqCharacterF4);
-    assertNotEquals(testEqCharacterA, testEqCharacterF5);
+    assertNotEquals(testConstructionCharacter, testOnlyDiffName);
+    assertNotEquals(testConstructionCharacter, testOnlyDiffMaxHp);
+    assertNotEquals(testConstructionCharacter, testOnlyDiffDefense);
+    assertNotEquals(testConstructionCharacter, testOnlyDiffManaOrWeightOrOther);
+    assertNotEquals(testConstructionCharacter, testOnlyDiffDamageOrOther);
   }
 }

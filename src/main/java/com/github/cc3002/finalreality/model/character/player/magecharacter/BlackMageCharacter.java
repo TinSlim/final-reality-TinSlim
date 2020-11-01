@@ -3,7 +3,6 @@ package com.github.cc3002.finalreality.model.character.player.magecharacter;
 import java.util.Random;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
-import com.github.cc3002.finalreality.model.character.player.CharacterClass;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,7 +17,7 @@ public class BlackMageCharacter extends AbstractMageCharacter {
      */
     public BlackMageCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
                               final int maxHp, final int defense, final int maxMana) {
-        super(turnsQueue, name, CharacterClass.BLACK_MAGE, maxHp, defense,maxMana);
+        super(turnsQueue, name, maxHp, defense,maxMana);
     }
 
     /**
@@ -28,10 +27,7 @@ public class BlackMageCharacter extends AbstractMageCharacter {
      */
     public void thunder(Enemy target) {
         IMageWeapons weapon = (IMageWeapons) this.getEquippedWeapon();
-        if ((this.getMana() - 15) < 0 || !weapon.castMagic()) {
-            return;
-        }
-        else {
+        if ((this.getMana() - 15) >= 0 && weapon.castMagic()) {
             this.reduceMana(15);
             Staff weaponStaff = (Staff) this.getEquippedWeapon();
             int magicDamage = weaponStaff.getMagicDamage();
@@ -51,10 +47,7 @@ public class BlackMageCharacter extends AbstractMageCharacter {
      */
     public void fire(Enemy target) {
         IMageWeapons weapon = (IMageWeapons) this.getEquippedWeapon();
-        if ((this.getMana() - 15) < 0 || !weapon.castMagic()) {
-            return;
-        }
-        else{
+        if ((this.getMana() - 15) >= 0 && weapon.castMagic()) {
             this.reduceMana(15);
             Staff weaponStaff = (Staff) this.getEquippedWeapon();
             int magicDamage = weaponStaff.getMagicDamage();
@@ -67,8 +60,8 @@ public class BlackMageCharacter extends AbstractMageCharacter {
         }
     }
 
-    @Override
-    public void equip(IWeapon weapon) {
+
+    public void equipWeapon(IWeapon weapon) {
         weapon.equipToBlackMage(this);
     }
 
@@ -81,7 +74,7 @@ public class BlackMageCharacter extends AbstractMageCharacter {
             return false;
         }
         final BlackMageCharacter character = (BlackMageCharacter) o;
-        return this.getName() == character.getName() && this.getDefense() == character.getDefense() &&
+        return this.getName().equals(character.getName()) && this.getDefense() == character.getDefense() &&
                 this.getMaxHp() == character.getMaxHp() && this.getMaxMana() == character.getMaxMana();
     }
 

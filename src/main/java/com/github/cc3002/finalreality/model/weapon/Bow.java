@@ -7,13 +7,12 @@ public class Bow extends AbstractWeapon {
   /**
    * Creates a bow with a name, a base damage and weight.
    *
-   * @param name
-   * @param damage
-   * @param weight
-   * @see WeaponType
+   * @param name    the bows's name
+   * @param damage  the bow's damage
+   * @param weight  the bow's weight
    */
   public Bow(String name, int damage, int weight) {
-    super(name, damage, weight, WeaponType.BOW);
+    super(name, damage, weight);
   }
 
   @Override
@@ -50,6 +49,6 @@ public class Bow extends AbstractWeapon {
     final Bow weapon = (Bow) o;
     return getDamage() == weapon.getDamage() &&
             getWeight() == weapon.getWeight() &&
-            getName() == weapon.getName();
+            getName().equals(weapon.getName());
   }
 }

@@ -1,6 +1,5 @@
 package com.github.cc3002.finalreality.model.character;
 
-import com.github.cc3002.finalreality.model.character.player.CharacterClass;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
@@ -38,7 +37,7 @@ public class Enemy extends AbstractCharacter {
   public Enemy(@NotNull BlockingQueue<ICharacter> turnsQueue,
                @NotNull String name, final int maxHp,
                final int weight,final int defense, final int damage){
-    super(turnsQueue,name,CharacterClass.ENEMY,maxHp,defense);
+    super(turnsQueue,name, maxHp,defense);
     this.weight = weight;
     this.damage = damage;
   }
@@ -68,14 +67,14 @@ public class Enemy extends AbstractCharacter {
       return false;
     }
     final Enemy enemy = (Enemy) o;
-    return getName() == enemy.getName() && getWeight() == enemy.getWeight() &&
+    return getName().equals(enemy.getName()) && getWeight() == enemy.getWeight() &&
             getMaxHp() == enemy.getMaxHp() && getDamage() == enemy.getDamage() &&
             getDefense() == enemy.getDefense();
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getCharacterClass(),getName(),getMaxHp(),getDefense(),getWeight(),getDamage());
+    return Objects.hash(getClass(),getName(),getMaxHp(),getDefense(),getWeight(),getDamage());
   }
 
   /**
@@ -123,7 +122,9 @@ public class Enemy extends AbstractCharacter {
    * @param target PlayerCharacter that will receive damage.
    */
   public void commonAttack(IPlayerCharacter target) {
-    target.receiveDamage(this.getDamage());
+    if (target.isAlive()) {
+      target.receiveDamage(this.getDamage());
+    }
   }
 
 
@@ -153,14 +154,10 @@ public class Enemy extends AbstractCharacter {
 
   /**
    * Applies paralyze state to this Enemy, making it not paralyzed for the next turn.
-   * @return is or not paralyzed this turn.
    */
-  public boolean applyParalyze() {
+  public void applyParalyze() {
     if (getParalyze()) {
       setParalyze(false);
-      return true;
-    } else {
-      return false;
     }
   }
 }

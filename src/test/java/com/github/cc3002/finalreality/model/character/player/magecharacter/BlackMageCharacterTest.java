@@ -23,7 +23,7 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
   public void setTestCharacter() {
     setEnemies();
 
-    testCharacterA = new BlackMageCharacter(turnsQueue,"BlackMageA",100,100,100);
+    testCharacterA = new BlackMageCharacter(turnsQueue,"BlackMageA",100,0,100);
     testCharacterB = new BlackMageCharacter(turnsQueue,"BlackMageB",50,50,50);
     testCharacterC = new BlackMageCharacter(turnsQueue,"BlackMageC",0,0,0);
     testCharacterD = new BlackMageCharacter(turnsQueue,"BlackMageD",-10,-10,-10);
@@ -39,38 +39,29 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
     testTurnsCharacterA = new BlackMageCharacter(turnsQueue,"BlackMageC",100,100,5);
     testTurnsCharacterB = new BlackMageCharacter(turnsQueue,"BlackMageC",100,100,5);
 
-    testEnemyD = new Enemy(turnsQueue,"testEnemyC",10,100,100,40);
+    testEnemyD = new Enemy(turnsQueue,"testEffectsC",10,100,100,40);
 
-    testClassWeaponA = new Knife("TestKnifeAttack",100,100);
-    testClassWeaponB = new Staff("TestStaffAttackA",50,42,20);
-    testClassWeaponC = new Staff("TestStaffAttackB",0,42,42);
+    testAttackWeaponA = new Knife("TestKnifeAttack",100,100);
+    testAttackWeaponB = new Staff("TestStaffAttackA",50,42,20);
+    testAttackWeaponC = new Staff("TestStaffAttackB",0,42,42);
+
+    testEquipableWeaponA = testWeaponStaff;
+    testEquipableWeaponB = testWeaponStaff;
+    testEquipableWeaponC = testWeaponKnife;
+
+    testNoEquipableWeaponA = testWeaponSword;
+    testNoEquipableWeaponB = testWeaponAxe;
+    testNoEquipableWeaponC = testWeaponBow;
+    testNoEquipableWeaponD = testWeaponBow;
 
     testTurnsCharacterA = new BlackMageCharacter(turnsQueue,"TestTurnsMageA",100,100,5);
-    ((BlackMageCharacter) testTurnsCharacterA).equip(testClassWeaponA);
+    ((BlackMageCharacter) testTurnsCharacterA).equip(testAttackWeaponA);
     testTurnsCharacterB = new BlackMageCharacter(turnsQueue,"TestTurnsMageB",100,100,5);
-    ((BlackMageCharacter) testTurnsCharacterB).equip(testClassWeaponB);
+    ((BlackMageCharacter) testTurnsCharacterB).equip(testAttackWeaponB);
 
     testMaxManaMageA = new BlackMageCharacter(turnsQueue,"MaxManaA",100,100,100);
     testMaxManaMageB = new BlackMageCharacter(turnsQueue,"MaxManaB",100,100,15);
     testMaxManaMageC = new BlackMageCharacter(turnsQueue,"MaxManaC",100,100,0);
-  }
-
-  public void testEquipWeapons() {
-    testPlayerCharacter.equip(testWeaponSword);
-    assertNull(testPlayerCharacter.getEquippedWeapon());
-
-    testPlayerCharacter.equip(testWeaponAxe);
-    assertNull(testPlayerCharacter.getEquippedWeapon());
-
-    testPlayerCharacter.equip(testWeaponBow);
-    assertNull(testPlayerCharacter.getEquippedWeapon());
-
-
-    testPlayerCharacter.equip(testWeaponKnife);
-    assertEquals(testWeaponKnife, testPlayerCharacter.getEquippedWeapon());
-
-    testPlayerCharacter.equip(testWeaponStaff);
-    assertEquals(testWeaponStaff, testPlayerCharacter.getEquippedWeapon());
   }
 
   @Test
@@ -80,13 +71,13 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
 
     testBlackMageA.equip(testWeaponStaffA);
     testBlackMageA.fire(testEnemyA);
-    assertEquals(40,testEnemyA.getBurnDamage());
-    assertEquals(0,testEnemyA.getHp());
+    assertEquals(15,testEnemyA.getBurnDamage());
+    assertEquals(50,testEnemyA.getHp());
 
     testBlackMageA.equip(testWeaponStaffB);
     testBlackMageA.fire(testEnemyB);
     assertEquals(0,testEnemyB.getBurnDamage());
-    assertEquals(60,testEnemyB.getHp());
+    assertEquals(70,testEnemyB.getHp());
 
     testBlackMageA.equip(testWeaponStaffC);
     testBlackMageA.fire(testEnemyC);
@@ -114,40 +105,40 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
 
     testBlackMageA.equip(testWeaponStaffA);
     testBlackMageA.thunder(testEnemyA);
-    assertEquals(true,testEnemyA.getParalyze());
-    assertEquals(0,testEnemyA.getHp());
+    assertTrue(testEnemyA.getParalyze());
+    assertEquals(50,testEnemyA.getHp());
 
     testBlackMageA.equip(testWeaponStaffB);
     testBlackMageA.thunder(testEnemyB);
-    assertEquals(false,testEnemyB.getParalyze());
-    assertEquals(60,testEnemyB.getHp());
+    assertFalse(testEnemyB.getParalyze());
+    assertEquals(70,testEnemyB.getHp());
 
     testBlackMageA.equip(testWeaponStaffC);
     testBlackMageA.thunder(testEnemyC);
-    assertEquals(false,testEnemyC.getParalyze());
+    assertFalse(testEnemyC.getParalyze());
     assertEquals(10,testEnemyC.getHp());
 
     testBlackMageA.equip(testWeaponKnife);
     testBlackMageA.thunder(testEnemyC);
-    assertEquals(false,testEnemyC.getParalyze());
+    assertFalse(testEnemyC.getParalyze());
     assertEquals(10,testEnemyC.getHp());
 
     testBlackMageB.equip(testWeaponStaffA);
     testBlackMageB.thunder(testEnemyD);
-    assertEquals(false,testEnemyD.getParalyze());
+    assertFalse(testEnemyD.getParalyze());
     assertEquals(10,testEnemyD.getHp());
   }
 
   public void setEqCharacter() {
-    testEqCharacterA = new BlackMageCharacter(turnsQueue,"testBlackMageA",100,100,60);
-    testEqCharacterB = new BlackMageCharacter(turnsQueue,"testBlackMageB",100,100,14);
-    testEqCharacterC = new ThiefCharacter(turnsQueue,"BlackMageA",100,100);
-    testEqCharacterD = new BlackMageCharacter(turnsQueue,"testBlackMageA",100,100,60);
+    testConstructionCharacter = new BlackMageCharacter(turnsQueue,"testBlackMageA",100,100,60);
+    testDiffCharacterSameClass = new BlackMageCharacter(turnsQueue,"testBlackMageB",100,100,14);
+    testDiffCharacterDiffClass = new ThiefCharacter(turnsQueue,"BlackMageA",100,100);
+    testSameCharacterSameClass = new BlackMageCharacter(turnsQueue,"testBlackMageA",100,100,60);
 
-    testEqCharacterF1 = new BlackMageCharacter(turnsQueue,"DiffName",100,100,60);
-    testEqCharacterF2 = new BlackMageCharacter(turnsQueue,"testBlackMageA",1,100,60);
-    testEqCharacterF3 = new BlackMageCharacter(turnsQueue,"testBlackMageA",100,1,60);
-    testEqCharacterF4 = new BlackMageCharacter(turnsQueue,"testBlackMageA",100,100,1);
-    testEqCharacterF5 = new BlackMageCharacter(turnsQueue,"test",1,1,1);
+    testOnlyDiffName = new BlackMageCharacter(turnsQueue,"DiffName",100,100,60);
+    testOnlyDiffMaxHp = new BlackMageCharacter(turnsQueue,"testBlackMageA",1,100,60);
+    testOnlyDiffDefense = new BlackMageCharacter(turnsQueue,"testBlackMageA",100,1,60);
+    testOnlyDiffManaOrWeightOrOther = new BlackMageCharacter(turnsQueue,"testBlackMageA",100,100,1);
+    testOnlyDiffDamageOrOther = new BlackMageCharacter(turnsQueue,"test",1,1,1);
   }
 }

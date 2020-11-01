@@ -3,8 +3,6 @@ import com.github.cc3002.finalreality.model.character.player.AbstractPlayerChara
 import com.github.cc3002.finalreality.model.weapon.Axe;
 import com.github.cc3002.finalreality.model.weapon.Bow;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * Class with set ups to test engineer class and method to test equipWeapons
  */
@@ -14,51 +12,42 @@ public class EngineerCharacterTest extends AbstractPlayerCharacterTest {
   public void setTestCharacter(){
     setEnemies();
 
-    testCharacterA = new EngineerCharacter(turnsQueue,"EngineerA",100,100);
+    testCharacterA = new EngineerCharacter(turnsQueue,"EngineerA",100,0);
     testCharacterB = new EngineerCharacter(turnsQueue,"EngineerB",50,50);
     testCharacterC = new EngineerCharacter(turnsQueue,"EngineerC",0,0);
     testCharacterD = new EngineerCharacter(turnsQueue,"EngineerD",-10,-10);
     testPlayerCharacter = new EngineerCharacter(turnsQueue,"EngineerE",100,100);
 
-    testClassWeaponA = new Bow("TestBowAttack",100,100);
-    testClassWeaponB = new Axe("TestAxeAttackA",50,20);
-    testClassWeaponC = new Axe("TestAxeAttackB",0,42);
+    testAttackWeaponA = new Bow("TestBowAttack",100,100);
+    testAttackWeaponB = new Axe("TestAxeAttackA",50,20);
+    testAttackWeaponC = new Axe("TestAxeAttackB",0,42);
+
+    testEquipableWeaponA = testWeaponAxe;
+    testEquipableWeaponB = testWeaponBow;
+    testEquipableWeaponC = testWeaponBow;
+
+    testNoEquipableWeaponA = testWeaponStaff;
+    testNoEquipableWeaponB = testWeaponKnife;
+    testNoEquipableWeaponC = testWeaponSword;
+    testNoEquipableWeaponD = testWeaponStaff;
 
     testTurnsCharacterA = new EngineerCharacter(turnsQueue,"TestTurnsEngineerA",100,100);
-    ((EngineerCharacter) testTurnsCharacterA).equip(testClassWeaponA);
+    ((EngineerCharacter) testTurnsCharacterA).equip(testAttackWeaponA);
     testTurnsCharacterB = new EngineerCharacter(turnsQueue,"TestTurnsEngineerB",100,100);
-    ((EngineerCharacter) testTurnsCharacterB).equip(testClassWeaponB);
-  }
-
-  @Override
-  public void testEquipWeapons() {
-    testPlayerCharacter.equip(testWeaponKnife);
-    assertNull(testPlayerCharacter.getEquippedWeapon());
-
-    testPlayerCharacter.equip(testWeaponStaff);
-    assertNull(testPlayerCharacter.getEquippedWeapon());
-
-    testPlayerCharacter.equip(testWeaponSword);
-    assertNull(testPlayerCharacter.getEquippedWeapon());
-
-    testPlayerCharacter.equip(testWeaponAxe);
-    assertEquals(testWeaponAxe, testPlayerCharacter.getEquippedWeapon());
-
-    testPlayerCharacter.equip(testWeaponBow);
-    assertEquals(testWeaponBow, testPlayerCharacter.getEquippedWeapon());
+    ((EngineerCharacter) testTurnsCharacterB).equip(testAttackWeaponB);
   }
 
   @Override
   public void setEqCharacter() {
-    testEqCharacterA = new EngineerCharacter(turnsQueue,"testEngineerA",100,100);
-    testEqCharacterB = new EngineerCharacter(turnsQueue,"testEngineerB",100,1);
-    testEqCharacterC = new ThiefCharacter(turnsQueue, "BlackMageA", 100, 100);
-    testEqCharacterD = new EngineerCharacter(turnsQueue, "testEngineerA", 100, 100);
+    testConstructionCharacter = new EngineerCharacter(turnsQueue,"testEngineerA",100,100);
+    testDiffCharacterSameClass = new EngineerCharacter(turnsQueue,"testEngineerB",100,1);
+    testDiffCharacterDiffClass = new ThiefCharacter(turnsQueue, "BlackMageA", 100, 100);
+    testSameCharacterSameClass = new EngineerCharacter(turnsQueue, "testEngineerA", 100, 100);
 
-    testEqCharacterF1 = new EngineerCharacter(turnsQueue, "DiffName", 100, 100);
-    testEqCharacterF2 = new EngineerCharacter(turnsQueue, "testEngineerA", 1, 100);
-    testEqCharacterF3 = new EngineerCharacter(turnsQueue, "testEngineerA", 100, 1);
-    testEqCharacterF4 = new EngineerCharacter(turnsQueue, "test", 5, 1);
-    testEqCharacterF5 = new EngineerCharacter(turnsQueue, "test", 5, 1);
+    testOnlyDiffName = new EngineerCharacter(turnsQueue, "DiffName", 100, 100);
+    testOnlyDiffMaxHp = new EngineerCharacter(turnsQueue, "testEngineerA", 1, 100);
+    testOnlyDiffDefense = new EngineerCharacter(turnsQueue, "testEngineerA", 100, 1);
+    testOnlyDiffManaOrWeightOrOther = new EngineerCharacter(turnsQueue, "test", 5, 1);
+    testOnlyDiffDamageOrOther = new EngineerCharacter(turnsQueue, "test", 5, 1);
   }
 }

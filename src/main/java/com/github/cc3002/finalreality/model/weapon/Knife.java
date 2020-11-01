@@ -7,13 +7,12 @@ public class Knife extends AbstractWeapon implements IMageWeapons {
   /**
    * Creates a knife with a name, a base damage and weight.
    *
-   * @param name
-   * @param damage
-   * @param weight
-   * @see WeaponType
+   * @param name    the knife's name
+   * @param damage  the knife's damage
+   * @param weight  the knife's weight
    */
   public Knife(String name, int damage, int weight) {
-    super(name, damage, weight, WeaponType.KNIFE);
+    super(name, damage, weight);
   }
 
   @Override
@@ -54,6 +53,6 @@ public class Knife extends AbstractWeapon implements IMageWeapons {
     final Knife weapon = (Knife) o;
     return getDamage() == weapon.getDamage() &&
             getWeight() == weapon.getWeight() &&
-            getName() == weapon.getName();
+            getName().equals(weapon.getName());
   }
 }

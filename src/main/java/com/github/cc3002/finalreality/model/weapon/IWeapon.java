@@ -50,10 +50,4 @@ public interface IWeapon {
    * @return name of this weapon.
    */
   String getName();
-
-  /**
-   * Returns type of this weapon.
-   * @return type of this weapon.
-   */
-  WeaponType getType();
 }
