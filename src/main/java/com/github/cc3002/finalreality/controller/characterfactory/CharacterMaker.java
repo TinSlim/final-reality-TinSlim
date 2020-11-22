@@ -1,4 +1,6 @@
-package com.github.cc3002.finalreality.controller;
+package com.github.cc3002.finalreality.controller.characterfactory;
+
+import com.github.cc3002.finalreality.controller.Controller;
 
 public class CharacterMaker {
   Controller controller;
@@ -10,7 +12,7 @@ public class CharacterMaker {
   }
 
   protected void changeState(CharacterMaker maker) {
-    controller.setMaker(maker);
+    controller.setCharacterMaker(maker);
   }
 
   public void error() {
