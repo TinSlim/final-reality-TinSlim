@@ -1,5 +1,7 @@
 package com.github.cc3002.finalreality.model.character;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -21,6 +23,7 @@ public abstract class AbstractCharacter implements ICharacter {
   private int hp;
   private final int defense;
 
+  private PropertyChangeSupport propertyChange;
   private boolean outOfCombat;
 
   /**
@@ -38,6 +41,8 @@ public abstract class AbstractCharacter implements ICharacter {
     this.hp = maxHp;
     this.defense = defense;
     this.outOfCombat = false;
+
+    this.propertyChange = new PropertyChangeSupport(this);
   }
 
 
@@ -49,6 +54,9 @@ public abstract class AbstractCharacter implements ICharacter {
     scheduledExecutor.shutdown();
   }
 
+  public void addListener(PropertyChangeListener listener) {
+    propertyChange.addPropertyChangeListener(listener);
+  }
 
   @Override
   public String getName() {
@@ -99,5 +107,6 @@ public abstract class AbstractCharacter implements ICharacter {
 
   public void faint() {
     this.outOfCombat = true;
+    propertyChange.firePropertyChange("Fainted",null,this);
   }
 }

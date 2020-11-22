@@ -15,7 +15,7 @@ public class Inventory {
     /**
      * Creates an empty inventory.
      */
-    public Inventory() {
+    public Inventory () {
         weaponsInventory = new ArrayList<IWeapon>();
         addToInventory(null);
         pointInventory = 0;
@@ -79,4 +79,5 @@ public class Inventory {
         character.equip(this.weaponsInventory.get(this.pointInventory));
         }
     }
+
 }

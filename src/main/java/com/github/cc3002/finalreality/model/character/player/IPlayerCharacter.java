@@ -60,4 +60,8 @@ public interface IPlayerCharacter {
   void commonAttack(Enemy testEnemyA);
 
   boolean isAlive();
+
+  String getName();
+
+  String[] getData();
 }
