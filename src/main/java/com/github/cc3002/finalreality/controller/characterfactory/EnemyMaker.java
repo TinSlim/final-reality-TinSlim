@@ -19,4 +19,16 @@ public class EnemyMaker extends CharacterMaker {
     this.getController().getEnemyCharacters().add(newCharacter);
     this.getController().changeEnemyQuantity(1);
   }
+
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof EnemyMaker)) {
+      return false;
+    }
+    final EnemyMaker maker = (EnemyMaker) o;
+    return getController().equals(maker.getController());
+  }
 }

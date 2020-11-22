@@ -10,16 +10,28 @@ public class EngineerMaker extends CharacterMaker {
   }
 
   public void changeRight () {
-    this.changeState(new WhiteMageMaker());
+    this.changeMaker(new WhiteMageMaker());
   }
 
   public void changeLeft () {
-    this.changeState(new ThiefMaker());
+    this.changeMaker(new ThiefMaker());
   }
 
   public void makeCharacter(String name) {
     EngineerCharacter newCharacter = new EngineerCharacter(getController().getQueue(),name,maxHp,defense);
     this.getController().getAlivePlayerCharacters().add(newCharacter);
     this.getController().changePlayersQuantity(1);
+  }
+
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof EngineerMaker)) {
+      return false;
+    }
+    final EngineerMaker maker = (EngineerMaker) o;
+    return getController().equals(maker.getController());
   }
 }

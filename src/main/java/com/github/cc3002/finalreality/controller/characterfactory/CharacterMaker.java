@@ -2,7 +2,7 @@ package com.github.cc3002.finalreality.controller.characterfactory;
 
 import com.github.cc3002.finalreality.controller.Controller;
 
-public class CharacterMaker {
+public abstract class CharacterMaker {
   Controller controller;
   int maxHp;
   int defense;
@@ -11,12 +11,12 @@ public class CharacterMaker {
     this.controller = controller;
   }
 
-  protected void changeState(CharacterMaker maker) {
+  protected void changeMaker(CharacterMaker maker) {
     controller.setCharacterMaker(maker);
   }
 
   public void error() {
-
+    throw new AssertionError("Invalid Character Maker");
   }
 
   public void makeCharacter(String name) {
@@ -36,6 +36,6 @@ public class CharacterMaker {
   }
 
   public void changeToEnemy() {
-    this.changeState(new EnemyMaker());
+    this.changeMaker(new EnemyMaker());
   }
 }

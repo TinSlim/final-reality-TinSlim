@@ -12,11 +12,11 @@ public class BlackMageMaker extends CharacterMaker {
   }
 
   public void changeRight () {
-    this.changeState(new KnightMaker());
+    this.changeMaker(new KnightMaker());
   }
 
   public void changeLeft () {
-    this.changeState(new WhiteMageMaker());
+    this.changeMaker(new WhiteMageMaker());
   }
 
   public void makeCharacter(String name) {
@@ -24,5 +24,17 @@ public class BlackMageMaker extends CharacterMaker {
             maxHp,defense,maxMana);
     this.getController().getAlivePlayerCharacters().add(newCharacter);
     this.getController().changePlayersQuantity(1);
+  }
+
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof BlackMageMaker)) {
+      return false;
+    }
+    final BlackMageMaker maker = (BlackMageMaker) o;
+    return getController().equals(maker.getController());
   }
 }
