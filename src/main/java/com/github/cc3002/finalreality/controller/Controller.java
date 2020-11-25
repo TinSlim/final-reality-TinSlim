@@ -1,21 +1,20 @@
 package com.github.cc3002.finalreality.controller;
 
 import com.github.cc3002.finalreality.controller.characterfactory.CharacterMaker;
-import com.github.cc3002.finalreality.controller.weaponfactory.WeaponMaker;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
+import com.github.cc3002.finalreality.model.character.player.magecharacter.IMageCharacter;
 import com.github.cc3002.finalreality.model.inventory.Inventory;
+import com.github.cc3002.finalreality.model.weapon.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.BlockingQueue;
 
 public class Controller {
-  int inventoryLenght = 7;
-
+  int inventoryLenght = 5;
   CharacterMaker characterFactory;
-  WeaponMaker weaponFactory;
 
   ArrayList<IPlayerCharacter> alivePlayerCharacters;
 
@@ -31,6 +30,7 @@ public class Controller {
 
   public Controller () {
     alivePlayerCharacters = new ArrayList<IPlayerCharacter>();
+    enemyCharacters = new ArrayList<Enemy>();
     faintedPlayerCharacters = new HashMap<>();
 
     playersAlive = 0;
@@ -47,30 +47,21 @@ public class Controller {
     return turnsQueue;
   }
 
-  /*
-    1 Crear y asignar objetos
-   */
-
-
   public void setCharacterMaker(CharacterMaker maker) {
     characterFactory = maker;
     maker.setController(this);
   }
 
-  public void setWeaponMaker(WeaponMaker maker) {
-    weaponFactory = maker;
-    maker.setController(this);
-  }
 
-  void rightCharacterMaker() {
+  public void rightCharacterMaker() {
     characterFactory.changeRight();
   }
 
-  void leftCharacterMaker() {
+  public void leftCharacterMaker() {
     characterFactory.changeLeft();
   }
 
-  void enemyMaker () {
+  public void enemyMaker () {
     characterFactory.changeToEnemy();
   }
 
@@ -90,9 +81,48 @@ public class Controller {
     playersAlive += i;
   }
 
-  /*
-    3 Tener Conocimiento de enemigos y datos
-   */
+
+
+  public String getCharacterName (ICharacter character) {
+    return character.getName();
+  }
+
+  public int getCharacterMaxHp (ICharacter character) {
+    return character.getMaxHp();
+  }
+
+  public int getCharacterHp (ICharacter character) {
+    return character.getHp();
+  }
+
+  public int getCharacterDefense (ICharacter character) {
+    return character.getDefense();
+  }
+
+  public int getMageMaxMana (IMageCharacter character) {
+    return character.getMaxMana();
+  }
+
+  public int getMageMana (IMageCharacter character) {
+    return character.getMana();
+  }
+
+  public int getCharacterWeight (ICharacter character) {
+    return character.getWeight();
+  }
+
+  public int getCharacterDamage (ICharacter character) {
+    return character.getDamage();
+  }
+
+  public int getMageMagicDamage (IMageCharacter character) {
+    return character.getMagicDamage();
+  }
+
+  public String getWeaponName (IPlayerCharacter character) {
+    return character.getEquippedWeapon().getName();
+  }
+
 
 
   public ArrayList<Enemy> getEnemyCharacters() {
@@ -107,10 +137,33 @@ public class Controller {
     enemiesAlive += i;
   }
 
-
-
   public HashMap<String, IPlayerCharacter> getFaintedPlayerCharacters() {
     return faintedPlayerCharacters;
+  }
+
+  public void makeAxe (String name) {
+    Axe weapon = new Axe(name,50,60);
+    getInventory().addToInventory(weapon);
+  }
+
+  public void makeSword (String name) {
+    Sword weapon = new Sword(name,50,60);
+    getInventory().addToInventory(weapon);
+  }
+
+  public void makeStaff (String name) {
+    Staff weapon = new Staff(name,50,60,20);
+    getInventory().addToInventory(weapon);
+  }
+
+  public void makeBow (String name) {
+    Bow weapon = new Bow(name,50,60);
+    getInventory().addToInventory(weapon);
+  }
+
+  public void makeKnife (String name) {
+    Knife weapon = new Knife(name,50,60);
+    getInventory().addToInventory(weapon);
   }
 
   public void win() {
@@ -121,24 +174,9 @@ public class Controller {
   }
 
 
-
-  public void getPlayersCharactersData () {
-    for (IPlayerCharacter character : alivePlayerCharacters) {
-      character.getData();
-    }
-  }
-
-
-
-
   public int getPlayersAlive () {
     return playersAlive;
   }
-
-  /*
-    4 Manejar el inventario
-    5 Equipar un arma a un personaje
-   */
 
   public Inventory getInventory () {
     return inventory;
@@ -163,10 +201,6 @@ public class Controller {
   public void equipWeaponTo (IPlayerCharacter character) {
     inventory.equipWeaponToCharacter(character);
   }
-
-  /*
-    6 Personaje ataque a otro
-   */
 
   public void enemyAttacks (Enemy enemy, IPlayerCharacter target) {
     enemy.commonAttack(target);
