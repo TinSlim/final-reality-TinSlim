@@ -8,10 +8,17 @@ public class KnightMakerTest extends CharacterMakerTest {
   public void setTestMaker() {
     testCharacterMaker = new KnightMaker();
     testController = new Controller();
+
     testCharacterMaker.setController(testController);
+    testController.setCharacterMaker(testCharacterMaker);
+
     expectedRightMaker = new ThiefMaker();
     expectedLeftMaker = new BlackMageMaker();
     expectedNewCharacter = new KnightCharacter(testController.getQueue(),"TestCharacter",
             200,100);
+
+    notEqualsMaker = new WhiteMageMaker();
+    equalsMaker = new KnightMaker();
+    equalsMaker.setController(testController);
   }
 }
