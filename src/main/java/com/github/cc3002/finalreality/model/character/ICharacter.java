@@ -45,4 +45,8 @@ public interface ICharacter {
    * @return this character's defense.
    */
   int getDefense();
+
+  int getWeight();
+
+  int getDamage();
 }

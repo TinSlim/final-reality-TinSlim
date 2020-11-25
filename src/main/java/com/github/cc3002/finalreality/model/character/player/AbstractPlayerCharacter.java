@@ -75,4 +75,12 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
       target.receiveDamage(damage);
     }
   }
+
+  public int getWeight () {
+    return this.getEquippedWeapon().getWeight();
+  }
+
+  public int getDamage () {
+    return this.getEquippedWeapon().getDamage();
+  }
 }

@@ -22,4 +22,5 @@ public interface IMageCharacter {
    */
   void equip(IWeapon weapon);
 
+  int getMagicDamage();
 }

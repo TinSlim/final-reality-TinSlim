@@ -2,6 +2,7 @@ package com.github.cc3002.finalreality.model.character;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -22,6 +23,7 @@ public abstract class AbstractCharacter implements ICharacter {
   private final int maxHp;
   private int hp;
   private final int defense;
+
 
   private PropertyChangeSupport propertyChange;
   private boolean outOfCombat;

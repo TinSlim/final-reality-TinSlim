@@ -50,4 +50,6 @@ public interface IWeapon {
    * @return name of this weapon.
    */
   String getName();
+
+  int getMagicDamage();
 }

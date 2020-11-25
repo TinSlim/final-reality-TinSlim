@@ -76,10 +76,10 @@ public abstract class AbstractMageCharacter extends AbstractPlayerCharacter impl
         return Objects.hash(getClass(),getName(),getMaxHp(),getDefense(),getMaxMana());
     }
 
-    //Todo agregar daño mágico
-    public String[] getData () {
-        return new String[]{this.getName(), String.valueOf(this.getMaxHp()), String.valueOf(this.getHp()),
-                String.valueOf(this.getDefense()), this.getEquippedWeapon().getName(),
-                String.valueOf(this.getEquippedWeapon().getDamage())};
+
+    public int getMagicDamage () {
+        return this.getEquippedWeapon().getMagicDamage();
     }
+
+
 }

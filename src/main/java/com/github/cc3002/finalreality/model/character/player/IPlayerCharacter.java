@@ -63,5 +63,4 @@ public interface IPlayerCharacter {
 
   String getName();
 
-  String[] getData();
 }

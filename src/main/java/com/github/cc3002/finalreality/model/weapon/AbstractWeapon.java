@@ -42,4 +42,8 @@ public abstract class AbstractWeapon implements IWeapon {
   public int hashCode() {
     return Objects.hash(getName(), getDamage(), getWeight(),getClass());
   }
+
+  public int getMagicDamage () {
+    throw new AssertionError("Wrong state");
+  }
 }
