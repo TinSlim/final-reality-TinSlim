@@ -1,5 +1,6 @@
 package com.github.cc3002.finalreality.controller.characterfactory;
 
+import com.github.cc3002.finalreality.model.character.player.magecharacter.BlackMageCharacter;
 import com.github.cc3002.finalreality.model.character.player.magecharacter.WhiteMageCharacter;
 
 public class BlackMageMaker extends CharacterMaker {
@@ -20,7 +21,7 @@ public class BlackMageMaker extends CharacterMaker {
   }
 
   public void makeCharacter(String name) {
-    WhiteMageCharacter newCharacter = new WhiteMageCharacter(getController().getQueue(),name,
+    BlackMageCharacter newCharacter = new BlackMageCharacter(getController().getQueue(),name,
             maxHp,defense,maxMana);
     this.getController().getAlivePlayerCharacters().add(newCharacter);
     this.getController().changePlayersQuantity(1);

@@ -19,9 +19,7 @@ public abstract class CharacterMaker {
     throw new AssertionError("Invalid Character Maker");
   }
 
-  public void makeCharacter(String name) {
-    error();
-  }
+  public abstract void makeCharacter(String name);
 
   public void changeRight () {
     error();
