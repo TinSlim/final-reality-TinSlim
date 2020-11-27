@@ -25,36 +25,12 @@ public class ControllerTest {
     testControler = new Controller();
   }
 
-  @Test
-  public void testWeaponMaker () {
-    testControler.makeAxe("TestAxe");
-    KnightCharacter testKnight1 = new KnightCharacter(testControler.getQueue(),"TestKnight1",1,1);
-    testControler.makeSword("TestSword");
-    KnightCharacter testKnight2 = new KnightCharacter(testControler.getQueue(),"TestKnight2",1,1);
-    testControler.makeStaff("TestStaff");
-    BlackMageCharacter testMage = new BlackMageCharacter(testControler.getQueue(),"TestMage1",1,1,1);
-    testControler.makeKnife("TestKnife");
-    KnightCharacter testKnight3 = new KnightCharacter(testControler.getQueue(),"TestKnight3",1,1);
-    testControler.makeBow("TestBow");
-    ThiefCharacter testThief = new ThiefCharacter(testControler.getQueue(),"TestThief",1,1);
-
-    testControler.rightMoveInventory();
-    testControler.equipWeaponTo(testKnight1);
-    testControler.rightMoveInventory();
-    testControler.equipWeaponTo(testKnight2);
-    testControler.rightMoveInventory();
-    testControler.equipWeaponTo(testMage);
-    testControler.rightMoveInventory();
-    testControler.equipWeaponTo(testKnight3);
-    testControler.rightMoveInventory();
-    testControler.equipWeaponTo(testThief);
-  }
 
   @Test
   public void testInventoryMovement () {
     for (int i = 0; i < 15; i++) {
       String number = String.valueOf(i);
-      testControler.makeSword("TestSword"+number);
+      testControler.makeSword("TestSword"+number,50,60);
     }
     KnightCharacter testKnight1 = new KnightCharacter(testControler.getQueue(),
             "TestKnight1",1,1);
@@ -245,5 +221,39 @@ public class ControllerTest {
 
     assertEquals(32,testControler.getEnemyDamage(testEnemy));
     assertEquals(35,testControler.getEnemyWeight(testEnemy));
+  }
+
+  @Test
+  public void testPlayerCharacterDeathListenerAndLoss () {
+    for (int i = 0 ; i < 4; i++) {
+      testControler.makeThief("TestThief" + String.valueOf(i),1,1);
+    }
+    assertEquals(4,testControler.getPlayersAlive());
+    testControler.getPlayerCharacter(0).receiveDamage(2);
+    assertEquals(3,testControler.getPlayersAlive());
+    testControler.getPlayerCharacter(1).receiveDamage(2);
+    assertEquals(2,testControler.getPlayersAlive());
+    testControler.getPlayerCharacter(2).receiveDamage(2);
+    assertEquals(1,testControler.getPlayersAlive());
+    testControler.getPlayerCharacter(3).receiveDamage(2);
+    assertEquals(0,testControler.getPlayersAlive());
+
+  }
+
+  @Test
+  public void testEnemyDeathListenerAndWin () {
+    for (int i = 0 ; i < 4; i++) {
+      testControler.makeEnemy("TestEnemy" + String.valueOf(i),1,1,2,2);
+    }
+    assertEquals(4,testControler.getEnemiesAlive());
+    testControler.getEnemy(0).receiveDamage(2);
+    assertEquals(3,testControler.getEnemiesAlive());
+    testControler.getEnemy(1).receiveDamage(2);
+    assertEquals(2,testControler.getEnemiesAlive());
+    testControler.getEnemy(2).receiveDamage(2);
+    assertEquals(1,testControler.getEnemiesAlive());
+    testControler.getEnemy(3).receiveDamage(2);
+    assertEquals(0,testControler.getEnemiesAlive());
+
   }
 }
