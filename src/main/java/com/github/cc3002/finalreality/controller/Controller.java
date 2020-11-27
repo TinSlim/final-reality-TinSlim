@@ -4,7 +4,12 @@ import com.github.cc3002.finalreality.controller.characterfactory.CharacterMaker
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
+import com.github.cc3002.finalreality.model.character.player.commoncharacter.EngineerCharacter;
+import com.github.cc3002.finalreality.model.character.player.commoncharacter.KnightCharacter;
+import com.github.cc3002.finalreality.model.character.player.commoncharacter.ThiefCharacter;
+import com.github.cc3002.finalreality.model.character.player.magecharacter.BlackMageCharacter;
 import com.github.cc3002.finalreality.model.character.player.magecharacter.IMageCharacter;
+import com.github.cc3002.finalreality.model.character.player.magecharacter.WhiteMageCharacter;
 import com.github.cc3002.finalreality.model.inventory.Inventory;
 import com.github.cc3002.finalreality.model.weapon.*;
 
@@ -53,6 +58,69 @@ public class Controller {
   }
 
 
+
+  public void makeKnight (String name, int maxHp, int defense) {
+    alivePlayerCharacters.add(new KnightCharacter(turnsQueue,name,maxHp,defense));
+    playersAlive += 1;
+  }
+
+  public void makeThief (String name, int maxHp, int defense) {
+    alivePlayerCharacters.add(new ThiefCharacter(turnsQueue,name,maxHp,defense));
+    playersAlive += 1;
+  }
+
+  public void makeEngineer (String name, int maxHp, int defense) {
+    alivePlayerCharacters.add(new EngineerCharacter(turnsQueue,name,maxHp,defense));
+    playersAlive += 1;
+  }
+
+  public void makeWhiteMage (String name, int maxHp, int defense, int maxMana) {
+    alivePlayerCharacters.add(new WhiteMageCharacter(turnsQueue,name,maxHp,defense,maxMana));
+    playersAlive += 1;
+  }
+
+  public void makeBlackMage (String name, int maxHp, int defense, int maxMana) {
+    alivePlayerCharacters.add(new BlackMageCharacter(turnsQueue,name,maxHp,defense,maxMana));
+    playersAlive += 1;
+  }
+
+  public void makeEnemy (String name, int maxHp, int defense, int weight, int damage) {
+    enemyCharacters.add(new Enemy(turnsQueue,name,maxHp,weight,defense,damage));
+    enemiesAlive += 1;
+  }
+
+
+
+  public void makeSword (String name, int damage, int weight) {
+    inventory.addToInventory(new Sword(name,damage,weight));
+  }
+
+  public void makeAxe (String name, int damage, int weight) {
+    inventory.addToInventory(new Axe(name,damage,weight));
+  }
+
+  public void makeKnife (String name, int damage, int weight) {
+    inventory.addToInventory(new Knife(name,damage,weight));
+  }
+
+  public void makeBow (String name, int damage, int weight) {
+    inventory.addToInventory(new Bow(name,damage,weight));
+  }
+
+  public void makeStaff (String name, int damage, int weight, int magicDamage) {
+    inventory.addToInventory(new Staff(name,damage,magicDamage,weight));
+  }
+
+
+  public IPlayerCharacter getPlayerCharacter (int index) {
+    return alivePlayerCharacters.get(index);
+  }
+
+  public Enemy getEnemy (int index) {
+    return enemyCharacters.get(index);
+  }
+
+
   public void rightCharacterMaker() {
     characterFactory.changeRight();
   }
@@ -81,8 +149,6 @@ public class Controller {
     playersAlive += i;
   }
 
-
-
   public String getCharacterName (ICharacter character) {
     return character.getName();
   }
@@ -99,6 +165,7 @@ public class Controller {
     return character.getDefense();
   }
 
+
   public int getMageMaxMana (IMageCharacter character) {
     return character.getMaxMana();
   }
@@ -107,17 +174,22 @@ public class Controller {
     return character.getMana();
   }
 
-  public int getCharacterWeight (ICharacter character) {
-    return character.getWeight();
+  public int getPlayerCharacterWeight (IPlayerCharacter character) {
+    return character.getEquippedWeapon().getWeight();
   }
 
-  public int getCharacterDamage (ICharacter character) {
+  public int getPlayerCharacterDamage (IPlayerCharacter character) {
+    return character.getEquippedWeapon().getDamage();
+  }
+
+  public int getEnemyDamage (Enemy character) {
     return character.getDamage();
   }
 
-  public int getMageMagicDamage (IMageCharacter character) {
-    return character.getMagicDamage();
+  public int getEnemyWeight (Enemy character) {
+    return character.getWeight();
   }
+
 
   public String getWeaponName (IPlayerCharacter character) {
     return character.getEquippedWeapon().getName();
