@@ -1,6 +1,5 @@
 package com.github.cc3002.finalreality.controller;
 
-import com.github.cc3002.finalreality.controller.characterfactory.CharacterMaker;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
@@ -14,16 +13,13 @@ import com.github.cc3002.finalreality.model.inventory.Inventory;
 import com.github.cc3002.finalreality.model.weapon.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.concurrent.BlockingQueue;
 
 public class Controller {
   int inventoryLenght = 5;
-  CharacterMaker characterFactory;
 
   ArrayList<IPlayerCharacter> alivePlayerCharacters;
 
-  HashMap<String, IPlayerCharacter> faintedPlayerCharacters;
   ArrayList<Enemy> enemyCharacters;
 
   protected BlockingQueue<ICharacter> turnsQueue;
@@ -36,7 +32,6 @@ public class Controller {
   public Controller () {
     alivePlayerCharacters = new ArrayList<IPlayerCharacter>();
     enemyCharacters = new ArrayList<Enemy>();
-    faintedPlayerCharacters = new HashMap<>();
 
     playersAlive = 0;
     enemiesAlive = 0;
@@ -51,12 +46,6 @@ public class Controller {
   public BlockingQueue<ICharacter> getQueue () {
     return turnsQueue;
   }
-
-  public void setCharacterMaker(CharacterMaker maker) {
-    characterFactory = maker;
-    maker.setController(this);
-  }
-
 
 
   public void makeKnight (String name, int maxHp, int defense) {
@@ -120,23 +109,6 @@ public class Controller {
     return enemyCharacters.get(index);
   }
 
-
-  public void rightCharacterMaker() {
-    characterFactory.changeRight();
-  }
-
-  public void leftCharacterMaker() {
-    characterFactory.changeLeft();
-  }
-
-  public void enemyMaker () {
-    characterFactory.changeToEnemy();
-  }
-
-  public void makeCharacter (String name) {
-    characterFactory.makeCharacter(name);
-  }
-
   /*
     2 Personajes del Jugador
    */
@@ -166,20 +138,20 @@ public class Controller {
   }
 
 
-  public int getMageMaxMana (IMageCharacter character) {
-    return character.getMaxMana();
-  }
-
-  public int getMageMana (IMageCharacter character) {
-    return character.getMana();
-  }
-
   public int getPlayerCharacterWeight (IPlayerCharacter character) {
     return character.getEquippedWeapon().getWeight();
   }
 
   public int getPlayerCharacterDamage (IPlayerCharacter character) {
     return character.getEquippedWeapon().getDamage();
+  }
+
+  public int getMageMaxMana (IMageCharacter character) {
+    return character.getMaxMana();
+  }
+
+  public int getMageMana (IMageCharacter character) {
+    return character.getMana();
   }
 
   public int getEnemyDamage (Enemy character) {
@@ -207,10 +179,6 @@ public class Controller {
 
   public void changeEnemyQuantity (int i) {
     enemiesAlive += i;
-  }
-
-  public HashMap<String, IPlayerCharacter> getFaintedPlayerCharacters() {
-    return faintedPlayerCharacters;
   }
 
   public void makeAxe (String name) {
@@ -282,8 +250,5 @@ public class Controller {
     player.commonAttack(target);
   }
 
-  public CharacterMaker getCharacterMaker() {
-    return characterFactory;
-  }
 }
 
