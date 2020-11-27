@@ -37,8 +37,8 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
     scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
     scheduledExecutor
             .schedule(this::addToQueue, equippedWeapon.getWeight() / 10, TimeUnit.SECONDS);
+    System.out.println(this.getName()+"TurnsIdont know");
   }
-
 
   @Override
   public void receiveLife(int addedHp) {
@@ -76,6 +76,7 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
     }
   }
 
+  /*
   public int getWeight () {
     return this.getEquippedWeapon().getWeight();
   }
@@ -83,4 +84,5 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
   public int getDamage () {
     return this.getEquippedWeapon().getDamage();
   }
+  */
 }

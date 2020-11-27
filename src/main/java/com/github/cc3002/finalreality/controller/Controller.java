@@ -25,6 +25,8 @@ public class Controller {
   protected BlockingQueue<ICharacter> turnsQueue;
   int playersAlive;
   int enemiesAlive;
+
+  TurnsListener turnsListener;
   PlayerCharacterDeathListener faintPlayerCharactersListener;
   EnemyDeathListener faintEnemyListener;
   Inventory inventory;
@@ -38,6 +40,7 @@ public class Controller {
 
     faintPlayerCharactersListener = new PlayerCharacterDeathListener(this);
     faintEnemyListener = new EnemyDeathListener(this);
+    turnsListener = new TurnsListener(this);
 
     inventory = new Inventory();
   }
@@ -50,47 +53,51 @@ public class Controller {
 
   public void makeKnight (String name, int maxHp, int defense) {
     KnightCharacter character = new KnightCharacter(turnsQueue,name,maxHp,defense);
-    character.addListener(faintPlayerCharactersListener);
+    character.addDeathListener(faintPlayerCharactersListener);
+    character.addTurnsListener(turnsListener);
     alivePlayerCharacters.add(character);
     changePlayersQuantity(1);
   }
 
   public void makeThief (String name, int maxHp, int defense) {
     ThiefCharacter character = new ThiefCharacter(turnsQueue,name,maxHp,defense);
-    character.addListener(faintPlayerCharactersListener);
+    character.addDeathListener(faintPlayerCharactersListener);
+    character.addTurnsListener(turnsListener);
     alivePlayerCharacters.add(character);
     changePlayersQuantity(1);
   }
 
   public void makeEngineer (String name, int maxHp, int defense) {
     EngineerCharacter character = new EngineerCharacter(turnsQueue, name, maxHp, defense);
-    character.addListener(faintPlayerCharactersListener);
+    character.addDeathListener(faintPlayerCharactersListener);
+    character.addTurnsListener(turnsListener);
     alivePlayerCharacters.add(character);
     changePlayersQuantity(1);
   }
 
   public void makeWhiteMage (String name, int maxHp, int defense, int maxMana) {
     WhiteMageCharacter character = new WhiteMageCharacter(turnsQueue,name,maxHp,defense,maxMana);
-    character.addListener(faintPlayerCharactersListener);
+    character.addDeathListener(faintPlayerCharactersListener);
+    character.addTurnsListener(turnsListener);
     alivePlayerCharacters.add(character);
     changePlayersQuantity(1);
   }
 
   public void makeBlackMage (String name, int maxHp, int defense, int maxMana) {
     BlackMageCharacter character = new BlackMageCharacter(turnsQueue,name,maxHp,defense,maxMana);
-    character.addListener(faintPlayerCharactersListener);
+    character.addDeathListener(faintPlayerCharactersListener);
+    character.addTurnsListener(turnsListener);
     alivePlayerCharacters.add(character);
     changePlayersQuantity(1);
   }
 
   public void makeEnemy (String name, int maxHp, int defense, int weight, int damage) {
     Enemy character = new Enemy(turnsQueue,name,maxHp,weight,defense,damage);
-    character.addListener(faintEnemyListener);
+    character.addDeathListener(faintEnemyListener);
+    character.addTurnsListener(turnsListener);
     enemyCharacters.add(character);
     changeEnemyQuantity (1);
   }
-
-
 
   public void makeSword (String name, int damage, int weight) {
     inventory.addToInventory(new Sword(name,damage,weight));
@@ -111,7 +118,6 @@ public class Controller {
   public void makeStaff (String name, int damage, int weight, int magicDamage) {
     inventory.addToInventory(new Staff(name,damage,magicDamage,weight));
   }
-
 
   public IPlayerCharacter getPlayerCharacter (int index) {
     return getAlivePlayerCharacters().get(index);
@@ -262,5 +268,7 @@ public class Controller {
     player.commonAttack(target);
   }
 
+  public void nextTurn() {
+  }
 }
 

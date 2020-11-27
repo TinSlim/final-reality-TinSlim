@@ -160,10 +160,4 @@ public class Enemy extends AbstractCharacter {
       setParalyze(false);
     }
   }
-
-  //Todo Revisar
-  public String[] getData () {
-    return new String[]{this.getName(), String.valueOf(this.getMaxHp()), String.valueOf(this.getHp()),
-            String.valueOf(this.getDefense()), String.valueOf(this.getDamage())};
-  }
 }

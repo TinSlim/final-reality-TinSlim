@@ -43,7 +43,4 @@ public abstract class AbstractWeapon implements IWeapon {
     return Objects.hash(getName(), getDamage(), getWeight(),getClass());
   }
 
-  public int getMagicDamage () {
-    throw new AssertionError("Wrong state");
-  }
 }

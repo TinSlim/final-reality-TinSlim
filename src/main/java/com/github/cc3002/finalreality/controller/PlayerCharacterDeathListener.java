@@ -5,10 +5,10 @@ import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class PlayerCharacterListener implements PropertyChangeListener {
+public class PlayerCharacterDeathListener implements PropertyChangeListener {
   Controller controller;
 
-  public PlayerCharacterListener (Controller controller) {
+  public PlayerCharacterDeathListener(Controller controller) {
     this.controller = controller;
   }
 

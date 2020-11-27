@@ -46,7 +46,4 @@ public interface ICharacter {
    */
   int getDefense();
 
-  int getWeight();
-
-  int getDamage();
 }

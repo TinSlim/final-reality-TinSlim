@@ -2,7 +2,6 @@ package com.github.cc3002.finalreality.model.character;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -20,12 +19,15 @@ public abstract class AbstractCharacter implements ICharacter {
   protected final String name;
 
   protected ScheduledExecutorService scheduledExecutor;
+
   private final int maxHp;
   private int hp;
   private final int defense;
 
 
-  private PropertyChangeSupport propertyChange;
+  private PropertyChangeSupport deathListener;
+  private PropertyChangeSupport turnsListener;
+
   private boolean outOfCombat;
 
   /**
@@ -44,7 +46,8 @@ public abstract class AbstractCharacter implements ICharacter {
     this.defense = defense;
     this.outOfCombat = false;
 
-    this.propertyChange = new PropertyChangeSupport(this);
+    this.deathListener = new PropertyChangeSupport(this);
+    this.turnsListener = new PropertyChangeSupport(this);
   }
 
 
@@ -56,8 +59,12 @@ public abstract class AbstractCharacter implements ICharacter {
     scheduledExecutor.shutdown();
   }
 
-  public void addListener(PropertyChangeListener listener) {
-    propertyChange.addPropertyChangeListener(listener);
+  public void addDeathListener(PropertyChangeListener listener) {
+    deathListener.addPropertyChangeListener(listener);
+  }
+
+  public void addTurnsListener(PropertyChangeListener listener) {
+    turnsListener.addPropertyChangeListener(listener);
   }
 
   @Override
@@ -93,6 +100,7 @@ public abstract class AbstractCharacter implements ICharacter {
   public void receiveDamage(int damage) {
     int realDamage = damage - this.getDefense();
     if (realDamage <= 0) {
+      turnsListener.firePropertyChange("NextTurn",null,this);
       return;
     }
     if ((this.getHp() - realDamage) <= 0) {
@@ -101,6 +109,7 @@ public abstract class AbstractCharacter implements ICharacter {
     } else {
       this.setHp(this.getHp() - realDamage);
     }
+    turnsListener.firePropertyChange("NextTurn",null,this);
   }
 
   public boolean isAlive() {
@@ -109,6 +118,7 @@ public abstract class AbstractCharacter implements ICharacter {
 
   public void faint() {
     this.outOfCombat = true;
-    propertyChange.firePropertyChange("Fainted",null,this);
+    deathListener.firePropertyChange("Fainted",null,this);
   }
+
 }

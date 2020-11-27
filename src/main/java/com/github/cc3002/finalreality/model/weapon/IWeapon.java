@@ -51,5 +51,4 @@ public interface IWeapon {
    */
   String getName();
 
-  int getMagicDamage();
 }

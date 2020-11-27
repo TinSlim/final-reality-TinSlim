@@ -77,9 +77,5 @@ public abstract class AbstractMageCharacter extends AbstractPlayerCharacter impl
     }
 
 
-    public int getMagicDamage () {
-        return this.getEquippedWeapon().getMagicDamage();
-    }
-
 
 }
