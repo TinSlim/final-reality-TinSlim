@@ -8,7 +8,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * The class that holds the information and methods of BlackMage type.
+ */
 public class BlackMageCharacter extends AbstractMageCharacter {
+
     /**
      * Creates a new character.
      *
@@ -77,6 +81,5 @@ public class BlackMageCharacter extends AbstractMageCharacter {
         return this.getName().equals(character.getName()) && this.getDefense() == character.getDefense() &&
                 this.getMaxHp() == character.getMaxHp() && this.getMaxMana() == character.getMaxMana();
     }
-
 }
 

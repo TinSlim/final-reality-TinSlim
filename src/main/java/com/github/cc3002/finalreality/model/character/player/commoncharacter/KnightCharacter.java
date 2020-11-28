@@ -6,6 +6,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * The class that holds the information and methods of Knight type.
+ */
 public class KnightCharacter extends AbstractCommonCharacter {
 
     /**

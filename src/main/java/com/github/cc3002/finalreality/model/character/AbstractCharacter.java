@@ -24,9 +24,9 @@ public abstract class AbstractCharacter implements ICharacter {
   private int hp;
   private final int defense;
 
-
-  private final PropertyChangeSupport deathListener;
-  private final PropertyChangeSupport turnsListener;
+  private final PropertyChangeSupport deathListened;
+  private final PropertyChangeSupport startTurnListened;
+  private final PropertyChangeSupport finishTurnListened;
 
   private boolean outOfCombat;
 
@@ -46,16 +46,17 @@ public abstract class AbstractCharacter implements ICharacter {
     this.defense = defense;
     this.outOfCombat = false;
 
-    this.deathListener = new PropertyChangeSupport(this);
-    this.turnsListener = new PropertyChangeSupport(this);
+    this.deathListened = new PropertyChangeSupport(this);
+    this.startTurnListened = new PropertyChangeSupport(this);
+    this.finishTurnListened = new PropertyChangeSupport(this);
   }
-
 
   /**
    * Adds this character to the turns queue.
    */
   protected void addToQueue() {
     turnsQueue.add(this);
+    startTurnListened.firePropertyChange("TurnAllowed",null,this);
     scheduledExecutor.shutdown();
   }
 
@@ -64,12 +65,23 @@ public abstract class AbstractCharacter implements ICharacter {
    * @param listener A death listener
    */
   public void addDeathListener(PropertyChangeListener listener) {
-    deathListener.addPropertyChangeListener(listener);
+    deathListened.addPropertyChangeListener(listener);
   }
 
-  //Todo add Description
-  public void addTurnsListener(PropertyChangeListener listener) {
-    turnsListener.addPropertyChangeListener(listener);
+  /**
+   * Adds a finish turn listener to this character, used when his turn finishes.
+   * @param listener start turn listener.
+   */
+  public void addFinishTurnListener(PropertyChangeListener listener) {
+    finishTurnListened.addPropertyChangeListener(listener);
+  }
+
+  /**
+   * Adds a start turn listener to this character, used when his turn can start.
+   * @param listener start turn listener.
+   */
+  public void addStartTurnListener(PropertyChangeListener listener) {
+    startTurnListened.addPropertyChangeListener(listener);
   }
 
   @Override
@@ -104,7 +116,7 @@ public abstract class AbstractCharacter implements ICharacter {
   public void receiveDamage(int damage) {
     int realDamage = damage - this.getDefense();
     if (realDamage <= 0) {
-      turnsListener.firePropertyChange("NextTurn",null,this);
+      finishTurnListened.firePropertyChange("NextTurn",null,this);
       return;
     }
     if ((this.getHp() - realDamage) <= 0) {
@@ -113,7 +125,7 @@ public abstract class AbstractCharacter implements ICharacter {
     } else {
       this.setHp(this.getHp() - realDamage);
     }
-    turnsListener.firePropertyChange("NextTurn",null,this);
+    finishTurnListened.firePropertyChange("NextTurn",null,this);
   }
 
   /**
@@ -124,9 +136,11 @@ public abstract class AbstractCharacter implements ICharacter {
     return !outOfCombat;
   }
 
+  /**
+   * This character becomes out of combat, reports it to the listener.
+   */
   public void faint() {
     this.outOfCombat = true;
-    deathListener.firePropertyChange("Fainted",null,this);
+    deathListened.firePropertyChange("Fainted",null,this);
   }
-
 }

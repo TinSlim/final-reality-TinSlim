@@ -7,6 +7,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * The class that holds the information and methods of Common Characters.
+ */
 public abstract class AbstractCommonCharacter extends AbstractPlayerCharacter {
 
     /**
@@ -26,5 +29,4 @@ public abstract class AbstractCommonCharacter extends AbstractPlayerCharacter {
     public int hashCode() {
         return Objects.hash(getClass(),getName(),getMaxHp(),getDefense());
     }
-
 }

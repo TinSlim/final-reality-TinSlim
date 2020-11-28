@@ -6,6 +6,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * The class that holds the information and methods of Engineer type.
+ */
 public class EngineerCharacter extends AbstractCommonCharacter {
 
     /**

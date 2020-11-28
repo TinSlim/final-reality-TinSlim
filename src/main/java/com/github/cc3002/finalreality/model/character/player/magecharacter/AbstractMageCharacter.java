@@ -8,7 +8,11 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 
-public abstract class AbstractMageCharacter extends AbstractPlayerCharacter implements IMageCharacter {
+/**
+ * A class that holds information and common methods of mages.
+ */
+public abstract class AbstractMageCharacter extends AbstractPlayerCharacter {
+
     private int mana;
     private final int maxMana;
 
@@ -75,5 +79,4 @@ public abstract class AbstractMageCharacter extends AbstractPlayerCharacter impl
     public int hashCode() {
         return Objects.hash(getClass(),getName(),getMaxHp(),getDefense(),getMaxMana());
     }
-
 }

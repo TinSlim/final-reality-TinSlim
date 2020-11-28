@@ -8,6 +8,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * The class that holds the information and methods of WhiteMage type.
+ */
 public class WhiteMageCharacter extends AbstractMageCharacter {
 
     /**
