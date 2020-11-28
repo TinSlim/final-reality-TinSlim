@@ -1,5 +1,9 @@
 package com.github.cc3002.finalreality.controller;
 
+import com.github.cc3002.finalreality.controller.listeners.EnemyDeathListener;
+import com.github.cc3002.finalreality.controller.listeners.FinishTurnListener;
+import com.github.cc3002.finalreality.controller.listeners.PlayerCharacterDeathListener;
+import com.github.cc3002.finalreality.controller.listeners.StartTurnListener;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
@@ -7,16 +11,16 @@ import com.github.cc3002.finalreality.model.character.player.commoncharacter.Eng
 import com.github.cc3002.finalreality.model.character.player.commoncharacter.KnightCharacter;
 import com.github.cc3002.finalreality.model.character.player.commoncharacter.ThiefCharacter;
 import com.github.cc3002.finalreality.model.character.player.magecharacter.BlackMageCharacter;
-import com.github.cc3002.finalreality.model.character.player.magecharacter.IMageCharacter;
 import com.github.cc3002.finalreality.model.character.player.magecharacter.WhiteMageCharacter;
 import com.github.cc3002.finalreality.model.inventory.Inventory;
 import com.github.cc3002.finalreality.model.weapon.*;
 
 import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class Controller {
-  int inventoryLenght = 5;
+  int inventoryLength = 5;
 
   ArrayList<IPlayerCharacter> alivePlayerCharacters;
 
@@ -26,21 +30,28 @@ public class Controller {
   int playersAlive;
   int enemiesAlive;
 
-  TurnsListener turnsListener;
+  StartTurnListener startTurnListener;
+  FinishTurnListener finishTurnListener;
   PlayerCharacterDeathListener faintPlayerCharactersListener;
   EnemyDeathListener faintEnemyListener;
+
+  boolean turnAvailable;
+
   Inventory inventory;
 
   public Controller () {
     alivePlayerCharacters = new ArrayList<IPlayerCharacter>();
     enemyCharacters = new ArrayList<Enemy>();
+    turnsQueue = new LinkedBlockingQueue<>();
+    turnAvailable = true;
 
     playersAlive = 0;
     enemiesAlive = 0;
 
     faintPlayerCharactersListener = new PlayerCharacterDeathListener(this);
     faintEnemyListener = new EnemyDeathListener(this);
-    turnsListener = new TurnsListener(this);
+    finishTurnListener = new FinishTurnListener(this);
+    startTurnListener = new StartTurnListener(this);
 
     inventory = new Inventory();
   }
@@ -63,7 +74,8 @@ public class Controller {
   public void makeKnight (String name, int maxHp, int defense) {
     KnightCharacter character = new KnightCharacter(turnsQueue,name,maxHp,defense);
     character.addDeathListener(faintPlayerCharactersListener);
-    character.addTurnsListener(turnsListener);
+    character.addStartTurnListener(startTurnListener);
+    character.addFinishTurnListener(finishTurnListener);
     alivePlayerCharacters.add(character);
     changePlayersQuantity(1);
   }
@@ -78,7 +90,8 @@ public class Controller {
   public void makeThief (String name, int maxHp, int defense) {
     ThiefCharacter character = new ThiefCharacter(turnsQueue,name,maxHp,defense);
     character.addDeathListener(faintPlayerCharactersListener);
-    character.addTurnsListener(turnsListener);
+    character.addStartTurnListener(startTurnListener);
+    character.addFinishTurnListener(finishTurnListener);
     alivePlayerCharacters.add(character);
     changePlayersQuantity(1);
   }
@@ -93,7 +106,8 @@ public class Controller {
   public void makeEngineer (String name, int maxHp, int defense) {
     EngineerCharacter character = new EngineerCharacter(turnsQueue, name, maxHp, defense);
     character.addDeathListener(faintPlayerCharactersListener);
-    character.addTurnsListener(turnsListener);
+    character.addStartTurnListener(startTurnListener);
+    character.addFinishTurnListener(finishTurnListener);
     alivePlayerCharacters.add(character);
     changePlayersQuantity(1);
   }
@@ -109,7 +123,8 @@ public class Controller {
   public void makeWhiteMage (String name, int maxHp, int defense, int maxMana) {
     WhiteMageCharacter character = new WhiteMageCharacter(turnsQueue,name,maxHp,defense,maxMana);
     character.addDeathListener(faintPlayerCharactersListener);
-    character.addTurnsListener(turnsListener);
+    character.addStartTurnListener(startTurnListener);
+    character.addFinishTurnListener(finishTurnListener);
     alivePlayerCharacters.add(character);
     changePlayersQuantity(1);
   }
@@ -125,7 +140,8 @@ public class Controller {
   public void makeBlackMage (String name, int maxHp, int defense, int maxMana) {
     BlackMageCharacter character = new BlackMageCharacter(turnsQueue,name,maxHp,defense,maxMana);
     character.addDeathListener(faintPlayerCharactersListener);
-    character.addTurnsListener(turnsListener);
+    character.addStartTurnListener(startTurnListener);
+    character.addFinishTurnListener(finishTurnListener);
     alivePlayerCharacters.add(character);
     changePlayersQuantity(1);
   }
@@ -142,7 +158,8 @@ public class Controller {
   public void makeEnemy (String name, int maxHp, int defense, int weight, int damage) {
     Enemy character = new Enemy(turnsQueue,name,maxHp,weight,defense,damage);
     character.addDeathListener(faintEnemyListener);
-    character.addTurnsListener(turnsListener);
+    character.addStartTurnListener(startTurnListener);
+    character.addFinishTurnListener(finishTurnListener);
     enemyCharacters.add(character);
     changeEnemyQuantity (1);
   }
@@ -437,14 +454,14 @@ public class Controller {
    * Moves the inventory pointer up.
    */
   public void upMoveInventory () {
-    getInventory().movePoint(inventoryLenght);
+    getInventory().movePoint(inventoryLength);
   }
 
   /**
    * Moves the inventory pointer down.
    */
   public void downMoveInventory () {
-    getInventory().movePoint(-inventoryLenght);
+    getInventory().movePoint(-inventoryLength);
   }
 
   /**
@@ -473,10 +490,45 @@ public class Controller {
     player.commonAttack(target);
   }
 
+
+
+
+
   /**
-   * Method called when a turn finished and then another turn starts.
+   * Adds 1 to CharactersInQueue value.
    */
-  public void nextTurn() {
+  public void waitingTurn () {
+    if (turnAvailable) {
+      startTurn();
+    }
+  }
+
+  /**
+   * A character finished his turn, turn is now available to be used by another character.
+   */
+  public void turnToAvailable() {
+    this.turnAvailable = true;
+    if (turnsQueue.size() > 0) {
+      startTurn();
+    }
+  }
+
+  /**
+   * Method called when a turn starts.
+   */
+  public void startTurn () {
+    ICharacter character = turnsQueue.poll();
+    turnToNotAvailable();
+    assert character != null;
+    character.receiveDamage(2);
+    character.waitTurn();
+  }
+
+  /**
+   * Turns the turnAvailable value to false.
+   */
+  private void turnToNotAvailable() {
+    turnAvailable = false;
   }
 }
 

@@ -1,5 +1,6 @@
-package com.github.cc3002.finalreality.controller;
+package com.github.cc3002.finalreality.controller.listeners;
 
+import com.github.cc3002.finalreality.controller.Controller;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 
 import java.beans.PropertyChangeEvent;
@@ -14,7 +15,6 @@ public class PlayerCharacterDeathListener implements PropertyChangeListener {
 
   @Override
   public void propertyChange(PropertyChangeEvent evt) {
-    IPlayerCharacter faintedCharacter = (IPlayerCharacter) evt.getNewValue();
     controller.changePlayersQuantity(-1);
     if (controller.getPlayersAlive() <= 0) {
       controller.lose();
