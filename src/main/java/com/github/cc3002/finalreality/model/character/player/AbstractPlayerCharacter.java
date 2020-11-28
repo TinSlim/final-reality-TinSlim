@@ -67,7 +67,7 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
 
   protected abstract void equipWeapon(IWeapon weapon);
 
-
+  @Override
   public void commonAttack(Enemy target) {
     if (target.isAlive()) {
       IWeapon weapon = this.getEquippedWeapon();
@@ -76,13 +76,13 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
     }
   }
 
-  /*
-  public int getWeight () {
-    return this.getEquippedWeapon().getWeight();
+  @Override
+  public int getMana () {
+    throw new AssertionError("No Mana");
   }
 
-  public int getDamage () {
-    return this.getEquippedWeapon().getDamage();
+  @Override
+  public int getMaxMana () {
+    throw new AssertionError("No Mana");
   }
-  */
 }

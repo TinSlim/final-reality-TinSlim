@@ -1,6 +1,7 @@
 package com.github.cc3002.finalreality.model.character.player;
 
 import com.github.cc3002.finalreality.model.character.Enemy;
+import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.weapon.AbstractWeapon;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
 
@@ -59,8 +60,33 @@ public interface IPlayerCharacter {
    */
   void commonAttack(Enemy testEnemyA);
 
+  /**
+   * Returns true if this player character is alive.
+   * @return is alive.
+   */
   boolean isAlive();
 
+  /**
+   * Returns the name of this player character.
+   * @return this player character's name.
+   */
   String getName();
 
+  /**
+   * Returns the defense of this player character.
+   * @return this player character's defense.
+   */
+  int getDefense();
+
+  /**
+   * Throws assertion error or returns this player character's max mana if is a Mage.
+   * @return this players character's max mana.
+   */
+  int getMaxMana();
+
+  /**
+   * Throws assertion error or returns this player character's mana if is a Mage.
+   * @return this players character's mana.
+   */
+  int getMana();
 }

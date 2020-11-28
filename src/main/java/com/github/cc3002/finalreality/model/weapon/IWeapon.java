@@ -51,4 +51,9 @@ public interface IWeapon {
    */
   String getName();
 
+  /**
+   * Thows error if this weapon is not a Staff, else returns the magicDamage.
+   * @return magicDamage.
+   */
+  int getMagicDamage();
 }

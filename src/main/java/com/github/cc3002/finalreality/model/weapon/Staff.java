@@ -25,17 +25,18 @@ public class Staff extends AbstractWeapon implements IMageWeapons {
     return true;
   }
 
+
   /**
    * Returns magic damage
    * @return magicDamage
    */
+  @Override
   public int getMagicDamage() {
     return this.magicDamage;
   }
 
   @Override
   public void equipToKnight(IPlayerCharacter character){
-
   }
 
   @Override
