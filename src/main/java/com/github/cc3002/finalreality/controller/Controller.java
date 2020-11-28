@@ -53,8 +53,6 @@ public class Controller {
     return turnsQueue;
   }
 
-
-
   /**
    * Makes a KnightCharacter, adds to it the listeners, adds 1 to the players quantity and adds the new
    * character to the alivePlayerCharacters list.
@@ -219,76 +217,175 @@ public class Controller {
     return getEnemyCharacters().get(index);
   }
 
-  /*
-    2 Personajes del Jugador
+  /**
+   * Returns the list of player characters.
+   * @return list of player characters.
    */
-
   public ArrayList<IPlayerCharacter> getAlivePlayerCharacters() {
     return alivePlayerCharacters;
   }
 
+  /**
+   * Adds i to playerAlive.
+   * @param i how many will be added to playersAlive.
+   */
   public void changePlayersQuantity (int i) {
     playersAlive += i;
   }
 
-  public String getCharacterName (ICharacter character) {
+  /**
+   * Returns IPlayerCharacter character's name.
+   * @param character who will be asked for his name.
+   * @return character's name.
+   */
+  public String getPlayerCharacterName(IPlayerCharacter character) {
     return character.getName();
   }
 
-  public int getCharacterMaxHp (ICharacter character) {
+  /**
+   * Returns Enemy character's name.
+   * @param character who will be asked for his name.
+   * @return character's name.
+   */
+  public String getEnemyName (Enemy character) {
+    return character.getName();
+  }
+
+  /**
+   * Returns player character's name.
+   * @param character who will be asked for his name.
+   * @return character's name.
+   */
+  public int getPlayerCharacterMaxHp (IPlayerCharacter character) {
     return character.getMaxHp();
   }
 
-  public int getCharacterHp (ICharacter character) {
+  /**
+   * Returns enemy character's maxHp.
+   * @param character who will be asked for his maxHp.
+   * @return maxHp value.
+   */
+  public int getEnemyMaxHp (Enemy character) {
+    return character.getMaxHp();
+  }
+
+  /**
+   * Returns player character's hp.
+   * @param character who will be asked for his hp.
+   * @return hp value.
+   */
+  public int getPlayerCharacterHp (IPlayerCharacter character) {
     return character.getHp();
   }
 
-  public int getCharacterDefense (ICharacter character) {
+  /**
+   * Returns enemy character's hp.
+   * @param character who will be asked for his hp.
+   * @return hp value.
+   */
+  public int getEnemyHp (Enemy character) {
+    return character.getHp();
+  }
+
+  /**
+   * Returns character's defense.
+   * @param character character who will be asked for his defense.
+   * @return defense value.
+   */
+  public int getPlayerCharacterDefense (IPlayerCharacter character) {
     return character.getDefense();
   }
 
+  /**
+   * Returns character's defense.
+   * @param character character who will be asked for his defense.
+   * @return defense value.
+   */
+  public int getEnemyDefense (Enemy character) {
+    return character.getDefense();
+  }
 
+  /**
+   * Returns this player character's weight, by asking his weapon's weight.
+   * @param character who will be asked for his weight.
+   * @return  weight of the character's weapon.
+   */
   public int getPlayerCharacterWeight (IPlayerCharacter character) {
     return character.getEquippedWeapon().getWeight();
   }
 
+  /**
+   * Returns this player character's damage, by asking his weapon's damage.
+   * @param character who will be asked for his damage.
+   * @return damage of the character's weapon.
+   */
   public int getPlayerCharacterDamage (IPlayerCharacter character) {
     return character.getEquippedWeapon().getDamage();
   }
 
-  public int getMageMaxMana (IMageCharacter character) {
+  /**
+   * Returns this player character's maxMana value.
+   * @param character who will be asked for maxMana value.
+   * @return maxMana.
+   */
+  public int getMaxMana (IPlayerCharacter character) {
     return character.getMaxMana();
   }
 
-  public int getMageMana (IMageCharacter character) {
+  /**
+   * Returns this player character's mana value.
+   * @param character who will be asked for mana value.
+   * @return mana.
+   */
+  public int getMana (IPlayerCharacter character) {
     return character.getMana();
   }
 
+  /**
+   * Returns the Enemy character's damage.
+   * @param character who will be asked for damage.
+   * @return the character's damage.
+   */
   public int getEnemyDamage (Enemy character) {
     return character.getDamage();
   }
 
+  /**
+   * Returns the Enemy character's weight.
+   * @param character who will be asked for weight.
+   * @return the character's weight.
+   */
   public int getEnemyWeight (Enemy character) {
     return character.getWeight();
   }
 
-
+  /**
+   * Returns the weapon's name of the character.
+   * @param character who will be asked for weapon's name.
+   * @return weapon's name.
+   */
   public String getWeaponName (IPlayerCharacter character) {
     return character.getEquippedWeapon().getName();
   }
 
-
-
+  /**
+   * Returns the list of enemies.
+   * @return enemyCharacters array list.
+   */
   public ArrayList<Enemy> getEnemyCharacters() {
     return enemyCharacters;
   }
 
-
+  /**
+   * Method called when the user wins.
+   */
   public void win() {
   }
 
-
-  public void loss() {
+  /**
+   * Method called when the user loses.
+   */
+  public void lose() {
   }
 
   /**
@@ -377,6 +474,9 @@ public class Controller {
     player.commonAttack(target);
   }
 
+  /**
+   * Method called when a turn finished and then another turn starts.
+   */
   public void nextTurn() {
   }
 }
