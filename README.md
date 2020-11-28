@@ -115,7 +115,10 @@ storage weapons and access to equip the weapon indexed by the *pointer* to a cha
 
 **All changes on classes were to keep SOLID principles.**
 
+
 ## Assumptions
 
 - Inventory will be used like a list of weapons.
 - If the victim's defense is more than the damage that it receives, the victim will only not receive damage.
+- Win, nextTurn and lose methods will be implemented the next iteration.
+- A turn finishes when a character receive damage (from an attack), and the next turn start at the same time.
