@@ -1,13 +1,11 @@
 package com.github.cc3002.finalreality.controller;
 
 import com.github.cc3002.finalreality.model.character.Enemy;
-import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import com.github.cc3002.finalreality.model.character.player.commoncharacter.EngineerCharacter;
 import com.github.cc3002.finalreality.model.character.player.commoncharacter.KnightCharacter;
 import com.github.cc3002.finalreality.model.character.player.commoncharacter.ThiefCharacter;
 import com.github.cc3002.finalreality.model.character.player.magecharacter.BlackMageCharacter;
-import com.github.cc3002.finalreality.model.character.player.magecharacter.IMageCharacter;
 import com.github.cc3002.finalreality.model.character.player.magecharacter.WhiteMageCharacter;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -269,6 +267,36 @@ public class ControllerTest {
     assertEquals(1,testControler.getEnemiesAlive());
     testControler.getEnemy(3).receiveDamage(2);
     assertEquals(0,testControler.getEnemiesAlive());
+
+  }
+
+  @Test
+  public void testStartTurn () throws InterruptedException {
+    testControler.makeSword("TestSword",1,12);
+    testControler.makeAxe("TestAxe",1,19);
+
+    testControler.makeKnight("TestKnight",50,0);
+    testControler.makeEngineer("TestEngineer",50,0);
+
+    testControler.makeEnemy("TestEnemy1",50,0,25,3);
+    testControler.makeEnemy("TestEnemy2",50,0,29,4);
+
+    testControler.rightMoveInventory();
+    testControler.equipWeaponTo(testControler.getPlayerCharacter(0));
+    testControler.rightMoveInventory();
+    testControler.equipWeaponTo(testControler.getPlayerCharacter(1));
+
+    assertEquals(0,testControler.getQueue().size());
+    testControler.getEnemy(0).waitTurn();
+    testControler.getEnemy(1).waitTurn();
+    testControler.getPlayerCharacter(0).waitTurn();
+    testControler.getPlayerCharacter(1).waitTurn();
+    assertEquals(0,testControler.getQueue().size());
+
+    Thread.sleep(3000);
+    Thread.sleep(2000);
+
+
 
   }
 }
