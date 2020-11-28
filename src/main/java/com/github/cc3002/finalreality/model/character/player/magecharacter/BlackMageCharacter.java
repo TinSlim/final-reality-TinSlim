@@ -30,11 +30,10 @@ public class BlackMageCharacter extends AbstractMageCharacter {
      * @param target Enemy that will receive thunder attack.
      */
     public void thunder(Enemy target) {
-        IMageWeapons weapon = (IMageWeapons) this.getEquippedWeapon();
+        IWeapon weapon = this.getEquippedWeapon();
         if ((this.getMana() - 15) >= 0 && weapon.castMagic()) {
             this.reduceMana(15);
-            Staff weaponStaff = (Staff) this.getEquippedWeapon();
-            int magicDamage = weaponStaff.getMagicDamage();
+            int magicDamage = weapon.getMagicDamage();
             target.receiveDamage(magicDamage);
             Random rng = this.getRandom();
             int posibilityToParalize = rng.nextInt(9);
@@ -50,11 +49,10 @@ public class BlackMageCharacter extends AbstractMageCharacter {
      * @param target Enemy that will receive fire attack.
      */
     public void fire(Enemy target) {
-        IMageWeapons weapon = (IMageWeapons) this.getEquippedWeapon();
+        IWeapon weapon = this.getEquippedWeapon();
         if ((this.getMana() - 15) >= 0 && weapon.castMagic()) {
             this.reduceMana(15);
-            Staff weaponStaff = (Staff) this.getEquippedWeapon();
-            int magicDamage = weaponStaff.getMagicDamage();
+            int magicDamage = weapon.getMagicDamage();
             target.receiveDamage(magicDamage);
             Random rng = this.getRandom();
             int burnRandom = rng.nextInt(9);
