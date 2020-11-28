@@ -16,11 +16,6 @@ public class Knife extends AbstractWeapon implements IMageWeapons {
   }
 
   @Override
-  public boolean castMagic(){
-    return false;
-  }
-
-  @Override
   public void equipToKnight(IPlayerCharacter character){
     character.setEquippedWeapon(this);
   }

@@ -47,4 +47,8 @@ public abstract class AbstractWeapon implements IWeapon {
   public int getMagicDamage () {
     throw new AssertionError("No Magic Damage");
   }
+
+  public boolean castMagic () {
+    return false;
+  }
 }

@@ -56,4 +56,7 @@ public interface IWeapon {
    * @return magicDamage.
    */
   int getMagicDamage();
+
+
+  boolean castMagic();
 }
