@@ -9,7 +9,6 @@ import com.github.cc3002.finalreality.model.character.player.commoncharacter.Thi
 import com.github.cc3002.finalreality.model.character.player.magecharacter.BlackMageCharacter;
 import com.github.cc3002.finalreality.model.character.player.magecharacter.IMageCharacter;
 import com.github.cc3002.finalreality.model.character.player.magecharacter.WhiteMageCharacter;
-import com.github.cc3002.finalreality.model.inventory.Inventory;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -188,39 +187,55 @@ public class ControllerTest {
   @Test
   public void testDataGet () {
     IPlayerCharacter testPlayerCharacter;
-    IMageCharacter testMage;
-    ICharacter testCharacter;
+    IPlayerCharacter testMage;
     Enemy testEnemy;
-
-    testCharacter = new ThiefCharacter(testControler.getQueue(),
-            "TestCharacter",15,7);
-    testCharacter.receiveDamage(15);
 
     testPlayerCharacter = new KnightCharacter(testControler.getQueue(),
             "TestPC", 10,8);
+    testPlayerCharacter.receiveDamage(12);
     testPlayerCharacter.equip(new Sword("TestSword",13,3));
 
-    //RestarMana TODO
+
     testMage = new WhiteMageCharacter(testControler.getQueue(),
             "TestMage",12,12,17);
     testMage.equip(new Staff("TestStaff",2,22,2));
 
     testEnemy = new Enemy(testControler.getQueue(),
             "TestEnemy",20,35,20,32);
+    testEnemy.receiveDamage(25);
 
-    assertEquals("TestCharacter",testControler.getCharacterName(testCharacter));
-    assertEquals(15,testControler.getCharacterMaxHp(testCharacter));
-    assertEquals(7,testControler.getCharacterHp(testCharacter));
-    assertEquals(7,testControler.getCharacterDefense(testCharacter));
-
+    assertEquals("TestPC",testControler.getPlayerCharacterName(testPlayerCharacter));
+    assertEquals(10,testControler.getPlayerCharacterMaxHp(testPlayerCharacter));
+    assertEquals(6,testControler.getPlayerCharacterHp(testPlayerCharacter));
+    assertEquals(8,testControler.getPlayerCharacterDefense(testPlayerCharacter));
     assertEquals(3,testControler.getPlayerCharacterWeight(testPlayerCharacter));
     assertEquals(13,testControler.getPlayerCharacterDamage(testPlayerCharacter));
     assertEquals("TestSword",testControler.getWeaponName(testPlayerCharacter));
 
-    assertEquals(17,testControler.getMageMaxMana(testMage));
-
-    assertEquals(32,testControler.getEnemyDamage(testEnemy));
+    assertEquals("TestEnemy",testControler.getEnemyName(testEnemy));
+    assertEquals(20,testControler.getEnemyMaxHp(testEnemy));
+    assertEquals(15,testControler.getEnemyHp(testEnemy));
+    assertEquals(20,testControler.getEnemyDefense(testEnemy));
     assertEquals(35,testControler.getEnemyWeight(testEnemy));
+    assertEquals(32,testControler.getEnemyDamage(testEnemy));
+
+    assertEquals(17,testControler.getMaxMana(testMage));
+    assertEquals(17,testControler.getMana(testMage));
+
+    boolean shouldPassMaxMana = false;
+    try {
+      testPlayerCharacter.getMaxMana();
+    } catch (AssertionError e) {
+      shouldPassMaxMana = true;
+    }
+
+    boolean shouldPassMana = false;
+    try {
+      testPlayerCharacter.getMana();
+    } catch (AssertionError e) {
+      shouldPassMana = true;
+    }
+
   }
 
   @Test

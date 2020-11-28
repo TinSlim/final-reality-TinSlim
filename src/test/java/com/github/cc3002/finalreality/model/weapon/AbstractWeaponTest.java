@@ -3,8 +3,7 @@ package com.github.cc3002.finalreality.model.weapon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Contains common tests for weapons.
@@ -64,5 +63,16 @@ public abstract class AbstractWeaponTest {
     assertNotEquals(testWeaponA.hashCode(),testWeaponF2.hashCode());
     assertNotEquals(testWeaponA.hashCode(),testWeaponF3.hashCode());
     assertNotEquals(testWeaponA.hashCode(),testWeaponF4.hashCode());
+  }
+
+  @Test
+  public void testGetMagicDamage () {
+    boolean shouldPassMagicDamage = false;
+    try {
+      testWeaponA.getMagicDamage();
+    } catch (AssertionError e) {
+      shouldPassMagicDamage = true;
+    }
+    assertTrue(shouldPassMagicDamage);
   }
 }

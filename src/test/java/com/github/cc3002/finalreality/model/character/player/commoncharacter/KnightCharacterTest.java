@@ -7,7 +7,7 @@ import com.github.cc3002.finalreality.model.weapon.Sword;
 /**
  * Class with set ups to test knight class and method to test equipWeapons
  */
-public class KnightCharacterTest extends AbstractPlayerCharacterTest {
+public class KnightCharacterTest extends AbstractCommonCharacterTest {
 
   @Override
   public void setTestCharacter(){

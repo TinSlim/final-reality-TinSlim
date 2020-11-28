@@ -1,5 +1,10 @@
 package com.github.cc3002.finalreality.model.weapon;
 
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 /**
  * Contains set up to test methods with Staff.
  */
@@ -16,5 +21,11 @@ public class StaffTest extends AbstractWeaponTest {
     testWeaponF2 = new Staff("TestStaffA",1,42,20);
     testWeaponF3 = new Staff("TestStaffA",50,1,20);
     testWeaponF4 = new Staff("TestStaffA",50,42,1);
+  }
+
+  @Override
+  @Test
+  public void testGetMagicDamage () {
+    assertEquals(42,testWeaponA.getMagicDamage());
   }
 }

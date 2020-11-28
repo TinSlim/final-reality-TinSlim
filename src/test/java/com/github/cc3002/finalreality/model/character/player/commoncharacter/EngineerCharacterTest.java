@@ -6,7 +6,7 @@ import com.github.cc3002.finalreality.model.weapon.Bow;
 /**
  * Class with set ups to test engineer class and method to test equipWeapons
  */
-public class EngineerCharacterTest extends AbstractPlayerCharacterTest {
+public class EngineerCharacterTest extends AbstractCommonCharacterTest {
 
   @Override
   public void setTestCharacter(){

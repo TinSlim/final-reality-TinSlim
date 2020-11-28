@@ -7,7 +7,7 @@ import com.github.cc3002.finalreality.model.weapon.Sword;
 /**
  * Class with set ups to test thief class and method to test equipWeapons
  */
-public class ThiefCharacterTest extends AbstractPlayerCharacterTest {
+public class ThiefCharacterTest extends AbstractCommonCharacterTest {
 
   @Override
   public void setTestCharacter(){
