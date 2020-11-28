@@ -2,7 +2,7 @@ package com.github.cc3002.finalreality.model.weapon;
 
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 
-public class Knife extends AbstractWeapon implements IMageWeapons {
+public class Knife extends AbstractWeapon {
 
   /**
    * Creates a knife with a name, a base damage and weight.

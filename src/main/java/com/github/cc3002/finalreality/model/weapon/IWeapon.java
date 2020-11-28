@@ -57,6 +57,9 @@ public interface IWeapon {
    */
   int getMagicDamage();
 
-
+  /**
+   * Returns true if this weapon can cast magic (only Staff can cast magic).
+   * @return true or false if the weapon can cast magic.
+   */
   boolean castMagic();
 }

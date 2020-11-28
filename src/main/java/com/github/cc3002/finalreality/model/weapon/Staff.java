@@ -4,7 +4,7 @@ import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 
 import java.util.Objects;
 
-public class Staff extends AbstractWeapon implements IMageWeapons {
+public class Staff extends AbstractWeapon {
 
   private final int magicDamage;
 
