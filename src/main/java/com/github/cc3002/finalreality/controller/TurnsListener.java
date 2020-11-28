@@ -9,6 +9,8 @@ public class TurnsListener implements PropertyChangeListener {
   public TurnsListener (Controller controller) {
     this.controller = controller;
   }
+
+
   public void propertyChange(PropertyChangeEvent evt) {
     controller.nextTurn ();
   }

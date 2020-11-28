@@ -57,7 +57,7 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
         }
     }
 
-
+    @Override
     public void equipWeapon(IWeapon weapon) {
         weapon.equipToWhiteMage(this);
     }

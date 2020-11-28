@@ -76,6 +76,4 @@ public abstract class AbstractMageCharacter extends AbstractPlayerCharacter impl
         return Objects.hash(getClass(),getName(),getMaxHp(),getDefense(),getMaxMana());
     }
 
-
-
 }

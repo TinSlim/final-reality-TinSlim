@@ -17,7 +17,7 @@ public class PlayerCharacterDeathListener implements PropertyChangeListener {
     IPlayerCharacter faintedCharacter = (IPlayerCharacter) evt.getNewValue();
     controller.changePlayersQuantity(-1);
     if (controller.getPlayersAlive() <= 0) {
-      controller.loss();
+      controller.lose();
     }
   }
 }

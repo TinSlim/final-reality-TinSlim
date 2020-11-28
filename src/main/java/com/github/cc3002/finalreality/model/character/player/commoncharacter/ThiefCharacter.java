@@ -19,10 +19,12 @@ public class ThiefCharacter extends AbstractCommonCharacter {
         super(turnsQueue, name, maxHp, defense);
     }
 
+    @Override
     public void equipWeapon(IWeapon weapon) {
         weapon.equipToThief(this);
     }
 
+    @Override
     public boolean equals(final Object o) {
         if (this == o) {
             return true;

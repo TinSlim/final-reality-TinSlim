@@ -147,7 +147,6 @@ public class Controller {
     changeEnemyQuantity (1);
   }
 
-
   /**
    * Makes a Sword and adds it to the inventory.
    * @param name Sword's name.

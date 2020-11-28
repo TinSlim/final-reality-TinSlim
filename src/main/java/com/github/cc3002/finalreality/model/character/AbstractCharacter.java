@@ -25,8 +25,8 @@ public abstract class AbstractCharacter implements ICharacter {
   private final int defense;
 
 
-  private PropertyChangeSupport deathListener;
-  private PropertyChangeSupport turnsListener;
+  private final PropertyChangeSupport deathListener;
+  private final PropertyChangeSupport turnsListener;
 
   private boolean outOfCombat;
 
@@ -59,10 +59,15 @@ public abstract class AbstractCharacter implements ICharacter {
     scheduledExecutor.shutdown();
   }
 
+  /**
+   * Adds a death listener, used when this characters faint.
+   * @param listener A death listener
+   */
   public void addDeathListener(PropertyChangeListener listener) {
     deathListener.addPropertyChangeListener(listener);
   }
 
+  //Todo add Description
   public void addTurnsListener(PropertyChangeListener listener) {
     turnsListener.addPropertyChangeListener(listener);
   }
@@ -71,7 +76,6 @@ public abstract class AbstractCharacter implements ICharacter {
   public String getName() {
     return name;
   }
-
 
   @Override
   public int getHp() {
@@ -112,6 +116,10 @@ public abstract class AbstractCharacter implements ICharacter {
     turnsListener.firePropertyChange("NextTurn",null,this);
   }
 
+  /**
+   * Returns the boolean value of is alive.
+   * @return boolean value of is alive.
+   */
   public boolean isAlive() {
     return !outOfCombat;
   }

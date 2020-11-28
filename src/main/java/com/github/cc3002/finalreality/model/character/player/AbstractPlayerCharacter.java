@@ -37,7 +37,6 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
     scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
     scheduledExecutor
             .schedule(this::addToQueue, equippedWeapon.getWeight() / 10, TimeUnit.SECONDS);
-    System.out.println(this.getName()+"TurnsIdont know");
   }
 
   @Override
@@ -65,6 +64,10 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
     }
   }
 
+  /**
+   * Calls with double dispatch the method of the weapon to equip to this player character.
+   * @param weapon weapon that will be tried to equip.
+   */
   protected abstract void equipWeapon(IWeapon weapon);
 
   @Override

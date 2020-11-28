@@ -6,9 +6,12 @@ import com.github.cc3002.finalreality.model.weapon.IWeapon;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class of the weapon's inventory, here the weapons will be stored.
+ */
 public class Inventory {
 
-    private List<IWeapon> weaponsInventory;
+    private final List<IWeapon> weaponsInventory;
     private int pointInventory;
     private int lenInventory;
 
@@ -16,7 +19,7 @@ public class Inventory {
      * Creates an empty inventory.
      */
     public Inventory () {
-        weaponsInventory = new ArrayList<IWeapon>();
+        weaponsInventory = new ArrayList<>();
         addToInventory(null);
         pointInventory = 0;
         lenInventory = 1;
@@ -63,11 +66,7 @@ public class Inventory {
         if (0 >= this.pointInventory + slots) {
             this.pointInventory = 0;
         }
-        else if (this.lenInventory - 1 <= this.pointInventory + slots) {
-            this.pointInventory = this.lenInventory-1;
-        } else {
-            this.pointInventory = this.pointInventory + slots;
-        }
+        else this.pointInventory = Math.min(this.lenInventory - 1, this.pointInventory + slots);
     }
 
     /**
