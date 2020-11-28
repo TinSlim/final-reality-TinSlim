@@ -28,8 +28,8 @@ methods that only an enemy has, like damage, weight, burnDamage, venomDamage.
 Then you will find **AbstractPlayerCharacter** abstract class, this class inherits from **AbstractCharacter**
 class some methods and attributes, here you have *equip()* method, this method uses double dispatch
 because every player character type (thief, knight, etc) has different weapons to equip. Another new method is
-*commonAttack()*, this method targets an enemy and the *this* object attacks with the weapon that
-it has, doing damage. This class implements the **IPlayerCharacter** interface
+*commonAttack()*, this method targets an enemy and *this* object attacks with the equipped weapon, doing damage. 
+This class implements the **IPlayerCharacter** interface
 
 There are two big types of characters, **CommonCharacters** (like thief, knight and engineer), these characters
 can't use magic, so they don't have *mana* or magic attacks, you will find an abstract class named
@@ -39,7 +39,7 @@ method.
 The other big type of characters is **MageCharacters** (like black mage and white mage), these type of characters
 can use magic and do magic attacks, for this exists the abstract class
 **AbstractMagicCharacters**, here you will find *mana* attribute, methods to set it and get it,
-all mages will inherit from this class. This class implements the **IMageCharacter** interface
+all mages will inherit from this class.
 
 For all player character types exists a class:
 > - **ThiefCharacter** : This class inherits from **AbstractCommonCharacter** class 
@@ -74,11 +74,6 @@ For all weapon types exists a class:
 >
 > - **Sword** : This weapon can be equipped to **ThiefCharacter**, **KnightCharacter** classes.
     
-**Knife** and **Staff** classes implements **IMageWeapons** interface, this is because a BlackMage can try to do magic 
-attacks with a knife equipped. With this interface, if a Mage do a magic attack, their weapon will call *weapon.cast()*,
-this method is only for the weapons that a mage can equip, if the weapon is a **Staff**, this call will return *true*, 
-because a **Staff** can cast magic attacks, in the case of the **Knife** it will returns *false*.
-
 The last package is the **inventory**, the only class here is **Inventory** class, with attributes like a list
 of **IWeapons**, a pointer to an index of the list and the len of the list. With a object of this class you can
 storage weapons and access to equip the weapon indexed by the *pointer* to a character.
