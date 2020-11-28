@@ -83,7 +83,7 @@ The last package is the **inventory**, the only class here is **Inventory** clas
 of **IWeapons**, a pointer to an index of the list and the len of the list. With a object of this class you can
 storage weapons and access to equip the weapon indexed by the *pointer* to a character.
 
-## Class Diagrams
+## Model Diagrams
 - **model** 
 
 ![model](images/PackageModel.png)
@@ -172,6 +172,10 @@ two listeners, one is for the enemies and the other for player characters, the l
 *fainted()* method, then reduce by one the count of their type of character. If the count of player characters become 0,
 the user loses, if the count of enemies become 0, the user wins.
 
+## Controller Diagram
+- controller
+
+![model](images/PackageController.png)
 
 ## Assumptions
 
