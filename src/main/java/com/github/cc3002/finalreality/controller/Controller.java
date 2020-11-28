@@ -19,29 +19,33 @@ import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+/**
+ * Controller class has the methods to access to the model.
+ */
 public class Controller {
-  int inventoryLength = 5;
 
-  ArrayList<IPlayerCharacter> alivePlayerCharacters;
+  private final int inventoryLength = 5;
 
-  ArrayList<Enemy> enemyCharacters;
+  private final ArrayList<IPlayerCharacter> alivePlayerCharacters;
+  private int playersAlive;
+  private final ArrayList<Enemy> enemyCharacters;
+  private int enemiesAlive;
+  private final Inventory inventory;
 
-  protected BlockingQueue<ICharacter> turnsQueue;
-  int playersAlive;
-  int enemiesAlive;
+  private final BlockingQueue<ICharacter> turnsQueue;
 
-  StartTurnListener startTurnListener;
-  FinishTurnListener finishTurnListener;
-  PlayerCharacterDeathListener faintPlayerCharactersListener;
-  EnemyDeathListener faintEnemyListener;
+  private final StartTurnListener startTurnListener;
+  private final FinishTurnListener finishTurnListener;
+  private final PlayerCharacterDeathListener faintPlayerCharactersListener;
+  private final EnemyDeathListener faintEnemyListener;
+  private boolean turnAvailable;
 
-  boolean turnAvailable;
-
-  Inventory inventory;
-
+  /**
+   * Initialize a Controller, making listeners, a queue, lists of characters.
+   */
   public Controller () {
-    alivePlayerCharacters = new ArrayList<IPlayerCharacter>();
-    enemyCharacters = new ArrayList<Enemy>();
+    alivePlayerCharacters = new ArrayList<>();
+    enemyCharacters = new ArrayList<>();
     turnsQueue = new LinkedBlockingQueue<>();
     turnAvailable = true;
 
@@ -519,7 +523,6 @@ public class Controller {
   public void startTurn () {
     ICharacter character = turnsQueue.poll();
     turnToNotAvailable();
-    assert character != null;
     character.receiveDamage(2);
     character.waitTurn();
   }
