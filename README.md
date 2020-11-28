@@ -115,6 +115,52 @@ storage weapons and access to equip the weapon indexed by the *pointer* to a cha
 
 **All changes on classes were to keep SOLID principles.**
 
+## Controller
+
+####Make Characters
+
+The controller can make Characters by calling make*Type*(*data*) where *Type* can be a player 
+character type (like Knight, Thief, Engineer, BlackMage, WhiteMage or Enemy) and *data* depends on
+the *Type*, if the type is a common player character, the *data* needed will be the name, maxHp, 
+defense, if the *type* is a mage, will be needed the same and maxMana value, if the *type* is Enemy,
+will be needed the name, maxHp, weight, defense and damage. 
+
+
+####Make Weapons
+
+Weapons can be made like the characters, just by calling make*Type*(data), where the type is a weapon type 
+like Sword, Axe, Bow, Knife and Staff. The data values will be the name of the weapon, the damage and the 
+weight, only Staff will need one more value, the magicDamage.
+
+
+####Getters and Data
+
+The characters will be saved in lists, one for player characters and one for enemies, to get a character just
+use the getPlayerCharacter(i) where the i is the index of the wanted player character, and getEnemy(i) to do the
+same but using the enemies list. For all character attributes exists methods to get them, there are for Enemy class
+and for IPlayerCharacter.
+
+####Inventory and Equipment
+
+The Controller makes an inventory, to move in there exists methods to move the inventory pointer up, down, left or right;
+and once you are pointing the weapon you wanted, just call *equipWeaponTo(playerCharacter)* where *playerCharacter* is the
+character who will be equipped with the pointed weapon.
+
+####Attack
+
+There are methods to attack, one for player characters and one for enemies. Both works in a similar way, calling the method 
+with the first parameter the attacker, and the second parameter is the target of the attack.
+
+####Start and finish turn
+
+
+####End Game
+
+The user wins when all enemies dies, and loses when all player characters dies. To implement this the **Controller** uses 
+two listeners, one is for the enemies and the other for player characters, the listeners uses their method when a character calls
+*fainted()* method, then reduce by one the count of their type of character. If the count of player characters go become 0,
+the user loses, if the count of enemies become 0, the user wins.
+
 
 ## Assumptions
 
