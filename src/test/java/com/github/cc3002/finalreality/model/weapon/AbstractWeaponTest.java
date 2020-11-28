@@ -75,4 +75,9 @@ public abstract class AbstractWeaponTest {
     }
     assertTrue(shouldPassMagicDamage);
   }
+
+  @Test
+  public void testCastMagic () {
+    assertFalse(testWeaponA.castMagic());
+  }
 }
