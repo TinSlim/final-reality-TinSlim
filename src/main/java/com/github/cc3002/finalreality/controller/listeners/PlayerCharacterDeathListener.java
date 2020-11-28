@@ -1,7 +1,6 @@
 package com.github.cc3002.finalreality.controller.listeners;
 
 import com.github.cc3002.finalreality.controller.Controller;
-import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
