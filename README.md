@@ -117,48 +117,59 @@ storage weapons and access to equip the weapon indexed by the *pointer* to a cha
 
 ## Controller
 
-####Make Characters
+#### Make Characters
 
-The controller can make Characters by calling make*Type*(*data*) where *Type* can be a player 
+The **Controller** can make Characters by calling make*Type*(*data*) where *Type* can be a player 
 character type (like Knight, Thief, Engineer, BlackMage, WhiteMage or Enemy) and *data* depends on
 the *Type*, if the type is a common player character, the *data* needed will be the name, maxHp, 
 defense, if the *type* is a mage, will be needed the same and maxMana value, if the *type* is Enemy,
 will be needed the name, maxHp, weight, defense and damage. 
 
 
-####Make Weapons
+#### Make Weapons
 
 Weapons can be made like the characters, just by calling make*Type*(data), where the type is a weapon type 
 like Sword, Axe, Bow, Knife and Staff. The data values will be the name of the weapon, the damage and the 
 weight, only Staff will need one more value, the magicDamage.
 
 
-####Getters and Data
+#### Getters and Data
 
 The characters will be saved in lists, one for player characters and one for enemies, to get a character just
 use the getPlayerCharacter(i) where the i is the index of the wanted player character, and getEnemy(i) to do the
 same but using the enemies list. For all character attributes exists methods to get them, there are for Enemy class
 and for IPlayerCharacter.
 
-####Inventory and Equipment
+#### Inventory and Equipment
 
 The Controller makes an inventory, to move in there exists methods to move the inventory pointer up, down, left or right;
 and once you are pointing the weapon you wanted, just call *equipWeaponTo(playerCharacter)* where *playerCharacter* is the
 character who will be equipped with the pointed weapon.
 
-####Attack
+#### Attack
 
-There are methods to attack, one for player characters and one for enemies. Both works in a similar way, calling the method 
+There are methods to attack, one for player characters and one for enemies. Both works similar, calling the method 
 with the first parameter the attacker, and the second parameter is the target of the attack.
 
-####Start and finish turn
+#### Start and finish turn
 
+A turn finishes when a character attacks, but after the attack other character receives the damage, knowing this, 
+is better to consider the end of the turn at the end of receive damage method. When a character receive damage, the 
+listener calls the method *turnToAvailable()* from the **Controller**, turns to *true* the *turnAvailable* boolean value
+from the Controller, because the turn can be taken.
+ 
+A turn can start only if there is a character in the **turnsQueue**, knowing this, other listener calls the method 
+*waitingTurn()* from the **Controller** just after is added a character to the **turnsQueue**, this happens in the
+*addToQueue()* method in **AbstractCharacter** class.
 
-####End Game
+With all of this, another turn will start only if there is almost one character in the **turnsQueue**, and the turn is 
+available.
 
-The user wins when all enemies dies, and loses when all player characters dies. To implement this the **Controller** uses 
+#### End Game
+
+The user wins when all enemies die, and loses when all player characters dies. To implement this, the **Controller** uses 
 two listeners, one is for the enemies and the other for player characters, the listeners uses their method when a character calls
-*fainted()* method, then reduce by one the count of their type of character. If the count of player characters go become 0,
+*fainted()* method, then reduce by one the count of their type of character. If the count of player characters become 0,
 the user loses, if the count of enemies become 0, the user wins.
 
 
@@ -167,4 +178,7 @@ the user loses, if the count of enemies become 0, the user wins.
 - Inventory will be used like a list of weapons.
 - If the victim's defense is more than the damage that it receives, the victim will only not receive damage.
 - Win, nextTurn and lose methods will be implemented the next iteration.
-- A turn finishes when a character receive damage (from an attack), and the next turn start at the same time.
+- A turn finishes when a character receive damage (from an attack), and the next turn starts if there is at least one 
+character in the turnsQueue and there is not another character using the turn.
+- The method *startTurn()* in **Controller** class will be changed in the next iteration, the method calls 
+*receiveDamage()*, but this will be changed to the method of the execution of the character's turn.
