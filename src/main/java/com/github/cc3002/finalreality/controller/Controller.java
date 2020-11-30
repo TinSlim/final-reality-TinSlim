@@ -494,10 +494,6 @@ public class Controller {
     player.commonAttack(target);
   }
 
-
-
-
-
   /**
    * Adds 1 to CharactersInQueue value.
    */

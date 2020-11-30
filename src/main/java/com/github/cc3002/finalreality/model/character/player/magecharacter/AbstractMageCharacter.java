@@ -13,70 +13,70 @@ import java.util.concurrent.BlockingQueue;
  */
 public abstract class AbstractMageCharacter extends AbstractPlayerCharacter {
 
-    private int mana;
-    private final int maxMana;
+  private int mana;
+  private final int maxMana;
 
-    Random adverseEffectProbability = new Random();
+  Random adverseEffectProbability = new Random();
 
-    /**
-     * Creates a new MageCharacter.
-     * @param turnsQueue       the queue with the characters waiting for their turn
-     * @param name             the character's name
-     * @param maxHp            the character's max health points value
-     * @param defense          the character's defense
-     * @param maxMana          the character's max mana value
-     */
-    public AbstractMageCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
-                                  final int maxHp, final int defense, final int maxMana){
-        super(turnsQueue, name, maxHp, defense);
-        this.mana = maxMana;
-        this.maxMana = maxMana;
-    }
+  /**
+   * Creates a new MageCharacter.
+   * @param turnsQueue       the queue with the characters waiting for their turn
+   * @param name             the character's name
+   * @param maxHp            the character's max health points value
+   * @param defense          the character's defense
+   * @param maxMana          the character's max mana value
+   */
+  public AbstractMageCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
+                               final int maxHp, final int defense, final int maxMana){
+    super(turnsQueue, name, maxHp, defense);
+    this.mana = maxMana;
+    this.maxMana = maxMana;
+  }
 
-    /**
-     * Sets the seed for attacks with random factor.
-     * @param seed value to repeat random numbers.
-     */
-    public void setSeed(long seed){
-        this.adverseEffectProbability = new Random(seed);
-    }
+  /**
+   * Sets the seed for attacks with random factor.
+   * @param seed value to repeat random numbers.
+   */
+  public void setSeed(long seed){
+    this.adverseEffectProbability = new Random(seed);
+  }
 
-    /**
-     * Gets Random parameter for for adverse effects.
-     * @return Random parameter for adverse effects.
-     */
-    public Random getRandom(){
-        return this.adverseEffectProbability;
-    }
+  /**
+   * Gets Random parameter for for adverse effects.
+   * @return Random parameter for adverse effects.
+   */
+  public Random getRandom(){
+    return this.adverseEffectProbability;
+  }
 
-    @Override
-    public int getMana() {
-        return this.mana;
-    }
+  @Override
+  public int getMana() {
+    return this.mana;
+  }
 
-    @Override
-    public int getMaxMana() {
-        return this.maxMana;
-    }
+  @Override
+  public int getMaxMana() {
+    return this.maxMana;
+  }
 
-    /**
-     * Sets this MageCharacter's mana.
-     * @param mana new mana.
-     */
-    public void setMana(int mana) {
-        this.mana = mana;
-    }
+  /**
+   * Sets this MageCharacter's mana.
+   * @param mana new mana.
+   */
+  public void setMana(int mana) {
+    this.mana = mana;
+  }
 
-    /**
-     * Reduces actual mana.
-     * @param mana quantity to reduce.
-     */
-    public void reduceMana(int mana){
-        this.setMana(this.mana - mana);
-    }
+  /**
+   * Reduces actual mana.
+   * @param mana quantity to reduce.
+   */
+  public void reduceMana(int mana){
+    this.setMana(this.mana - mana);
+  }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getClass(),getName(),getMaxHp(),getDefense(),getMaxMana());
-    }
+  @Override
+  public int hashCode() {
+    return Objects.hash(getClass(),getName(),getMaxHp(),getDefense(),getMaxMana());
+  }
 }

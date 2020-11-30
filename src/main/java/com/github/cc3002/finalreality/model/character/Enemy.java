@@ -126,8 +126,7 @@ public class Enemy extends AbstractCharacter {
       target.receiveDamage(this.getDamage());
     }
   }
-
-
+  
   /**
    * Sets this enemy's poison damage (acquired when a mage uses venom attack).
    * @param damage Poison damage from mage venom attack.

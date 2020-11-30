@@ -3,7 +3,6 @@ package com.github.cc3002.finalreality.controller.listeners;
 import com.github.cc3002.finalreality.controller.Controller;
 
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 /**
  * Observes if a PlayerCharacter dies, if this happens execute the method propertyChange.
