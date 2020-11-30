@@ -131,15 +131,15 @@ weight, only Staff will need one more value, the magicDamage.
 #### Getters and Data
 
 The characters will be saved in lists, one for player characters and one for enemies, to get a character just
-use the getPlayerCharacter(i) where the i is the index of the wanted player character, and getEnemy(i) to do the
+use the *getPlayerCharacter(i)* where the i is the index of the wanted player character, and *getEnemy(i)* to do the
 same but using the enemies list. For all character attributes exists methods to get them, there are for Enemy class
-and for IPlayerCharacter.
+and for **IPlayerCharacter**.
 
 #### Inventory and Equipment
 
-The Controller makes an inventory, to move in there exists methods to move the inventory pointer up, down, left or right;
-and once you are pointing the weapon you wanted, just call *equipWeaponTo(playerCharacter)* where *playerCharacter* is the
-character who will be equipped with the pointed weapon.
+The **Controller** makes an *inventory* (from **Inventory** class), to move in there exists methods to move the 
+inventory pointer up, down, left or right; and once you are pointing the weapon you wanted, just call 
+*equipWeaponTo(playerCharacter)* where *playerCharacter* is the character who will be equipped with the pointed weapon.
 
 #### Attack
 
@@ -181,3 +181,4 @@ the user loses, if the count of enemies become 0, the user wins.
 character in the turnsQueue and there is not another character using the turn.
 - The method *startTurn()* in **Controller** class will be changed in the next iteration, the method calls 
 *receiveDamage()*, but this will be changed to the method of the execution of the character's turn.
+- Methods *win()* and *lose()* will be implemented in a next iteration, magic attacks too.
