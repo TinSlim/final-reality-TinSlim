@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * attack and adverse effects.
  */
 class EnemyTest extends AbstractCharacterTest {
+
   protected IPlayerCharacter testPlayerCharacterA;
   protected IPlayerCharacter testPlayerCharacterB;
   protected IPlayerCharacter testPlayerCharacterC;

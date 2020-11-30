@@ -1,9 +1,26 @@
 ChangeLog
 =========
 
+Version 5.0
+-----------
+- (B.14) Added doc to all methods.
+- (B.13) Added more tests and fixed the others.
+- (B.12) Added all getters for Controller class.
+- (B.11) Added test for getMana and getMaxMana.
+- (B.10) Added mana and maxMana getters to IPlayerCharacter. 
+- (B.9) Made a listener to alert when a turn finishes.
+- (B.8) Added methods to get data from characters.
+- (B.7) Added methods to equip weapons and lists to save characters.
+- (B.6) Fixed methods to make characters and weapons (added to Controller).
+- (B.5) Added listeners to know if a character dies.
+- (B.4) Fixed tests for Controller class.
+- (B.3) Added methods to Controller to make characters and weapons with another class.
+- (B.2) Added tests for Controller class.
+- (B.1) Controller class added.
+
 Version 4.0
 -----------
-- (B.3) More code clean.
+- (B.4) More code clean.
 - (B.3) Code clean on tests.
 - (B.2) A character who died can't receive damage or equip weapons.
 - (B.1) Now the defense attribute appears when a character receives damage.

@@ -39,7 +39,6 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
             .schedule(this::addToQueue, equippedWeapon.getWeight() / 10, TimeUnit.SECONDS);
   }
 
-
   @Override
   public void receiveLife(int addedHp) {
     this.setHp(this.getHp() + addedHp);
@@ -65,14 +64,28 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
     }
   }
 
+  /**
+   * Calls with double dispatch the method of the weapon to equip to this player character.
+   * @param weapon weapon that will be tried to equip.
+   */
   protected abstract void equipWeapon(IWeapon weapon);
 
-
+  @Override
   public void commonAttack(Enemy target) {
     if (target.isAlive()) {
       IWeapon weapon = this.getEquippedWeapon();
       int damage = weapon.getDamage();
       target.receiveDamage(damage);
     }
+  }
+
+  @Override
+  public int getMana () {
+    throw new AssertionError("No Mana");
+  }
+
+  @Override
+  public int getMaxMana () {
+    throw new AssertionError("No Mana");
   }
 }

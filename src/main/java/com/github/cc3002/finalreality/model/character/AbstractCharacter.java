@@ -1,8 +1,13 @@
 package com.github.cc3002.finalreality.model.character;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 
+import com.github.cc3002.finalreality.controller.listeners.FinishTurnListener;
+import com.github.cc3002.finalreality.controller.listeners.IDeathHandler;
+import com.github.cc3002.finalreality.controller.listeners.StartTurnListener;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -17,9 +22,14 @@ public abstract class AbstractCharacter implements ICharacter {
   protected final String name;
 
   protected ScheduledExecutorService scheduledExecutor;
+
   private final int maxHp;
   private int hp;
   private final int defense;
+
+  private final PropertyChangeSupport deathListened;
+  private final PropertyChangeSupport startTurnListened;
+  private final PropertyChangeSupport finishTurnListened;
 
   private boolean outOfCombat;
 
@@ -38,23 +48,49 @@ public abstract class AbstractCharacter implements ICharacter {
     this.hp = maxHp;
     this.defense = defense;
     this.outOfCombat = false;
-  }
 
+    this.deathListened = new PropertyChangeSupport(this);
+    this.startTurnListened = new PropertyChangeSupport(this);
+    this.finishTurnListened = new PropertyChangeSupport(this);
+  }
 
   /**
    * Adds this character to the turns queue.
    */
   protected void addToQueue() {
     turnsQueue.add(this);
+    startTurnListened.firePropertyChange("TurnAllowed",null,this);
     scheduledExecutor.shutdown();
   }
 
+  /**
+   * Adds a death listener, used when this characters faint.
+   * @param listener A death listener
+   */
+  public void addDeathListener(IDeathHandler listener) {
+    deathListened.addPropertyChangeListener(listener);
+  }
+
+  /**
+   * Adds a finish turn listener to this character, used when his turn finishes.
+   * @param listener start turn listener.
+   */
+  public void addFinishTurnListener(FinishTurnListener listener) {
+    finishTurnListened.addPropertyChangeListener(listener);
+  }
+
+  /**
+   * Adds a start turn listener to this character, used when his turn can start.
+   * @param listener start turn listener.
+   */
+  public void addStartTurnListener(StartTurnListener listener) {
+    startTurnListened.addPropertyChangeListener(listener);
+  }
 
   @Override
   public String getName() {
     return name;
   }
-
 
   @Override
   public int getHp() {
@@ -83,6 +119,7 @@ public abstract class AbstractCharacter implements ICharacter {
   public void receiveDamage(int damage) {
     int realDamage = damage - this.getDefense();
     if (realDamage <= 0) {
+      finishTurnListened.firePropertyChange("NextTurn",null,this);
       return;
     }
     if ((this.getHp() - realDamage) <= 0) {
@@ -91,13 +128,22 @@ public abstract class AbstractCharacter implements ICharacter {
     } else {
       this.setHp(this.getHp() - realDamage);
     }
+    finishTurnListened.firePropertyChange("NextTurn",null,this);
   }
 
+  /**
+   * Returns the boolean value of is alive.
+   * @return boolean value of is alive.
+   */
   public boolean isAlive() {
     return !outOfCombat;
   }
 
+  /**
+   * This character becomes out of combat, reports it to the listener.
+   */
   public void faint() {
     this.outOfCombat = true;
+    deathListened.firePropertyChange("Fainted",null,this);
   }
 }

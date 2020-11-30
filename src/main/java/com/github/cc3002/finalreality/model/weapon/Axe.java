@@ -2,6 +2,7 @@ package com.github.cc3002.finalreality.model.weapon;
 
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 
+
 public class Axe extends AbstractWeapon {
 
   /**

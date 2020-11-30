@@ -50,4 +50,16 @@ public interface IWeapon {
    * @return name of this weapon.
    */
   String getName();
+
+  /**
+   * Thows error if this weapon is not a Staff, else returns the magicDamage.
+   * @return magicDamage.
+   */
+  int getMagicDamage();
+
+  /**
+   * Returns true if this weapon can cast magic (only Staff can cast magic).
+   * @return true or false if the weapon can cast magic.
+   */
+  boolean castMagic();
 }

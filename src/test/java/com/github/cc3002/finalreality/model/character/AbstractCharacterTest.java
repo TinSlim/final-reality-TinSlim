@@ -26,10 +26,8 @@ public abstract class AbstractCharacterTest {
   protected ICharacter testCharacterC;
   protected ICharacter testCharacterD;
 
-
   protected ICharacter testTurnsCharacterA;
   protected ICharacter testTurnsCharacterB;
-
 
   protected ICharacter testConstructionCharacter;
   protected ICharacter testDiffCharacterSameClass;

@@ -4,6 +4,10 @@ import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.weapon.AbstractWeapon;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
 
+/**
+ * This represents a player character from the game.
+ * A player character can be controlled by the player.
+ */
 public interface IPlayerCharacter {
 
   /**
@@ -59,5 +63,39 @@ public interface IPlayerCharacter {
    */
   void commonAttack(Enemy testEnemyA);
 
+  /**
+   * Returns true if this player character is alive.
+   * @return is alive.
+   */
   boolean isAlive();
+
+  /**
+   * Returns the name of this player character.
+   * @return this player character's name.
+   */
+  String getName();
+
+  /**
+   * Returns the defense of this player character.
+   * @return this player character's defense.
+   */
+  int getDefense();
+
+  /**
+   * Throws assertion error or returns this player character's max mana if is a Mage.
+   * @return this players character's max mana.
+   */
+  int getMaxMana();
+
+  /**
+   * Throws assertion error or returns this player character's mana if is a Mage.
+   * @return this players character's mana.
+   */
+  int getMana();
+
+  /**
+   * Sets a scheduled executor to make this character (thread) wait for {@code speed / 10}
+   * seconds before adding the character to the queue.
+   */
+  void waitTurn();
 }
