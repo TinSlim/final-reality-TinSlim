@@ -5,6 +5,9 @@ import java.beans.PropertyChangeSupport;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 
+import com.github.cc3002.finalreality.controller.listeners.FinishTurnListener;
+import com.github.cc3002.finalreality.controller.listeners.IDeathHandler;
+import com.github.cc3002.finalreality.controller.listeners.StartTurnListener;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -64,7 +67,7 @@ public abstract class AbstractCharacter implements ICharacter {
    * Adds a death listener, used when this characters faint.
    * @param listener A death listener
    */
-  public void addDeathListener(PropertyChangeListener listener) {
+  public void addDeathListener(IDeathHandler listener) {
     deathListened.addPropertyChangeListener(listener);
   }
 
@@ -72,7 +75,7 @@ public abstract class AbstractCharacter implements ICharacter {
    * Adds a finish turn listener to this character, used when his turn finishes.
    * @param listener start turn listener.
    */
-  public void addFinishTurnListener(PropertyChangeListener listener) {
+  public void addFinishTurnListener(FinishTurnListener listener) {
     finishTurnListened.addPropertyChangeListener(listener);
   }
 
@@ -80,7 +83,7 @@ public abstract class AbstractCharacter implements ICharacter {
    * Adds a start turn listener to this character, used when his turn can start.
    * @param listener start turn listener.
    */
-  public void addStartTurnListener(PropertyChangeListener listener) {
+  public void addStartTurnListener(StartTurnListener listener) {
     startTurnListened.addPropertyChangeListener(listener);
   }
 

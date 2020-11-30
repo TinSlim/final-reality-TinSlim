@@ -3,12 +3,11 @@ package com.github.cc3002.finalreality.controller.listeners;
 import com.github.cc3002.finalreality.controller.Controller;
 
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 /**
  * Observes if an Enemy dies, if this happens execute the method propertyChange.
  */
-public class EnemyDeathListener implements PropertyChangeListener {
+public class EnemyDeathListener implements IDeathHandler {
   Controller controller;
 
   /**

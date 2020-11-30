@@ -8,7 +8,7 @@ import java.beans.PropertyChangeListener;
 /**
  * Observes if a PlayerCharacter dies, if this happens execute the method propertyChange.
  */
-public class PlayerCharacterDeathListener implements PropertyChangeListener {
+public class PlayerCharacterDeathListener implements IDeathHandler {
   Controller controller;
 
   /**
