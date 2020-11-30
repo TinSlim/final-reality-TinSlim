@@ -48,6 +48,9 @@ public abstract class AbstractPlayerCharacterTest extends AbstractCharacterTest 
     testEnemyC = new Enemy(turnsQueue,"testEffectsC",10,100,100,30);
   }
 
+  /**
+   * Tests weapon equipment.
+   */
   @Test
   public void testEquipWeaponsToPlayer() {
     testPlayerCharacter.equip(testNoEquipableWeaponA);
@@ -77,6 +80,9 @@ public abstract class AbstractPlayerCharacterTest extends AbstractCharacterTest 
     assertEquals(testEquipableWeaponC, testPlayerCharacter.getEquippedWeapon());
   }
 
+  /**
+   * Tests the common attack.
+   */
   @Test
   public void testCommonAttack() {
     testPlayerCharacter.equip(testAttackWeaponA);

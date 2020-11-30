@@ -17,12 +17,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ControllerTest {
   Controller testController;
 
+  /**
+   * This method set up the controller.
+   */
   @BeforeEach
   public void setUp () {
     testController = new Controller();
   }
 
-
+  /**
+   * Tests the inventory movement.
+   */
   @Test
   public void testInventoryMovement () {
     for (int i = 0; i < 15; i++) {
@@ -52,6 +57,9 @@ public class ControllerTest {
 
   }
 
+  /**
+   * Tests all character makers and character getters (player characters and enemies).
+   */
   @Test
   public void testCharactersMakerAndGetCharacters () {
     boolean isPlayerCharactersEmpty = false;
@@ -105,6 +113,9 @@ public class ControllerTest {
 
   }
 
+  /**
+   * Tests weapon makers.
+   */
   @Test
   public void testWeaponsMaker () {
     testController.makeSword("TestSword",3,3);
@@ -129,6 +140,9 @@ public class ControllerTest {
             testController.getInventory().getWeaponsInventory().get(5));
   }
 
+  /**
+   * Tests common attacks and weapon equip.
+   */
   @Test
   public void testAttackAndEquip () {
     testController.makeSword("TestSword",1,3);
@@ -182,6 +196,9 @@ public class ControllerTest {
     assertEquals(45, testController.getEnemy(0).getHp());
   }
 
+  /**
+   * Tests data getters.
+   */
   @Test
   public void testDataGet () {
     IPlayerCharacter testPlayerCharacter;
@@ -238,8 +255,11 @@ public class ControllerTest {
 
   }
 
+  /**
+   * Tests player death listeners and lose method.
+   */
   @Test
-  public void testPlayerCharacterDeathListenerAndLoss () {
+  public void testPlayerCharacterDeathListenerAndLose() {
     for (int i = 0 ; i < 4; i++) {
       testController.makeThief("TestThief" + String.valueOf(i),1,1);
     }
@@ -255,6 +275,9 @@ public class ControllerTest {
 
   }
 
+  /**
+   * Tests enemy death listeners and win method.
+   */
   @Test
   public void testEnemyDeathListenerAndWin () {
     for (int i = 0 ; i < 4; i++) {
@@ -272,6 +295,10 @@ public class ControllerTest {
 
   }
 
+  /**
+   * Tests the turns.
+   * @throws InterruptedException thread error.
+   */
   @Test
   public void testStartTurn () throws InterruptedException {
     testController.makeSword("TestSword",1,12);
@@ -297,8 +324,5 @@ public class ControllerTest {
 
     Thread.sleep(3000);
     Thread.sleep(2000);
-
-
-
   }
 }

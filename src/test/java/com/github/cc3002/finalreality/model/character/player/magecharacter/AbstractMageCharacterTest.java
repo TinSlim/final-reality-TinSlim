@@ -24,6 +24,9 @@ public abstract class AbstractMageCharacterTest extends AbstractPlayerCharacterT
   protected IPlayerCharacter testMaxManaMageB;
   protected IPlayerCharacter testMaxManaMageC;
 
+  /**
+   * Tests the getMaxmana method.
+   */
   @Test
   public void testGetMaxMana(){
     assertEquals(100,testMaxManaMageA.getMaxMana());
