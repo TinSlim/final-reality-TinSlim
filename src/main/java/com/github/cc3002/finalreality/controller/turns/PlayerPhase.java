@@ -6,8 +6,7 @@ public class PlayerPhase extends Phase {
   int targetIndex;
   IPlayerCharacter playerCharacter;
 
-  public PlayerPhase () {
-    playerCharacter = (IPlayerCharacter) actualCharacter;
+  public PlayerPhase() {
     targetIndex = 0;
   }
 
@@ -46,4 +45,6 @@ public class PlayerPhase extends Phase {
   public void equipWeapon () {
     controller.equipWeaponTo(playerCharacter);
   }
+
+
 }

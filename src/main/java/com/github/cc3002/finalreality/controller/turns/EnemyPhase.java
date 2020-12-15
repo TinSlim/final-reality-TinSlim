@@ -8,18 +8,18 @@ import java.util.Random;
 public class EnemyPhase extends Phase {
   private Random r;
 
-  public EnemyPhase () {
+  public EnemyPhase() {
     r = new Random();
-    randomAttack();
-    changePhase(new WaitingPhase());
+    doAttack();
   }
 
-  public void randomAttack () {
+  public void doAttack () {
+    Enemy actualCharacter = (Enemy) controller.getCharacter();
     if (actualCharacter.isAlive()) {
       int targetIndex = r.nextInt(controller.getPlayersAlive());
       IPlayerCharacter target = (IPlayerCharacter) controller.getAlivePlayerCharacters().get(targetIndex);
-      controller.enemyAttacks((Enemy) actualCharacter,target);
-      actualCharacter.waitTurn();
+      controller.enemyAttacks(actualCharacter,target);
     }
+    changePhase(new WaitingPhase());
   }
 }
