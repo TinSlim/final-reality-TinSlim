@@ -11,9 +11,6 @@ import com.github.cc3002.finalreality.model.character.player.magecharacter.White
 public class CharactersFactory {
   Controller controller;
 
-  int maxSize = 4;
-  int actualSize = 0;
-
   String actualName;
   int actualMaxHp;
   int actualDefense;
@@ -75,5 +72,9 @@ public class CharactersFactory {
 
   public void setDamage(int i) {
     enemyDamage = i;
+  }
+
+  public void setMaxMana(int i) {
+    actualMaxHp = i;
   }
 }

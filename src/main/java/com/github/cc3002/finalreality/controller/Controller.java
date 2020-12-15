@@ -4,6 +4,10 @@ import com.github.cc3002.finalreality.controller.listeners.EnemyDeathListener;
 import com.github.cc3002.finalreality.controller.listeners.FinishTurnListener;
 import com.github.cc3002.finalreality.controller.listeners.PlayerCharacterDeathListener;
 import com.github.cc3002.finalreality.controller.listeners.StartTurnListener;
+import com.github.cc3002.finalreality.controller.turns.EnemyPhase;
+import com.github.cc3002.finalreality.controller.turns.Phase;
+import com.github.cc3002.finalreality.controller.turns.PlayerPhase;
+import com.github.cc3002.finalreality.controller.turns.WaitingPhase;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
@@ -16,6 +20,7 @@ import com.github.cc3002.finalreality.model.inventory.Inventory;
 import com.github.cc3002.finalreality.model.weapon.*;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -23,10 +28,17 @@ import java.util.concurrent.LinkedBlockingQueue;
  * Controller class has the methods to access to the model.
  */
 public class Controller {
+  private CharactersFactory cFactory;
+  private WeaponsFactory wFactory;
 
+  private Random random;
+  private Phase phase;
   private final int inventoryLength = 5;
+  private int maxPlayers = 4;
 
+  private final ArrayList<IPlayerCharacter> allPlayerCharacters;
   private final ArrayList<IPlayerCharacter> alivePlayerCharacters;
+
   private int playersAlive;
   private final ArrayList<Enemy> enemyCharacters;
   private int enemiesAlive;
@@ -38,16 +50,22 @@ public class Controller {
   private final FinishTurnListener finishTurnListener;
   private final PlayerCharacterDeathListener faintPlayerCharactersListener;
   private final EnemyDeathListener faintEnemyListener;
-  private boolean turnAvailable;
+
+  private ICharacter actualCharacter;
 
   /**
    * Initialize a Controller, making listeners, a queue, lists of characters.
    */
-  public Controller () {
+  public Controller (int seed) {
+    random = new Random(seed);
+    wFactory = new WeaponsFactory(this);
+    cFactory = new CharactersFactory(this);
+
+    allPlayerCharacters = new ArrayList<>();
     alivePlayerCharacters = new ArrayList<>();
     enemyCharacters = new ArrayList<>();
+
     turnsQueue = new LinkedBlockingQueue<>();
-    turnAvailable = true;
 
     playersAlive = 0;
     enemiesAlive = 0;
@@ -60,6 +78,10 @@ public class Controller {
     inventory = new Inventory();
   }
 
+  public ArrayList<IPlayerCharacter> getAlivePlayerCharacters () {
+    return alivePlayerCharacters;
+  }
+
   /**
    * Returns the turnsQueue
    * @return turnsQueue
@@ -69,154 +91,155 @@ public class Controller {
   }
 
   /**
-   * Makes a KnightCharacter, adds to it the listeners, adds 1 to the players quantity and adds the new
-   * character to the alivePlayerCharacters list.
-   * @param name Knight's name.
-   * @param maxHp Knight's maxHp.
-   * @param defense Knight's defense.
+   * Adds the player listeners to the character.
+   * @param character
    */
-  public void makeKnight (String name, int maxHp, int defense) {
-    KnightCharacter character = new KnightCharacter(turnsQueue,name,maxHp,defense);
+  public void addPlayerToListsAndListeners(IPlayerCharacter character) {
     character.addDeathListener(faintPlayerCharactersListener);
-    character.addStartTurnListener(startTurnListener);
     character.addFinishTurnListener(finishTurnListener);
+    character.addStartTurnListener(startTurnListener);
+    allPlayerCharacters.add(character);
     alivePlayerCharacters.add(character);
     changePlayersQuantity(1);
   }
 
   /**
-   * Makes a ThiefCharacter, adds to it the listeners, adds 1 to the players quantity and adds the new
-   * character to the alivePlayerCharacters list.
-   * @param name Thief's name.
-   * @param maxHp Thief's maxHp.
-   * @param defense Thief's defense.
+   * Adds the enemy listeners to the character.
+   * @param character
    */
-  public void makeThief (String name, int maxHp, int defense) {
-    ThiefCharacter character = new ThiefCharacter(turnsQueue,name,maxHp,defense);
-    character.addDeathListener(faintPlayerCharactersListener);
-    character.addStartTurnListener(startTurnListener);
-    character.addFinishTurnListener(finishTurnListener);
-    alivePlayerCharacters.add(character);
-    changePlayersQuantity(1);
-  }
-
-  /**
-   * Makes a EngineerCharacter, adds to it the listeners, adds 1 to the players quantity and adds the new
-   * character to the alivePlayerCharacters list.
-   * @param name Engineer's name.
-   * @param maxHp Enigneer's maxHp.
-   * @param defense Engineer's defense.
-   */
-  public void makeEngineer (String name, int maxHp, int defense) {
-    EngineerCharacter character = new EngineerCharacter(turnsQueue, name, maxHp, defense);
-    character.addDeathListener(faintPlayerCharactersListener);
-    character.addStartTurnListener(startTurnListener);
-    character.addFinishTurnListener(finishTurnListener);
-    alivePlayerCharacters.add(character);
-    changePlayersQuantity(1);
-  }
-
-  /**
-   * Makes a WhiteMageCharacter, adds to it the listeners, adds 1 to the players quantity and adds the new
-   * character to the alivePlayerCharacters list.
-   * @param name WhiteMage's name.
-   * @param maxHp WhiteMage's maxHp.
-   * @param defense WhiteMage's defense.
-   * @param maxMana WhiteMage's maxMana.
-   */
-  public void makeWhiteMage (String name, int maxHp, int defense, int maxMana) {
-    WhiteMageCharacter character = new WhiteMageCharacter(turnsQueue,name,maxHp,defense,maxMana);
-    character.addDeathListener(faintPlayerCharactersListener);
-    character.addStartTurnListener(startTurnListener);
-    character.addFinishTurnListener(finishTurnListener);
-    alivePlayerCharacters.add(character);
-    changePlayersQuantity(1);
-  }
-
-  /**
-   * Makes a BlackMageCharacter, adds to it the listeners, adds 1 to the players quantity and adds the new
-   * character to the alivePlayerCharacters list.
-   * @param name BlackMage's name.
-   * @param maxHp BlackMage's maxHp.
-   * @param defense BlackMage's defense.
-   * @param maxMana BlackMage's maxMana.
-   */
-  public void makeBlackMage (String name, int maxHp, int defense, int maxMana) {
-    BlackMageCharacter character = new BlackMageCharacter(turnsQueue,name,maxHp,defense,maxMana);
-    character.addDeathListener(faintPlayerCharactersListener);
-    character.addStartTurnListener(startTurnListener);
-    character.addFinishTurnListener(finishTurnListener);
-    alivePlayerCharacters.add(character);
-    changePlayersQuantity(1);
-  }
-
-  /**
-   * Makes a Enemy, adds to it the listeners, adds 1 to the enemy quantity and adds the new character to
-   * enemyCharacters list.
-   * @param name Enemy's name.
-   * @param maxHp Enemy's maxHp.
-   * @param defense Enemy's defense.
-   * @param weight Enemy's weight.
-   * @param damage Enemy's damage.
-   */
-  public void makeEnemy (String name, int maxHp, int defense, int weight, int damage) {
-    Enemy character = new Enemy(turnsQueue,name,maxHp,weight,defense,damage);
+  public void addEnemyToListsAndListeners(Enemy character) {
     character.addDeathListener(faintEnemyListener);
-    character.addStartTurnListener(startTurnListener);
     character.addFinishTurnListener(finishTurnListener);
+    character.addStartTurnListener(startTurnListener);
     enemyCharacters.add(character);
-    changeEnemyQuantity (1);
+    changeEnemyQuantity(1);
   }
 
   /**
-   * Makes a Sword and adds it to the inventory.
-   * @param name Sword's name.
-   * @param damage Sword's damage.
-   * @param weight Swords's weight.
+   * Makes a knight using the cFactory.
    */
-  public void makeSword (String name, int damage, int weight) {
-    inventory.addToInventory(new Sword(name,damage,weight));
+  public void makeKnight () {
+    if (getPlayersAlive() < maxPlayers) {
+      cFactory.makeKnight();
+    }
   }
 
   /**
-   * Makes an Axe and adds it to the inventory.
-   * @param name Axe's name.
-   * @param damage Axe's damage.
-   * @param weight Axe's weight.
+   * Makes a thief using the cFactory.
    */
-  public void makeAxe (String name, int damage, int weight) {
-    inventory.addToInventory(new Axe(name,damage,weight));
+  public void makeThief () {
+    if (getPlayersAlive() < maxPlayers) {
+      cFactory.makeThief();
+    }
   }
 
   /**
-   * Makes a Knife and adds it to the inventory.
-   * @param name Knife's name.
-   * @param damage Knife's damage.
-   * @param weight Knife's weight.
+   * Makes a engineer using the cFactory.
    */
-  public void makeKnife (String name, int damage, int weight) {
-    inventory.addToInventory(new Knife(name,damage,weight));
+  public void makeEngineer () {
+    if (getPlayersAlive() < maxPlayers) {
+      cFactory.makeEngineer();
+    }
   }
 
   /**
-   * Makes a Bow and adds it to the inventory.
-   * @param name Bow's name.
-   * @param damage Bow's damage.
-   * @param weight Bow's weight.
+   * Makes a white mage using the cFactory.
    */
-  public void makeBow (String name, int damage, int weight) {
-    inventory.addToInventory(new Bow(name,damage,weight));
+  public void makeWhiteMage () {
+    if (getPlayersAlive() < maxPlayers) {
+      cFactory.makeWhiteMage();
+    }
   }
 
   /**
-   * Makes a Staff and adds it to the inventory.
-   * @param name Staff's name.
-   * @param damage Staff's damage.
-   * @param weight Staff's weight.
-   * @param magicDamage Staff's magicDamage.
+   * Makes a black mage using the cFactory.
    */
-  public void makeStaff (String name, int damage, int weight, int magicDamage) {
-    inventory.addToInventory(new Staff(name,damage,magicDamage,weight));
+  public void makeBlackMage () {
+    if (getPlayersAlive() < maxPlayers) {
+      cFactory.makeBlackMage();
+    }
+  }
+
+  /**
+   * Makes a enemy using the cFactory.
+   */
+  public void makeEnemy () {
+    cFactory.makeEnemy();
+  }
+
+  /**
+   * Makes a sword using the wFactory.
+   */
+  public void makeSword () {
+    wFactory.makeSword();
+  }
+
+  /**
+   * Makes a knife using the wFactory.
+   */
+  public void makeKnife () {
+    wFactory.makeKnife();
+  }
+
+  /**
+   * Makes a bow using the wFactory.
+   */
+  public void makeBow () {
+    wFactory.makeBow();
+  }
+
+  /**
+   * Makes an axe using the wFactory.
+   */
+  public void makeAxe () {
+    wFactory.makeAxe();
+  }
+
+  /**
+   * Makes a staff using the wFactory.
+   */
+  public void makeStaff () {
+    wFactory.makeStaff();
+  }
+
+  public void setWeaponDamage (int i) {
+    wFactory.setDamage(i);
+  }
+
+  public void setWeaponMagicDamage (int i) {
+    wFactory.setMagicDamage(i);
+  }
+
+  public void setWeaponName (String name) {
+    wFactory.setName(name);
+  }
+
+  public void setWeaponWeight (int i) {
+    wFactory.setWeight(i);
+  }
+
+  public void setCharacterName (String name) {
+    cFactory.setName(name);
+  }
+
+  public void setCharacterDefense (int i) {
+    cFactory.setDefense(i);
+  }
+
+  public void setCharacterMaxHp (int i) {
+    cFactory.setMaxHp(i);
+  }
+
+  public void setCharacterMaxMana (int i) {
+    cFactory.setMaxMana(i);
+  }
+
+  public void setEnemyWeight (int i) {
+    cFactory.setWeight(i);
+  }
+
+  public void setEnemyDamage (int i) {
+    cFactory.setDamage(i);
   }
 
   /**
@@ -225,7 +248,7 @@ public class Controller {
    * @return player character wanted.
    */
   public IPlayerCharacter getPlayerCharacter (int index) {
-    return getAlivePlayerCharacters().get(index);
+    return getAllPlayerCharacters().get(index);
   }
 
   /**
@@ -241,8 +264,8 @@ public class Controller {
    * Returns the list of player characters.
    * @return list of player characters.
    */
-  public ArrayList<IPlayerCharacter> getAlivePlayerCharacters() {
-    return alivePlayerCharacters;
+  public ArrayList<IPlayerCharacter> getAllPlayerCharacters() {
+    return allPlayerCharacters;
   }
 
   /**
@@ -494,40 +517,50 @@ public class Controller {
     player.commonAttack(target);
   }
 
-  /**
-   * Adds 1 to CharactersInQueue value.
-   */
-  public void waitingTurn () {
-    if (turnAvailable) {
-      startTurn();
-    }
+  public void setPhase (Phase phase) {
+    phase.setController(this);
+    this.phase = phase;
   }
 
-  /**
-   * A character finished his turn, turn is now available to be used by another character.
-   */
-  public void turnToAvailable() {
-    this.turnAvailable = true;
+  public Phase getPhase () {
+    return this.phase;
+  }
+
+  public Random getRandom() {
+    return random;
+  }
+
+  public void startTurn() {
+    phase.newTurn();
+  }
+
+  public void endTurn() {
+    actualCharacter.waitTurn();
+    setPhase(new WaitingPhase());
     if (turnsQueue.size() > 0) {
-      startTurn();
+      phase.newTurn();
     }
   }
 
-  /**
-   * Method called when a turn starts.
-   */
-  public void startTurn () {
-    ICharacter character = turnsQueue.poll();
-    turnToNotAvailable();
-    character.receiveDamage(2);
-    character.waitTurn();
+  public void doPlayerPhase() {
+    setPhase(new PlayerPhase());
   }
 
-  /**
-   * Turns the turnAvailable value to false.
-   */
-  private void turnToNotAvailable() {
-    turnAvailable = false;
+  public void doEnemyPhase() {
+    setPhase(new EnemyPhase());
+    phase.doAttack();
+  }
+
+  public void setCharacter(ICharacter character) {
+    actualCharacter = character;
+  }
+
+  public ICharacter getCharacter() {
+    return actualCharacter;
+  }
+
+  public void addWeaponToInventory(IWeapon weapon) {
+    inventory.addToInventory(weapon);
   }
 }
 

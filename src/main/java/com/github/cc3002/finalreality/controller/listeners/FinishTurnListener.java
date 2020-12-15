@@ -19,12 +19,8 @@ public class FinishTurnListener implements PropertyChangeListener {
     this.controller = controller;
   }
 
-  /**
-   * Calls the method waitingTurn from the controller.
-   * @param evt the event with the character who received damage.
-   */
   @Override
   public void propertyChange(PropertyChangeEvent evt) {
-    controller.turnToAvailable();
+    controller.endTurn();
   }
 }
