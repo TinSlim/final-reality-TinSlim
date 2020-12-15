@@ -1,6 +1,9 @@
 package com.github.cc3002.finalreality.model.character;
 
 
+import com.github.cc3002.finalreality.controller.Controller;
+import com.github.cc3002.finalreality.controller.listeners.FinishTurnListener;
+
 /**
  * This represents a character from the game.
  * A character can be controlled by the player or by the CPU (an enemy).
@@ -45,4 +48,10 @@ public interface ICharacter {
    * @return this character's defense.
    */
   int getDefense();
+
+  void doPhase(Controller drawPhase);
+
+  boolean isAlive();
+
+  void addFinishTurnListener(FinishTurnListener finishTurnListener);
 }

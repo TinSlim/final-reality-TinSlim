@@ -1,5 +1,6 @@
 package com.github.cc3002.finalreality.model.character.player;
 
+import com.github.cc3002.finalreality.controller.Controller;
 import com.github.cc3002.finalreality.model.character.AbstractCharacter;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
@@ -87,5 +88,9 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
   @Override
   public int getMaxMana () {
     throw new AssertionError("No Mana");
+  }
+
+  public void doPhase (Controller controller) {
+    controller.doPlayerPhase();
   }
 }

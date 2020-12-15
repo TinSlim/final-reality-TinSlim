@@ -5,6 +5,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import com.github.cc3002.finalreality.controller.Controller;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import org.jetbrains.annotations.NotNull;
 
@@ -158,5 +159,9 @@ public class Enemy extends AbstractCharacter {
     if (getParalyze()) {
       setParalyze(false);
     }
+  }
+
+  public void doPhase (Controller controller) {
+    controller.doEnemyPhase();
   }
 }

@@ -1,5 +1,6 @@
 package com.github.cc3002.finalreality.gui;
 
+import com.github.cc3002.finalreality.controller.Controller;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -18,6 +19,7 @@ public class FinalReality extends Application {
 
   public static void main(String[] args) {
     launch(args);
+
   }
 
   @Override
