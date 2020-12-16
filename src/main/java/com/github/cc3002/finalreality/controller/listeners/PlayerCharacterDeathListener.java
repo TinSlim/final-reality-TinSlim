@@ -24,7 +24,7 @@ public class PlayerCharacterDeathListener implements IDeathHandler {
    */
   @Override
   public void propertyChange(PropertyChangeEvent evt) {
-    controller.changePlayersQuantity(-1);
+    controller.changeAlivePlayersQuantity(-1);
     if (controller.getPlayersAlive() <= 0) {
       controller.lose();
     }

@@ -1,6 +1,19 @@
 ChangeLog
 =========
 
+Version 6.0
+-----------
+- (B.10) Code clean and added doc.
+- (B.9) Added connections between model and controller.
+- (B.8) Fixed phases.
+- (B.7) Fixed tests.
+- (B.6) Added WaitingPhase and Decision phase.
+- (B.5) Fixed handlers.
+- (B.4) Phases now are separated from the controller.
+- (B.3) Start doing phases in the controller.
+- (B.2) Added a way to play in the controller.
+- (B.1) Added tests.
+
 Version 5.0
 -----------
 - (B.14) Added doc to all methods.
