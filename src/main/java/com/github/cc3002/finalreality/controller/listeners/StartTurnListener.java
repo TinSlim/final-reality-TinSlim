@@ -20,10 +20,10 @@ public class StartTurnListener implements PropertyChangeListener {
   }
 
   /**
-   * Calls the method waitingTurn from the controller.
+   * Calls the method newCharacterAddedToQueue from the controller.
    * @param evt the event with the character who entered to the queue.
    */
   public void propertyChange(PropertyChangeEvent evt) {
-    controller.waitingTurn();
+    controller.newCharacterAddedToQueue();
   }
 }
