@@ -1,6 +1,5 @@
 package com.github.cc3002.finalreality.model.character;
 
-import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;

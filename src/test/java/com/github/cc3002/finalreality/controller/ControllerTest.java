@@ -280,6 +280,10 @@ public class ControllerTest {
 
   }
 
+  /**
+   * Tests the method lose, when the user loses the game.
+   * @throws InterruptedException
+   */
   @Test
   public void testLoseGame () throws InterruptedException {
     testController.makeSword("TestSword",9,300);
@@ -300,10 +304,12 @@ public class ControllerTest {
 
     Thread.sleep(2000);
     testController.executePhase();
-
-    System.out.println("a");
   }
 
+  /**
+   * Tests the method win, when the user wins the game.
+   * @throws InterruptedException
+   */
   @Test
   public void testWinGame () throws InterruptedException {
     testController.makeSword("TestSword",100,10);
@@ -319,6 +325,10 @@ public class ControllerTest {
     testController.getPhase().doAttack();
   }
 
+  /**
+   * Tests the equipment change in a player's turn.
+   * @throws InterruptedException
+   */
   @Test
   public void testChangeEquipment () throws InterruptedException {
     for (int i = 0; i < 10; i++) {

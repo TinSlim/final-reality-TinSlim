@@ -4,7 +4,6 @@ import com.github.cc3002.finalreality.controller.listeners.EnemyDeathListener;
 import com.github.cc3002.finalreality.controller.listeners.FinishTurnListener;
 import com.github.cc3002.finalreality.controller.listeners.PlayerCharacterDeathListener;
 import com.github.cc3002.finalreality.controller.listeners.StartTurnListener;
-import com.github.cc3002.finalreality.controller.phases.AbstractPhase;
 import com.github.cc3002.finalreality.controller.phases.IPhase;
 import com.github.cc3002.finalreality.controller.phases.WaitingPhase;
 import com.github.cc3002.finalreality.model.character.Enemy;
@@ -44,7 +43,7 @@ public class Controller {
   private final EnemyDeathListener faintEnemyListener;
   private ICharacter actualCharacter;
   private IPhase phase;
-  private Random random;
+  private final Random random;
 
   /**
    * Initialize a Controller, making listeners, a queue, lists of characters.
@@ -504,7 +503,7 @@ public class Controller {
 
   /**
    * Sets a phase to this controller.
-   * @param IPhase phase that will be setted.
+   * @param newPhase phase that will be setted.
    */
   public void setPhase (IPhase newPhase) {
     newPhase.setController(this);
