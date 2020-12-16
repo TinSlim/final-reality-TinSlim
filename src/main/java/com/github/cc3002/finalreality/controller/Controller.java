@@ -4,6 +4,8 @@ import com.github.cc3002.finalreality.controller.listeners.EnemyDeathListener;
 import com.github.cc3002.finalreality.controller.listeners.FinishTurnListener;
 import com.github.cc3002.finalreality.controller.listeners.PlayerCharacterDeathListener;
 import com.github.cc3002.finalreality.controller.listeners.StartTurnListener;
+import com.github.cc3002.finalreality.controller.turns.Phase;
+import com.github.cc3002.finalreality.controller.turns.WaitingPhase;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
@@ -16,6 +18,7 @@ import com.github.cc3002.finalreality.model.inventory.Inventory;
 import com.github.cc3002.finalreality.model.weapon.*;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -26,7 +29,7 @@ public class Controller {
 
   private final int inventoryLength = 5;
 
-  private final ArrayList<IPlayerCharacter> alivePlayerCharacters;
+  private final ArrayList<IPlayerCharacter> playerCharacters;
   private int playersAlive;
   private final ArrayList<Enemy> enemyCharacters;
   private int enemiesAlive;
@@ -38,16 +41,18 @@ public class Controller {
   private final FinishTurnListener finishTurnListener;
   private final PlayerCharacterDeathListener faintPlayerCharactersListener;
   private final EnemyDeathListener faintEnemyListener;
-  private boolean turnAvailable;
+  private ICharacter actualCharacter;
+  private Phase phase;
+  private Random random;
 
   /**
    * Initialize a Controller, making listeners, a queue, lists of characters.
    */
-  public Controller () {
-    alivePlayerCharacters = new ArrayList<>();
+  public Controller (int seed) {
+    random = new Random(seed);
+    playerCharacters = new ArrayList<>();
     enemyCharacters = new ArrayList<>();
     turnsQueue = new LinkedBlockingQueue<>();
-    turnAvailable = true;
 
     playersAlive = 0;
     enemiesAlive = 0;
@@ -68,6 +73,14 @@ public class Controller {
     return turnsQueue;
   }
 
+  public void addPlayer (IPlayerCharacter character) {
+    character.addDeathListener(faintPlayerCharactersListener);
+    character.addStartTurnListener(startTurnListener);
+    character.addFinishTurnListener(finishTurnListener);
+    playerCharacters.add(character);
+    changeAlivePlayersQuantity(1);
+  }
+
   /**
    * Makes a KnightCharacter, adds to it the listeners, adds 1 to the players quantity and adds the new
    * character to the alivePlayerCharacters list.
@@ -77,11 +90,7 @@ public class Controller {
    */
   public void makeKnight (String name, int maxHp, int defense) {
     KnightCharacter character = new KnightCharacter(turnsQueue,name,maxHp,defense);
-    character.addDeathListener(faintPlayerCharactersListener);
-    character.addStartTurnListener(startTurnListener);
-    character.addFinishTurnListener(finishTurnListener);
-    alivePlayerCharacters.add(character);
-    changePlayersQuantity(1);
+    addPlayer(character);
   }
 
   /**
@@ -93,11 +102,7 @@ public class Controller {
    */
   public void makeThief (String name, int maxHp, int defense) {
     ThiefCharacter character = new ThiefCharacter(turnsQueue,name,maxHp,defense);
-    character.addDeathListener(faintPlayerCharactersListener);
-    character.addStartTurnListener(startTurnListener);
-    character.addFinishTurnListener(finishTurnListener);
-    alivePlayerCharacters.add(character);
-    changePlayersQuantity(1);
+    addPlayer(character);
   }
 
   /**
@@ -109,11 +114,7 @@ public class Controller {
    */
   public void makeEngineer (String name, int maxHp, int defense) {
     EngineerCharacter character = new EngineerCharacter(turnsQueue, name, maxHp, defense);
-    character.addDeathListener(faintPlayerCharactersListener);
-    character.addStartTurnListener(startTurnListener);
-    character.addFinishTurnListener(finishTurnListener);
-    alivePlayerCharacters.add(character);
-    changePlayersQuantity(1);
+    addPlayer(character);
   }
 
   /**
@@ -126,11 +127,7 @@ public class Controller {
    */
   public void makeWhiteMage (String name, int maxHp, int defense, int maxMana) {
     WhiteMageCharacter character = new WhiteMageCharacter(turnsQueue,name,maxHp,defense,maxMana);
-    character.addDeathListener(faintPlayerCharactersListener);
-    character.addStartTurnListener(startTurnListener);
-    character.addFinishTurnListener(finishTurnListener);
-    alivePlayerCharacters.add(character);
-    changePlayersQuantity(1);
+    addPlayer(character);
   }
 
   /**
@@ -143,11 +140,7 @@ public class Controller {
    */
   public void makeBlackMage (String name, int maxHp, int defense, int maxMana) {
     BlackMageCharacter character = new BlackMageCharacter(turnsQueue,name,maxHp,defense,maxMana);
-    character.addDeathListener(faintPlayerCharactersListener);
-    character.addStartTurnListener(startTurnListener);
-    character.addFinishTurnListener(finishTurnListener);
-    alivePlayerCharacters.add(character);
-    changePlayersQuantity(1);
+    addPlayer(character);
   }
 
   /**
@@ -225,7 +218,7 @@ public class Controller {
    * @return player character wanted.
    */
   public IPlayerCharacter getPlayerCharacter (int index) {
-    return getAlivePlayerCharacters().get(index);
+    return getPlayerCharacters().get(index);
   }
 
   /**
@@ -241,15 +234,15 @@ public class Controller {
    * Returns the list of player characters.
    * @return list of player characters.
    */
-  public ArrayList<IPlayerCharacter> getAlivePlayerCharacters() {
-    return alivePlayerCharacters;
+  public ArrayList<IPlayerCharacter> getPlayerCharacters() {
+    return playerCharacters;
   }
 
   /**
    * Adds i to playerAlive.
    * @param i how many will be added to playersAlive.
    */
-  public void changePlayersQuantity (int i) {
+  public void changeAlivePlayersQuantity(int i) {
     playersAlive += i;
   }
 
@@ -400,12 +393,14 @@ public class Controller {
    * Method called when the user wins.
    */
   public void win() {
+
   }
 
   /**
    * Method called when the user loses.
    */
   public void lose() {
+
   }
 
   /**
@@ -495,39 +490,123 @@ public class Controller {
   }
 
   /**
-   * Adds 1 to CharactersInQueue value.
+   * Returns the random.
+   * @return a random element.
    */
-  public void waitingTurn () {
-    if (turnAvailable) {
-      startTurn();
+  public Random getRandom() {
+    return random;
+  }
+
+  /**
+   * Sets a phase to this controller.
+   * @param phase phase that will be setted.
+   */
+  public void setPhase (Phase phase) {
+    phase.setController(this);
+    this.phase = phase;
+  }
+
+  /**
+   * Returns the phase.
+   * @return the phase of this controller.
+   */
+  public Phase getPhase () {
+    return this.phase;
+  }
+
+  /**
+   * Starts a new turn depending on the actual phase.
+   */
+  public void startNewTurn () {
+    phase.newTurn();
+  }
+
+  /**
+   * Executes the actual phase.
+   */
+  public void executePhase() {
+    phase.doPhase();
+  }
+
+  /**
+   * Returns the actual character.
+   * @return the actual character.
+   */
+  public ICharacter getCharacter() {
+    return actualCharacter;
+  }
+
+  /**
+   * Saves a character for the actual phase.
+   * @param newCharacter the saved character.
+   */
+  public void setCharacter (ICharacter newCharacter) {
+    actualCharacter = newCharacter;
+  }
+
+  /**
+   * Saves the player character in the phase to use it by the user.
+   */
+  public void doPlayerPhase() {
+    phase.setPlayerCharacter((IPlayerCharacter) actualCharacter);
+  }
+
+  /**
+   * Calls the enemy automated attack.
+   */
+  public void doEnemyPhase() {
+    phase.enemyAttack();
+  }
+
+  /**
+   * Called when a turn ends, the actual character starts waiting and sets a waiting phase.
+   */
+  public void endTurn() {
+    actualCharacter.waitTurn();
+    setPhase(new WaitingPhase());
+  }
+
+  /**
+   * Starts a new game, initializing a waiting phase and doing waitTurn() for aLl characters.
+   */
+  public void startGame() {
+    setPhase(new WaitingPhase());
+    for (IPlayerCharacter character : playerCharacters) {
+      character.waitTurn();
+    }
+    for (Enemy character : enemyCharacters) {
+      character.waitTurn();
     }
   }
 
   /**
-   * A character finished his turn, turn is now available to be used by another character.
+   * Returns the number of player characters.
+   * @return number of player characters.
    */
-  public void turnToAvailable() {
-    this.turnAvailable = true;
-    if (turnsQueue.size() > 0) {
-      startTurn();
-    }
+  public int getPlayersQuantity() {
+    return playerCharacters.size();
   }
 
   /**
-   * Method called when a turn starts.
+   * Returns the number of enemies.
+   * @return number of enemies.
    */
-  public void startTurn () {
-    ICharacter character = turnsQueue.poll();
-    turnToNotAvailable();
-    character.receiveDamage(2);
-    character.waitTurn();
+  public int getEnemiesQuantity() {
+    return enemyCharacters.size();
   }
 
   /**
-   * Turns the turnAvailable value to false.
+   * Called when the user wants to move the target pointer to the right.
    */
-  private void turnToNotAvailable() {
-    turnAvailable = false;
+  public void moveTargetRight() {
+    phase.moveTargetRight();
+  }
+
+  /**
+   * Called when the user wants to move the target pointer to the left.
+   */
+  public void moveTargetLeft() {
+    phase.moveTargetLeft();
   }
 }
 
