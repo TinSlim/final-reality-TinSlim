@@ -29,7 +29,7 @@ public abstract class AbstractCharacter implements ICharacter {
 
   private final PropertyChangeSupport deathListened;
   private final PropertyChangeSupport startTurnListened;
-  private final PropertyChangeSupport finishTurnListened;
+  protected final PropertyChangeSupport finishTurnListened;
 
   private boolean outOfCombat;
 
@@ -59,8 +59,8 @@ public abstract class AbstractCharacter implements ICharacter {
    */
   protected void addToQueue() {
     turnsQueue.add(this);
-    startTurnListened.firePropertyChange("TurnAllowed",null,this);
     scheduledExecutor.shutdown();
+    startTurnListened.firePropertyChange("TurnAllowed",null,this);
   }
 
   /**
@@ -119,7 +119,6 @@ public abstract class AbstractCharacter implements ICharacter {
   public void receiveDamage(int damage) {
     int realDamage = damage - this.getDefense();
     if (realDamage <= 0) {
-      finishTurnListened.firePropertyChange("NextTurn",null,this);
       return;
     }
     if ((this.getHp() - realDamage) <= 0) {
@@ -128,7 +127,6 @@ public abstract class AbstractCharacter implements ICharacter {
     } else {
       this.setHp(this.getHp() - realDamage);
     }
-    finishTurnListened.firePropertyChange("NextTurn",null,this);
   }
 
   /**
