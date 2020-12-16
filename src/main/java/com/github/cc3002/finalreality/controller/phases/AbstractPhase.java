@@ -3,21 +3,19 @@ package com.github.cc3002.finalreality.controller.phases;
 import com.github.cc3002.finalreality.controller.Controller;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 
-public abstract class Phase implements IPhase {
-
+public abstract class AbstractPhase implements IPhase {
 
   protected Controller controller;
 
-  public Phase () {
-
+  public AbstractPhase() {
   }
 
   public void setController (Controller controller) {
     this.controller = controller;
   }
   
-  public void changePhase (Phase phase) {
-    controller.setPhase(phase);
+  public void changePhase (AbstractPhase abstractPhase) {
+    controller.setPhase(abstractPhase);
   }
 
 
