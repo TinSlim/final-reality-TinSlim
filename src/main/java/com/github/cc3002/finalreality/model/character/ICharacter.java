@@ -1,6 +1,8 @@
 package com.github.cc3002.finalreality.model.character;
 
 
+import com.github.cc3002.finalreality.controller.Controller;
+
 /**
  * This represents a character from the game.
  * A character can be controlled by the player or by the CPU (an enemy).
@@ -45,4 +47,11 @@ public interface ICharacter {
    * @return this character's defense.
    */
   int getDefense();
+
+  /**
+   * Calls a method of the controller to do this character movement, if this is an Enemy does
+   * an automatized attack, else waits for user decision.
+   * @param controller controller who wants the answer.
+   */
+  void doPhase(Controller controller);
 }
