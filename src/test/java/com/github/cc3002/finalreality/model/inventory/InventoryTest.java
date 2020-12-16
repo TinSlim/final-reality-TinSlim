@@ -67,6 +67,9 @@ public class InventoryTest {
 
   @Test
   public void testEquipToPlayerCharacter() {
+    testBag.equipWeaponToCharacter(testPlayerCharacter);
+    assertNull(testPlayerCharacter.getEquippedWeapon());
+
     Knife testKnifeA = new Knife("TestKnifeA",22,21);
     Knife testKnifeB = new Knife("TestKnifeB",11,5);
     Sword testSword = new Sword("TestSword",32,22);
@@ -74,9 +77,6 @@ public class InventoryTest {
     testBag.addToInventory(testKnifeA);
     testBag.addToInventory(testKnifeB);
     testBag.addToInventory(testSword);
-
-    testBag.equipWeaponToCharacter(testPlayerCharacter);
-    assertNull(testPlayerCharacter.getEquippedWeapon());
 
     testBag.movePoint(1);
     testBag.equipWeaponToCharacter(testPlayerCharacter);
