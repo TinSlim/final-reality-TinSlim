@@ -22,7 +22,7 @@ public class ControllerTest {
    */
   @BeforeEach
   public void setUp () {
-    testController = new Controller();
+    testController = new Controller(4);
   }
 
   /**
@@ -144,12 +144,12 @@ public class ControllerTest {
    * Tests common attacks and weapon equip.
    */
   @Test
-  public void testAttackAndEquip () {
-    testController.makeSword("TestSword",1,3);
-    testController.makeAxe("TestAxe",1,6);
-    testController.makeBow("TestBow",1,4);
-    testController.makeKnife("TestKnife",1,5);
-    testController.makeStaff("TestStaff",1,7,7);
+  public void testAttackAndEquip () throws InterruptedException {
+    testController.makeSword("TestSword",9,40);
+    testController.makeAxe("TestAxe",2,60);
+    testController.makeBow("TestBow",4,120);
+    testController.makeKnife("TestKnife",10,100);
+    testController.makeStaff("TestStaff",15,160,7);
 
     testController.makeKnight("TestKnight",50,0);
     testController.makeEngineer("TestEngineer",50,0);
@@ -157,8 +157,9 @@ public class ControllerTest {
     testController.makeBlackMage("TestBlackMage",50,0,4);
     testController.makeWhiteMage("TestWhiteMage",50,0,5);
 
-    testController.makeEnemy("TestEnemy1",50,0,6,3);
-    testController.makeEnemy("TestEnemy2",50,0,7,4);
+    testController.makeEnemy("TestEnemy1",10,0,140,3);
+    testController.makeEnemy("TestEnemy2",2,0,80,4);
+    testController.makeEnemy("TestEnemy3",10,0,20,50);
 
     testController.rightMoveInventory();
     testController.equipWeaponTo(testController.getPlayerCharacter(0));
@@ -171,29 +172,53 @@ public class ControllerTest {
     testController.rightMoveInventory();
     testController.equipWeaponTo(testController.getPlayerCharacter(4));
 
-    testController.enemyAttacks(testController.getEnemy(0)
-            , testController.getPlayerCharacter(0));
-    assertEquals(47, testController.getPlayerCharacter(0).getHp());
+    testController.startGame();
 
-    testController.playerCharacterCommonAttack(testController.getPlayerCharacter(0),
-            testController.getEnemy(0));
-    assertEquals(49, testController.getEnemy(0).getHp());
+    Thread.sleep(2500);
+    testController.executePhase();
 
-    testController.playerCharacterCommonAttack(testController.getPlayerCharacter(1),
-            testController.getEnemy(0));
-    assertEquals(48, testController.getEnemy(0).getHp());
+    Thread.sleep(2500);
+    testController.executePhase();
+    testController.getPhase().moveTargetRight();
+    testController.getPhase().moveTargetRight();
+    testController.getPhase().moveTargetRight();
+    testController.getPhase().moveTargetRight();
+    testController.getPhase().moveTargetLeft();
+    testController.getPhase().doAttack();
 
-    testController.playerCharacterCommonAttack(testController.getPlayerCharacter(2),
-            testController.getEnemy(0));
-    assertEquals(47, testController.getEnemy(0).getHp());
+    Thread.sleep(2500);
+    testController.executePhase();
+    testController.getPhase().doAttack();
 
-    testController.playerCharacterCommonAttack(testController.getPlayerCharacter(3),
-            testController.getEnemy(0));
-    assertEquals(46, testController.getEnemy(0).getHp());
+    Thread.sleep(2000);
+    testController.executePhase();
+    testController.moveTargetRight();
+    testController.moveTargetRight();
+    testController.moveTargetRight();
+    testController.getPhase().doAttack();
 
-    testController.playerCharacterCommonAttack(testController.getPlayerCharacter(4),
-            testController.getEnemy(0));
-    assertEquals(45, testController.getEnemy(0).getHp());
+    Thread.sleep(2000);
+    testController.executePhase();
+    testController.getPhase().doAttack();
+
+    Thread.sleep(2000);
+    testController.executePhase();
+    testController.moveTargetLeft();
+    testController.moveTargetLeft();
+    testController.moveTargetLeft();
+    testController.getPhase().doAttack();
+
+    Thread.sleep(2000);
+    testController.executePhase();
+    testController.getPhase().doAttack();
+
+    Thread.sleep(2000);
+    testController.executePhase();
+    testController.getPhase().doAttack();
+
+    Thread.sleep(2000);
+    testController.executePhase();
+    testController.getPhase().doAttack();
   }
 
   /**
@@ -255,74 +280,81 @@ public class ControllerTest {
 
   }
 
-  /**
-   * Tests player death listeners and lose method.
-   */
   @Test
-  public void testPlayerCharacterDeathListenerAndLose() {
-    for (int i = 0 ; i < 4; i++) {
-      testController.makeThief("TestThief" + String.valueOf(i),1,1);
-    }
-    assertEquals(4, testController.getPlayersAlive());
-    testController.getPlayerCharacter(0).receiveDamage(2);
-    assertEquals(3, testController.getPlayersAlive());
-    testController.getPlayerCharacter(1).receiveDamage(2);
-    assertEquals(2, testController.getPlayersAlive());
-    testController.getPlayerCharacter(2).receiveDamage(2);
-    assertEquals(1, testController.getPlayersAlive());
-    testController.getPlayerCharacter(3).receiveDamage(2);
-    assertEquals(0, testController.getPlayersAlive());
-
-  }
-
-  /**
-   * Tests enemy death listeners and win method.
-   */
-  @Test
-  public void testEnemyDeathListenerAndWin () {
-    for (int i = 0 ; i < 4; i++) {
-      testController.makeEnemy("TestEnemy" + String.valueOf(i),1,1,2,2);
-    }
-    assertEquals(4, testController.getEnemiesAlive());
-    testController.getEnemy(0).receiveDamage(2);
-    assertEquals(3, testController.getEnemiesAlive());
-    testController.getEnemy(1).receiveDamage(2);
-    assertEquals(2, testController.getEnemiesAlive());
-    testController.getEnemy(2).receiveDamage(2);
-    assertEquals(1, testController.getEnemiesAlive());
-    testController.getEnemy(3).receiveDamage(2);
-    assertEquals(0, testController.getEnemiesAlive());
-
-  }
-
-  /**
-   * Tests the turns.
-   * @throws InterruptedException thread error.
-   */
-  @Test
-  public void testStartTurn () throws InterruptedException {
-    testController.makeSword("TestSword",1,12);
-    testController.makeAxe("TestAxe",1,19);
-
-    testController.makeKnight("TestKnight",50,0);
-    testController.makeEngineer("TestEngineer",50,0);
-
-    testController.makeEnemy("TestEnemy1",50,0,25,3);
-    testController.makeEnemy("TestEnemy2",50,0,29,4);
+  public void testLoseGame () throws InterruptedException {
+    testController.makeSword("TestSword",9,300);
+    testController.makeKnight("TestKnight",20,3);
 
     testController.rightMoveInventory();
     testController.equipWeaponTo(testController.getPlayerCharacter(0));
-    testController.rightMoveInventory();
-    testController.equipWeaponTo(testController.getPlayerCharacter(1));
 
-    assertEquals(0, testController.getQueue().size());
-    testController.getEnemy(0).waitTurn();
-    testController.getEnemy(1).waitTurn();
-    testController.getPlayerCharacter(0).waitTurn();
-    testController.getPlayerCharacter(1).waitTurn();
-    assertEquals(0, testController.getQueue().size());
+    testController.makeEnemy("TestEnemy1",10,0,30,100);
+    testController.makeEnemy("TestEnemy2",10,0,70,100);
+    testController.startGame();
 
-    Thread.sleep(3000);
     Thread.sleep(2000);
+    testController.executePhase();
+
+    Thread.sleep(2000);
+    testController.executePhase();
+
+    Thread.sleep(2000);
+    testController.executePhase();
+
+    System.out.println("a");
+  }
+
+  @Test
+  public void testWinGame () throws InterruptedException {
+    testController.makeSword("TestSword",100,10);
+    testController.makeKnight("TestKnight",20,3);
+
+    testController.rightMoveInventory();
+    testController.equipWeaponTo(testController.getPlayerCharacter(0));
+
+    testController.makeEnemy("TestEnemy1",10,5,300,2);
+    testController.startGame();
+    Thread.sleep(2000);
+    testController.executePhase();
+    testController.getPhase().doAttack();
+  }
+
+  @Test
+  public void testChangeEquipment () throws InterruptedException {
+    for (int i = 0; i < 10; i++) {
+      testController.makeSword("TestSword"+String.valueOf(i),3,20);
+    }
+    testController.makeKnight("TestKnight",100,60);
+    testController.makeEnemy("TestEnemy",100,100,40,100);
+
+    testController.rightMoveInventory();
+    testController.equipWeaponTo(testController.getPlayerCharacter(0));
+    assertEquals(new Sword("TestSword0",3,20),
+            testController.getPlayerCharacter(0).getEquippedWeapon());
+
+    testController.startGame();
+    Thread.sleep(4000);
+    testController.executePhase();
+    testController.getPhase().moveRightInventory();
+    testController.getPhase().moveRightInventory();
+    testController.getPhase().equipWeapon();
+    assertEquals(new Sword("TestSword2",3,20),
+            testController.getPlayerCharacter(0).getEquippedWeapon());
+
+    testController.getPhase().moveUpInventory();
+    testController.getPhase().equipWeapon();
+    assertEquals(new Sword("TestSword7",3,20),
+            testController.getPlayerCharacter(0).getEquippedWeapon());
+
+    testController.getPhase().moveDownInventory();
+    testController.getPhase().equipWeapon();
+    assertEquals(new Sword("TestSword2",3,20),
+            testController.getPlayerCharacter(0).getEquippedWeapon());
+
+    testController.getPhase().moveLeftInventory();
+    testController.getPhase().equipWeapon();
+    assertEquals(new Sword("TestSword1",3,20),
+            testController.getPlayerCharacter(0).getEquippedWeapon());
+
   }
 }
