@@ -1,5 +1,9 @@
 package com.github.cc3002.finalreality.model.character.player;
 
+import com.github.cc3002.finalreality.controller.listeners.FinishTurnListener;
+import com.github.cc3002.finalreality.controller.listeners.IDeathHandler;
+import com.github.cc3002.finalreality.controller.listeners.PlayerCharacterDeathListener;
+import com.github.cc3002.finalreality.controller.listeners.StartTurnListener;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.weapon.AbstractWeapon;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
@@ -98,4 +102,22 @@ public interface IPlayerCharacter {
    * seconds before adding the character to the queue.
    */
   void waitTurn();
+
+  /**
+   * Adds a death handler to know when this character dies.
+   * @param listener death handler.
+   */
+  void addDeathListener(IDeathHandler listener);
+
+  /**
+   * Adds a start turn listener to know when starts a turn.
+   * @param startTurnListener a start turn listener.
+   */
+  void addStartTurnListener(StartTurnListener startTurnListener);
+
+  /**
+   * Adds a finish turn listener to know when starts a turn.
+   * @param finishTurnListener a finish turn listener.
+   */
+  void addFinishTurnListener(FinishTurnListener finishTurnListener);
 }
