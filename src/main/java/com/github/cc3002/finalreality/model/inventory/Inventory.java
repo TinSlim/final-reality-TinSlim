@@ -74,7 +74,7 @@ public class Inventory {
    * @param character character who will be equipped with the current pointed weapon.
    */
   public void equipWeaponToCharacter (IPlayerCharacter character) {
-    if (pointInventory != 0){
+    if (lenInventory > 1){
       character.equip(this.weaponsInventory.get(this.pointInventory));
     }
   }
