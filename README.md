@@ -146,19 +146,20 @@ inventory pointer up, down, left or right; and once you are pointing the weapon 
 There are methods to attack, one for player characters and one for enemies. Both works similar, calling the method 
 with the first parameter the attacker, and the second parameter is the target of the attack.
 
+### Phases
+
+The game uses **TWO** phases, one is the **WaitingPhase**, here the game waits looking if the queue adds a character, if
+happens the game changes to **DecisionPhase**, here the controller takes a character from the queue an depending of his
+type do an attack or waits for the user decision.
+
 #### Start and finish turn
 
-A turn finishes when a character attacks, but after the attack other character receives the damage, knowing this, 
-is better to consider the end of the turn at the end of receive damage method. When a character receive damage, the 
-listener calls the method *turnToAvailable()* from the **Controller**, turns to *true* the *turnAvailable* boolean value
-from the Controller, because the turn can be taken.
+A turn finishes when a character attacks, this activates the observer and turns to
+waiting phase.  When a new character enters to the queue, activates the *newTurn()* method and depending on the actual 
+phase, starts a new turn (this happens when the actual phase is **WaitingPhase**).
  
-A turn can start only if there is a character in the **turnsQueue**, knowing this, other listener calls the method 
-*waitingTurn()* from the **Controller** just after is added a character to the **turnsQueue**, this happens in the
-*addToQueue()* method in **AbstractCharacter** class.
-
-With all of this, another turn will start only if there is almost one character in the **turnsQueue**, and the turn is 
-available.
+When a turn starts, the phase changes to **DecisionPhase**, here if the character that uses the turn is an **Enemy**, the
+character does an automatic attack, if the character was a **PlayerCharacter**, the game waits for the user decisions.
 
 #### End Game
 
