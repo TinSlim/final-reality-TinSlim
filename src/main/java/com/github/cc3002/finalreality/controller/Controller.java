@@ -4,8 +4,9 @@ import com.github.cc3002.finalreality.controller.listeners.EnemyDeathListener;
 import com.github.cc3002.finalreality.controller.listeners.FinishTurnListener;
 import com.github.cc3002.finalreality.controller.listeners.PlayerCharacterDeathListener;
 import com.github.cc3002.finalreality.controller.listeners.StartTurnListener;
-import com.github.cc3002.finalreality.controller.turns.Phase;
-import com.github.cc3002.finalreality.controller.turns.WaitingPhase;
+import com.github.cc3002.finalreality.controller.phases.AbstractPhase;
+import com.github.cc3002.finalreality.controller.phases.IPhase;
+import com.github.cc3002.finalreality.controller.phases.WaitingPhase;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
@@ -42,7 +43,7 @@ public class Controller {
   private final PlayerCharacterDeathListener faintPlayerCharactersListener;
   private final EnemyDeathListener faintEnemyListener;
   private ICharacter actualCharacter;
-  private Phase phase;
+  private IPhase phase;
   private Random random;
 
   /**
@@ -73,6 +74,10 @@ public class Controller {
     return turnsQueue;
   }
 
+  /**
+   * Adds all listeners to a player character and adds it to the list of players.
+   * @param character the character who will be added.
+   */
   public void addPlayer (IPlayerCharacter character) {
     character.addDeathListener(faintPlayerCharactersListener);
     character.addStartTurnListener(startTurnListener);
@@ -499,18 +504,18 @@ public class Controller {
 
   /**
    * Sets a phase to this controller.
-   * @param phase phase that will be setted.
+   * @param IPhase phase that will be setted.
    */
-  public void setPhase (Phase phase) {
-    phase.setController(this);
-    this.phase = phase;
+  public void setPhase (IPhase newPhase) {
+    newPhase.setController(this);
+    this.phase = newPhase;
   }
 
   /**
    * Returns the phase.
    * @return the phase of this controller.
    */
-  public Phase getPhase () {
+  public IPhase getPhase () {
     return this.phase;
   }
 
