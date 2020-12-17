@@ -22,6 +22,10 @@ public class BattleView {
 
   Controller controller;
 
+  public BattleView () {
+    hpVisible = new ArrayList<>();
+  }
+
   public void setController (Controller controller) {
     this.controller = controller;
   }
@@ -70,19 +74,33 @@ public class BattleView {
   }
 
   public void setEquipment () {
+    int i = 10;
+    int j = 320;
+
     Group weapons = new Group();
     for (IWeapon weapon : controller.getInventory().getWeaponsInventory()) {
       Group actualWeapon = new Group();
       Label name = new Label(weapon.getName());
       Label damage = new Label("Damage:"+weapon.getDamage());
-
+      damage.setLayoutY(10);
+      Label weight = new Label("Weight:"+weapon.getWeight());
+      weight.setLayoutY(20);
       Image image = new Image(weapon.getImage(),160,60,false,
               true);
       ImageView imageView = new ImageView(image);
+      imageView.setLayoutX(30);
 
       actualWeapon.getChildren().add(imageView);
       actualWeapon.getChildren().add(name);
       actualWeapon.getChildren().add(damage);
+      actualWeapon.getChildren().add(weight);
+      actualWeapon.setLayoutX(i);
+      actualWeapon.setLayoutY(j);
+      i += 165; // 165 * 4 =  680 + 10
+      if (i % (165 * 4 + 10) == 0) {
+        j += 70;
+        i = 10;
+      }
       weapons.getChildren().add(actualWeapon);
     }
     actualWeapons = weapons;
