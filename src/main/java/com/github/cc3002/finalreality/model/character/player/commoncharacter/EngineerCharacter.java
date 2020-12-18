@@ -20,6 +20,7 @@ public class EngineerCharacter extends AbstractCommonCharacter {
   public EngineerCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
                            final int maxHp, final int defense) {
     super(turnsQueue, name, maxHp, defense);
+    image = "src\\resources\\characters\\engineer.png";
   }
 
   @Override

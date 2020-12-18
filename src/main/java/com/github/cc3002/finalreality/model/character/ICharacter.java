@@ -54,4 +54,6 @@ public interface ICharacter {
    * @param controller controller who wants the answer.
    */
   void doPhase(Controller controller);
+
+  String getImage();
 }

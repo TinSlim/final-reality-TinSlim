@@ -20,6 +20,7 @@ public class ThiefCharacter extends AbstractCommonCharacter {
   public ThiefCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,@NotNull String name,
                         final int maxHp,final int defense) {
     super(turnsQueue, name, maxHp, defense);
+    image = "src\\resources\\characters\\thief.png";
   }
 
   @Override

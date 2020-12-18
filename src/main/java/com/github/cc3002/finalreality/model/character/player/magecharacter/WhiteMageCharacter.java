@@ -22,6 +22,7 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
   public WhiteMageCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
                             final int maxHp, final int defense, final int maxMana) {
     super(turnsQueue, name, maxHp, defense,maxMana);
+    image = "src\\resources\\characters\\whiteMage.png";
   }
 
   /**

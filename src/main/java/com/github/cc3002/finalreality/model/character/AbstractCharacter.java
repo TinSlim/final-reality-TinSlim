@@ -17,6 +17,8 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class AbstractCharacter implements ICharacter {
 
+  protected String image;
+
   protected final BlockingQueue<ICharacter> turnsQueue;
   protected final String name;
 
@@ -142,5 +144,9 @@ public abstract class AbstractCharacter implements ICharacter {
   public void faint() {
     this.outOfCombat = true;
     deathListened.firePropertyChange("Fainted",null,this);
+  }
+
+  public String getImage () {
+    return image;
   }
 }

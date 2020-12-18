@@ -16,7 +16,6 @@ import org.jetbrains.annotations.NotNull;
  * @author Cristóbal Torres Gutiérrez
  */
 public class Enemy extends AbstractCharacter {
-
   private final int weight;
   private final int damage;
 
@@ -41,6 +40,7 @@ public class Enemy extends AbstractCharacter {
     super(turnsQueue,name, maxHp,defense);
     this.weight = weight;
     this.damage = damage;
+    image = "src\\resources\\characters\\enemy.png";
   }
 
   /**
