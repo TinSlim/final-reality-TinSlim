@@ -5,6 +5,7 @@ import com.github.cc3002.finalreality.controller.listeners.FinishTurnListener;
 import com.github.cc3002.finalreality.controller.listeners.PlayerCharacterDeathListener;
 import com.github.cc3002.finalreality.controller.listeners.StartTurnListener;
 import com.github.cc3002.finalreality.controller.phases.IPhase;
+import com.github.cc3002.finalreality.controller.phases.PlayerPhase;
 import com.github.cc3002.finalreality.controller.phases.WaitingPhase;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
@@ -27,7 +28,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class Controller {
 
-  private final int inventoryLength = 5;
+  protected final int inventoryLength = 5;
 
   private final ArrayList<IPlayerCharacter> playerCharacters;
   private int playersAlive;
@@ -443,28 +444,28 @@ public class Controller {
    * Moves the inventory pointer right.
    */
   public void rightMoveInventory () {
-    getInventory().movePoint(1);
+    phase.moveRightInventory();
   }
 
   /**
    * Moves the inventory pointer left.
    */
   public void leftMoveInventory () {
-    getInventory().movePoint(-1);
+    phase.moveLeftInventory();
   }
 
   /**
    * Moves the inventory pointer up.
    */
   public void upMoveInventory () {
-    getInventory().movePoint(inventoryLength);
+    phase.moveUpInventory();
   }
 
   /**
    * Moves the inventory pointer down.
    */
   public void downMoveInventory () {
-    getInventory().movePoint(-inventoryLength);
+    phase.moveDownInventory();
   }
 
   /**
@@ -552,7 +553,7 @@ public class Controller {
    * Saves the player character in the phase to use it by the user.
    */
   public void doPlayerPhase() {
-    phase.setPlayerCharacter((IPlayerCharacter) actualCharacter);
+    setPhase(new PlayerPhase());
   }
 
   /**
@@ -611,6 +612,37 @@ public class Controller {
    */
   public void moveTargetLeft() {
     phase.moveTargetLeft();
+  }
+
+  public String getImage (ICharacter character) {
+    return character.getImage();
+  }
+
+  public void pointLeft() {
+  }
+
+  public int getInventoryLength() {
+    return inventoryLength;
+  }
+
+  public void doAttack() {
+    phase.doAttack();
+    System.out.println(getPlayerCharacter(0).getHp());
+    System.out.println(getPlayerCharacter(1).getHp());
+    System.out.println(getPlayerCharacter(2).getHp());
+    System.out.println(getPlayersQuantity());
+  }
+
+  public int getAttackPointer() {
+    return phase.getAttackPointer();
+  }
+
+  public int getEquipmentPointer() {
+    return inventory.getPointer();
+  }
+
+  public void equipWeapon() {
+    phase.equipWeapon();
   }
 }
 
