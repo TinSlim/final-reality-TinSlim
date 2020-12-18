@@ -1,16 +1,17 @@
 package com.github.cc3002.finalreality.gui;
 
 import com.github.cc3002.finalreality.controller.Controller;
-import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+
+import java.io.File;
+
 
 /**
  * Main entry point for the application.
@@ -36,33 +37,40 @@ public class FinalReality extends Application {
     Button leftEnemyButton = new Button("Point Left");
     leftEnemyButton.setOnAction(event -> controller.moveTargetLeft());
     leftEnemyButton.setLayoutY(580);
+    leftEnemyButton.setLayoutX(10);
 
     Button rightEnemyButton = new Button("Point Right");
     rightEnemyButton.setOnAction(event -> controller.moveTargetRight());
     rightEnemyButton.setLayoutY(580);
-    rightEnemyButton.setLayoutX(90);
+    rightEnemyButton.setLayoutX(100);
 
     Button attackButton = new Button("Attack");
+    attackButton.setOnAction(event -> controller.doAttack());
     attackButton.setLayoutY(580);
     attackButton.setLayoutX(200);
 
     Button leftWeapon = new Button("Left Weapon");
+    leftWeapon.setOnAction(event -> controller.leftMoveInventory());
     leftWeapon.setLayoutY(580);
     leftWeapon.setLayoutX(300);
 
     Button equipWeapon = new Button("Equip");
+    equipWeapon.setOnAction(event -> controller.equipWeapon());
     equipWeapon.setLayoutY(580);
     equipWeapon.setLayoutX(395);
 
     Button rightWeapon = new Button("Right Weapon");
+    rightWeapon.setOnAction(event -> controller.rightMoveInventory());
     rightWeapon.setLayoutY(580);
     rightWeapon.setLayoutX(450);
 
     Button upWeapon = new Button("Up Weapon");
+    upWeapon.setOnAction(event -> controller.upMoveInventory());
     upWeapon.setLayoutY(550);
     upWeapon.setLayoutX(375);
 
     Button downWeapon = new Button("Down Weapon");
+    downWeapon.setOnAction(event -> controller.downMoveInventory());
     downWeapon.setLayoutY(610);
     downWeapon.setLayoutX(370);
 
@@ -80,13 +88,23 @@ public class FinalReality extends Application {
 
   public FinalReality () {
     controller = new Controller(10);
-    controller.makeKnight("Pepe",1,1);
-    controller.makeKnight("Pepa",1,1);
-    controller.makeKnight("Pepy",1,1);
-    controller.makeKnight("Pepaa",1,1);
+    controller.makeKnight("Pepe",100,1);
+    controller.makeKnight("Pepa",100,1);
+    controller.makeKnight("Pepy",100,1);
 
-    controller.makeEnemy("Juan",2,2,2,2);
-    controller.makeEnemy("Juae",2,2,2,2);
+    controller.makeSword("Espade",3,23);
+    controller.makeSword("Espadea",3,54);
+    controller.makeSword("Espaweadea",3,64);
+    controller.makeSword("E231spaweadea",4,100);
+    controller.makeSword("E2adad31spaweadea",3,232);
+
+    controller.equipWeaponTo(controller.getPlayerCharacter(0));
+    controller.equipWeaponTo(controller.getPlayerCharacter(1));
+    controller.equipWeaponTo(controller.getPlayerCharacter(2));
+
+    controller.makeEnemy("Juan",2,2,33,2);
+    controller.makeEnemy("Juae",2,2,77,2);
+    controller.makeEnemy("Juae",2,2,77,2);
 
     battle = new BattleView();
     battle.setController(controller);
@@ -101,9 +119,14 @@ public class FinalReality extends Application {
 
   @Override
   public void start(Stage primaryStage) {
+    controller.startGame();
     setBattleButtons();
     battle.setPlayerValues();
+    battle.initializeTargetPointer();
+    battle.initializeEquipmentPointer();
+    battle.setEnemyValues();
     battle.setEquipment();
+
 
     primaryStage.setTitle("Final reality");
     primaryStage.setResizable(false);
@@ -111,19 +134,26 @@ public class FinalReality extends Application {
     Group root = new Group();
     Scene mainScene = new Scene(root, 700, 650);
 
+    //File file = new File("src...");
+    //String imageUrl = file.toURI().toString();
 
-    String imageUrl = "https://docs.oracle.com/javafx/javafx/images/javafx-documentation.png";
-    Image image = new Image(imageUrl,160,60,false,true);
-    ImageView imageView = new ImageView(image);
-    root.getChildren().add(imageView);
+
+    //Image image = new Image(imageUrl,160,60,false,true);
+    //ImageView imageView = new ImageView(image);
+    //root.getChildren().add(imageView);
+
+    Group grupo = new Group();
+
+    grupo.getChildren().add(battle.targetPointer);
+    grupo.getChildren().add(battle.equipmentPointer);
+    root.getChildren().add(grupo);
 
     root.getChildren().add(battle.getActualPlayers());
+    root.getChildren().add(battle.getActualWeapons());
+    root.getChildren().add(battle.getActualEnemies());
     root.getChildren().add(battleButtons);
-    //equipButton.setOnAction(event -> funcion;
-    //playerAttack.getChildren().add(leftEnemyButton);
-    //playerAttack.getChildren().add(rightEnemyButton);
-    //playerAttack.getChildren().add(attackButton);
-    //playerAttack.getChildren().add(equipButton);
+    //root.getChildren().add(battle.targetPointer);
+
 
 
     Group playerEquipment = new Group();
@@ -137,9 +167,23 @@ public class FinalReality extends Application {
     //battlePhase();
     //root.getChildren().add(playerAttack);
     //attackButton.setOnAction(event -> root.getChildren().remove(playerAttack));
+    setupTimer();
     primaryStage.setScene(mainScene);
-
     primaryStage.show();
+    System.out.println(controller.getEnemy(0).getName());
+  }
+
+  private void setupTimer () {
+    AnimationTimer timer = new AnimationTimer() {
+      @Override
+      public void handle (long now) {
+        battle.updateHp();
+        battle.updateAttackPointer();
+        battle.updateEquipmentPointer();
+        controller.getPhase().doPhase();
+      }
+    };
+    timer.start();
   }
 
 }
