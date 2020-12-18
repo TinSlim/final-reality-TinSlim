@@ -62,4 +62,6 @@ public interface IWeapon {
    * @return true or false if the weapon can cast magic.
    */
   boolean castMagic();
+
+  String getImage();
 }

@@ -13,6 +13,7 @@ public class Sword extends AbstractWeapon {
    */
   public Sword(String name, int damage, int weight) {
     super(name, damage, weight);
+    image = "src\\resources\\weapons\\sword.png";
   }
 
   @Override

@@ -9,6 +9,8 @@ import java.util.Objects;
  * @author <Your name>
  */
 public abstract class AbstractWeapon implements IWeapon {
+  protected String image = "src\\resources\\weapons\\sword.png"; //Todo cambiar
+
 
   private final String name;
   private final int damage;
@@ -23,6 +25,9 @@ public abstract class AbstractWeapon implements IWeapon {
     this.weight = weight;
   }
 
+  public String getImage () {
+    return image;
+  }
   @Override
   public String getName() {
     return name;
