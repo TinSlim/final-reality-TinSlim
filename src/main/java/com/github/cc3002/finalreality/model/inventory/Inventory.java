@@ -20,9 +20,8 @@ public class Inventory {
    */
   public Inventory () {
     weaponsInventory = new ArrayList<>();
-    addToInventory(null);
     pointInventory = 0;
-    lenInventory = 1;
+    lenInventory = 0;
   }
 
   /**
