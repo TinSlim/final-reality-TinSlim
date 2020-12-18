@@ -72,4 +72,6 @@ public interface IPhase {
    * Moves left the inventory pointer.
    */
   void moveLeftInventory();
+
+  int getAttackPointer();
 }

@@ -24,10 +24,6 @@ public class DecisionPhase extends AbstractPhase {
     controller.getCharacter().doPhase(controller);
   }
 
-  @Override
-  public void setPlayerCharacter (IPlayerCharacter character) {
-    playerCharacter = character;
-  }
 
   @Override
   public void enemyAttack () {
@@ -37,47 +33,5 @@ public class DecisionPhase extends AbstractPhase {
     controller.enemyAttacks(actualCharacter,target);
   }
 
-  @Override
-  public void moveTargetRight () {
-    if (targetIndex + 1 < controller.getEnemiesQuantity()) {
-      targetIndex += 1;
-    }
-  }
 
-  @Override
-  public void moveTargetLeft () {
-    if (targetIndex - 1 >= 0) {
-      targetIndex -= 1;
-    }
-  }
-
-  @Override
-  public void doAttack ( ) {
-    controller.playerCharacterCommonAttack(playerCharacter,controller.getEnemyCharacters().get(targetIndex));
-  }
-
-  @Override
-  public void moveDownInventory () {
-    controller.downMoveInventory();
-  }
-
-  @Override
-  public void moveUpInventory () {
-    controller.upMoveInventory();
-  }
-
-  @Override
-  public void moveRightInventory () {
-    controller.rightMoveInventory();
-  }
-
-  @Override
-  public void moveLeftInventory () {
-    controller.leftMoveInventory();
-  }
-
-  @Override
-  public void equipWeapon () {
-    controller.equipWeaponTo(playerCharacter);
-  }
 }

@@ -65,10 +65,15 @@ public abstract class AbstractPhase implements IPhase {
   }
 
   @Override
-  public void moveUpInventory() {
+  public void moveUpInventory () {
   }
 
   @Override
-  public void moveLeftInventory() {
+  public void moveLeftInventory () {
+  }
+
+  @Override
+  public int getAttackPointer () {
+    return -10;
   }
 }
