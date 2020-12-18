@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +42,10 @@ public class BattleView {
       hpVisible.add(hp);
       Label defense = new Label("Def:"+controller.getPlayerCharacterDefense(player));
 
-      Image image = new Image(controller.getImage((ICharacter) player),160,60,false,
+      File file = new File(controller.getImage((ICharacter) player));
+      String imageUrl = file.toURI().toString();
+
+      Image image = new Image(imageUrl,160,60,false,
               true);
       ImageView imageView = new ImageView(image);
 
@@ -85,10 +89,15 @@ public class BattleView {
       damage.setLayoutY(10);
       Label weight = new Label("Weight:"+weapon.getWeight());
       weight.setLayoutY(20);
-      Image image = new Image(weapon.getImage(),160,60,false,
+
+      File file = new File(weapon.getImage());
+      String imageUrl = file.toURI().toString();
+
+      Image image = new Image(imageUrl,60,60,false,
               true);
       ImageView imageView = new ImageView(image);
-      imageView.setLayoutX(30);
+      imageView.setLayoutX(65);
+      imageView.setLayoutY(12);
 
       actualWeapon.getChildren().add(imageView);
       actualWeapon.getChildren().add(name);
