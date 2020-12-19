@@ -74,4 +74,7 @@ public interface IPhase {
   void moveLeftInventory();
 
   int getAttackPointer();
+
+
+  int getPlayerAttackingPointer();
 }

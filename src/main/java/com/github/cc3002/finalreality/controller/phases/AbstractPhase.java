@@ -76,4 +76,8 @@ public abstract class AbstractPhase implements IPhase {
   public int getAttackPointer () {
     return -10;
   }
+
+  public int getPlayerAttackingPointer () {
+    return 0;
+  }
 }

@@ -57,4 +57,5 @@ public class PlayerPhase extends AbstractPhase {
   public int getAttackPointer () {
     return targetIndex;
   }
+
 }

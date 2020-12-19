@@ -21,17 +21,7 @@ public class DecisionPhase extends AbstractPhase {
   @Override
   public void doPhase () {
     controller.setCharacter(controller.getQueue().poll());
+    controller.setPosition(controller.getCharacter().getPosition());
     controller.getCharacter().doPhase(controller);
   }
-
-
-  @Override
-  public void enemyAttack () {
-    Enemy actualCharacter = (Enemy) controller.getCharacter();
-    int targetIndex = controller.getRandom().nextInt(controller.getPlayersQuantity());
-    IPlayerCharacter target = controller.getPlayerCharacters().get(targetIndex);
-    controller.enemyAttacks(actualCharacter,target);
-  }
-
-
 }
