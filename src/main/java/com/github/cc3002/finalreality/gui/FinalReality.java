@@ -88,27 +88,30 @@ public class FinalReality extends Application {
 
   public FinalReality () {
     controller = new Controller(10);
-    controller.makeKnight("Pepe",100,1);
-    controller.makeKnight("Pepa",100,1);
-    controller.makeKnight("Pepy",100,1);
+    controller.makeKnight("Pepe",70,1);
+    controller.makeKnight("Pepaa",30,1);
+    controller.makeKnight("Pepeaa",30,1);
+    controller.makeKnight("Pepea",30,1);;
 
     controller.makeSword("Espade",3,23);
     controller.makeSword("Espadea",3,54);
     controller.makeSword("Espaweadea",3,64);
     controller.makeSword("E231spaweadea",4,100);
     controller.makeSword("E2adad31spaweadea",3,232);
+    controller.makeAxe("Esxa",3,232);
+    controller.makeAxe("Ea",3,232);
+    controller.makeAxe("E23a",3,232);
+    controller.makeAxe("313Ea",3,232);
+    controller.makeAxe("1Ea",53,232);
 
-    controller.equipWeaponTo(controller.getPlayerCharacter(0));
-    controller.equipWeaponTo(controller.getPlayerCharacter(1));
-    controller.equipWeaponTo(controller.getPlayerCharacter(2));
-
-    controller.makeEnemy("Juan",2,2,33,2);
-    controller.makeEnemy("Juae",2,2,77,2);
-    controller.makeEnemy("Juae",2,2,77,2);
+    controller.makeEnemy("Juan",2,0,33,10);
+    controller.makeEnemy("Juae",1,0,77,10);
+    controller.makeEnemy("Juae",3,0,147,10);
 
     battle = new BattleView();
     battle.setController(controller);
   }
+
   public void addWeapons () {
 
   }
@@ -124,6 +127,7 @@ public class FinalReality extends Application {
     battle.setPlayerValues();
     battle.initializeTargetPointer();
     battle.initializeEquipmentPointer();
+    battle.initializeAttackerPointer();
     battle.setEnemyValues();
     battle.setEquipment();
 
@@ -146,6 +150,7 @@ public class FinalReality extends Application {
 
     grupo.getChildren().add(battle.targetPointer);
     grupo.getChildren().add(battle.equipmentPointer);
+    grupo.getChildren().add(battle.attackerPointer);
     root.getChildren().add(grupo);
 
     root.getChildren().add(battle.getActualPlayers());
@@ -168,6 +173,7 @@ public class FinalReality extends Application {
     //root.getChildren().add(playerAttack);
     //attackButton.setOnAction(event -> root.getChildren().remove(playerAttack));
     setupTimer();
+    System.out.println("nice");
     primaryStage.setScene(mainScene);
     primaryStage.show();
     System.out.println(controller.getEnemy(0).getName());
@@ -180,6 +186,8 @@ public class FinalReality extends Application {
         battle.updateHp();
         battle.updateAttackPointer();
         battle.updateEquipmentPointer();
+        battle.updatePlayerDamageWeight();
+        battle.updateAttacker();
         controller.getPhase().doPhase();
       }
     };

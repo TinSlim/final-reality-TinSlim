@@ -16,15 +16,20 @@ import java.util.ArrayList;
 public class BattleView {
   Group actualPlayers;
   ArrayList<Label> playerHpVisible;
+  ArrayList<Label> playerDamageVisible;
+  ArrayList<Label> playerWeightVisible;
   ArrayList<Label> enemyHpVisible;
   Group actualEnemies;
   Group actualWeapons;
   Controller controller;
   ImageView targetPointer;
   ImageView equipmentPointer;
+  ImageView attackerPointer;
 
   public BattleView () {
     playerHpVisible = new ArrayList<>();
+    playerDamageVisible = new ArrayList<>();
+    playerWeightVisible = new ArrayList<>();
     enemyHpVisible = new ArrayList<>();
   }
 
@@ -35,6 +40,15 @@ public class BattleView {
     targetPointer = new ImageView(image);
     targetPointer.setLayoutX(200);
     targetPointer.setLayoutY(130);
+  }
+
+  public void initializeAttackerPointer () {
+    File file = new File("src\\resources\\targetWeapon.png");
+    String imageUrl = file.toURI().toString();
+    Image image = new Image(imageUrl,150,70,false,true);
+    attackerPointer = new ImageView(image);
+    attackerPointer.setLayoutX(200);
+    attackerPointer.setLayoutY(130);
   }
 
   public void initializeEquipmentPointer () {
@@ -60,20 +74,25 @@ public class BattleView {
       Label hp = new Label("HP:"+controller.getPlayerCharacterMaxHp(player)+"/"+controller.getPlayerCharacterHp(player));
       playerHpVisible.add(hp);
       Label defense = new Label("Def:"+controller.getPlayerCharacterDefense(player));
+      Label damage = new Label("Atk:"+player.getEquippedWeapon().getDamage());
+      playerDamageVisible.add(damage);
+      Label weight = new Label("Wgt:"+player.getEquippedWeapon().getWeight());
+      playerWeightVisible.add(weight);
 
-      File file = new File(controller.getImage((ICharacter) player));
-      String imageUrl = file.toURI().toString();
-
-      Image image = new Image(imageUrl,160,60,false,
+      Image image = new Image(controller.getImage((ICharacter) player),160,60,false,
               true);
       ImageView imageView = new ImageView(image);
 
       actualPlayer.getChildren().add(imageView);
       actualPlayer.getChildren().add(name);
       actualPlayer.getChildren().add(hp);
+      actualPlayer.getChildren().add(damage);
+      actualPlayer.getChildren().add(weight);
       name.setLayoutY(0);
       hp.setLayoutY(12);
       defense.setLayoutY(24);
+      damage.setLayoutY(36);
+      weight.setLayoutY(48);
       imageView.setLayoutX(5);
       actualPlayer.setLayoutY(i);
       i += 70;
@@ -97,10 +116,7 @@ public class BattleView {
       Label defense = new Label("Def:"+controller.getEnemyDefense(enemy));
       Label damage = new Label("Damage:"+controller.getEnemyDamage(enemy));
 
-      File file = new File(controller.getImage(enemy));
-      String imageUrl = file.toURI().toString();
-
-      Image image = new Image(imageUrl,160,60,false,
+      Image image = new Image(controller.getImage(enemy),160,60,false,
               true);
       ImageView imageView = new ImageView(image);
 
@@ -126,6 +142,10 @@ public class BattleView {
     return actualEnemies;
   }
 
+  public void updatePlayerAttackingPointer () {
+
+  }
+
   public void updateHp () {
     for (int i = 0; i < controller.getPlayerCharacters().size(); i++) {
       playerHpVisible.get(i).setText("HP:"+controller.getPlayerCharacterMaxHp(controller.getPlayerCharacter(i))+"/"+
@@ -134,6 +154,13 @@ public class BattleView {
     for (int i = 0; i < controller.getEnemyCharacters().size(); i++) {
       enemyHpVisible.get(i).setText("HP:"+controller.getEnemyMaxHp(controller.getEnemy(i))+"/"+
               controller.getEnemyHp(controller.getEnemy(i)));
+    }
+  }
+
+  public void updatePlayerDamageWeight () {
+    for (int i = 0; i < controller.getPlayerCharacters().size(); i++) {
+      playerDamageVisible.get(i).setText("Atk:"+controller.getPlayerCharacter(i).getEquippedWeapon().getDamage());
+      playerWeightVisible.get(i).setText("Wgt:"+controller.getPlayerCharacter(i).getEquippedWeapon().getWeight());
     }
   }
 
@@ -183,6 +210,7 @@ public class BattleView {
     return actualWeapons;
   }
 
+
   public void updateAttackPointer() {
     targetPointer.setLayoutY(30 + 70 * controller.getAttackPointer());
   }
@@ -191,5 +219,11 @@ public class BattleView {
     int value = controller.getEquipmentPointer();
     equipmentPointer.setLayoutY(320 + (value / 4) * 70);
     equipmentPointer.setLayoutX(5 + (value % 4) * 165);
+  }
+
+  public void updateAttacker() {
+    int value = controller.getPlayerAttackingPointer();
+    attackerPointer.setLayoutY(20 + (value) * 70);
+    attackerPointer.setLayoutX(20);
   }
 }
