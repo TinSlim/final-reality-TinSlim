@@ -1,5 +1,6 @@
 package com.github.cc3002.finalreality.model.character;
 
+import java.io.File;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
@@ -37,11 +38,11 @@ public class Enemy extends AbstractCharacter {
   public Enemy(@NotNull BlockingQueue<ICharacter> turnsQueue,
                @NotNull String name, final int maxHp,
                final int weight,final int defense, final int damage){
-    super(turnsQueue,name, maxHp,defense);
+    super(turnsQueue,name, maxHp,defense, "src\\resources\\characters\\enemy.png",-10);
     this.weight = weight;
     this.damage = damage;
-    image = "src\\resources\\characters\\enemy.png";
   }
+
 
   /**
    * Returns the weight of this enemy.
@@ -125,8 +126,8 @@ public class Enemy extends AbstractCharacter {
   public void commonAttack(IPlayerCharacter target) {
     if (target.isAlive()) {
       target.receiveDamage(this.getDamage());
+      finishTurnListened.firePropertyChange("NextTurn",null,this);
     }
-    finishTurnListened.firePropertyChange("NextTurn",null,this);
   }
   
   /**
@@ -164,6 +165,10 @@ public class Enemy extends AbstractCharacter {
 
   @Override
   public void doPhase (Controller controller) {
-    controller.doEnemyPhase();
+    if (isAlive()) {
+      controller.doEnemyPhase();;
+    } else {
+      controller.endTurn();
+    }
   }
 }

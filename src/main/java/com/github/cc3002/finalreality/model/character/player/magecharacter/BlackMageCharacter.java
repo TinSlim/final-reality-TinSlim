@@ -1,5 +1,6 @@
 package com.github.cc3002.finalreality.model.character.player.magecharacter;
 
+import java.io.File;
 import java.util.Random;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
@@ -20,10 +21,11 @@ public class BlackMageCharacter extends AbstractMageCharacter {
    * @param turnsQueue     the queue with the characters waiting for their turn
    */
   public BlackMageCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
-                            final int maxHp, final int defense, final int maxMana) {
-    super(turnsQueue, name, maxHp, defense,maxMana);
-    image = "src\\resources\\characters\\blackMage.png";
+                            final int maxHp, final int defense, final int maxMana, int position) {
+    super(turnsQueue, name, maxHp, defense,maxMana, "src\\resources\\characters\\blackMage.png", position);
   }
+
+
 
   /**
    * This BlackMageCharacter attacks a target (Enemy) with thunder magic with a chance to paralize

@@ -14,6 +14,7 @@ public class Axe extends AbstractWeapon {
    */
   public Axe(String name, int damage, int weight) {
     super(name, damage, weight);
+    image = "src\\resources\\weapons\\axe.png";
   }
 
   @Override

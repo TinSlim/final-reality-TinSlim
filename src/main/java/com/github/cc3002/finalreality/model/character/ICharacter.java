@@ -56,4 +56,8 @@ public interface ICharacter {
   void doPhase(Controller controller);
 
   String getImage();
+
+  boolean isAlive();
+
+  int getPosition();
 }

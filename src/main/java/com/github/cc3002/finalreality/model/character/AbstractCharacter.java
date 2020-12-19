@@ -1,6 +1,7 @@
 package com.github.cc3002.finalreality.model.character;
 
 import java.beans.PropertyChangeSupport;
+import java.io.File;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -18,6 +19,7 @@ import org.jetbrains.annotations.NotNull;
 public abstract class AbstractCharacter implements ICharacter {
 
   protected String image;
+  protected String imageFile;
 
   protected final BlockingQueue<ICharacter> turnsQueue;
   protected final String name;
@@ -32,6 +34,8 @@ public abstract class AbstractCharacter implements ICharacter {
   private final PropertyChangeSupport startTurnListened;
   protected final PropertyChangeSupport finishTurnListened;
 
+  protected int characterPosition;
+
   private boolean outOfCombat;
 
   /**
@@ -42,17 +46,25 @@ public abstract class AbstractCharacter implements ICharacter {
    * @param defense         the character's defense
    */
   protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,
-      @NotNull String name, final int maxHp, final int defense) {
+      @NotNull String name, final int maxHp, final int defense, String imageFile, int position) {
     this.turnsQueue = turnsQueue;
     this.name = name;
     this.maxHp = maxHp;
     this.hp = maxHp;
     this.defense = defense;
     this.outOfCombat = false;
+    this.imageFile = imageFile;
+    characterPosition = position;
+    setAliveImage();
 
     this.deathListened = new PropertyChangeSupport(this);
     this.startTurnListened = new PropertyChangeSupport(this);
     this.finishTurnListened = new PropertyChangeSupport(this);
+  }
+
+  protected void setAliveImage() {
+    File file = new File(imageFile);
+    image = file.toURI().toString();
   }
 
   /**
@@ -148,5 +160,9 @@ public abstract class AbstractCharacter implements ICharacter {
 
   public String getImage () {
     return image;
+  }
+
+  public int getPosition () {
+    return characterPosition;
   }
 }

@@ -29,8 +29,8 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
    *  @param name           the character's name
    */
   public AbstractPlayerCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,@NotNull String name,
-                                 final int maxHp,final int defense){
-    super(turnsQueue, name, maxHp,defense);
+                                 final int maxHp,final int defense, String imageFile, int position){
+    super(turnsQueue, name, maxHp,defense, imageFile, position);
   }
 
   @Override
@@ -77,8 +77,9 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
       IWeapon weapon = this.getEquippedWeapon();
       int damage = weapon.getDamage();
       target.receiveDamage(damage);
+      finishTurnListened.firePropertyChange("NextTurn",null,this);
     }
-    finishTurnListened.firePropertyChange("NextTurn",null,this);
+
   }
 
   @Override
@@ -93,6 +94,10 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
 
   @Override
   public void doPhase (Controller controller) {
-    controller.doPlayerPhase();
+    if (isAlive()) {
+      controller.doPlayerPhase();
+    } else {
+      controller.endTurn();
+    }
   }
 }
