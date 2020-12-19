@@ -4,9 +4,7 @@ import com.github.cc3002.finalreality.controller.listeners.EnemyDeathListener;
 import com.github.cc3002.finalreality.controller.listeners.FinishTurnListener;
 import com.github.cc3002.finalreality.controller.listeners.PlayerCharacterDeathListener;
 import com.github.cc3002.finalreality.controller.listeners.StartTurnListener;
-import com.github.cc3002.finalreality.controller.phases.IPhase;
-import com.github.cc3002.finalreality.controller.phases.PlayerPhase;
-import com.github.cc3002.finalreality.controller.phases.WaitingPhase;
+import com.github.cc3002.finalreality.controller.phases.*;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
@@ -28,7 +26,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class Controller {
 
-  protected final int inventoryLength = 5;
+  protected final int inventoryLength = 4;
 
   private final ArrayList<IPlayerCharacter> playerCharacters;
   private int playersAlive;
@@ -45,6 +43,7 @@ public class Controller {
   private ICharacter actualCharacter;
   private IPhase phase;
   private final Random random;
+  private int position;
 
   /**
    * Initialize a Controller, making listeners, a queue, lists of characters.
@@ -54,6 +53,7 @@ public class Controller {
     playerCharacters = new ArrayList<>();
     enemyCharacters = new ArrayList<>();
     turnsQueue = new LinkedBlockingQueue<>();
+    position = -10;
 
     playersAlive = 0;
     enemiesAlive = 0;
@@ -94,7 +94,8 @@ public class Controller {
    * @param defense Knight's defense.
    */
   public void makeKnight (String name, int maxHp, int defense) {
-    KnightCharacter character = new KnightCharacter(turnsQueue,name,maxHp,defense);
+    KnightCharacter character = new KnightCharacter(turnsQueue,name,maxHp,defense,playersAlive);
+    character.equipWeapon(new Sword("ToySword",0,20));
     addPlayer(character);
   }
 
@@ -106,7 +107,8 @@ public class Controller {
    * @param defense Thief's defense.
    */
   public void makeThief (String name, int maxHp, int defense) {
-    ThiefCharacter character = new ThiefCharacter(turnsQueue,name,maxHp,defense);
+    ThiefCharacter character = new ThiefCharacter(turnsQueue,name,maxHp,defense,playersAlive);
+    character.equipWeapon(new Bow("ToyBow",0,20));
     addPlayer(character);
   }
 
@@ -118,7 +120,8 @@ public class Controller {
    * @param defense Engineer's defense.
    */
   public void makeEngineer (String name, int maxHp, int defense) {
-    EngineerCharacter character = new EngineerCharacter(turnsQueue, name, maxHp, defense);
+    EngineerCharacter character = new EngineerCharacter(turnsQueue, name, maxHp, defense,playersAlive);
+    character.equipWeapon(new Axe("ToyAxe",0,20));
     addPlayer(character);
   }
 
@@ -131,7 +134,8 @@ public class Controller {
    * @param maxMana WhiteMage's maxMana.
    */
   public void makeWhiteMage (String name, int maxHp, int defense, int maxMana) {
-    WhiteMageCharacter character = new WhiteMageCharacter(turnsQueue,name,maxHp,defense,maxMana);
+    WhiteMageCharacter character = new WhiteMageCharacter(turnsQueue,name,maxHp,defense,maxMana,playersAlive);
+    character.equipWeapon(new Staff("ToyStaff",0,0,20));
     addPlayer(character);
   }
 
@@ -144,7 +148,8 @@ public class Controller {
    * @param maxMana BlackMage's maxMana.
    */
   public void makeBlackMage (String name, int maxHp, int defense, int maxMana) {
-    BlackMageCharacter character = new BlackMageCharacter(turnsQueue,name,maxHp,defense,maxMana);
+    BlackMageCharacter character = new BlackMageCharacter(turnsQueue,name,maxHp,defense,maxMana,playersAlive);
+    character.equipWeapon(new Staff("ToyStaff",0,0,20));
     addPlayer(character);
   }
 
@@ -398,13 +403,14 @@ public class Controller {
    * Method called when the user wins.
    */
   public void win() {
-
+    setPhase(new EndPhase());
   }
 
   /**
    * Method called when the user loses.
    */
   public void lose() {
+    System.out.println("You Lose");
 
   }
 
@@ -554,12 +560,14 @@ public class Controller {
    */
   public void doPlayerPhase() {
     setPhase(new PlayerPhase());
+    phase.setPlayerCharacter((IPlayerCharacter) actualCharacter);
   }
 
   /**
    * Calls the enemy automated attack.
    */
   public void doEnemyPhase() {
+    setPhase(new EnemyPhase());
     phase.enemyAttack();
   }
 
@@ -569,6 +577,10 @@ public class Controller {
   public void endTurn() {
     actualCharacter.waitTurn();
     setPhase(new WaitingPhase());
+    setPosition(-10);
+    if (getQueue().size() > 0) {
+      startNewTurn();
+    }
   }
 
   /**
@@ -643,6 +655,18 @@ public class Controller {
 
   public void equipWeapon() {
     phase.equipWeapon();
+  }
+
+  public int getPosition () {
+    return position;
+  }
+
+  public int getPlayerAttackingPointer() {
+    return position;
+  }
+
+  public void setPosition (int i) {
+    position = i;
   }
 }
 
