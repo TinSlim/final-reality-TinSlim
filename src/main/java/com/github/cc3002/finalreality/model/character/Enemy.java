@@ -38,7 +38,7 @@ public class Enemy extends AbstractCharacter {
   public Enemy(@NotNull BlockingQueue<ICharacter> turnsQueue,
                @NotNull String name, final int maxHp,
                final int weight,final int defense, final int damage){
-    super(turnsQueue,name, maxHp,defense, "src\\resources\\characters\\enemy.png",-10);
+    super(turnsQueue,name, maxHp,defense, "src\\resources\\characters\\enemy.png");
     this.weight = weight;
     this.damage = damage;
   }

@@ -28,6 +28,7 @@ public abstract class AbstractWeapon implements IWeapon {
   public String getImage () {
     return image;
   }
+
   @Override
   public String getName() {
     return name;

@@ -19,8 +19,8 @@ public class ThiefCharacter extends AbstractCommonCharacter {
    * @param turnsQueue     the queue with the characters waiting for their turn
    */
   public ThiefCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,@NotNull String name,
-                        final int maxHp,final int defense, int position) {
-    super(turnsQueue, name, maxHp, defense, "src\\resources\\characters\\thief.png", position);
+                        final int maxHp,final int defense) {
+    super(turnsQueue, name, maxHp, defense, "src\\resources\\characters\\thief.png");
   }
 
 

@@ -29,8 +29,8 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
    *  @param name           the character's name
    */
   public AbstractPlayerCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,@NotNull String name,
-                                 final int maxHp,final int defense, String imageFile, int position){
-    super(turnsQueue, name, maxHp,defense, imageFile, position);
+                                 final int maxHp,final int defense, String imageFile){
+    super(turnsQueue, name, maxHp,defense, imageFile);
   }
 
   @Override

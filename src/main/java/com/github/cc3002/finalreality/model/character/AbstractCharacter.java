@@ -46,7 +46,7 @@ public abstract class AbstractCharacter implements ICharacter {
    * @param defense         the character's defense
    */
   protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,
-      @NotNull String name, final int maxHp, final int defense, String imageFile, int position) {
+      @NotNull String name, final int maxHp, final int defense, String imageFile) {
     this.turnsQueue = turnsQueue;
     this.name = name;
     this.maxHp = maxHp;
@@ -54,7 +54,6 @@ public abstract class AbstractCharacter implements ICharacter {
     this.defense = defense;
     this.outOfCombat = false;
     this.imageFile = imageFile;
-    characterPosition = position;
     setAliveImage();
 
     this.deathListened = new PropertyChangeSupport(this);
@@ -164,5 +163,9 @@ public abstract class AbstractCharacter implements ICharacter {
 
   public int getPosition () {
     return characterPosition;
+  }
+
+  public void setPosition(int newValue) {
+    characterPosition = newValue;
   }
 }
