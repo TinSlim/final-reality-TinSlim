@@ -6,6 +6,7 @@ import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
 import javafx.scene.Group;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,7 +14,8 @@ import javafx.scene.image.ImageView;
 import java.io.File;
 import java.util.ArrayList;
 
-public class BattleView {
+public class BattleView extends View {
+  Group battleButtons;
   Group actualPlayers;
   ArrayList<Label> playerHpVisible;
   ArrayList<Label> playerDamageVisible;
@@ -26,11 +28,21 @@ public class BattleView {
   ImageView equipmentPointer;
   ImageView attackerPointer;
 
-  public BattleView () {
+  private FinalReality actualGame;
+
+  public BattleView() {
     playerHpVisible = new ArrayList<>();
     playerDamageVisible = new ArrayList<>();
     playerWeightVisible = new ArrayList<>();
     enemyHpVisible = new ArrayList<>();
+  }
+
+  public void setRoot (Group newRoot) {
+    this.root = newRoot;
+  }
+
+  public void setGame (FinalReality newGame) {
+    actualGame = newGame;
   }
 
   public void initializeTargetPointer () {
@@ -226,4 +238,90 @@ public class BattleView {
     attackerPointer.setLayoutY(20 + (value) * 70);
     attackerPointer.setLayoutX(20);
   }
+
+  public void initialize() {
+    setPlayerValues();
+    initializeTargetPointer();
+    initializeEquipmentPointer();
+    initializeAttackerPointer();
+    setEnemyValues();
+    setEquipment();
+
+    root.getChildren().add(targetPointer);
+    root.getChildren().add(equipmentPointer);
+    root.getChildren().add(attackerPointer);
+
+    root.getChildren().add(getActualPlayers());
+    root.getChildren().add(getActualWeapons());
+    root.getChildren().add(getActualEnemies());
+    setBattleButtons();
+    root.getChildren().add(battleButtons);
+    controller.startGame();
+  }
+
+  public void setBattleButtons () {
+    battleButtons = new Group();
+
+    Button leftEnemyButton = new Button("Point Left");
+    leftEnemyButton.setOnAction(event -> controller.moveTargetLeft());
+    leftEnemyButton.setLayoutY(580);
+    leftEnemyButton.setLayoutX(10);
+
+    Button rightEnemyButton = new Button("Point Right");
+    rightEnemyButton.setOnAction(event -> controller.moveTargetRight());
+    rightEnemyButton.setLayoutY(580);
+    rightEnemyButton.setLayoutX(100);
+
+    Button attackButton = new Button("Attack");
+    attackButton.setOnAction(event -> controller.doAttack());
+    attackButton.setLayoutY(580);
+    attackButton.setLayoutX(200);
+
+    Button leftWeapon = new Button("Left Weapon");
+    leftWeapon.setOnAction(event -> controller.leftMoveInventory());
+    leftWeapon.setLayoutY(580);
+    leftWeapon.setLayoutX(300);
+
+    Button equipWeapon = new Button("Equip");
+    equipWeapon.setOnAction(event -> controller.equipWeapon());
+    equipWeapon.setLayoutY(580);
+    equipWeapon.setLayoutX(395);
+
+    Button rightWeapon = new Button("Right Weapon");
+    rightWeapon.setOnAction(event -> controller.rightMoveInventory());
+    rightWeapon.setLayoutY(580);
+    rightWeapon.setLayoutX(450);
+
+    Button upWeapon = new Button("Up Weapon");
+    upWeapon.setOnAction(event -> controller.upMoveInventory());
+    upWeapon.setLayoutY(550);
+    upWeapon.setLayoutX(375);
+
+    Button downWeapon = new Button("Down Weapon");
+    downWeapon.setOnAction(event -> controller.downMoveInventory());
+    downWeapon.setLayoutY(610);
+    downWeapon.setLayoutX(370);
+
+
+
+    battleButtons.getChildren().add(leftEnemyButton);
+    battleButtons.getChildren().add(rightEnemyButton);
+    battleButtons.getChildren().add(attackButton);
+    battleButtons.getChildren().add(downWeapon);
+    battleButtons.getChildren().add(upWeapon);
+    battleButtons.getChildren().add(leftWeapon);
+    battleButtons.getChildren().add(rightWeapon);
+    battleButtons.getChildren().add(equipWeapon);
+  }
+
+  public void update() {
+    updateHp();
+    updateAttackPointer();
+    updateEquipmentPointer();
+    updatePlayerDamageWeight();
+    updateAttacker();
+    controller.getPhase().doPhase();
+  }
+
+
 }
