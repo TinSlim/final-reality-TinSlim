@@ -79,11 +79,13 @@ public class Controller {
    * @param character the character who will be added.
    */
   public void addPlayer (IPlayerCharacter character) {
-    character.addDeathListener(faintPlayerCharactersListener);
-    character.addStartTurnListener(startTurnListener);
-    character.addFinishTurnListener(finishTurnListener);
-    playerCharacters.add(character);
-    changeAlivePlayersQuantity(1);
+    if (getPlayersAlive() < 4) {
+      character.addDeathListener(faintPlayerCharactersListener);
+      character.addStartTurnListener(startTurnListener);
+      character.addFinishTurnListener(finishTurnListener);
+      playerCharacters.add(character);
+      changeAlivePlayersQuantity(1);
+    }
   }
 
   /**
@@ -94,7 +96,8 @@ public class Controller {
    * @param defense Knight's defense.
    */
   public void makeKnight (String name, int maxHp, int defense) {
-    KnightCharacter character = new KnightCharacter(turnsQueue,name,maxHp,defense,playersAlive);
+    KnightCharacter character = new KnightCharacter(turnsQueue,name,maxHp,defense);
+    character.setPosition(playersAlive);
     character.equipWeapon(new Sword("ToySword",0,20));
     addPlayer(character);
   }
@@ -107,7 +110,8 @@ public class Controller {
    * @param defense Thief's defense.
    */
   public void makeThief (String name, int maxHp, int defense) {
-    ThiefCharacter character = new ThiefCharacter(turnsQueue,name,maxHp,defense,playersAlive);
+    ThiefCharacter character = new ThiefCharacter(turnsQueue,name,maxHp,defense);
+    character.setPosition(playersAlive);
     character.equipWeapon(new Bow("ToyBow",0,20));
     addPlayer(character);
   }
@@ -120,7 +124,8 @@ public class Controller {
    * @param defense Engineer's defense.
    */
   public void makeEngineer (String name, int maxHp, int defense) {
-    EngineerCharacter character = new EngineerCharacter(turnsQueue, name, maxHp, defense,playersAlive);
+    EngineerCharacter character = new EngineerCharacter(turnsQueue, name, maxHp, defense);
+    character.setPosition(playersAlive);
     character.equipWeapon(new Axe("ToyAxe",0,20));
     addPlayer(character);
   }
@@ -134,7 +139,8 @@ public class Controller {
    * @param maxMana WhiteMage's maxMana.
    */
   public void makeWhiteMage (String name, int maxHp, int defense, int maxMana) {
-    WhiteMageCharacter character = new WhiteMageCharacter(turnsQueue,name,maxHp,defense,maxMana,playersAlive);
+    WhiteMageCharacter character = new WhiteMageCharacter(turnsQueue,name,maxHp,defense,maxMana);
+    character.setPosition(playersAlive);
     character.equipWeapon(new Staff("ToyStaff",0,0,20));
     addPlayer(character);
   }
@@ -148,7 +154,8 @@ public class Controller {
    * @param maxMana BlackMage's maxMana.
    */
   public void makeBlackMage (String name, int maxHp, int defense, int maxMana) {
-    BlackMageCharacter character = new BlackMageCharacter(turnsQueue,name,maxHp,defense,maxMana,playersAlive);
+    BlackMageCharacter character = new BlackMageCharacter(turnsQueue,name,maxHp,defense,maxMana);
+    character.setPosition(playersAlive);
     character.equipWeapon(new Staff("ToyStaff",0,0,20));
     addPlayer(character);
   }
@@ -639,9 +646,6 @@ public class Controller {
 
   public void doAttack() {
     phase.doAttack();
-    System.out.println(getPlayerCharacter(0).getHp());
-    System.out.println(getPlayerCharacter(1).getHp());
-    System.out.println(getPlayerCharacter(2).getHp());
     System.out.println(getPlayersQuantity());
   }
 
