@@ -59,7 +59,7 @@ public class InventoryTest {
     assertEquals(12,testBag.getPointer());
 
     testBag.movePoint(20);
-    assertEquals(19,testBag.getPointer());
+    assertEquals(18,testBag.getPointer());
 
     testBag.movePoint(-40);
     assertEquals(0,testBag.getPointer());
