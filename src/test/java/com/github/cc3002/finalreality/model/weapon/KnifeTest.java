@@ -16,5 +16,7 @@ public class KnifeTest extends AbstractWeaponTest {
     testWeaponF2 = new Knife("TestKnifeA",1,42);
     testWeaponF3 = new Knife("TestKnifeA",200,42);
     testWeaponF4 = new Knife("TestKnifeA",50,1);
+
+    imgFileName = "src\\resources\\weapons\\knife.png";
   }
 }

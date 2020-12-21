@@ -35,6 +35,8 @@ public class EngineerCharacterTest extends AbstractCommonCharacterTest {
     ((EngineerCharacter) testTurnsCharacterA).equip(testAttackWeaponA);
     testTurnsCharacterB = new EngineerCharacter(turnsQueue,"TestTurnsEngineerB",100,100);
     ((EngineerCharacter) testTurnsCharacterB).equip(testAttackWeaponB);
+
+    imgFileName = "src\\resources\\characters\\engineer.png";
   }
 
   @Override

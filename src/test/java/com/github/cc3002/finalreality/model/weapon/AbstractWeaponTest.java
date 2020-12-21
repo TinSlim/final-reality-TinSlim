@@ -1,7 +1,18 @@
 package com.github.cc3002.finalreality.model.weapon;
 
+import com.github.cc3002.finalreality.model.character.ICharacter;
+import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
+import com.github.cc3002.finalreality.model.character.player.commoncharacter.EngineerCharacter;
+import com.github.cc3002.finalreality.model.character.player.commoncharacter.KnightCharacter;
+import com.github.cc3002.finalreality.model.character.player.commoncharacter.ThiefCharacter;
+import com.github.cc3002.finalreality.model.character.player.magecharacter.BlackMageCharacter;
+import com.github.cc3002.finalreality.model.character.player.magecharacter.WhiteMageCharacter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,6 +31,13 @@ public abstract class AbstractWeaponTest {
   IWeapon testWeaponF3;
   IWeapon testWeaponF4;
 
+  KnightCharacter testKnight;
+  ThiefCharacter testThief;
+  EngineerCharacter testEngineer;
+  BlackMageCharacter testBlackMage;
+  WhiteMageCharacter testWhiteMage;
+  protected String imgFileName;
+
   /**
    * Sets weapons depending on the class, to test.
    */
@@ -30,9 +48,18 @@ public abstract class AbstractWeaponTest {
    */
   @BeforeEach
   public void setUp() {
-    this.setWeapons();
+    setWeapons();
+    setCharacters();
   }
 
+  public void setCharacters () {
+    BlockingQueue<ICharacter> testTurnsQueue = new LinkedBlockingQueue<>();;
+    testKnight = new KnightCharacter(testTurnsQueue,"TestKnight",1,1);
+    testThief = new ThiefCharacter(testTurnsQueue,"TestThief",1,1);
+    testEngineer = new EngineerCharacter(testTurnsQueue,"TestEngineer",1,1);
+    testBlackMage = new BlackMageCharacter(testTurnsQueue,"TestBlackMage",1,1,1);
+    testWhiteMage = new WhiteMageCharacter(testTurnsQueue,"TestWhiteMage",1,1,1);
+  }
   /**
    * Test Construction for weapons classes.
    */
@@ -79,5 +106,10 @@ public abstract class AbstractWeaponTest {
   @Test
   public void testCastMagic () {
     assertFalse(testWeaponA.castMagic());
+  }
+
+  @Test
+  public void imageFileNameGetter () {
+    assertEquals(imgFileName, testWeaponA.getImage());
   }
 }

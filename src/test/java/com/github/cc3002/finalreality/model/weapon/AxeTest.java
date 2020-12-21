@@ -16,5 +16,7 @@ public class AxeTest extends AbstractWeaponTest {
     testWeaponF2 = new Axe("TestAxeA",1,42);
     testWeaponF3 = new Axe("TestAxeA",200,1);
     testWeaponF4 = new Axe("TestAxeA",50,1);
+
+    imgFileName = "src\\resources\\weapons\\axe.png";
   }
 }

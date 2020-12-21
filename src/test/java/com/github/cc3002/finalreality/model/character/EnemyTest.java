@@ -46,6 +46,8 @@ class EnemyTest extends AbstractCharacterTest {
 
     testTurnsCharacterA = new Enemy(turnsQueue,"EnemyA",100,100,100,100);
     testTurnsCharacterB = new Enemy(turnsQueue,"EnemyB",50,20,50,50);
+
+    imgFileName = "src\\resources\\characters\\enemy.png";
   }
 
   /**

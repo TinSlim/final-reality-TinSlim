@@ -16,5 +16,7 @@ public class SwordTest extends AbstractWeaponTest {
     testWeaponF2 = new Sword("TestSwordA",1,42);
     testWeaponF3 = new Sword("TestSwordA",200,42);
     testWeaponF4 = new Sword("TestSwordA",50,1);
+
+    imgFileName = "src\\resources\\weapons\\sword.png";
   }
 }

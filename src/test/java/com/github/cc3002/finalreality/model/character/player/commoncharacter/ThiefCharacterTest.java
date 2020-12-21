@@ -37,6 +37,8 @@ public class ThiefCharacterTest extends AbstractCommonCharacterTest {
     ((ThiefCharacter) testTurnsCharacterA).equip(testAttackWeaponA);
     testTurnsCharacterB = new ThiefCharacter(turnsQueue,"TestTurnsThiefB",100,100);
     ((ThiefCharacter) testTurnsCharacterB).equip(testAttackWeaponB);
+
+    imgFileName = "src\\resources\\characters\\thief.png";
   }
 
   @Override

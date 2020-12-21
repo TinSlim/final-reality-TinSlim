@@ -56,10 +56,10 @@ public class InventoryTest {
     assertEquals(0,testBag.getPointer());
 
     testBag.movePoint(12);
-    assertEquals(12,testBag.getPointer());
+    assertEquals(11,testBag.getPointer());
 
     testBag.movePoint(20);
-    assertEquals(18,testBag.getPointer());
+    assertEquals(11,testBag.getPointer());
 
     testBag.movePoint(-40);
     assertEquals(0,testBag.getPointer());
@@ -78,7 +78,6 @@ public class InventoryTest {
     testBag.addToInventory(testKnifeB);
     testBag.addToInventory(testSword);
 
-    testBag.movePoint(1);
     testBag.equipWeaponToCharacter(testPlayerCharacter);
     assertEquals(testKnifeA,testPlayerCharacter.getEquippedWeapon());
 
