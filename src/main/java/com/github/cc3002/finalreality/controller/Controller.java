@@ -34,6 +34,8 @@ public class Controller {
   private int enemiesAlive;
   private final Inventory inventory;
 
+  private String gameEnd;
+
   private final BlockingQueue<ICharacter> turnsQueue;
 
   private final StartTurnListener startTurnListener;
@@ -44,6 +46,7 @@ public class Controller {
   private IPhase phase;
   private final Random random;
   private int position;
+  private int targetIndex;
 
   /**
    * Initialize a Controller, making listeners, a queue, lists of characters.
@@ -53,8 +56,8 @@ public class Controller {
     playerCharacters = new ArrayList<>();
     enemyCharacters = new ArrayList<>();
     turnsQueue = new LinkedBlockingQueue<>();
-    position = -10;
-
+    position = 10;
+    targetIndex = 0;
     playersAlive = 0;
     enemiesAlive = 0;
 
@@ -64,6 +67,7 @@ public class Controller {
     startTurnListener = new StartTurnListener(this);
 
     inventory = new Inventory();
+    gameEnd = "";
   }
 
   /**
@@ -170,12 +174,15 @@ public class Controller {
    * @param damage Enemy's damage.
    */
   public void makeEnemy (String name, int maxHp, int defense, int weight, int damage) {
-    Enemy character = new Enemy(turnsQueue,name,maxHp,weight,defense,damage);
-    character.addDeathListener(faintEnemyListener);
-    character.addStartTurnListener(startTurnListener);
-    character.addFinishTurnListener(finishTurnListener);
-    enemyCharacters.add(character);
-    changeEnemyQuantity (1);
+    if (getEnemiesAlive() < 8) {
+      Enemy character = new Enemy(turnsQueue,name,maxHp,weight,defense,damage);
+      character.addDeathListener(faintEnemyListener);
+      character.addStartTurnListener(startTurnListener);
+      character.addFinishTurnListener(finishTurnListener);
+      character.setPosition(10);
+      enemyCharacters.add(character);
+      changeEnemyQuantity (1);
+    }
   }
 
   /**
@@ -389,13 +396,35 @@ public class Controller {
     return character.getWeight();
   }
 
+  public IWeapon getWeapon (int index) {
+    return inventory.getWeaponsInventory().get(index);
+  }
+
   /**
-   * Returns the weapon's name of the character.
-   * @param character who will be asked for weapon's name.
-   * @return weapon's name.
+   * Returns the name of the weapon.
+   * @param weapon who will be asked for it name.
+   * @return the name of the weapon.
    */
-  public String getWeaponName (IPlayerCharacter character) {
-    return character.getEquippedWeapon().getName();
+  public String getWeaponName (IWeapon weapon) {
+    return weapon.getName();
+  }
+
+  /**
+   * Returns the damage of the weapon.
+   * @param weapon who will be asked for it damage.
+   * @return the damage of the weapon.
+   */
+  public int getWeaponDamage (IWeapon weapon) {
+    return weapon.getDamage();
+  }
+
+  /**
+   * Returns the weight of the weapon.
+   * @param weapon who will be asked for it weight.
+   * @return the weight of the weapon.
+   */
+  public int getWeaponWeight (IWeapon weapon) {
+    return weapon.getWeight();
   }
 
   /**
@@ -411,14 +440,23 @@ public class Controller {
    */
   public void win() {
     setPhase(new EndPhase());
+    gameEnd = "Congratulations, you won!!!";
   }
 
   /**
    * Method called when the user loses.
    */
   public void lose() {
-    System.out.println("You Lose");
+    setPhase(new EndPhase());
+    gameEnd = "GameOver, you lose";
+  }
 
+  /**
+   * Returns the result of the game, this value changes when the game ends.
+   * @return the result of the game.
+   */
+  public String getGameEnd () {
+    return gameEnd;
   }
 
   /**
@@ -583,8 +621,8 @@ public class Controller {
    */
   public void endTurn() {
     actualCharacter.waitTurn();
+    setPosition(10);
     setPhase(new WaitingPhase());
-    setPosition(-10);
     if (getQueue().size() > 0) {
       startNewTurn();
     }
@@ -633,36 +671,51 @@ public class Controller {
     phase.moveTargetLeft();
   }
 
+  /**
+   * Returns image file path of the character as String.
+   * @param character who will be asked for his image.
+   * @return the image file path.
+   */
   public String getImage (ICharacter character) {
     return character.getImage();
   }
 
-  public void pointLeft() {
-  }
-
+  /**
+   * Returns the quantity of weapons.
+   * @return quantity of weapons.
+   */
   public int getInventoryLength() {
     return inventoryLength;
   }
 
+  /**
+   * Do an attack depending on the actual phase.
+   */
   public void doAttack() {
     phase.doAttack();
-    System.out.println(getPlayersQuantity());
   }
 
+  /**
+   * Returns the index of the player's target.
+   * @return index of the player's target.
+   */
   public int getAttackPointer() {
     return phase.getAttackPointer();
   }
 
+  /**
+   * Returns the index of the equipment's pointer.
+   * @return index of the equipment's pointer.
+   */
   public int getEquipmentPointer() {
     return inventory.getPointer();
   }
 
+  /**
+   * Equips the actual pointed weapon to the actual character, depending on the actual phase.
+   */
   public void equipWeapon() {
     phase.equipWeapon();
-  }
-
-  public int getPosition () {
-    return position;
   }
 
   public int getPlayerAttackingPointer() {
@@ -671,6 +724,32 @@ public class Controller {
 
   public void setPosition (int i) {
     position = i;
+  }
+
+  /**
+   * Takes a look to the players quantity, enemies quantity and weapons quantity, if in all values there are at least 1,
+   * the game can start.
+   * @return true  if the game can start.
+   */
+  public boolean gameCanStart() {
+    return (getPlayersAlive() > 0 && getEnemiesAlive() > 0 && inventory.getLen() > 0);
+  }
+
+  /**
+   * Returns the path of the playerCharacter's image.
+   * @param playerCharacter who will be asked for his image path.
+   * @return the path of the playerCharacter's image.
+   */
+  public String getPlayerImage(IPlayerCharacter playerCharacter) {
+    return playerCharacter.getImage();
+  }
+
+  public int getTargetIndex() {
+    return targetIndex;
+  }
+
+  public void addTargetIndex(int i) {
+    targetIndex += i;
   }
 }
 
