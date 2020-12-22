@@ -53,7 +53,7 @@ public class PlayerPhase extends AbstractPhase {
   }
 
   @Override
-  public int getAttackPointer () {
+  public int getTargetPointer() {
     return controller.getTargetIndex();
   }
 

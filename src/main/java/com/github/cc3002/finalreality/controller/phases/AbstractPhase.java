@@ -70,7 +70,7 @@ public abstract class AbstractPhase implements IPhase {
   }
 
   @Override
-  public int getAttackPointer () {
+  public int getTargetPointer() {
     return 100;
   }
 }

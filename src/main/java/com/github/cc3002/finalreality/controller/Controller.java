@@ -698,8 +698,8 @@ public class Controller {
    * Returns the index of the player's target.
    * @return index of the player's target.
    */
-  public int getAttackPointer() {
-    return phase.getAttackPointer();
+  public int getActualTargetPointer() {
+    return phase.getTargetPointer();
   }
 
   /**

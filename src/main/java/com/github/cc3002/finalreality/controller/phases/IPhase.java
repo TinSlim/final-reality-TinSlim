@@ -75,6 +75,5 @@ public interface IPhase {
    * Returns the user target index.
    * @return the user target index.
    */
-  int getAttackPointer();
-
+  int getTargetPointer();
 }
