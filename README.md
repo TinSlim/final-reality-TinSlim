@@ -1,4 +1,4 @@
-Final Reality
+![model](images/logo.png)
 =============
 
 ![http://creativecommons.org/licenses/by/4.0/](https://i.creativecommons.org/l/by/4.0/88x31.png)
@@ -148,9 +148,17 @@ with the first parameter the attacker, and the second parameter is the target of
 
 ### Phases
 
-The game uses **TWO** phases, one is the **WaitingPhase**, here the game waits looking if the queue adds a character, if
+The game uses **five** phases, one is the **WaitingPhase**, here the game waits looking if the queue adds a character, if
 happens the game changes to **DecisionPhase**, here the controller takes a character from the queue an depending of his
-type do an attack or waits for the user decision.
+type changes to **EnemyPhase** or **PlayerPhase**.
+
+In the **EnemyPhase**, the turn is for an enemy, so just does an automatic attack, at **PlayerPhase**, the game waits for
+inputs by the user, here the user can equip weapons, select weapons, attack and select target. Both phases ends
+when a character attacks an alive character, when this happens return to waiting phase looking if there is a character in
+the queue to start a new turn.
+
+The las phase is **EndPhase**, this phase will be setted when the game ends, just to stop the game.
+
 
 #### Start and finish turn
 
@@ -173,13 +181,95 @@ the user loses, if the count of enemies become 0, the user wins.
 
 ![model](images/PackageController.png)
 
+
+## GUI
+
+- Main View:
+
+![model](images/MakeCharactersView.png)
+
+1) There are three counters, the players counter increase when a player character is added, the enemies counter 
+ increase when you add an enemy, the weapons counter increase when a weapon is added. The game requires at least 
+ one of each, and you can't exceed 4 players, 8 enemies and 12 weapons.
+
+2) There are five inputs, to make a player you need to fill *name*, *maxHp* and *defense*. To make an enemy you need
+    to fill *name*, *maxHp*, *defense*, *damage* and *weight*. To make a weapon you nedd to fill *name*, *damage* and *weight*.
+
+3) Starts a new game, making a default set up of characters, enemies and weapons.
+
+4) Starts a game with the added player characters, enemies and weapons.
+
+5) Makes a player character using the inputs from **2**.
+
+6) Makes an enemy using the inputs from **2**.
+
+7) Makes a weapon using the inputs from **2**.
+
+
+
+- BattleView (waiting for turn)
+
+![model](images/BattleView1.png)
+
+1) Player character images.
+
+2) Info about player characters (name, hp, def and weight).
+
+3) Inventory.
+
+4) Actual pointed weapon.
+
+5) Game buttons.
+
+6) Info about weapons (name, damage, weight).
+
+7) Weapon image.
+
+- BattleView (player's turn)
+
+![model](images/BattleView2.png)
+
+1) Actual player character.
+
+2) Actual pointed weapon
+
+3) Buttons to point the previous enemy or the next.
+
+4) Mark to the actual pointed enemy.
+
+5) Button to attack the actual pointed enemy using the actual player character.
+
+6) Buttons to move the inventory pointer and equip the actual pointed weapon to the actual
+ player character.
+
+## Playing
+
+When the game starts you will see the main view, here you can choose if you want to just play by clicking
+**Play with default configurations.** this button makes default characters and starts a game. If you want to make your 
+own game, you have to make at least one *player character*, one *enemy* and one *weapon*, there you have three counters
+to know how many objects you create, the max quantity of player characters is **4**, of enemies **8** and weapons **12**,
+finally to start the game click on **start** button.
+
+All games starts with player characters using a toy weapon, this weapon has the value *20* for weight and *0* for damage
+so you will need one weapon to do damage.
+
+When the game starts the view changes to a battle scene, with your player characters at left and enemies at right, 
+weapons are in the bottom, here you will see all the information about characters and 
+weapons, to play just wait for your turn, when a player character has an arrow at the left, is your turn and you are
+using the character with the arrow.
+
+From this phase you can equip weapons to the actual character using the buttons, using the **Attack** button will make 
+the actual player attacks the enemy with *red aura* if you want to attack other enemy use the buttons to point another.
+The phase will ends when the actual character does an attack to a alive enemy.
+
+The enemies turns are automatic, when the game finishes you will see if you won or lose.
+Good Luck. 
+
 ## Assumptions
 
 - Inventory will be used like a list of weapons.
 - If the victim's defense is more than the damage that it receives, the victim will only not receive damage.
 - Win, nextTurn and lose methods will be implemented the next iteration.
-- A turn finishes when a character receive damage (from an attack), and the next turn starts if there is at least one 
+- A turn finishes when a character attacks, and the next turn starts if there is at least one 
 character in the turnsQueue and there is not another character using the turn.
-- The method *startTurn()* in **Controller** class will be changed in the next iteration, the method calls 
-*receiveDamage()*, but this will be changed to the method of the execution of the character's turn.
-- Methods *win()* and *lose()* will be implemented in a next iteration, magic attacks too.
+- All players starts with a toy weapon (weapon with 0 damage and 20 weight).
