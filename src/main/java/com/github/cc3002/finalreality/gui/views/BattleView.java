@@ -316,8 +316,8 @@ public class BattleView extends AbstractView {
     initializeEnemyValues();
     initializeEquipment();
 
-    root.getChildren().addAll(targetPointer, equipmentPointer, attackerPointer, endGame);
-    root.getChildren().addAll(getActualPlayers(), getActualWeapons(), getActualEnemies());
+    root.getChildren().addAll(targetPointer, equipmentPointer, attackerPointer);
+    root.getChildren().addAll(getActualPlayers(), getActualWeapons(), getActualEnemies(),endGame);
     setBattleButtons();
     root.getChildren().add(battleButtons);
     controller.startGame();
