@@ -4,7 +4,6 @@ import com.github.cc3002.finalreality.controller.listeners.FinishTurnListener;
 import com.github.cc3002.finalreality.controller.listeners.IDeathHandler;
 import com.github.cc3002.finalreality.controller.listeners.StartTurnListener;
 import com.github.cc3002.finalreality.model.character.Enemy;
-import com.github.cc3002.finalreality.model.weapon.AbstractWeapon;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
 
 /**
@@ -27,8 +26,9 @@ public interface IPlayerCharacter {
 
   /**
    * Sets weapon to this character's equipped weapon.
+   * @param weapon weapon that will try to be equipped.
    */
-  void setEquippedWeapon(AbstractWeapon abstractWeapon);
+  void setEquippedWeapon(IWeapon weapon);
 
   /**
    * Returns this PlayerCharacter's maxHp (max health points).
@@ -119,4 +119,10 @@ public interface IPlayerCharacter {
    * @param finishTurnListener a finish turn listener.
    */
   void addFinishTurnListener(FinishTurnListener finishTurnListener);
+
+  /**
+   * Returns the image path of this character.
+   * @return the image path of this character.
+   */
+  String getImage();
 }
