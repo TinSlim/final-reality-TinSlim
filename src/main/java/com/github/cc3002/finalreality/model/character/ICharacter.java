@@ -55,9 +55,17 @@ public interface ICharacter {
    */
   void doPhase(Controller controller);
 
-  String getImage();
-
+  /**
+   * Returns true if the character is alive.
+   * @return true if the character is alive.
+   */
   boolean isAlive();
 
   int getPosition();
+
+  /**
+   * Returns the path of the image of this character.
+   * @return the path of the image of this character.
+   */
+  String getImage();
 }
