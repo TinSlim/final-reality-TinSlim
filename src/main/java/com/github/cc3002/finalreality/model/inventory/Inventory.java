@@ -29,7 +29,7 @@ public class Inventory {
    * @return weapons inventory list.
    */
   public List<IWeapon> getWeaponsInventory(){
-    return this.weaponsInventory;
+    return weaponsInventory;
   }
 
   /**
@@ -45,8 +45,10 @@ public class Inventory {
    * @param weapon weapon wanted to be added to inventory.
    */
   public void addToInventory(IWeapon weapon){
-    this.weaponsInventory.add(weapon);
-    this.lenInventory += 1;
+    if (weaponsInventory.size() < 12) {
+      this.weaponsInventory.add(weapon);
+      lenInventory += 1;
+    }
   }
 
   /**
