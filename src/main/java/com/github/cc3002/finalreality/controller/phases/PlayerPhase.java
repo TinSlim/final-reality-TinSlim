@@ -2,30 +2,29 @@ package com.github.cc3002.finalreality.controller.phases;
 
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 
+/**
+ * The PlayerPhase, this phase is used to control the player character who is using the turn.
+ */
 public class PlayerPhase extends AbstractPhase {
-  int targetIndex;
-
-  public PlayerPhase () {
-    targetIndex = 0;
-  }
 
   @Override
   public void moveTargetRight () {
-    if (targetIndex + 1 < controller.getEnemiesQuantity()) {
-      targetIndex += 1;
+    if (controller.getTargetIndex() + 1 < controller.getEnemiesQuantity()) {
+      controller.addTargetIndex(1);
     }
   }
 
   @Override
   public void moveTargetLeft () {
-    if (targetIndex - 1 >= 0) {
-      targetIndex -= 1;
+    if (controller.getTargetIndex() - 1 >= 0) {
+      controller.addTargetIndex(-1);
     }
   }
 
   @Override
   public void doAttack ( ) {
-    controller.playerCharacterCommonAttack((IPlayerCharacter) controller.getCharacter(),controller.getEnemyCharacters().get(targetIndex));
+    controller.playerCharacterCommonAttack((IPlayerCharacter) controller.getCharacter(),
+            controller.getEnemyCharacters().get(controller.getTargetIndex()));
   }
 
   @Override
@@ -55,7 +54,7 @@ public class PlayerPhase extends AbstractPhase {
 
   @Override
   public int getAttackPointer () {
-    return targetIndex;
+    return controller.getTargetIndex();
   }
 
 }
