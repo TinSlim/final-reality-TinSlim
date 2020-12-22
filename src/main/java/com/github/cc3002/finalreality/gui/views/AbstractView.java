@@ -7,7 +7,7 @@ import javafx.scene.Group;
 /**
  * Common methods for all views.
  */
-public abstract class View implements IView {
+public abstract class AbstractView implements IView {
   Group root;
   Controller controller;
   protected FinalReality aGame;
