@@ -177,10 +177,13 @@ two listeners, one is for the enemies and the other for player characters, the l
 the user loses, if the count of enemies become 0, the user wins.
 
 ## Controller Diagram
-- controller
+- controller / listeners
 
 ![model](images/PackageController.png)
 
+- phases
+
+![model](images/Phases.png)
 
 ## GUI
 
@@ -273,3 +276,4 @@ Good Luck.
 - A turn finishes when a character attacks, and the next turn starts if there is at least one 
 character in the turnsQueue and there is not another character using the turn.
 - All players starts with a toy weapon (weapon with 0 damage and 20 weight).
+. The game needs at least one enemy, one player character and one weapon to start.
