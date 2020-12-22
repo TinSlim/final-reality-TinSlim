@@ -63,5 +63,9 @@ public interface IWeapon {
    */
   boolean castMagic();
 
+  /**
+   * Returns the image path of this weapon.
+   * @return the image path of this weapon.
+   */
   String getImage();
 }
