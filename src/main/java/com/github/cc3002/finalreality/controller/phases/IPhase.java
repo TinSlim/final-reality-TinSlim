@@ -7,6 +7,11 @@ import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
  * Interface for the phases.
  */
 public interface IPhase {
+
+  /**
+   * Sets the controller for this phase.
+   * @param controller controller using this phase.
+   */
   void setController(Controller controller);
 
   /**
@@ -46,7 +51,6 @@ public interface IPhase {
    */
   void doAttack();
 
-
   /**
    * Equips the pointed weapon to the player character who is using this phase.
    */
@@ -67,14 +71,15 @@ public interface IPhase {
    */
   void moveDownInventory();
 
-
   /**
    * Moves left the inventory pointer.
    */
   void moveLeftInventory();
 
+  /**
+   * Returns the user target index.
+   * @return the user target index.
+   */
   int getAttackPointer();
 
-
-  int getPlayerAttackingPointer();
 }
