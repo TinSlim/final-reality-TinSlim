@@ -14,7 +14,7 @@ import java.io.File;
 /**
  * Main view, here you can make items and start a game.
  */
-public class MakeCharactersView extends View {
+public class MakeCharactersView extends AbstractView {
   Group buttons;
   Group playerCharacters;
 

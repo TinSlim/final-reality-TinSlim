@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * View that shows the characters info, weapons info and buttons to play the game.
  */
-public class BattleView extends View {
+public class BattleView extends AbstractView {
   protected Group battleButtons;
   protected Group actualPlayers;
   protected ArrayList<Label> playerHpVisible;
