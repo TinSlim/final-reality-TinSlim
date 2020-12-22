@@ -44,9 +44,6 @@ public abstract class AbstractPhase implements IPhase {
   public void moveTargetLeft () {
   }
 
-  @Override
-  public void enemyAttack() {
-  }
 
   @Override
   public void setPlayerCharacter(IPlayerCharacter actualCharacter) {
@@ -74,10 +71,6 @@ public abstract class AbstractPhase implements IPhase {
 
   @Override
   public int getAttackPointer () {
-    return -10;
-  }
-
-  public int getPlayerAttackingPointer () {
-    return 0;
+    return 100;
   }
 }
