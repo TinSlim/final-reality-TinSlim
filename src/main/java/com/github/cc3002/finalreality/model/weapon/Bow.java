@@ -2,6 +2,9 @@ package com.github.cc3002.finalreality.model.weapon;
 
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 
+/**
+ * Class for Bow weapon.
+ */
 public class Bow extends AbstractWeapon {
 
   /**
@@ -13,11 +16,7 @@ public class Bow extends AbstractWeapon {
    */
   public Bow(String name, int damage, int weight) {
     super(name, damage, weight);
-  }
-
-  @Override
-  public void equipToKnight(IPlayerCharacter character){
-
+    image = "src\\resources\\weapons\\bow.png";
   }
 
   @Override
@@ -30,13 +29,6 @@ public class Bow extends AbstractWeapon {
     character.setEquippedWeapon(this);
   }
 
-  @Override
-  public void equipToBlackMage(IPlayerCharacter character){
-  }
-
-  @Override
-  public void equipToWhiteMage(IPlayerCharacter character){
-  }
 
   @Override
   public boolean equals(final Object o) {

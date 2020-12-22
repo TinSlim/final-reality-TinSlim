@@ -2,6 +2,9 @@ package com.github.cc3002.finalreality.model.weapon;
 
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 
+/**
+ * Class for Knife weapon.
+ */
 public class Knife extends AbstractWeapon {
 
   /**
@@ -13,6 +16,7 @@ public class Knife extends AbstractWeapon {
    */
   public Knife(String name, int damage, int weight) {
     super(name, damage, weight);
+    image = "src\\resources\\weapons\\knife.png";
   }
 
   @Override

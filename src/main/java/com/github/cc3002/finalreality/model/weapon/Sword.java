@@ -2,6 +2,9 @@ package com.github.cc3002.finalreality.model.weapon;
 
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 
+/**
+ * Class for Sword weapon.
+ */
 public class Sword extends AbstractWeapon {
 
   /**
@@ -24,18 +27,6 @@ public class Sword extends AbstractWeapon {
   @Override
   public void equipToThief(IPlayerCharacter character){
     character.setEquippedWeapon(this);
-  }
-
-  @Override
-  public void equipToEngineer(IPlayerCharacter character){
-  }
-
-  @Override
-  public void equipToBlackMage(IPlayerCharacter character){
-  }
-
-  @Override
-  public void equipToWhiteMage(IPlayerCharacter character){
   }
 
   @Override

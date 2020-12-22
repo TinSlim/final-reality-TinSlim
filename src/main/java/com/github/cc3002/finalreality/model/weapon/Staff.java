@@ -4,6 +4,9 @@ import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 
 import java.util.Objects;
 
+/**
+ * Class for Staff weapon.
+ */
 public class Staff extends AbstractWeapon {
 
   private final int magicDamage;
@@ -17,6 +20,7 @@ public class Staff extends AbstractWeapon {
    */
   public Staff(String name, int damage, int magicDamage, int weight) {
     super(name, damage, weight);
+    image = "src\\resources\\weapons\\staff.png";
     this.magicDamage = magicDamage;
   }
 
@@ -35,18 +39,10 @@ public class Staff extends AbstractWeapon {
     return this.magicDamage;
   }
 
-  @Override
-  public void equipToKnight(IPlayerCharacter character){
-  }
 
   @Override
   public void equipToThief(IPlayerCharacter character){
     character.setEquippedWeapon(this);
-  }
-
-  @Override
-  public void equipToEngineer(IPlayerCharacter character){
-
   }
 
   @Override

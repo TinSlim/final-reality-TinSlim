@@ -1,5 +1,7 @@
 package com.github.cc3002.finalreality.model.weapon;
 
+import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
+
 import java.util.Objects;
 
 /**
@@ -9,8 +11,7 @@ import java.util.Objects;
  * @author <Your name>
  */
 public abstract class AbstractWeapon implements IWeapon {
-  protected String image = "src\\resources\\weapons\\sword.png"; //Todo cambiar
-
+  protected String image;
 
   private final String name;
   private final int damage;
@@ -25,6 +26,7 @@ public abstract class AbstractWeapon implements IWeapon {
     this.weight = weight;
   }
 
+  @Override
   public String getImage () {
     return image;
   }
@@ -50,10 +52,31 @@ public abstract class AbstractWeapon implements IWeapon {
   }
 
   @Override
+  public void equipToKnight(IPlayerCharacter character){
+  }
+
+  @Override
+  public void equipToThief(IPlayerCharacter character){
+  }
+
+  @Override
+  public void equipToEngineer(IPlayerCharacter character){
+  }
+
+  @Override
+  public void equipToBlackMage(IPlayerCharacter character){
+  }
+
+  @Override
+  public void equipToWhiteMage(IPlayerCharacter character){
+  }
+
+  @Override
   public int getMagicDamage () {
     throw new AssertionError("No Magic Damage");
   }
 
+  @Override
   public boolean castMagic () {
     return false;
   }
