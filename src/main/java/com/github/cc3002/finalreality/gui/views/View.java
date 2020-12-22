@@ -1,13 +1,18 @@
-package com.github.cc3002.finalreality.gui;
+package com.github.cc3002.finalreality.gui.views;
 
 import com.github.cc3002.finalreality.controller.Controller;
+import com.github.cc3002.finalreality.gui.FinalReality;
 import javafx.scene.Group;
 
+/**
+ * Common methods for all views.
+ */
 public abstract class View implements IView {
   Group root;
   Controller controller;
-  FinalReality aGame;
+  protected FinalReality aGame;
 
+  @Override
   public void setRoot(Group newRoot) {
     root = newRoot;
   }
@@ -22,8 +27,10 @@ public abstract class View implements IView {
     aGame = game;
   }
 
+  @Override
   public abstract void initialize ();
 
+  @Override
   public abstract void update ();
 
   @Override
