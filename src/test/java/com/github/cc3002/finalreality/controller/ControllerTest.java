@@ -12,9 +12,11 @@ import com.github.cc3002.finalreality.model.weapon.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests for Controller class, phases and listeners.
+ */
 public class ControllerTest {
   Controller testController;
 
@@ -147,22 +149,33 @@ public class ControllerTest {
 
   /**
    * Tests common attacks and weapon equip.
+   * @throws InterruptedException thread exception.
    */
   @Test
   public void testAttack() throws InterruptedException {
+    assertFalse(testController.gameCanStart());
+
     testController.makeKnight("TestKnight",50,0);
     testController.makeEngineer("TestEngineer",50,0);
     testController.makeThief("TestThief",50,0);
     testController.makeBlackMage("TestBlackMage",50,0,4);
 
+    assertFalse(testController.gameCanStart());
+
     testController.makeEnemy("TestEnemy1",10,0,140,3);
     testController.makeEnemy("TestEnemy2",2,0,80,4);
     testController.makeEnemy("TestEnemy3",10,0,20,50);
+
+    assertFalse(testController.gameCanStart());
 
     testController.getPlayerCharacter(0).equip(new Sword("TestSword",9,40));
     testController.getPlayerCharacter(1).equip(new Axe("TestAxe",2,60));
     testController.getPlayerCharacter(2).equip(new Bow("TestBow",4,120));
     testController.getPlayerCharacter(3).equip(new Knife("TestKnife",10,100));
+
+    testController.makeSword("TestSword",10,10);
+
+    assertTrue(testController.gameCanStart());
 
     boolean outOfBoundCharacterList = false;
     try {
@@ -173,12 +186,10 @@ public class ControllerTest {
     assertTrue(outOfBoundCharacterList);
 
     testController.startGame();
+    assertEquals(100,testController.getAttackPointer());
 
     Thread.sleep(2500);
     testController.executePhase();
-
-
-    Thread.sleep(2500);
     testController.executePhase();
 
     Thread.sleep(2500);
@@ -198,28 +209,33 @@ public class ControllerTest {
 
     Thread.sleep(2500);
     testController.executePhase();
+    testController.executePhase();
+
+    Thread.sleep(2500);
+    testController.executePhase();
     assertEquals(1,testController.getPlayerAttackingPointer());
     testController.getPhase().doAttack();
 
     Thread.sleep(2000);
     testController.executePhase();
-    assertEquals(0,testController.getPlayerAttackingPointer());
+    assertEquals(1,testController.getPlayerAttackingPointer());
     testController.moveTargetRight();
     testController.moveTargetRight();
-    testController.moveTargetRight();
+    testController.getPhase().doAttack();
+    //
+    Thread.sleep(2000);
+    testController.executePhase();
     testController.getPhase().doAttack();
 
     Thread.sleep(2000);
     testController.executePhase();
-    testController.getPhase().doAttack();
-
-    Thread.sleep(2000);
-    testController.executePhase();
 
     Thread.sleep(2000);
     testController.executePhase();
     testController.executePhase();
     assertEquals(0,testController.getPlayerAttackingPointer());
+    testController.moveTargetLeft();
+    testController.moveTargetLeft();
     assertEquals(0,testController.getAttackPointer());
     testController.moveTargetLeft();
     assertEquals(0,testController.getAttackPointer());
@@ -273,7 +289,6 @@ public class ControllerTest {
     assertEquals(8, testController.getPlayerCharacterDefense(testPlayerCharacter));
     assertEquals(3, testController.getPlayerCharacterWeight(testPlayerCharacter));
     assertEquals(13, testController.getPlayerCharacterDamage(testPlayerCharacter));
-    assertEquals("TestSword", testController.getWeaponName(testPlayerCharacter));
 
     assertEquals("TestEnemy", testController.getEnemyName(testEnemy));
     assertEquals(20, testController.getEnemyMaxHp(testEnemy));
@@ -305,15 +320,17 @@ public class ControllerTest {
 
   /**
    * Tests the method lose, when the user loses the game.
-   * @throws InterruptedException
+   * @throws InterruptedException thread exception.
    */
   @Test
   public void testLoseGame () throws InterruptedException {
-    testController.makeKnight("TestKnight",20,3);
+    testController.makeKnight("TestKnightA",20,3);
+    testController.makeKnight("TestKnightB",20,3);
 
     testController.getPlayerCharacter(0).equip(new Sword("TestSword",9,300));
+    testController.getPlayerCharacter(1).equip(new Sword("TestSword",9,30));
 
-    testController.makeEnemy("TestEnemy1",10,0,30,100);
+    testController.makeEnemy("TestEnemy1",10,0,10,100);
     testController.makeEnemy("TestEnemy2",10,0,50,100);
     testController.makeEnemy("TestEnemy3",10,0,70,100);
     testController.makeEnemy("TestEnemy4",10,0,90,100);
@@ -329,39 +346,75 @@ public class ControllerTest {
 
     Thread.sleep(2000);
     testController.executePhase();
-
-    Thread.sleep(2000);
     testController.executePhase();
 
     Thread.sleep(2000);
     testController.executePhase();
+    testController.executePhase();
+    testController.doAttack();
+
+    Thread.sleep(2000);
+    testController.executePhase();
+    testController.executePhase();
+
+    Thread.sleep(2000);
+    testController.executePhase();
+    testController.executePhase();
+
+    Thread.sleep(2000);
+    testController.executePhase();
+    testController.executePhase();
+
+    Thread.sleep(2000);
+    testController.executePhase();
+    testController.executePhase();
+
+    assertEquals("GameOver, you lose",testController.getGameEnd());
   }
 
   /**
    * Tests the method win, when the user wins the game.
-   * @throws InterruptedException
+   * @throws InterruptedException thread exception.
    */
   @Test
   public void testWinGame () throws InterruptedException {
     testController.makeKnight("TestKnight",20,3);
 
-    testController.getPlayerCharacter(0).equip(new Sword("TestSword",100,10));
+    testController.getPlayerCharacter(0).equip(new Sword("TestSword",50,20));
 
-    testController.makeEnemy("TestEnemy1",10,5,40,2);
+    testController.makeEnemy("TestEnemy1",10,5,50,2);
+    testController.makeEnemy("TestEnemy1",45,5,80,2);
+
     testController.startGame();
+
     Thread.sleep(2000);
     testController.executePhase();
     testController.doAttack();
+
+    Thread.sleep(2000);
+    testController.executePhase();
+    testController.doAttack();
+
+    Thread.sleep(2000);
+    testController.executePhase();
+    testController.doAttack();
+
+    Thread.sleep(2000);
+    testController.executePhase();
+    testController.moveTargetRight();
+    testController.doAttack();
+
+    assertEquals("Congratulations, you won!!!",testController.getGameEnd());
   }
 
   /**
    * Tests the equipment change in a player's turn.
-   * @throws InterruptedException
+   * @throws InterruptedException thread exception.
    */
   @Test
   public void testChangeEquipment () throws InterruptedException {
     for (int i = 0; i < 10; i++) {
-      testController.makeSword("TestSword"+String.valueOf(i),3,20);
+      testController.makeSword("TestSword"+ i,3,20);
     }
     testController.makeKnight("TestKnight",100,60);
     testController.makeEnemy("TestEnemy",100,100,100,100);
@@ -401,5 +454,43 @@ public class ControllerTest {
     assertEquals(new Sword("TestSword9",3,20),
             testController.getPlayerCharacter(0).getEquippedWeapon());
 
+  }
+
+  /**
+   * Tests image path getters.
+   */
+  @Test
+  public void testImageFiles () {
+    testController.makeKnight("TestPlayerCharacter",10,10);
+    assertEquals("src\\resources\\characters\\knight.png",testController.getPlayerImage(testController.getPlayerCharacter(0)));
+
+    testController.makeEnemy("TestCharacter",10,10,10,10);
+    assertEquals("src\\resources\\characters\\enemy.png",testController.getImage(testController.getEnemy(0)));
+  }
+
+  /**
+   * Tests weapon getters.
+   */
+  @Test
+  public void testWeaponGetters () {
+    testController.makeSword("TestSword",1,2);
+    testController.makeKnife("TestKnife",3,4);
+    testController.makeAxe("TestAxe",5,6);
+    testController.makeBow("TestBow",7,8);
+
+    assertEquals(new Sword("TestSword",1,2),testController.getWeapon(0));
+    assertEquals("TestSword",testController.getWeaponName(testController.getWeapon(0)));
+    assertEquals(1,testController.getWeaponDamage(testController.getWeapon(0)));
+    assertEquals(2,testController.getWeaponWeight(testController.getWeapon(0)));
+
+    assertEquals(new Knife("TestKnife",3,4),testController.getWeapon(1));
+    assertEquals("TestKnife",testController.getWeaponName(testController.getWeapon(1)));
+    assertEquals(3,testController.getWeaponDamage(testController.getWeapon(1)));
+    assertEquals(4,testController.getWeaponWeight(testController.getWeapon(1)));
+
+    assertEquals(new Bow("TestBow",7,8),testController.getWeapon(3));
+    assertEquals("TestBow",testController.getWeaponName(testController.getWeapon(3)));
+    assertEquals(7,testController.getWeaponDamage(testController.getWeapon(3)));
+    assertEquals(8,testController.getWeaponWeight(testController.getWeapon(3)));
   }
 }
