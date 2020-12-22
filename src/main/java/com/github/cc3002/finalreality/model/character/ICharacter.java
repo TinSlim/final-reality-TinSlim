@@ -61,6 +61,10 @@ public interface ICharacter {
    */
   boolean isAlive();
 
+  /**
+   * Returns the index to enumerate the character.
+   * @return the index to enumerate the character.
+   */
   int getPosition();
 
   /**
