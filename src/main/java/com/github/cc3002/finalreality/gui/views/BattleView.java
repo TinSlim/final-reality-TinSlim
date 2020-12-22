@@ -83,17 +83,17 @@ public class BattleView extends AbstractView {
     Group players = new Group();
     for (int index = 0; index < controller.getPlayersQuantity(); index++) {
       Group actualPlayer = new Group();
-      Label name = new Label(controller.getPlayerCharacterName(controller.getPlayerCharacter(index)));
-      Label hp = new Label("HP:" + controller.getPlayerCharacterHp(controller.getPlayerCharacter(index)) + "/" +
-              controller.getPlayerCharacterMaxHp(controller.getPlayerCharacter(index)));
+      Label name = new Label(controller.getPlayerCharacterName(index));
+      Label hp = new Label("HP:" + controller.getPlayerCharacterHp(index) + "/" +
+              controller.getPlayerCharacterMaxHp(index));
       playerHpVisible.add(hp);
-      Label defense = new Label("Def:" + controller.getPlayerCharacterDefense(controller.getPlayerCharacter(index)));
-      Label damage = new Label("Atk:" + controller.getPlayerCharacterDamage(controller.getPlayerCharacter(index)));
+      Label defense = new Label("Def:" + controller.getPlayerCharacterDefense(index));
+      Label damage = new Label("Atk:" + controller.getPlayerCharacterDamage(index));
       playerDamageVisible.add(damage);
-      Label weight = new Label("Wgt:"+controller.getPlayerCharacterWeight(controller.getPlayerCharacter(index)));
+      Label weight = new Label("Wgt:"+controller.getPlayerCharacterWeight(index));
       playerWeightVisible.add(weight);
 
-      String imageString = controller.getPlayerImage(controller.getPlayerCharacter(index));
+      String imageString = controller.getPlayerImage(index);
       File file = new File(imageString);
       String imageFile = file.toURI().toString();
 
@@ -165,13 +165,13 @@ public class BattleView extends AbstractView {
     Group enemies = new Group();
     for (int index = 0; index < controller.getEnemiesQuantity(); index++) {
       Group actualEnemy = new Group();
-      Label name = new Label(controller.getEnemyName(controller.getEnemy(index)));
-      Label hp = new Label("HP:" + controller.getEnemyHp(controller.getEnemy(index)) + "/" +
-              controller.getEnemyMaxHp(controller.getEnemy(index)));
+      Label name = new Label(controller.getEnemyName(index));
+      Label hp = new Label("HP:" + controller.getEnemyHp(index) + "/" +
+              controller.getEnemyMaxHp(index));
       enemyHpVisible.add(hp);
-      Label defense = new Label("Def:" + controller.getEnemyDefense(controller.getEnemy(index)));
-      Label damage = new Label("Dmg:" + controller.getEnemyDamage(controller.getEnemy(index)));
-      Label weight = new Label("Wgt:" + controller.getEnemyWeight(controller.getEnemy(index)));
+      Label defense = new Label("Def:" + controller.getEnemyDefense(index));
+      Label damage = new Label("Dmg:" + controller.getEnemyDamage(index));
+      Label weight = new Label("Wgt:" + controller.getEnemyWeight(index));
 
       String imageAsString = fileImg.toURI().toString();
 
@@ -204,12 +204,12 @@ public class BattleView extends AbstractView {
    */
   public void updateHp () {
     for (int i = 0; i < controller.getPlayerCharacters().size(); i++) {
-      playerHpVisible.get(i).setText("HP:" + controller.getPlayerCharacterHp(controller.getPlayerCharacter(i)) + "/" +
-                      controller.getPlayerCharacterMaxHp(controller.getPlayerCharacter(i)));
+      playerHpVisible.get(i).setText("HP:" + controller.getPlayerCharacterHp(i) + "/" +
+                      controller.getPlayerCharacterMaxHp(i));
     }
     for (int i = 0; i < controller.getEnemyCharacters().size(); i++) {
-      enemyHpVisible.get(i).setText("HP:" + controller.getEnemyHp(controller.getEnemy(i)) + "/" +
-                      controller.getEnemyMaxHp(controller.getEnemy(i)));
+      enemyHpVisible.get(i).setText("HP:" + controller.getEnemyHp(i) + "/" +
+                      controller.getEnemyMaxHp(i));
     }
   }
 
@@ -218,8 +218,8 @@ public class BattleView extends AbstractView {
    */
   public void updatePlayerDamageWeight () {
     for (int i = 0; i < controller.getPlayerCharacters().size(); i++) {
-      playerDamageVisible.get(i).setText("Atk:"+controller.getPlayerCharacter(i).getEquippedWeapon().getDamage());
-      playerWeightVisible.get(i).setText("Wgt:"+controller.getPlayerCharacter(i).getEquippedWeapon().getWeight());
+      playerDamageVisible.get(i).setText("Atk:"+controller.getPlayerCharacterDamage(i));
+      playerWeightVisible.get(i).setText("Wgt:"+controller.getPlayerCharacterDamage(i));
     }
   }
 
@@ -247,15 +247,15 @@ public class BattleView extends AbstractView {
     int j = 320;
 
     Group weapons = new Group();
-    for (int index = 0; index < controller.getInventory().getWeaponsInventory().size(); index++) {
+    for (int index = 0; index < controller.getInventoryLength(); index++) { // TODO
       Group actualWeapon = new Group();
-      Label name = new Label(controller.getWeaponName(controller.getWeapon(index)));
-      Label damage = new Label("Damage:" + controller.getWeaponDamage(controller.getWeapon(index)));
+      Label name = new Label(controller.getWeaponName(index));
+      Label damage = new Label("Damage:" + controller.getWeaponDamage(index));
       damage.setLayoutY(10);
-      Label weight = new Label("Weight:" + controller.getWeaponWeight(controller.getWeapon(index)));
+      Label weight = new Label("Weight:" + controller.getWeaponWeight(index));
       weight.setLayoutY(20);
 
-      String imageString = controller.getWeapon(index).getImage(); //TODO
+      String imageString = controller.getWeaponImage(index);
       File file = new File(imageString);
       String imageFile = file.toURI().toString();
 
