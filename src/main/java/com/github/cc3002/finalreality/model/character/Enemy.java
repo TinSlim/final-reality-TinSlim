@@ -1,6 +1,5 @@
 package com.github.cc3002.finalreality.model.character;
 
-import java.io.File;
 import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
