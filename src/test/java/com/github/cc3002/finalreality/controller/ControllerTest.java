@@ -2,15 +2,15 @@ package com.github.cc3002.finalreality.controller;
 
 import com.github.cc3002.finalreality.controller.phases.PlayerPhase;
 import com.github.cc3002.finalreality.model.character.Enemy;
-import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import com.github.cc3002.finalreality.model.character.player.commoncharacter.EngineerCharacter;
 import com.github.cc3002.finalreality.model.character.player.commoncharacter.KnightCharacter;
 import com.github.cc3002.finalreality.model.character.player.commoncharacter.ThiefCharacter;
 import com.github.cc3002.finalreality.model.character.player.magecharacter.BlackMageCharacter;
-import com.github.cc3002.finalreality.model.character.player.magecharacter.WhiteMageCharacter;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,7 +25,7 @@ public class ControllerTest {
    */
   @BeforeEach
   public void setUp () {
-    testController = new Controller(4);
+    testController = new Controller(new Random(4));
   }
 
   /**
@@ -33,10 +33,12 @@ public class ControllerTest {
    */
   @Test
   public void testInventoryMovement () {
+    assertEquals(0,testController.getInventoryLength());
     for (int i = 0; i < 15; i++) {
       String number = String.valueOf(i);
       testController.makeSword("TestSword"+number,50,60);
     }
+    assertEquals(12,testController.getInventoryLength());
     KnightCharacter testKnight1 = new KnightCharacter(testController.getQueue(),
             "TestKnight1",1,1);
     testKnight1.equipWeapon(new Sword("DummySword",9,9));
@@ -186,7 +188,7 @@ public class ControllerTest {
     assertTrue(outOfBoundCharacterList);
 
     testController.startGame();
-    assertEquals(100,testController.getAttackPointer());
+    assertEquals(100,testController.getActualTargetPointer());
 
     Thread.sleep(2500);
     testController.executePhase();
@@ -195,16 +197,16 @@ public class ControllerTest {
     Thread.sleep(2500);
     testController.executePhase();
     assertEquals(0,testController.getPlayerAttackingPointer());
-    assertEquals(0,testController.getAttackPointer());
+    assertEquals(0,testController.getActualTargetPointer());
     testController.getPhase().moveTargetRight();
-    assertEquals(1,testController.getAttackPointer());
+    assertEquals(1,testController.getActualTargetPointer());
     testController.getPhase().moveTargetRight();
-    assertEquals(2,testController.getAttackPointer());
+    assertEquals(2,testController.getActualTargetPointer());
     testController.getPhase().moveTargetRight();
-    assertEquals(2,testController.getAttackPointer());
+    assertEquals(2,testController.getActualTargetPointer());
     testController.getPhase().moveTargetRight();
     testController.getPhase().moveTargetLeft();
-    assertEquals(1,testController.getAttackPointer());
+    assertEquals(1,testController.getActualTargetPointer());
     testController.getPhase().doAttack();
 
     Thread.sleep(2500);
@@ -236,11 +238,11 @@ public class ControllerTest {
     assertEquals(0,testController.getPlayerAttackingPointer());
     testController.moveTargetLeft();
     testController.moveTargetLeft();
-    assertEquals(0,testController.getAttackPointer());
+    assertEquals(0,testController.getActualTargetPointer());
     testController.moveTargetLeft();
-    assertEquals(0,testController.getAttackPointer());
+    assertEquals(0,testController.getActualTargetPointer());
     testController.moveTargetLeft();
-    assertEquals(0,testController.getAttackPointer());
+    assertEquals(0,testController.getActualTargetPointer());
     testController.moveTargetLeft();
     testController.getPhase().doAttack();
 
@@ -265,44 +267,38 @@ public class ControllerTest {
    */
   @Test
   public void testDataGet () {
-    IPlayerCharacter testPlayerCharacter;
-    IPlayerCharacter testMage;
-    Enemy testEnemy;
-
-    testPlayerCharacter = new KnightCharacter(testController.getQueue(),
-            "TestPC", 10,8);
-    testPlayerCharacter.receiveDamage(12);
-    testPlayerCharacter.equip(new Sword("TestSword",13,3));
+    testController.makeKnight("TestPC",10,8);
+    testController.getPlayerCharacter(0).receiveDamage(12);
+    testController.getPlayerCharacter(0).equip(new Sword("TestSword",13,3));
 
 
-    testMage = new WhiteMageCharacter(testController.getQueue(),
-            "TestMage",12,12,17);
-    testMage.equip(new Staff("TestStaff",2,22,2));
+    testController.makeWhiteMage("TestMage",12,12,17);
+    testController.getPlayerCharacter(1).equip(new Staff("TestStaff",2,22,2));
 
-    testEnemy = new Enemy(testController.getQueue(),
-            "TestEnemy",20,35,20,32);
-    testEnemy.receiveDamage(25);
+    testController.makeEnemy("TestEnemy",20,20,35,32);
+    testController.getEnemy(0).receiveDamage(25);
 
-    assertEquals("TestPC", testController.getPlayerCharacterName(testPlayerCharacter));
-    assertEquals(10, testController.getPlayerCharacterMaxHp(testPlayerCharacter));
-    assertEquals(6, testController.getPlayerCharacterHp(testPlayerCharacter));
-    assertEquals(8, testController.getPlayerCharacterDefense(testPlayerCharacter));
-    assertEquals(3, testController.getPlayerCharacterWeight(testPlayerCharacter));
-    assertEquals(13, testController.getPlayerCharacterDamage(testPlayerCharacter));
+    assertEquals("TestPC", testController.getPlayerCharacterName(0));
+    assertEquals(10, testController.getPlayerCharacterMaxHp(0));
+    assertEquals(6, testController.getPlayerCharacterHp(0));
+    assertEquals(8, testController.getPlayerCharacterDefense(0));
+    assertEquals(3, testController.getPlayerCharacterWeight(0));
+    assertEquals(13, testController.getPlayerCharacterDamage(0));
 
-    assertEquals("TestEnemy", testController.getEnemyName(testEnemy));
-    assertEquals(20, testController.getEnemyMaxHp(testEnemy));
-    assertEquals(15, testController.getEnemyHp(testEnemy));
-    assertEquals(20, testController.getEnemyDefense(testEnemy));
-    assertEquals(35, testController.getEnemyWeight(testEnemy));
-    assertEquals(32, testController.getEnemyDamage(testEnemy));
 
-    assertEquals(17, testController.getMaxMana(testMage));
-    assertEquals(17, testController.getMana(testMage));
+    assertEquals("TestEnemy", testController.getEnemyName(0));
+    assertEquals(20, testController.getEnemyMaxHp(0));
+    assertEquals(15, testController.getEnemyHp(0));
+    assertEquals(20, testController.getEnemyDefense(0));
+    assertEquals(35, testController.getEnemyWeight(0));
+    assertEquals(32, testController.getEnemyDamage(0));
+
+    assertEquals(17, testController.getMaxMana(1));
+    assertEquals(17, testController.getMana(1));
 
     boolean shouldPassMaxMana = false;
     try {
-      testPlayerCharacter.getMaxMana();
+      testController.getMaxMana(0);
     } catch (AssertionError e) {
       shouldPassMaxMana = true;
     }
@@ -310,7 +306,7 @@ public class ControllerTest {
 
     boolean shouldPassMana = false;
     try {
-      testPlayerCharacter.getMana();
+      testController.getMana(0);
     } catch (AssertionError e) {
       shouldPassMana = true;
     }
@@ -462,10 +458,14 @@ public class ControllerTest {
   @Test
   public void testImageFiles () {
     testController.makeKnight("TestPlayerCharacter",10,10);
-    assertEquals("src\\resources\\characters\\knight.png",testController.getPlayerImage(testController.getPlayerCharacter(0)));
+    assertEquals("src\\resources\\characters\\knight.png",testController.getPlayerImage(0));
 
-    testController.makeEnemy("TestCharacter",10,10,10,10);
-    assertEquals("src\\resources\\characters\\enemy.png",testController.getImage(testController.getEnemy(0)));
+    testController.makeSword("TestSword",10,10);
+    assertEquals("src\\resources\\weapons\\sword.png",testController.getWeaponImage(0));
+
+    testController.makeKnife("TestKnife",12,12);
+    assertEquals("src\\resources\\weapons\\knife.png",testController.getWeaponImage(1));
+
   }
 
   /**
@@ -479,18 +479,18 @@ public class ControllerTest {
     testController.makeBow("TestBow",7,8);
 
     assertEquals(new Sword("TestSword",1,2),testController.getWeapon(0));
-    assertEquals("TestSword",testController.getWeaponName(testController.getWeapon(0)));
-    assertEquals(1,testController.getWeaponDamage(testController.getWeapon(0)));
-    assertEquals(2,testController.getWeaponWeight(testController.getWeapon(0)));
+    assertEquals("TestSword",testController.getWeaponName(0));
+    assertEquals(1,testController.getWeaponDamage(0));
+    assertEquals(2,testController.getWeaponWeight(0));
 
     assertEquals(new Knife("TestKnife",3,4),testController.getWeapon(1));
-    assertEquals("TestKnife",testController.getWeaponName(testController.getWeapon(1)));
-    assertEquals(3,testController.getWeaponDamage(testController.getWeapon(1)));
-    assertEquals(4,testController.getWeaponWeight(testController.getWeapon(1)));
+    assertEquals("TestKnife",testController.getWeaponName(1));
+    assertEquals(3,testController.getWeaponDamage(1));
+    assertEquals(4,testController.getWeaponWeight(1));
 
     assertEquals(new Bow("TestBow",7,8),testController.getWeapon(3));
-    assertEquals("TestBow",testController.getWeaponName(testController.getWeapon(3)));
-    assertEquals(7,testController.getWeaponDamage(testController.getWeapon(3)));
-    assertEquals(8,testController.getWeaponWeight(testController.getWeapon(3)));
+    assertEquals("TestBow",testController.getWeaponName(3));
+    assertEquals(7,testController.getWeaponDamage(3));
+    assertEquals(8,testController.getWeaponWeight(3));
   }
 }
