@@ -1,6 +1,5 @@
 package com.github.cc3002.finalreality.model.character.player.magecharacter;
 
-import java.io.File;
 import java.util.Random;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
