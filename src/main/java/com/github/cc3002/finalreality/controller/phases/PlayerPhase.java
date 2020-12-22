@@ -29,12 +29,12 @@ public class PlayerPhase extends AbstractPhase {
 
   @Override
   public void moveUpInventory () {
-    controller.getInventory().movePoint(-controller.getInventoryLength());
+    controller.getInventory().movePoint(-4);
   }
 
   @Override
   public void moveDownInventory () {
-    controller.getInventory().movePoint(controller.getInventoryLength());
+    controller.getInventory().movePoint(4);
   }
 
   @Override

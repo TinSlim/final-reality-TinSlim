@@ -22,11 +22,9 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * Controller class has the methods to access to the model.
+ * Controller class has the methods to access to the model, get values for the GUI and play the game.
  */
 public class Controller {
-
-  protected final int inventoryLength = 4;
 
   private final ArrayList<IPlayerCharacter> playerCharacters;
   private int playersAlive;
@@ -49,10 +47,11 @@ public class Controller {
   private int targetIndex;
 
   /**
-   * Initialize a Controller, making listeners, a queue, lists of characters.
+   * Makes a Controller initializing characters lists, the turns queue, and counters.
+   * @param random a random to repeat the same controller using a seed.
    */
-  public Controller (int seed) {
-    random = new Random(seed);
+  public Controller (Random random) {
+    this.random = random;
     playerCharacters = new ArrayList<>();
     enemyCharacters = new ArrayList<>();
     turnsQueue = new LinkedBlockingQueue<>();
@@ -82,7 +81,7 @@ public class Controller {
    * Adds all listeners to a player character and adds it to the list of players.
    * @param character the character who will be added.
    */
-  public void addPlayer (IPlayerCharacter character) {
+  private void addPlayer (IPlayerCharacter character) {
     if (getPlayersAlive() < 4) {
       character.addDeathListener(faintPlayerCharactersListener);
       character.addStartTurnListener(startTurnListener);
@@ -271,160 +270,165 @@ public class Controller {
   }
 
   /**
-   * Returns IPlayerCharacter character's name.
-   * @param character who will be asked for his name.
-   * @return character's name.
+   * Returns the name of the player character with the index.
+   * @param index of the character.
+   * @return name of the character.
    */
-  public String getPlayerCharacterName(IPlayerCharacter character) {
-    return character.getName();
+  public String getPlayerCharacterName(int index) {
+    return getPlayerCharacter(index).getName();
   }
 
   /**
-   * Returns Enemy character's name.
-   * @param character who will be asked for his name.
-   * @return character's name.
+   * Returns the name of the enemy with the index.
+   * @param index of the enemy.
+   * @return name of the enemy.
    */
-  public String getEnemyName (Enemy character) {
-    return character.getName();
+  public String getEnemyName (int index) {
+    return getEnemy(index).getName();
   }
 
   /**
-   * Returns player character's name.
-   * @param character who will be asked for his name.
-   * @return character's name.
+   * Returns the maxHp of the player character with the index.
+   * @param index of the player character.
+   * @return max hp of the player character.
    */
-  public int getPlayerCharacterMaxHp (IPlayerCharacter character) {
-    return character.getMaxHp();
+  public int getPlayerCharacterMaxHp (int index) {
+    return getPlayerCharacter(index).getMaxHp();
   }
 
   /**
-   * Returns enemy character's maxHp.
-   * @param character who will be asked for his maxHp.
-   * @return maxHp value.
+   * Returns the maxHp of the enemy with the index.
+   * @param index of the enemy.
+   * @return max hp of the enemy.
    */
-  public int getEnemyMaxHp (Enemy character) {
-    return character.getMaxHp();
+  public int getEnemyMaxHp (int index) {
+    return getEnemy(index).getMaxHp();
   }
 
   /**
-   * Returns player character's hp.
-   * @param character who will be asked for his hp.
-   * @return hp value.
+   * Returns the hp of the player character with the index.
+   * @param index of the player character.
+   * @return hp of the player character.
    */
-  public int getPlayerCharacterHp (IPlayerCharacter character) {
-    return character.getHp();
+  public int getPlayerCharacterHp (int index) {
+    return getPlayerCharacter(index).getHp();
   }
 
   /**
-   * Returns enemy character's hp.
-   * @param character who will be asked for his hp.
-   * @return hp value.
+   * Returns the hp of the enemy with the index.
+   * @param index of the enemy.
+   * @return hp of the enemy.
    */
-  public int getEnemyHp (Enemy character) {
-    return character.getHp();
+  public int getEnemyHp (int index) {
+    return getEnemy(index).getHp();
   }
 
   /**
-   * Returns character's defense.
-   * @param character character who will be asked for his defense.
-   * @return defense value.
+   * Returns the defense of the player character with the index.
+   * @param index of the player character.
+   * @return defense of the player character.
    */
-  public int getPlayerCharacterDefense (IPlayerCharacter character) {
-    return character.getDefense();
+  public int getPlayerCharacterDefense (int index) {
+    return getPlayerCharacter(index).getDefense();
   }
 
   /**
-   * Returns character's defense.
-   * @param character character who will be asked for his defense.
-   * @return defense value.
+   * Returns the defense of the enemy with the index.
+   * @param index of the enemy.
+   * @return defense of the enemy.
    */
-  public int getEnemyDefense (Enemy character) {
-    return character.getDefense();
+  public int getEnemyDefense (int index) {
+    return getEnemy(index).getDefense();
   }
 
   /**
-   * Returns this player character's weight, by asking his weapon's weight.
-   * @param character who will be asked for his weight.
-   * @return  weight of the character's weapon.
+   * Returns the weight of the player character with the index.
+   * @param index of the player character.
+   * @return weight of the player character.
    */
-  public int getPlayerCharacterWeight (IPlayerCharacter character) {
-    return character.getEquippedWeapon().getWeight();
+  public int getPlayerCharacterWeight (int index) {
+    return getPlayerCharacter(index).getEquippedWeapon().getWeight();
   }
 
   /**
-   * Returns this player character's damage, by asking his weapon's damage.
-   * @param character who will be asked for his damage.
-   * @return damage of the character's weapon.
+   * Returns the damage of the player character with the index.
+   * @param index of the player character.
+   * @return damage of the player character.
    */
-  public int getPlayerCharacterDamage (IPlayerCharacter character) {
-    return character.getEquippedWeapon().getDamage();
+  public int getPlayerCharacterDamage (int index) {
+    return getPlayerCharacter(index).getEquippedWeapon().getDamage();
   }
 
   /**
-   * Returns this player character's maxMana value.
-   * @param character who will be asked for maxMana value.
-   * @return maxMana.
+   * Returns the max mana of the player character with the index.
+   * @param index of the player character.
+   * @return max mana of the player character.
    */
-  public int getMaxMana (IPlayerCharacter character) {
-    return character.getMaxMana();
+  public int getMaxMana (int index) {
+    return getPlayerCharacter(index).getMaxMana();
   }
 
   /**
-   * Returns this player character's mana value.
-   * @param character who will be asked for mana value.
-   * @return mana.
+   * Returns the mana of the player character with the index.
+   * @param index of the player character.
+   * @return mana of the player character.
    */
-  public int getMana (IPlayerCharacter character) {
-    return character.getMana();
+  public int getMana (int index) {
+    return getPlayerCharacter(index).getMana();
   }
 
   /**
-   * Returns the Enemy character's damage.
-   * @param character who will be asked for damage.
-   * @return the character's damage.
+   * Returns the damage of the enemy with the index.
+   * @param index of the enemy.
+   * @return damage of the enemy.
    */
-  public int getEnemyDamage (Enemy character) {
-    return character.getDamage();
+  public int getEnemyDamage (int index) {
+    return getEnemy(index).getDamage();
   }
 
   /**
-   * Returns the Enemy character's weight.
-   * @param character who will be asked for weight.
-   * @return the character's weight.
+   * Returns the weight of the enemy with the index.
+   * @param index of the enemy.
+   * @return weight of the enemy.
    */
-  public int getEnemyWeight (Enemy character) {
-    return character.getWeight();
+  public int getEnemyWeight (int index) {
+    return getEnemy(index).getWeight();
   }
 
+  /**
+   * Returns the weapon with the index.
+   * @param index of the weapon.
+   * @return weapon.
+   */
   public IWeapon getWeapon (int index) {
     return inventory.getWeaponsInventory().get(index);
   }
 
   /**
-   * Returns the name of the weapon.
-   * @param weapon who will be asked for it name.
-   * @return the name of the weapon.
+   * Returns the name of the weapon with the index.
+   * @param index of the weapon.
+   * @return the name of the weapon with the index.
    */
-  public String getWeaponName (IWeapon weapon) {
-    return weapon.getName();
+  public String getWeaponName (int index) {
+    return getWeapon(index).getName();
   }
 
   /**
-   * Returns the damage of the weapon.
-   * @param weapon who will be asked for it damage.
-   * @return the damage of the weapon.
+   * Returns the damage of the weapon with the index.
+   * @param index of the weapon.
+   * @return the damage of the weapon with the index.
    */
-  public int getWeaponDamage (IWeapon weapon) {
-    return weapon.getDamage();
+  public int getWeaponDamage (int index) {
+    return getWeapon(index).getDamage();
   }
 
   /**
-   * Returns the weight of the weapon.
-   * @param weapon who will be asked for it weight.
-   * @return the weight of the weapon.
+   * Returns the weight of the weapon with the index.
+   * @param index of the weapon.
+   * @return the weight of the weapon with the index.
    */
-  public int getWeaponWeight (IWeapon weapon) {
-    return weapon.getWeight();
+  public int getWeaponWeight (int index) {
+    return getWeapon(index).getWeight();
   }
 
   /**
@@ -566,7 +570,7 @@ public class Controller {
    * Returns the phase.
    * @return the phase of this controller.
    */
-  public IPhase getPhase () {
+  protected IPhase getPhase () {
     return this.phase;
   }
 
@@ -671,20 +675,11 @@ public class Controller {
   }
 
   /**
-   * Returns image file path of the character as String.
-   * @param character who will be asked for his image.
-   * @return the image file path.
-   */
-  public String getImage (ICharacter character) {
-    return character.getImage();
-  }
-
-  /**
    * Returns the quantity of weapons.
    * @return quantity of weapons.
    */
   public int getInventoryLength() {
-    return inventoryLength;
+    return inventory.getWeaponsInventory().size();
   }
 
   /**
@@ -717,10 +712,18 @@ public class Controller {
     phase.equipWeapon();
   }
 
+  /**
+   * Returns the actual attacking character pointer.
+   * @return the actual attacking character pointer.
+   */
   public int getPlayerAttackingPointer() {
     return position;
   }
 
+  /**
+   * Sets the actual attacking character pointer.
+   * @param i new position.
+   */
   public void setPosition (int i) {
     position = i;
   }
@@ -735,20 +738,37 @@ public class Controller {
   }
 
   /**
-   * Returns the path of the playerCharacter's image.
-   * @param playerCharacter who will be asked for his image path.
-   * @return the path of the playerCharacter's image.
+   * Returns the image of the index player character.
+   * @param index of player character.
+   * @return image of the index player character.
    */
-  public String getPlayerImage(IPlayerCharacter playerCharacter) {
-    return playerCharacter.getImage();
+  public String getPlayerImage(int index) {
+    return getPlayerCharacter(index).getImage();
   }
 
+  /**
+   * Returns the index of the actual target.
+   * @return the index of the actual target.
+   */
   public int getTargetIndex() {
     return targetIndex;
   }
 
+  /**
+   * Adds i to the index of actual target.
+   * @param i how many adds to the index of actual target.
+   */
   public void addTargetIndex(int i) {
     targetIndex += i;
+  }
+
+  /**
+   * Return the image path of the index weapon.
+   * @param index of the weapon.
+   * @return the image path of the index weapon.
+   */
+  public String getWeaponImage(int index) {
+    return getWeapon(index).getImage();
   }
 }
 
