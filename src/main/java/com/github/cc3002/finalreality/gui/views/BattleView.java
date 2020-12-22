@@ -247,7 +247,7 @@ public class BattleView extends AbstractView {
     int j = 320;
 
     Group weapons = new Group();
-    for (int index = 0; index < controller.getInventoryLength(); index++) { // TODO
+    for (int index = 0; index < controller.getInventoryLength(); index++) {
       Group actualWeapon = new Group();
       Label name = new Label(controller.getWeaponName(index));
       Label damage = new Label("Damage:" + controller.getWeaponDamage(index));
