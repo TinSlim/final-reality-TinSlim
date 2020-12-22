@@ -1,63 +1,47 @@
 package com.github.cc3002.finalreality.gui;
 
 import com.github.cc3002.finalreality.controller.Controller;
-import com.github.cc3002.finalreality.model.character.AbstractCharacter;
+import com.github.cc3002.finalreality.gui.views.IView;
+import com.github.cc3002.finalreality.gui.views.MakeCharactersView;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Random;
+
 
 /**
  * Main entry point for the application.
- * <p>
- * <Complete here with the details of the implemented application>
- *
+ * The game starts with a screen to make characters and then play the battle.
+ * Here are methods to show the game and update it.
  * @author Ignacio Slater Muñoz.
- * @author <Your name>
+ * @author Cristóbal Torres Gutiérre.
  */
 public class FinalReality extends Application {
   Controller controller;
   IView actualView;
   Group root;
 
-
-
+  /**
+   * Initializes a controller and a root, sets a first view.
+   */
   public FinalReality () {
-    controller = new Controller(10);
-    //controller.makeKnight("Pepe",70,1);
-    //controller.makeKnight("Pepaa",30,1);
-
-    //controller.makeSword("Espade",3,23);
-    //controller.makeSword("Espadea",3,54);
-    //controller.makeSword("Espaweadea",3,64);
-    //controller.makeSword("E231spaweadea",4,100);
-    //controller.makeSword("E2adad31spaweadea",3,232);
-    //controller.makeAxe("Esxa",3,232);
-    //controller.makeAxe("Ea",3,232);
-    //controller.makeAxe("E23a",3,232);
-    //controller.makeAxe("313Ea",3,232);
-    //controller.makeAxe("1Ea",53,232);
-
-    //controller.makeEnemy("Juan",2,0,33,10);
-    //controller.makeEnemy("Juae",1,0,77,10);
-    //controller.makeEnemy("Juae",3,0,147,10);
-
+    controller = new Controller(new Random());
     root = new Group();
-
-
     setActualView(new MakeCharactersView());
-
   }
-
-
 
   public static void main(String[] args) {
     launch(args);
   }
 
-  protected void setActualView (IView newView) {
+  /**
+   * Sets an actual view for this game.
+   * @param newView new view.
+   */
+  public void setActualView(IView newView) {
     Group viewRoot = new Group();
     actualView = newView;
     actualView.setRoot(viewRoot);
@@ -79,6 +63,9 @@ public class FinalReality extends Application {
     primaryStage.show();
   }
 
+  /**
+   * Sets a timer, the timer calls the update method from the actual view.
+   */
   private void setupTimer () {
     AnimationTimer timer = new AnimationTimer() {
       @Override
