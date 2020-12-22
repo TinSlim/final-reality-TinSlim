@@ -613,7 +613,6 @@ public class Controller {
    */
   public void doEnemyPhase() {
     setPhase(new EnemyPhase());
-    phase.enemyAttack();
   }
 
   /**
