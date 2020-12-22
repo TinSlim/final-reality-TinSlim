@@ -1,7 +1,6 @@
 package com.github.cc3002.finalreality.model.character;
 
 import java.beans.PropertyChangeSupport;
-import java.io.File;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -18,7 +17,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class AbstractCharacter implements ICharacter {
 
-  protected String image;
   protected String imageFile;
 
   protected final BlockingQueue<ICharacter> turnsQueue;
@@ -54,16 +52,10 @@ public abstract class AbstractCharacter implements ICharacter {
     this.defense = defense;
     this.outOfCombat = false;
     this.imageFile = imageFile;
-    setAliveImage();
 
     this.deathListened = new PropertyChangeSupport(this);
     this.startTurnListened = new PropertyChangeSupport(this);
     this.finishTurnListened = new PropertyChangeSupport(this);
-  }
-
-  protected void setAliveImage() {
-    File file = new File(imageFile);
-    image = file.toURI().toString();
   }
 
   /**
@@ -157,15 +149,21 @@ public abstract class AbstractCharacter implements ICharacter {
     deathListened.firePropertyChange("Fainted",null,this);
   }
 
-  public String getImage () {
-    return image;
-  }
-
+  @Override
   public int getPosition () {
     return characterPosition;
   }
 
+  /**
+   * Sets the index to enumerate this character.
+   * @param newValue the index to enumerate this character.
+   */
   public void setPosition(int newValue) {
     characterPosition = newValue;
+  }
+
+  @Override
+  public String getImage() {
+    return imageFile;
   }
 }
