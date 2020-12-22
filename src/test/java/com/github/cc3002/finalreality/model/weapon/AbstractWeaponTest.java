@@ -52,6 +52,9 @@ public abstract class AbstractWeaponTest {
     setCharacters();
   }
 
+  /**
+   * Sets test characters.
+   */
   public void setCharacters () {
     BlockingQueue<ICharacter> testTurnsQueue = new LinkedBlockingQueue<>();;
     testKnight = new KnightCharacter(testTurnsQueue,"TestKnight",1,1);
@@ -92,6 +95,9 @@ public abstract class AbstractWeaponTest {
     assertNotEquals(testWeaponA.hashCode(),testWeaponF4.hashCode());
   }
 
+  /**
+   * Tests the magic damage getter.
+   */
   @Test
   public void testGetMagicDamage () {
     boolean shouldPassMagicDamage = false;
@@ -103,11 +109,17 @@ public abstract class AbstractWeaponTest {
     assertTrue(shouldPassMagicDamage);
   }
 
+  /**
+   * Tests the magic cast.
+   */
   @Test
   public void testCastMagic () {
     assertFalse(testWeaponA.castMagic());
   }
 
+  /**
+   * Tests the image file path getter.
+   */
   @Test
   public void imageFileNameGetter () {
     assertEquals(imgFileName, testWeaponA.getImage());
