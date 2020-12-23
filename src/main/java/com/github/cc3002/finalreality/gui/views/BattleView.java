@@ -219,7 +219,7 @@ public class BattleView extends AbstractView {
   public void updatePlayerDamageWeight () {
     for (int i = 0; i < controller.getPlayerCharacters().size(); i++) {
       playerDamageVisible.get(i).setText("Atk:"+controller.getPlayerCharacterDamage(i));
-      playerWeightVisible.get(i).setText("Wgt:"+controller.getPlayerCharacterDamage(i));
+      playerWeightVisible.get(i).setText("Wgt:"+controller.getPlayerCharacterWeight(i));
     }
   }
 
