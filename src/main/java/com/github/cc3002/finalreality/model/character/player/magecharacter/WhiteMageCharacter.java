@@ -6,6 +6,7 @@ import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.util.concurrent.BlockingQueue;
 
 /**
@@ -21,8 +22,10 @@ public class WhiteMageCharacter extends AbstractMageCharacter {
    */
   public WhiteMageCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
                             final int maxHp, final int defense, final int maxMana) {
-    super(turnsQueue, name, maxHp, defense,maxMana);
+    super(turnsQueue, name, maxHp, defense,maxMana, "src\\resources\\characters\\whiteMage.png");
   }
+
+
 
   /**
    * This WhiteMageCharacter cures a target (IPlayerCharacter).

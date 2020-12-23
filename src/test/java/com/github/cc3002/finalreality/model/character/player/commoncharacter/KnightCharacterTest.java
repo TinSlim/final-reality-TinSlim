@@ -36,6 +36,8 @@ public class KnightCharacterTest extends AbstractCommonCharacterTest {
     ((KnightCharacter) testTurnsCharacterA).equip(testAttackWeaponA);
     testTurnsCharacterB = new KnightCharacter(turnsQueue,"TestTurnsKnightB",100,100);
     ((KnightCharacter) testTurnsCharacterB).equip(testAttackWeaponB);
+
+    imgFileName = "src\\resources\\characters\\knight.png";
   }
 
 

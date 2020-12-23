@@ -1,9 +1,12 @@
 package com.github.cc3002.finalreality.controller.phases;
 
+/**
+ * Phase that waits for a new character to start a turn.
+ */
 public class WaitingPhase extends AbstractPhase {
 
   /**
-   * Start a new turn, changing to decision phase.
+   * Starts a new turn, changing to decision phase.
    */
   @Override
   public void newTurn() {

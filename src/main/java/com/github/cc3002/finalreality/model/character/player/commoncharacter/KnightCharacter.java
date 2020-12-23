@@ -19,7 +19,7 @@ public class KnightCharacter extends AbstractCommonCharacter {
    */
   public KnightCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
                          final int maxHp, final int defense) {
-    super(turnsQueue, name, maxHp, defense);
+    super(turnsQueue, name, maxHp, defense,"src\\resources\\characters\\knight.png");
   }
 
   @Override

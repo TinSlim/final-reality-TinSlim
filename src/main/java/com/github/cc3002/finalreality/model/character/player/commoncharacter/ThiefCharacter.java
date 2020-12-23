@@ -4,6 +4,7 @@ import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.weapon.*;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.util.concurrent.BlockingQueue;
 
 /**
@@ -19,8 +20,10 @@ public class ThiefCharacter extends AbstractCommonCharacter {
    */
   public ThiefCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,@NotNull String name,
                         final int maxHp,final int defense) {
-    super(turnsQueue, name, maxHp, defense);
+    super(turnsQueue, name, maxHp, defense, "src\\resources\\characters\\thief.png");
   }
+
+
 
   @Override
   public void equipWeapon(IWeapon weapon) {

@@ -9,7 +9,6 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import com.github.cc3002.finalreality.model.weapon.AbstractWeapon;
 import com.github.cc3002.finalreality.model.weapon.IWeapon;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
  * A class that holds all the information of a single character of the game.
  *
  * @author Ignacio Slater Muñoz.
- * @author <Your name>
+ * @author Cristóbal Torres Gutiérrez
  */
 public abstract class AbstractPlayerCharacter extends AbstractCharacter implements IPlayerCharacter{
 
@@ -29,8 +28,8 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
    *  @param name           the character's name
    */
   public AbstractPlayerCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,@NotNull String name,
-                                 final int maxHp,final int defense){
-    super(turnsQueue, name, maxHp,defense);
+                                 final int maxHp,final int defense, String imageFile){
+    super(turnsQueue, name, maxHp,defense, imageFile);
   }
 
   @Override
@@ -49,8 +48,8 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
   }
 
   @Override
-  public void setEquippedWeapon(AbstractWeapon abstractWeapon) {
-    this.equippedWeapon = abstractWeapon;
+  public void setEquippedWeapon(IWeapon weapon) {
+    this.equippedWeapon = weapon;
   }
 
   @Override
@@ -77,8 +76,9 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
       IWeapon weapon = this.getEquippedWeapon();
       int damage = weapon.getDamage();
       target.receiveDamage(damage);
+      finishTurnListened.firePropertyChange("NextTurn",null,this);
     }
-    finishTurnListened.firePropertyChange("NextTurn",null,this);
+
   }
 
   @Override
@@ -93,6 +93,10 @@ public abstract class AbstractPlayerCharacter extends AbstractCharacter implemen
 
   @Override
   public void doPhase (Controller controller) {
-    controller.doPlayerPhase();
+    if (isAlive()) {
+      controller.doPlayerPhase();
+    } else {
+      controller.endTurn();
+    }
   }
 }

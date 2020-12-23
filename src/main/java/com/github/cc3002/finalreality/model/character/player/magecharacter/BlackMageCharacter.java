@@ -21,8 +21,10 @@ public class BlackMageCharacter extends AbstractMageCharacter {
    */
   public BlackMageCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
                             final int maxHp, final int defense, final int maxMana) {
-    super(turnsQueue, name, maxHp, defense,maxMana);
+    super(turnsQueue, name, maxHp, defense,maxMana, "src\\resources\\characters\\blackMage.png");
   }
+
+
 
   /**
    * This BlackMageCharacter attacks a target (Enemy) with thunder magic with a chance to paralize

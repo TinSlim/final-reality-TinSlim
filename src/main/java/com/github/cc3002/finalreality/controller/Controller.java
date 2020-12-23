@@ -4,8 +4,7 @@ import com.github.cc3002.finalreality.controller.listeners.EnemyDeathListener;
 import com.github.cc3002.finalreality.controller.listeners.FinishTurnListener;
 import com.github.cc3002.finalreality.controller.listeners.PlayerCharacterDeathListener;
 import com.github.cc3002.finalreality.controller.listeners.StartTurnListener;
-import com.github.cc3002.finalreality.controller.phases.IPhase;
-import com.github.cc3002.finalreality.controller.phases.WaitingPhase;
+import com.github.cc3002.finalreality.controller.phases.*;
 import com.github.cc3002.finalreality.model.character.Enemy;
 import com.github.cc3002.finalreality.model.character.ICharacter;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
@@ -23,17 +22,17 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * Controller class has the methods to access to the model.
+ * Controller class has the methods to access to the model, get values for the GUI and play the game.
  */
 public class Controller {
-
-  private final int inventoryLength = 5;
 
   private final ArrayList<IPlayerCharacter> playerCharacters;
   private int playersAlive;
   private final ArrayList<Enemy> enemyCharacters;
   private int enemiesAlive;
   private final Inventory inventory;
+
+  private String gameEnd;
 
   private final BlockingQueue<ICharacter> turnsQueue;
 
@@ -44,16 +43,20 @@ public class Controller {
   private ICharacter actualCharacter;
   private IPhase phase;
   private final Random random;
+  private int position;
+  private int targetIndex;
 
   /**
-   * Initialize a Controller, making listeners, a queue, lists of characters.
+   * Makes a Controller initializing characters lists, the turns queue, and counters.
+   * @param random a random to repeat the same controller using a seed.
    */
-  public Controller (int seed) {
-    random = new Random(seed);
+  public Controller (Random random) {
+    this.random = random;
     playerCharacters = new ArrayList<>();
     enemyCharacters = new ArrayList<>();
     turnsQueue = new LinkedBlockingQueue<>();
-
+    position = 10;
+    targetIndex = 0;
     playersAlive = 0;
     enemiesAlive = 0;
 
@@ -63,6 +66,7 @@ public class Controller {
     startTurnListener = new StartTurnListener(this);
 
     inventory = new Inventory();
+    gameEnd = "";
   }
 
   /**
@@ -77,12 +81,14 @@ public class Controller {
    * Adds all listeners to a player character and adds it to the list of players.
    * @param character the character who will be added.
    */
-  public void addPlayer (IPlayerCharacter character) {
-    character.addDeathListener(faintPlayerCharactersListener);
-    character.addStartTurnListener(startTurnListener);
-    character.addFinishTurnListener(finishTurnListener);
-    playerCharacters.add(character);
-    changeAlivePlayersQuantity(1);
+  private void addPlayer (IPlayerCharacter character) {
+    if (getPlayersAlive() < 4) {
+      character.addDeathListener(faintPlayerCharactersListener);
+      character.addStartTurnListener(startTurnListener);
+      character.addFinishTurnListener(finishTurnListener);
+      playerCharacters.add(character);
+      changeAlivePlayersQuantity(1);
+    }
   }
 
   /**
@@ -94,6 +100,8 @@ public class Controller {
    */
   public void makeKnight (String name, int maxHp, int defense) {
     KnightCharacter character = new KnightCharacter(turnsQueue,name,maxHp,defense);
+    character.setPosition(playersAlive);
+    character.equipWeapon(new Sword("ToySword",0,20));
     addPlayer(character);
   }
 
@@ -106,6 +114,8 @@ public class Controller {
    */
   public void makeThief (String name, int maxHp, int defense) {
     ThiefCharacter character = new ThiefCharacter(turnsQueue,name,maxHp,defense);
+    character.setPosition(playersAlive);
+    character.equipWeapon(new Bow("ToyBow",0,20));
     addPlayer(character);
   }
 
@@ -118,6 +128,8 @@ public class Controller {
    */
   public void makeEngineer (String name, int maxHp, int defense) {
     EngineerCharacter character = new EngineerCharacter(turnsQueue, name, maxHp, defense);
+    character.setPosition(playersAlive);
+    character.equipWeapon(new Axe("ToyAxe",0,20));
     addPlayer(character);
   }
 
@@ -131,6 +143,8 @@ public class Controller {
    */
   public void makeWhiteMage (String name, int maxHp, int defense, int maxMana) {
     WhiteMageCharacter character = new WhiteMageCharacter(turnsQueue,name,maxHp,defense,maxMana);
+    character.setPosition(playersAlive);
+    character.equipWeapon(new Staff("ToyStaff",0,0,20));
     addPlayer(character);
   }
 
@@ -144,6 +158,8 @@ public class Controller {
    */
   public void makeBlackMage (String name, int maxHp, int defense, int maxMana) {
     BlackMageCharacter character = new BlackMageCharacter(turnsQueue,name,maxHp,defense,maxMana);
+    character.setPosition(playersAlive);
+    character.equipWeapon(new Staff("ToyStaff",0,0,20));
     addPlayer(character);
   }
 
@@ -157,12 +173,15 @@ public class Controller {
    * @param damage Enemy's damage.
    */
   public void makeEnemy (String name, int maxHp, int defense, int weight, int damage) {
-    Enemy character = new Enemy(turnsQueue,name,maxHp,weight,defense,damage);
-    character.addDeathListener(faintEnemyListener);
-    character.addStartTurnListener(startTurnListener);
-    character.addFinishTurnListener(finishTurnListener);
-    enemyCharacters.add(character);
-    changeEnemyQuantity (1);
+    if (getEnemiesAlive() < 8) {
+      Enemy character = new Enemy(turnsQueue,name,maxHp,weight,defense,damage);
+      character.addDeathListener(faintEnemyListener);
+      character.addStartTurnListener(startTurnListener);
+      character.addFinishTurnListener(finishTurnListener);
+      character.setPosition(10);
+      enemyCharacters.add(character);
+      changeEnemyQuantity (1);
+    }
   }
 
   /**
@@ -251,138 +270,165 @@ public class Controller {
   }
 
   /**
-   * Returns IPlayerCharacter character's name.
-   * @param character who will be asked for his name.
-   * @return character's name.
+   * Returns the name of the player character with the index.
+   * @param index of the character.
+   * @return name of the character.
    */
-  public String getPlayerCharacterName(IPlayerCharacter character) {
-    return character.getName();
+  public String getPlayerCharacterName(int index) {
+    return getPlayerCharacter(index).getName();
   }
 
   /**
-   * Returns Enemy character's name.
-   * @param character who will be asked for his name.
-   * @return character's name.
+   * Returns the name of the enemy with the index.
+   * @param index of the enemy.
+   * @return name of the enemy.
    */
-  public String getEnemyName (Enemy character) {
-    return character.getName();
+  public String getEnemyName (int index) {
+    return getEnemy(index).getName();
   }
 
   /**
-   * Returns player character's name.
-   * @param character who will be asked for his name.
-   * @return character's name.
+   * Returns the maxHp of the player character with the index.
+   * @param index of the player character.
+   * @return max hp of the player character.
    */
-  public int getPlayerCharacterMaxHp (IPlayerCharacter character) {
-    return character.getMaxHp();
+  public int getPlayerCharacterMaxHp (int index) {
+    return getPlayerCharacter(index).getMaxHp();
   }
 
   /**
-   * Returns enemy character's maxHp.
-   * @param character who will be asked for his maxHp.
-   * @return maxHp value.
+   * Returns the maxHp of the enemy with the index.
+   * @param index of the enemy.
+   * @return max hp of the enemy.
    */
-  public int getEnemyMaxHp (Enemy character) {
-    return character.getMaxHp();
+  public int getEnemyMaxHp (int index) {
+    return getEnemy(index).getMaxHp();
   }
 
   /**
-   * Returns player character's hp.
-   * @param character who will be asked for his hp.
-   * @return hp value.
+   * Returns the hp of the player character with the index.
+   * @param index of the player character.
+   * @return hp of the player character.
    */
-  public int getPlayerCharacterHp (IPlayerCharacter character) {
-    return character.getHp();
+  public int getPlayerCharacterHp (int index) {
+    return getPlayerCharacter(index).getHp();
   }
 
   /**
-   * Returns enemy character's hp.
-   * @param character who will be asked for his hp.
-   * @return hp value.
+   * Returns the hp of the enemy with the index.
+   * @param index of the enemy.
+   * @return hp of the enemy.
    */
-  public int getEnemyHp (Enemy character) {
-    return character.getHp();
+  public int getEnemyHp (int index) {
+    return getEnemy(index).getHp();
   }
 
   /**
-   * Returns character's defense.
-   * @param character character who will be asked for his defense.
-   * @return defense value.
+   * Returns the defense of the player character with the index.
+   * @param index of the player character.
+   * @return defense of the player character.
    */
-  public int getPlayerCharacterDefense (IPlayerCharacter character) {
-    return character.getDefense();
+  public int getPlayerCharacterDefense (int index) {
+    return getPlayerCharacter(index).getDefense();
   }
 
   /**
-   * Returns character's defense.
-   * @param character character who will be asked for his defense.
-   * @return defense value.
+   * Returns the defense of the enemy with the index.
+   * @param index of the enemy.
+   * @return defense of the enemy.
    */
-  public int getEnemyDefense (Enemy character) {
-    return character.getDefense();
+  public int getEnemyDefense (int index) {
+    return getEnemy(index).getDefense();
   }
 
   /**
-   * Returns this player character's weight, by asking his weapon's weight.
-   * @param character who will be asked for his weight.
-   * @return  weight of the character's weapon.
+   * Returns the weight of the player character with the index.
+   * @param index of the player character.
+   * @return weight of the player character.
    */
-  public int getPlayerCharacterWeight (IPlayerCharacter character) {
-    return character.getEquippedWeapon().getWeight();
+  public int getPlayerCharacterWeight (int index) {
+    return getPlayerCharacter(index).getEquippedWeapon().getWeight();
   }
 
   /**
-   * Returns this player character's damage, by asking his weapon's damage.
-   * @param character who will be asked for his damage.
-   * @return damage of the character's weapon.
+   * Returns the damage of the player character with the index.
+   * @param index of the player character.
+   * @return damage of the player character.
    */
-  public int getPlayerCharacterDamage (IPlayerCharacter character) {
-    return character.getEquippedWeapon().getDamage();
+  public int getPlayerCharacterDamage (int index) {
+    return getPlayerCharacter(index).getEquippedWeapon().getDamage();
   }
 
   /**
-   * Returns this player character's maxMana value.
-   * @param character who will be asked for maxMana value.
-   * @return maxMana.
+   * Returns the max mana of the player character with the index.
+   * @param index of the player character.
+   * @return max mana of the player character.
    */
-  public int getMaxMana (IPlayerCharacter character) {
-    return character.getMaxMana();
+  public int getMaxMana (int index) {
+    return getPlayerCharacter(index).getMaxMana();
   }
 
   /**
-   * Returns this player character's mana value.
-   * @param character who will be asked for mana value.
-   * @return mana.
+   * Returns the mana of the player character with the index.
+   * @param index of the player character.
+   * @return mana of the player character.
    */
-  public int getMana (IPlayerCharacter character) {
-    return character.getMana();
+  public int getMana (int index) {
+    return getPlayerCharacter(index).getMana();
   }
 
   /**
-   * Returns the Enemy character's damage.
-   * @param character who will be asked for damage.
-   * @return the character's damage.
+   * Returns the damage of the enemy with the index.
+   * @param index of the enemy.
+   * @return damage of the enemy.
    */
-  public int getEnemyDamage (Enemy character) {
-    return character.getDamage();
+  public int getEnemyDamage (int index) {
+    return getEnemy(index).getDamage();
   }
 
   /**
-   * Returns the Enemy character's weight.
-   * @param character who will be asked for weight.
-   * @return the character's weight.
+   * Returns the weight of the enemy with the index.
+   * @param index of the enemy.
+   * @return weight of the enemy.
    */
-  public int getEnemyWeight (Enemy character) {
-    return character.getWeight();
+  public int getEnemyWeight (int index) {
+    return getEnemy(index).getWeight();
   }
 
   /**
-   * Returns the weapon's name of the character.
-   * @param character who will be asked for weapon's name.
-   * @return weapon's name.
+   * Returns the weapon with the index.
+   * @param index of the weapon.
+   * @return weapon.
    */
-  public String getWeaponName (IPlayerCharacter character) {
-    return character.getEquippedWeapon().getName();
+  public IWeapon getWeapon (int index) {
+    return inventory.getWeaponsInventory().get(index);
+  }
+
+  /**
+   * Returns the name of the weapon with the index.
+   * @param index of the weapon.
+   * @return the name of the weapon with the index.
+   */
+  public String getWeaponName (int index) {
+    return getWeapon(index).getName();
+  }
+
+  /**
+   * Returns the damage of the weapon with the index.
+   * @param index of the weapon.
+   * @return the damage of the weapon with the index.
+   */
+  public int getWeaponDamage (int index) {
+    return getWeapon(index).getDamage();
+  }
+
+  /**
+   * Returns the weight of the weapon with the index.
+   * @param index of the weapon.
+   * @return the weight of the weapon with the index.
+   */
+  public int getWeaponWeight (int index) {
+    return getWeapon(index).getWeight();
   }
 
   /**
@@ -397,14 +443,24 @@ public class Controller {
    * Method called when the user wins.
    */
   public void win() {
-
+    setPhase(new EndPhase());
+    gameEnd = "Congratulations, you won!!!";
   }
 
   /**
    * Method called when the user loses.
    */
   public void lose() {
+    setPhase(new EndPhase());
+    gameEnd = "GameOver, you lose";
+  }
 
+  /**
+   * Returns the result of the game, this value changes when the game ends.
+   * @return the result of the game.
+   */
+  public String getGameEnd () {
+    return gameEnd;
   }
 
   /**
@@ -443,28 +499,28 @@ public class Controller {
    * Moves the inventory pointer right.
    */
   public void rightMoveInventory () {
-    getInventory().movePoint(1);
+    phase.moveRightInventory();
   }
 
   /**
    * Moves the inventory pointer left.
    */
   public void leftMoveInventory () {
-    getInventory().movePoint(-1);
+    phase.moveLeftInventory();
   }
 
   /**
    * Moves the inventory pointer up.
    */
   public void upMoveInventory () {
-    getInventory().movePoint(inventoryLength);
+    phase.moveUpInventory();
   }
 
   /**
    * Moves the inventory pointer down.
    */
   public void downMoveInventory () {
-    getInventory().movePoint(-inventoryLength);
+    phase.moveDownInventory();
   }
 
   /**
@@ -514,7 +570,7 @@ public class Controller {
    * Returns the phase.
    * @return the phase of this controller.
    */
-  public IPhase getPhase () {
+  protected IPhase getPhase () {
     return this.phase;
   }
 
@@ -552,6 +608,7 @@ public class Controller {
    * Saves the player character in the phase to use it by the user.
    */
   public void doPlayerPhase() {
+    setPhase(new PlayerPhase());
     phase.setPlayerCharacter((IPlayerCharacter) actualCharacter);
   }
 
@@ -559,7 +616,7 @@ public class Controller {
    * Calls the enemy automated attack.
    */
   public void doEnemyPhase() {
-    phase.enemyAttack();
+    setPhase(new EnemyPhase());
   }
 
   /**
@@ -567,7 +624,11 @@ public class Controller {
    */
   public void endTurn() {
     actualCharacter.waitTurn();
+    setPosition(10);
     setPhase(new WaitingPhase());
+    if (getQueue().size() > 0) {
+      startNewTurn();
+    }
   }
 
   /**
@@ -611,6 +672,103 @@ public class Controller {
    */
   public void moveTargetLeft() {
     phase.moveTargetLeft();
+  }
+
+  /**
+   * Returns the quantity of weapons.
+   * @return quantity of weapons.
+   */
+  public int getInventoryLength() {
+    return inventory.getWeaponsInventory().size();
+  }
+
+  /**
+   * Do an attack depending on the actual phase.
+   */
+  public void doAttack() {
+    phase.doAttack();
+  }
+
+  /**
+   * Returns the index of the player's target.
+   * @return index of the player's target.
+   */
+  public int getActualTargetPointer() {
+    return phase.getTargetPointer();
+  }
+
+  /**
+   * Returns the index of the equipment's pointer.
+   * @return index of the equipment's pointer.
+   */
+  public int getEquipmentPointer() {
+    return inventory.getPointer();
+  }
+
+  /**
+   * Equips the actual pointed weapon to the actual character, depending on the actual phase.
+   */
+  public void equipWeapon() {
+    phase.equipWeapon();
+  }
+
+  /**
+   * Returns the actual attacking character pointer.
+   * @return the actual attacking character pointer.
+   */
+  public int getPlayerAttackingPointer() {
+    return position;
+  }
+
+  /**
+   * Sets the actual attacking character pointer.
+   * @param i new position.
+   */
+  public void setPosition (int i) {
+    position = i;
+  }
+
+  /**
+   * Takes a look to the players quantity, enemies quantity and weapons quantity, if in all values there are at least 1,
+   * the game can start.
+   * @return true  if the game can start.
+   */
+  public boolean gameCanStart() {
+    return (getPlayersAlive() > 0 && getEnemiesAlive() > 0 && inventory.getLen() > 0);
+  }
+
+  /**
+   * Returns the image of the index player character.
+   * @param index of player character.
+   * @return image of the index player character.
+   */
+  public String getPlayerImage(int index) {
+    return getPlayerCharacter(index).getImage();
+  }
+
+  /**
+   * Returns the index of the actual target.
+   * @return the index of the actual target.
+   */
+  public int getTargetIndex() {
+    return targetIndex;
+  }
+
+  /**
+   * Adds i to the index of actual target.
+   * @param i how many adds to the index of actual target.
+   */
+  public void addTargetIndex(int i) {
+    targetIndex += i;
+  }
+
+  /**
+   * Return the image path of the index weapon.
+   * @param index of the weapon.
+   * @return the image path of the index weapon.
+   */
+  public String getWeaponImage(int index) {
+    return getWeapon(index).getImage();
   }
 }
 

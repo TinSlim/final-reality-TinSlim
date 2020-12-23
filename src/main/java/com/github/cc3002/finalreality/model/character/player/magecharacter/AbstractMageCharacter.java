@@ -27,8 +27,8 @@ public abstract class AbstractMageCharacter extends AbstractPlayerCharacter {
    * @param maxMana          the character's max mana value
    */
   public AbstractMageCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
-                               final int maxHp, final int defense, final int maxMana){
-    super(turnsQueue, name, maxHp, defense);
+                               final int maxHp, final int defense, final int maxMana, String imageFile){
+    super(turnsQueue, name, maxHp, defense, imageFile);
     this.mana = maxMana;
     this.maxMana = maxMana;
   }

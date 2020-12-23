@@ -17,6 +17,8 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class AbstractCharacter implements ICharacter {
 
+  protected String imageFile;
+
   protected final BlockingQueue<ICharacter> turnsQueue;
   protected final String name;
 
@@ -30,6 +32,8 @@ public abstract class AbstractCharacter implements ICharacter {
   private final PropertyChangeSupport startTurnListened;
   protected final PropertyChangeSupport finishTurnListened;
 
+  protected int characterPosition;
+
   private boolean outOfCombat;
 
   /**
@@ -40,13 +44,14 @@ public abstract class AbstractCharacter implements ICharacter {
    * @param defense         the character's defense
    */
   protected AbstractCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue,
-      @NotNull String name, final int maxHp, final int defense) {
+      @NotNull String name, final int maxHp, final int defense, String imageFile) {
     this.turnsQueue = turnsQueue;
     this.name = name;
     this.maxHp = maxHp;
     this.hp = maxHp;
     this.defense = defense;
     this.outOfCombat = false;
+    this.imageFile = imageFile;
 
     this.deathListened = new PropertyChangeSupport(this);
     this.startTurnListened = new PropertyChangeSupport(this);
@@ -142,5 +147,23 @@ public abstract class AbstractCharacter implements ICharacter {
   public void faint() {
     this.outOfCombat = true;
     deathListened.firePropertyChange("Fainted",null,this);
+  }
+
+  @Override
+  public int getPosition () {
+    return characterPosition;
+  }
+
+  /**
+   * Sets the index to enumerate this character.
+   * @param newValue the index to enumerate this character.
+   */
+  public void setPosition(int newValue) {
+    characterPosition = newValue;
+  }
+
+  @Override
+  public String getImage() {
+    return imageFile;
   }
 }

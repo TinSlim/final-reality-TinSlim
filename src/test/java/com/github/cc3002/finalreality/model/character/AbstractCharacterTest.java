@@ -21,6 +21,8 @@ public abstract class AbstractCharacterTest {
 
   protected BlockingQueue<ICharacter> turnsQueue;
 
+  protected String imgFileName;
+
   protected ICharacter testCharacterA;
   protected ICharacter testCharacterB;
   protected ICharacter testCharacterC;

@@ -16,5 +16,7 @@ public class BowTest extends AbstractWeaponTest {
     testWeaponF2 = new Bow("TestBowA",1,42);
     testWeaponF3 = new Bow("TestBowA",200,42);
     testWeaponF4 = new Bow("TestBowA",50,1);
+
+    imgFileName = "src\\resources\\weapons\\bow.png";
   }
 }

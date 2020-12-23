@@ -3,6 +3,9 @@ package com.github.cc3002.finalreality.model.weapon;
 import com.github.cc3002.finalreality.model.character.player.IPlayerCharacter;
 
 
+/**
+ * Class for Axe weapon.
+ */
 public class Axe extends AbstractWeapon {
 
   /**
@@ -14,6 +17,7 @@ public class Axe extends AbstractWeapon {
    */
   public Axe(String name, int damage, int weight) {
     super(name, damage, weight);
+    image = "src\\resources\\weapons\\axe.png";
   }
 
   @Override
@@ -22,20 +26,8 @@ public class Axe extends AbstractWeapon {
   }
 
   @Override
-  public void equipToThief(IPlayerCharacter character){
-  }
-
-  @Override
   public void equipToEngineer(IPlayerCharacter character){
     character.setEquippedWeapon(this);
-  }
-
-  @Override
-  public void equipToBlackMage(IPlayerCharacter character){
-  }
-
-  @Override
-  public void equipToWhiteMage(IPlayerCharacter character){
   }
 
   @Override

@@ -33,11 +33,17 @@ public class InventoryTest {
     }
   }
 
+  /**
+   * Set up.
+   */
   @BeforeEach
   public void setUp() {
     testBag = new Inventory();
   }
 
+  /**
+   * Tests adding weapons to inventory.
+   */
   @Test
   public void testAddTo() {
     assertEquals(testBag.getWeaponsInventory().size(), testBag.getLen());
@@ -50,21 +56,27 @@ public class InventoryTest {
     assertEquals(testBag.getWeaponsInventory().size(), testBag.getLen());
   }
 
+  /**
+   * Tests the movement of the inventory pointer.
+   */
   @Test
   public void testPointer() {
     addWeaponsToBag(20);
     assertEquals(0,testBag.getPointer());
 
     testBag.movePoint(12);
-    assertEquals(12,testBag.getPointer());
+    assertEquals(11,testBag.getPointer());
 
     testBag.movePoint(20);
-    assertEquals(19,testBag.getPointer());
+    assertEquals(11,testBag.getPointer());
 
     testBag.movePoint(-40);
     assertEquals(0,testBag.getPointer());
   }
 
+  /**
+   * Test the equip weapons to character method.
+   */
   @Test
   public void testEquipToPlayerCharacter() {
     testBag.equipWeaponToCharacter(testPlayerCharacter);
@@ -78,7 +90,6 @@ public class InventoryTest {
     testBag.addToInventory(testKnifeB);
     testBag.addToInventory(testSword);
 
-    testBag.movePoint(1);
     testBag.equipWeaponToCharacter(testPlayerCharacter);
     assertEquals(testKnifeA,testPlayerCharacter.getEquippedWeapon());
 

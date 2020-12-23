@@ -66,6 +66,7 @@ public class WhiteMageCharacterTest extends AbstractMageCharacterTest {
     testMaxManaMageB = new WhiteMageCharacter(turnsQueue,"MaxManaB",100,100,15);
     testMaxManaMageC = new WhiteMageCharacter(turnsQueue,"MaxManaC",100,100,0);
 
+    imgFileName = "src\\resources\\characters\\whiteMage.png";
   }
 
   public void setEqCharacter() {

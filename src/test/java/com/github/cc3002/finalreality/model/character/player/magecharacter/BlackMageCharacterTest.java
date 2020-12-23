@@ -62,6 +62,8 @@ public class BlackMageCharacterTest extends AbstractMageCharacterTest {
     testMaxManaMageA = new BlackMageCharacter(turnsQueue,"MaxManaA",100,100,100);
     testMaxManaMageB = new BlackMageCharacter(turnsQueue,"MaxManaB",100,100,15);
     testMaxManaMageC = new BlackMageCharacter(turnsQueue,"MaxManaC",100,100,0);
+
+    imgFileName = "src\\resources\\characters\\blackMage.png";
   }
 
   @Test

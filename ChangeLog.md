@@ -1,6 +1,24 @@
 ChangeLog
 =========
 
+Version 7.0
+-----------
+- (RC.1) Added docs.
+- (B.14) Game is fully playable.
+- (B.13) Added button to play default game.
+- (B.12) Fixed getters in controller.
+- (B.11) Added doc.
+- (B.10) Added making characters view.
+- (B.9) Added equipment movement.
+- (B.8) Fixed tests.
+- (B.7) Added target and attacker pointers to controller.
+- (B.6) Added enemy phase.
+- (B.5) Minor fixes.
+- (B.4) Added image files.
+- (B.3) Start doing battle view.
+- (B.2) Added initial background.
+- (B.1) Added tests.
+
 Version 6.0
 -----------
 - (B.10) Code clean and added doc.

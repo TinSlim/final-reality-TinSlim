@@ -21,8 +21,8 @@ public abstract class AbstractCommonCharacter extends AbstractPlayerCharacter {
    * @param defense        the character's defense
    */
   public AbstractCommonCharacter(@NotNull BlockingQueue<ICharacter> turnsQueue, @NotNull String name,
-                                 final int maxHp, final int defense) {
-    super(turnsQueue, name, maxHp, defense);
+                                 final int maxHp, final int defense, String imageFile) {
+    super(turnsQueue, name, maxHp, defense, imageFile);
   }
 
   @Override

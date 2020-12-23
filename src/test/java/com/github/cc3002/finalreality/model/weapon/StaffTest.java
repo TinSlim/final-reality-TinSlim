@@ -20,6 +20,8 @@ public class StaffTest extends AbstractWeaponTest {
     testWeaponF2 = new Staff("TestStaffA",1,42,20);
     testWeaponF3 = new Staff("TestStaffA",50,1,20);
     testWeaponF4 = new Staff("TestStaffA",50,42,1);
+
+    imgFileName = "src\\resources\\weapons\\staff.png";
   }
 
   @Override
