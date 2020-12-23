@@ -189,7 +189,7 @@ the user loses, if the count of enemies become 0, the user wins.
 
 - Main View:
 
-![model](images/MakeCharactersView.png)
+![model](images/MakeCharactersView.PNG)
 
 1) There are three counters, the players counter increase when a player character is added, the enemies counter 
  increase when you add an enemy, the weapons counter increase when a weapon is added. The game requires at least 
