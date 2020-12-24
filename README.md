@@ -249,6 +249,7 @@ the user loses, if the count of enemies become 0, the user wins.
 
 ## Playing
 
+Execute **FinalReality.java** to play the game.
 When the game starts you will see the main view, here you can choose if you want to just play by clicking
 **Play with default configurations.** this button makes default characters and starts a game. If you want to make your 
 own game, you have to make at least one *player character*, one *enemy* and one *weapon*, there you have three counters
