@@ -13,18 +13,18 @@ import java.util.ArrayList;
  * View that shows the characters info, weapons info and buttons to play the game.
  */
 public class BattleView extends AbstractView {
-  protected Group battleButtons;
-  protected Group actualPlayers;
-  protected ArrayList<Label> playerHpVisible;
-  protected ArrayList<Label> playerDamageVisible;
-  protected ArrayList<Label> playerWeightVisible;
-  protected ArrayList<Label> enemyHpVisible;
-  protected Group actualEnemies;
-  protected Group actualWeapons;
-  protected ImageView targetPointer;
-  protected ImageView equipmentPointer;
-  protected ImageView attackerPointer;
-  protected Label endGame;
+  private Group battleButtons;
+  private Group actualPlayers;
+  private ArrayList<Label> playerHpVisible;
+  private ArrayList<Label> playerDamageVisible;
+  private ArrayList<Label> playerWeightVisible;
+  private ArrayList<Label> enemyHpVisible;
+  private Group actualEnemies;
+  private Group actualWeapons;
+  private ImageView targetPointer;
+  private ImageView equipmentPointer;
+  private ImageView attackerPointer;
+  private Label endGame;
 
   /**
    * Initializes arrays of labels and labels that will be updated while the game continues.

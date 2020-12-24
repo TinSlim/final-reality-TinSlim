@@ -15,24 +15,24 @@ import java.io.File;
  * Main view, here you can make items and start a game.
  */
 public class MakeCharactersView extends AbstractView {
-  Group buttons;
-  Group playerCharacters;
+  private Group buttons;
+  private Group playerCharacters;
 
-  int playerNmb = 0;
-  int enemyNmb = 0;
-  int weaponsNmb = 0;
+  private int playerNmb = 0;
+  private int enemyNmb = 0;
+  private int weaponsNmb = 0;
 
-  TextField nameField;
-  TextField hpField;
-  TextField defenseField;
-  TextField damageField;
-  TextField weightField;
+  private TextField nameField;
+  private TextField hpField;
+  private TextField defenseField;
+  private TextField damageField;
+  private TextField weightField;
 
-  ImageView backGround;
+  private ImageView backGround;
 
-  Label playersQuantity;
-  Label enemiesQuantity;
-  Label weaponsQuantity;
+  private Label playersQuantity;
+  private Label enemiesQuantity;
+  private Label weaponsQuantity;
 
   /**
    * Initializes background and nodes.

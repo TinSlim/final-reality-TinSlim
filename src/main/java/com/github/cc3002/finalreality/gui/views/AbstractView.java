@@ -8,8 +8,8 @@ import javafx.scene.Group;
  * Common methods for all views.
  */
 public abstract class AbstractView implements IView {
-  Group root;
-  Controller controller;
+  protected Group root;
+  protected Controller controller;
   protected FinalReality aGame;
 
   @Override
